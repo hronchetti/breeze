@@ -1,13 +1,24 @@
 import React from "react"
 import PropTypes from "prop-types"
-import Nav from "../Nav"
 
-const Header = () => {
-  return <Nav />
+const Header = ({ title, type }) => {
+  if (type === "landing") {
+  } else if (type === "backgroundBlob") {
+  } else {
+  }
+
+  return (
+    <>
+      <header>
+        <h1>{title}</h1>
+      </header>
+    </>
+  )
 }
 
 Header.propTypes = {
-  children: PropTypes.node.isRequired,
+  title: PropTypes.string,
+  type: PropTypes.string,
 }
 
 export default Header

@@ -2,16 +2,20 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
 
-const Button = ({ styles, onClick, text, url, ...props }) => {
-  if (url) {
+const Button = ({ active, clickFunc, styles, text, to, ...props }) => {
+  if (to) {
     return (
-      <Link className={`button ${styles}`} to={url} {...props}>
+      <Link className={`button ${styles}`} to={to} {...props}>
         {text}
       </Link>
     )
-  } else if (onClick) {
+  } else if (clickFunc) {
     return (
-      <button className={`button ${styles}`} onClick={() => onClick} {...props}>
+      <button
+        className={`button ${styles}${active ? " active" : ""}`}
+        onClick={clickFunc}
+        {...props}
+      >
         {text}
       </button>
     )
@@ -22,9 +26,9 @@ const Button = ({ styles, onClick, text, url, ...props }) => {
 
 Button.propTypes = {
   styles: PropTypes.string,
-  onClick: PropTypes.func,
+  clickFunc: PropTypes.func,
   text: PropTypes.string.isRequired,
-  url: PropTypes.string,
+  to: PropTypes.string,
 }
 
 export default Button

@@ -1,4 +1,360 @@
-nav {
-  padding: 0.5rem 0.5rem 0.5rem 1rem;
-  position: sticky;
+.navWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1001;
+
+  .fill {
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4rem;
+    z-index: 1;
+    transform: translate3d(0px, 0px, 0px);
+    transition: height cubic-bezier(0.4, 0.1, 0.1, 1) 300ms;
+    transition-delay: 850ms;
+  }
+
+  .overlay {
+    background-color: $greyLight;
+    opacity: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+    transition: opacity 300ms ease-in-out;
+    transition-delay: 200ms;
+    pointer-events: none;
+  }
+
+  .nav {
+    width: 100%;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    @include flexSpaceBetween;
+    align-items: center;
+    position: fixed;
+    z-index: 2;
+    height: 4rem;
+
+    .logo {
+      @include flexJustifyStart;
+      align-items: center;
+
+      .symbol {
+        width: 2rem;
+        margin: 0 0.75rem 0 0;
+      }
+
+      .type {
+        font: 600 1.5rem/2rem "Inter", Arial, sans-serif;
+        color: $blueDark;
+        letter-spacing: -0.5px;
+      }
+    }
+
+    .mobileNavControl {
+      @extend %buttonStyleReset;
+      padding: 0.75rem;
+      appearance: none;
+      border: none;
+      background: none;
+
+      @media (hover: hover) {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .accessibleText {
+        display: none;
+      }
+
+      .hamburger {
+        display: block;
+        position: relative;
+        width: 1.5rem;
+        height: 1.5rem;
+        transition-duration: 300ms;
+        transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+        .line {
+          display: block;
+          width: 1.375rem;
+          height: 0.125rem;
+          background-color: $greyLight;
+          border-radius: 2px;
+          position: absolute;
+          left: 1px;
+
+          &:nth-of-type(1) {
+            top: 4px;
+            opacity: 1;
+            transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in;
+          }
+
+          &:nth-of-type(2) {
+            top: 11px;
+          }
+
+          &:nth-of-type(3) {
+            top: 18px;
+            transition: top 0.1s 0.25s ease-in,
+              transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+          }
+        }
+
+        &.active {
+          transform: rotate(225deg);
+          transition-delay: 120ms;
+
+          .line {
+            &:nth-of-type(1) {
+              top: 11px;
+              opacity: 0;
+              transition: top 100ms ease-out, opacity 0.1s 120ms ease-out;
+            }
+
+            &:nth-of-type(3) {
+              top: 11px;
+              transform: rotate(-90deg);
+              transition: top 0.1s ease-out,
+                transform 220ms 120ms cubic-bezier(0.215, 0.61, 0.355, 1);
+            }
+          }
+        }
+      }
+    }
+
+    .links {
+      width: 100%;
+      margin: 0;
+      padding: 0.5rem 0.75rem 0 0;
+      pointer-events: none;
+
+      .link {
+        opacity: 0;
+        position: relative;
+        top: 0.75rem;
+        transition: all 150ms ease-in;
+
+        @for $i from 1 through 4 {
+          &:nth-of-type(#{$i}) {
+            transition-delay: #{400ms + (400ms / $i)};
+          }
+        }
+
+        a {
+          padding: 0.5rem 0.5rem 0.5rem 0.25rem;
+          font: 400 1.125rem/1.5rem "Inter", Arial, sans-serif;
+          color: $grey;
+          margin: 0.5rem 0 0 0;
+        }
+      }
+
+      .iconChevron {
+        display: none;
+      }
+
+      .coursesDesktop {
+        display: none;
+      }
+
+      .coursesMobile {
+        padding: 0.5rem 0 0 0;
+        margin: 0 0 0 0.25rem;
+
+        .course {
+          margin: 0.5rem 0 0 0;
+          opacity: 0;
+          position: relative;
+          top: 0.75rem;
+          transition: all 150ms ease-in;
+
+          @for $i from 1 through 3 {
+            &:nth-of-type(#{$i}) {
+              transition-delay: #{300ms / $i};
+            }
+          }
+
+          .button {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  &.active {
+    .overlay {
+      opacity: 0.4;
+      pointer-events: all;
+    }
+
+    .fill {
+      transition: height cubic-bezier(0.4, 0.1, 0.1, 1.55) 600ms;
+      height: 30.5rem;
+      transition-delay: 0s;
+    }
+
+    .links {
+      pointer-events: all;
+
+      .link {
+        opacity: 1;
+        top: 0;
+
+        @for $i from 1 through 4 {
+          &:nth-of-type(#{$i}) {
+            transition-delay: #{100ms * $i};
+          }
+        }
+      }
+
+      .coursesMobile {
+        .course {
+          opacity: 1;
+          top: 0;
+
+          @for $i from 1 through 3 {
+            &:nth-of-type(#{$i}) {
+              transition-delay: #{400ms + (100ms * $i)};
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .navWrapper {
+    .fill {
+      height: 6em;
+    }
+
+    .nav {
+      padding: 1.375rem 2rem;
+      height: 6rem;
+
+      .logo {
+        .symbol {
+          width: 2.25rem;
+          margin: 0 1rem 0 0;
+        }
+
+        .type {
+          font-size: 1.75rem;
+          letter-spacing: -0.5px;
+        }
+      }
+
+      .mobileNavControl {
+        display: none;
+      }
+
+      .links {
+        width: auto;
+        @include flexJustifyStart;
+        align-items: center;
+        padding: 0;
+        pointer-events: all;
+
+        .link {
+          opacity: 1;
+          transition: none;
+          position: static;
+          top: 0;
+
+          a {
+            font-size: 1rem;
+            margin: 0 2rem 0 0;
+            padding: 0;
+          }
+        }
+
+        .iconChevron {
+          display: block;
+        }
+
+        .coursesDesktop {
+          display: block;
+          position: fixed;
+          width: 15rem;
+          top: 5.25rem;
+          right: 2rem;
+          background-color: white;
+          @include shadowSoft;
+          border-radius: 0.5rem;
+          padding: 1rem 1.5rem;
+          opacity: 0;
+          transition: all 250ms ease-in;
+          pointer-events: none;
+
+          .course {
+            height: 3rem;
+            position: relative;
+
+            a {
+              width: 100%;
+              display: block;
+              position: relative;
+              border-radius: 0.5rem;
+              color: $blueDark;
+              padding: 0.75rem 0;
+              transition: padding 200ms ease-in, color 100ms ease-in;
+              position: absolute;
+              z-index: 1;
+
+              &:focus {
+                color: $blue;
+                padding: 0.75rem 1rem;
+
+                + .background {
+                  right: 0;
+                }
+              }
+
+              @media (hover: hover) {
+                &:hover {
+                  color: $blue;
+                  padding: 0.75rem 1rem;
+
+                  + .background {
+                    right: 0;
+                  }
+                }
+              }
+            }
+
+            .background {
+              position: absolute;
+              background: $blueLight;
+              bottom: 0;
+              left: 0;
+              top: 0;
+              right: 100%;
+              z-index: 0;
+              transition: opacity 200ms ease-in, top 100ms ease-in;
+              border-radius: 0.25rem;
+            }
+          }
+
+          &.active {
+            opacity: 1;
+            top: 4.25rem;
+            pointer-events: all;
+          }
+        }
+
+        .coursesMobile {
+          display: none;
+        }
+      }
+    }
+  }
 }

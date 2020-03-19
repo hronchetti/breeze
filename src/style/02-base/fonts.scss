@@ -62,7 +62,7 @@ a {
   color: $blue;
 }
 
-@media screen and (min-width: 1100px) {
+@media all and (min-width: 1100px) {
   body {
     font: 400 16px/30px "Inter", Arial, sans-serif;
   }

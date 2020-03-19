@@ -1,15 +1,21 @@
-// Variables, Functions, Settings and Mixins
+// 01 ABSTRACT - Sass only, no direct CSS output
 @import "01-abstract/colour";
 @import "01-abstract/flexbox";
+@import "01-abstract/buttonStyleReset";
+@import "01-abstract/shadows";
 
-// Site-wide element styles
+// 02 BASE - Site-wide styles on HTML elements
 @import "02-base/fonts";
 @import "02-base/site";
 @import "02-base/forms";
 
-// Component styles
+// 03 UTILITIES - Re-usable classes
+@import "03-utilities/wrappers";
+
+// 04 COMPONENTS - Nested component styles in respective component folders
 @import "../components/Button/button";
 @import "../components/Footer/footer";
 @import "../components/Header/header";
 @import "../components/Layout/layout";
 @import "../components/Nav/nav";
+@import "../components/Review/review";

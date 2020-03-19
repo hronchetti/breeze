@@ -1,0 +1,121 @@
+footer {
+  .wrapper {
+    padding: 1.75rem 0;
+
+    .social {
+      .logoType {
+        font: 600 2rem/2rem "Inter", Arial, sans-serif;
+        letter-spacing: -0.5px;
+        color: $blueDark;
+        display: block;
+        margin: 0 0 0.75rem 0;
+      }
+
+      .logos {
+        .logo {
+          display: inline-block;
+          padding: 0.75rem 1.5rem 0.75rem 0;
+
+          img {
+            width: 1.5rem;
+          }
+        }
+      }
+    }
+
+    .links {
+      ul {
+        padding: 0;
+        margin: 0;
+
+        &:nth-child(2) {
+          padding: 0.5rem 0 0 0;
+        }
+
+        .title {
+          font: 600 14px/20px "Inter", Arial, sans-serif;
+          color: $blueDark;
+          padding: 0.5rem 0;
+        }
+
+        a {
+          font: 400 14px/20px "Inter", Arial, sans-serif;
+          color: $grey;
+          padding: 0.5rem 0;
+        }
+      }
+    }
+  }
+
+  .footNote {
+    background-color: $greyLightSuper;
+    padding: 1.25rem;
+    text-align: center;
+    margin: 0;
+
+    a {
+      font: 400 14px/26px "Inter", Arial, sans-serif;
+      color: $grey;
+      text-decoration: underline;
+
+      @media (hover: hover) {
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 640px) {
+  footer {
+    .wrapper {
+      .links {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 3rem;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  footer {
+    .wrapper {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 3rem;
+      padding: 6rem 0;
+
+      .social {
+        .logoType {
+          font-size: 2.75rem;
+          line-height: 3.5rem;
+          letter-spacing: -0.75px;
+        }
+
+        .logos {
+          margin: 3.5rem 0 0 0;
+          .logo {
+            padding: 0;
+            margin: 0 1.5rem 0 0;
+
+            img {
+              width: 2rem;
+            }
+          }
+        }
+      }
+
+      .links {
+        ul {
+          .title,
+          a {
+            font-size: 1rem;
+            line-height: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}

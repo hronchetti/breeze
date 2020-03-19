@@ -8,64 +8,88 @@ import InstagramLogo from "../../images/instagram.svg"
 const Footer = () => {
   return (
     <footer>
-      <section>
-        <span>Breeze</span>
-        <span>© {new Date().getFullYear()} Breeze</span>
-        <section>
-          <a href="" target="_blank">
-            <img src={FacebookLogo} alt="Facebook Logo" />
-          </a>
-          <a href="" target="_blank">
-            <img src={LinkedInLogo} alt="LinkedIn Logo" />
-          </a>
-          <a href="" target="_blank">
-            <img src={TwitterLogo} alt="Twitter Logo" />
-          </a>
-          <a href="" target="_blank">
-            <img src={InstagramLogo} alt="Instagram Logo" />
-          </a>
-        </section>
+      <section className="wrapper">
+        <div className="social">
+          <span className="logoType">Breeze</span>
+          <span>&copy; {new Date().getFullYear()} Breeze</span>
+          <div className="logos">
+            <a
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="logo"
+            >
+              <img src={FacebookLogo} alt="Facebook Logo" />
+            </a>
+            <a
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="logo"
+            >
+              <img src={LinkedInLogo} alt="LinkedIn Logo" />
+            </a>
+            <a
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="logo"
+            >
+              <img src={TwitterLogo} alt="Twitter Logo" />
+            </a>
+            <a
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="logo"
+            >
+              <img src={InstagramLogo} alt="Instagram Logo" />
+            </a>
+          </div>
+        </div>
+        <div className="links">
+          <ul>
+            <li className="title">Company</li>
+            <li>
+              <Link to="/">Homepage</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/blog">Blog</Link>
+            </li>
+            <li>
+              <Link to="/contact">Contact</Link>
+            </li>
+          </ul>
+          <ul>
+            <li className="title">Courses</li>
+            <li>
+              <Link to="/courses/acupuncture">Acupuncture courses</Link>
+            </li>
+            <li>
+              <Link to="/courses/general-cpd">General CPD courses</Link>
+            </li>
+            <li>
+              <Link to="/courses/coaching">Coaching courses</Link>
+            </li>
+            <li>
+              <Link to="/resources">Resources</Link>
+            </li>
+          </ul>
+        </div>
       </section>
-      <section>
-        <ul>
-          <li>Company</li>
-          <li>
-            <Link to="/">Homepage</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/blog">Blog</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
-        </ul>
-        <ul>
-          <li>Courses</li>
-          <li>
-            <Link to="/courses/acupuncture">Acupuncture courses</Link>
-          </li>
-          <li>
-            <Link to="/courses/general-cpd">General CPD courses</Link>
-          </li>
-          <li>
-            <Link to="/courses/coaching">Coaching courses</Link>
-          </li>
-          <li>
-            <Link to="/resources">Resources</Link>
-          </li>
-        </ul>
-      </section>
-      <section>
-        <p>
-          Website by{" "}
-          <a href="http://harryronchetti.com/" target="_blank">
-            Harry Ronchetti
-          </a>
-        </p>
-      </section>
+      <p className="footNote">
+        Website by{" "}
+        <a
+          href="http://harryronchetti.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Harry Ronchetti
+        </a>
+      </p>
     </footer>
   )
 }

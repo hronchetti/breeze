@@ -1,14 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
-import Header from "../Header"
 import Footer from "../Footer"
+import Nav from "../Nav"
 import "../../style/main.scss"
 
 const Layout = ({ children }) => {
   return (
     <>
-      <Header />
-      <main>{children}</main>
+      <Nav />
+      {children}
       <Footer />
     </>
   )
@@ -16,6 +16,7 @@ const Layout = ({ children }) => {
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  headerTitle: PropTypes.string,
 }
 
 export default Layout
