@@ -2,9 +2,9 @@ import React from "react"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import Header from "../components/Header"
-import { graphql } from "gatsby"
+//import { graphql } from "gatsby"
 
-const IndexPage = ({}) => (
+const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
     <Header />
@@ -19,17 +19,3 @@ const IndexPage = ({}) => (
 )
 
 export default IndexPage
-
-// export const pageSectionsQuery = graphql`
-//   query homepageSections {
-//     allStrapiHomePageSections {
-//       edges {
-//         node {
-//           heading
-//           order
-//           paragraph
-//         }
-//       }
-//     }
-//   }
-// `

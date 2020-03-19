@@ -1,23 +1,21 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-const Header = ({ title, type }) => {
-  if (type === "landing") {
-  } else if (type === "backgroundBlob") {
+const Header = ({ paragraph, title, type }) => {
+  if (type === "backgroundBlob") {
   } else {
-  }
-
-  return (
-    <>
-      <header>
+    return (
+      <header className="wrapper">
         <h1>{title}</h1>
+        {paragraph ? <p>{paragraph}</p> : ""}
       </header>
-    </>
-  )
+    )
+  }
 }
 
 Header.propTypes = {
-  title: PropTypes.string,
+  paragraph: PropTypes.string,
+  title: PropTypes.string.isRequired,
   type: PropTypes.string,
 }
 

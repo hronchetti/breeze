@@ -13,9 +13,12 @@
 @import "03-utilities/wrappers";
 
 // 04 COMPONENTS - Nested component styles in respective component folders
+@import "../components/BlogArticleList/blogArticleList";
 @import "../components/Button/button";
 @import "../components/Footer/footer";
 @import "../components/Header/header";
 @import "../components/Layout/layout";
 @import "../components/Nav/nav";
 @import "../components/Review/review";
+
+// 05 PAGES - styles related to Gatsby pages and templates
