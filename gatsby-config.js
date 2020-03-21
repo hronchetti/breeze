@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Breeze Academy`,
+    title: `Breeze`,
     description: `Online courses and face-to-face training for Healthcare professionals, view our courses now to see how you can maximise your career potential today.`,
     author: `Dr. Carl Clarkson`,
   },

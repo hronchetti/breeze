@@ -1,5 +1,7 @@
 import React from "react"
 
-export const SignOffMailingList = () => {
+const SignOffMailingList = () => {
   return <div></div>
 }
+
+export default SignOffMailingList

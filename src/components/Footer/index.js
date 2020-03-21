@@ -1,9 +1,9 @@
 import React from "react"
 import { Link } from "gatsby"
-import FacebookLogo from "../../images/facebook.svg"
-import LinkedInLogo from "../../images/linked-in.svg"
-import TwitterLogo from "../../images/twitter.svg"
-import InstagramLogo from "../../images/instagram.svg"
+import FacebookLogo from "../../images/icons/facebook.svg"
+import LinkedInLogo from "../../images/icons/linkedIn.svg"
+import TwitterLogo from "../../images/icons/twitter.svg"
+import InstagramLogo from "../../images/icons/instagram.svg"
 
 const Footer = () => {
   return (

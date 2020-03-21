@@ -31,24 +31,24 @@
 }
 
 body {
-  font: 400 14px/26px "Inter", Arial, sans-serif;
+  font: 400 0.875rem/1.625rem "Inter", Arial, sans-serif;
   color: $grey;
 }
 
 h1 {
-  font: 700 34px/44px "Charter", "Times New Roman", serif;
+  font: 700 2.125rem/2.75rem "Charter", "Times New Roman", serif;
   letter-spacing: -0.25px;
   color: $blueDark;
 }
 
 h2 {
-  font: 700 28px/38px "Charter", "Times New Roman", serif;
+  font: 700 1.75rem/2.375rem "Charter", "Times New Roman", serif;
   letter-spacing: -0.25px;
   color: $blueDark;
 }
 
 h3 {
-  font: 600 1.5rem/34px "Inter", Arial, sans-serif;
+  font: 600 1.5rem/2.125rem "Inter", Arial, sans-serif;
   color: $blueDark;
 }
 
@@ -62,26 +62,38 @@ a {
   color: $blue;
 }
 
-@media all and (min-width: 1100px) {
+@media all and (min-width: 800px) {
   body {
-    font: 400 16px/30px "Inter", Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.875rem;
   }
 
   h1 {
-    font: 700 56px/68px "Charter", "Times New Roman", serif;
+    font-size: 2.5rem;
+    line-height: 3.25rem;
+  }
+}
+
+@media all and (min-width: 1100px) {
+  h1 {
+    font-size: 3.5rem;
+    line-height: 4.25rem;
     letter-spacing: -1px;
   }
 
   h2 {
-    font: 700 2.5rem/3.25rem "Charter", "Times New Roman", serif;
+    font-size: 2.5rem;
+    line-height: 3.25rem;
     letter-spacing: -0.75px;
   }
 
   h3 {
-    font: 600 2rem/2.5rem "Inter", Arial, sans-serif;
+    font-size: 2rem;
+    line-height: 2.75rem;
   }
 
   h4 {
-    font: 600 1.5rem/2rem "Inter", Arial, sans-serif;
+    font-size: 1.5rem;
+    line-height: 2rem;
   }
 }

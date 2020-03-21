@@ -70,10 +70,6 @@
         }
       }
 
-      .accessibleText {
-        display: none;
-      }
-
       .hamburger {
         display: block;
         position: relative;
@@ -152,7 +148,7 @@
           padding: 0.5rem 0.5rem 0.5rem 0.25rem;
           font: 400 1.125rem/1.5rem "Inter", Arial, sans-serif;
           color: $grey;
-          margin: 0.5rem 0 0 0;
+          margin: 0.75rem 0 0 0;
         }
       }
 
@@ -197,7 +193,7 @@
 
     .fill {
       transition: height cubic-bezier(0.4, 0.1, 0.1, 1.55) 600ms;
-      height: 30.5rem;
+      height: 31.5rem;
       transition-delay: 0s;
     }
 

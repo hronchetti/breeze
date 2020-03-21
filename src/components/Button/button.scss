@@ -60,13 +60,13 @@
 
   &.iconArrow {
     &:after {
-      background-image: url("../images/arrow--white.svg");
+      background-image: url("../images/icons/arrow--white.svg");
     }
   }
 
   &.iconChevron {
     &:after {
-      background-image: url("../images/chevron.svg");
+      background-image: url("../images/icons/chevron.svg");
       transform: rotate(0deg);
       transition: transform 250ms ease-in;
     }

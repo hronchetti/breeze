@@ -1,33 +1,53 @@
-import React from "react"
+import React, { useState } from "react"
 import BlogArticleList from "../components/BlogArticleList"
 import Header from "../components/Header"
 import Layout from "../components/Layout"
 import PropTypes from "prop-types"
 import SEO from "../components/SEO"
+import FilterOption from "../components/FilterOption"
+import SignOffMailingList from "../components/SignOffMailingList"
 import { graphql } from "gatsby"
 
 const Blog = ({ data }) => {
-  console.log("courses:", data.allStrapiBlogArticles.edges)
   const articles = data.allStrapiBlogArticles.edges
 
+  const [filtersVisibility, setFiltersVisibility] = useState(false)
+
+  const toggleFilters = () => {
+    setFiltersVisibility(!filtersVisibility)
+  }
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Blog" />
       <Header title="Blog" />
       <main className="backgroundGreyLightSuper">
-        <section className="wrapper">
-          <aside></aside>
-          <div>
-            <span>
+        <section className="wrapper wrapperFilterSystem">
+          <aside
+            className={`wrapperFilters${filtersVisibility ? " open" : ""}`}
+          >
+            <div className="filters">
+              <span className="filtersHeading">Topics</span>
+              <FilterOption value="Acupuncture" applied={true} />
+              <FilterOption value="General CPD" applied={false} />
+              <FilterOption value="Coaching" applied={false} />
+            </div>
+            <button className="filtersToggle" onClick={toggleFilters}>
+              <span className="accessibleText">Show/hide filters</span>
+            </button>
+            <span className="fill"></span>
+          </aside>
+          <section className="filteredContent">
+            <span className="filterCount">
               {articles.length}
               {articles.length > 1 ? " articles" : " article"}{" "}
             </span>
             {articles.map(article => (
               <BlogArticleList article={article.node} key={article.node.id} />
             ))}
-          </div>
+          </section>
         </section>
       </main>
+      <SignOffMailingList />
     </Layout>
   )
 }
@@ -54,7 +74,7 @@ export const pageQuery = graphql`
           cover_image_description
           cover {
             childImageSharp {
-              fluid {
+              fluid(maxWidth: 960) {
                 ...GatsbyImageSharpFluid
               }
             }

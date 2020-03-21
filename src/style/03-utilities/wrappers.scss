@@ -1,7 +1,7 @@
 .wrapper {
   width: calc(100% - 2.5rem);
   display: block;
-  max-width: 1440px;
+  max-width: 1248px;
   margin: 0 auto;
 }
 
@@ -9,7 +9,7 @@
   background-color: $greyLightSuper;
 }
 
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 800px) {
   .wrapper {
     width: calc(100% - 6rem);
   }

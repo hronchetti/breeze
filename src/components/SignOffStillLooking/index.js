@@ -1,5 +1,7 @@
 import React from "react"
 
-export const SignOffStillLooking = () => {
+const SignOffStillLooking = () => {
   return <div></div>
 }
+
+export default SignOffStillLooking
