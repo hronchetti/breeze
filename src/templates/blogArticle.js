@@ -11,19 +11,12 @@ import { graphql } from "gatsby"
 const BlogArticle = ({ data }) => {
   const article = data.strapiBlogArticles
 
-  const cleanCategory = dirtyCategory => {
-    dirtyCategory = dirtyCategory.replace(/_/g, " ")
-    return dirtyCategory
-  }
-
   return (
     <Layout>
       <SEO title={article.title} />
       <header className="articleHeader">
         <section className="content">
-          <span className="label">
-            {cleanCategory(article.blog_category.category)}
-          </span>
+          <span className="label">{article.blog_article_topic.topic}</span>
           <h1>{article.title}</h1>
           <div className="author">
             <Img
@@ -45,8 +38,8 @@ const BlogArticle = ({ data }) => {
       <main>
         <article className="article">
           {article.section.map(section => (
-            <section>
-              <ReactMarkdown source={section.content} key={section.id} />
+            <section key={section.id}>
+              <ReactMarkdown source={section.content} />
               {section.image && section.image_description ? (
                 <Img
                   className="sectionImage"
@@ -76,8 +69,9 @@ export const pageQuery = graphql`
   query Article($title: String!) {
     strapiBlogArticles(title: { eq: $title }) {
       id
-      blog_category {
-        category
+      blog_article_topic {
+        id
+        topic
       }
       created_at
       cover_image_description

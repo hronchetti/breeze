@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import BlogArticleList from "../components/BlogArticleList"
 import Header from "../components/Header"
 import Layout from "../components/Layout"
@@ -9,12 +9,48 @@ import SignOffMailingList from "../components/SignOffMailingList"
 import { graphql } from "gatsby"
 
 const Blog = ({ data }) => {
-  const articles = data.allStrapiBlogArticles.edges
+  const [articles, setArticles] = useState([])
+  const [articleTopics, setArticleTopics] = useState([])
+  const [articleTopicFiltered, setArticleTopicFiltered] = useState("All topics")
+  const [topicsVisibilityMobile, setTopicsVisibilityMobile] = useState(false)
 
-  const [filtersVisibility, setFiltersVisibility] = useState(false)
+  useEffect(() => {
+    data.allStrapiBlogArticleTopics.edges.map(topicItem =>
+      setArticleTopics(articleTopics => [
+        ...articleTopics,
+        {
+          id: topicItem.node.id,
+          topic: topicItem.node.topicName,
+        },
+      ])
+    )
+    setArticles(data.allStrapiBlogArticles.edges)
+  }, [])
 
-  const toggleFilters = () => {
-    setFiltersVisibility(!filtersVisibility)
+  const toggleFilteredTopic = clickedTopicName => {
+    if (
+      articleTopicFiltered === clickedTopicName ||
+      clickedTopicName === "All topics"
+    ) {
+      setArticleTopicFiltered("All topics")
+      setArticles(data.allStrapiBlogArticles.edges)
+    } else {
+      setArticleTopicFiltered(clickedTopicName)
+      setArticles([])
+      data.allStrapiBlogArticles.edges.map(article =>
+        article.node.blog_article_topic.topicName === clickedTopicName
+          ? setArticles(oldArticles => [...oldArticles, article])
+          : null
+      )
+    }
+
+    setTimeout(() => {
+      setTopicsVisibilityMobile(false)
+    }, 250)
+  }
+
+  const toggleTopicsVisibilityOnMobile = () => {
+    setTopicsVisibilityMobile(!topicsVisibilityMobile)
   }
   return (
     <Layout>
@@ -23,15 +59,29 @@ const Blog = ({ data }) => {
       <main className="backgroundGreyLightSuper">
         <section className="wrapper wrapperFilterSystem">
           <aside
-            className={`wrapperFilters${filtersVisibility ? " open" : ""}`}
+            className={`wrapperFilters${topicsVisibilityMobile ? " open" : ""}`}
           >
             <div className="filters">
               <span className="filtersHeading">Topics</span>
-              <FilterOption value="Acupuncture" applied={true} />
-              <FilterOption value="General CPD" applied={false} />
-              <FilterOption value="Coaching" applied={false} />
+              <FilterOption
+                value="All topics"
+                clickFunc={toggleFilteredTopic}
+                filteredValue={articleTopicFiltered}
+                mobileOnly={true}
+              />
+              {articleTopics.map(topic => (
+                <FilterOption
+                  key={topic.id}
+                  value={topic.topic}
+                  clickFunc={toggleFilteredTopic}
+                  filteredValue={articleTopicFiltered}
+                />
+              ))}
             </div>
-            <button className="filtersToggle" onClick={toggleFilters}>
+            <button
+              className="filtersToggle"
+              onClick={toggleTopicsVisibilityOnMobile}
+            >
               <span className="accessibleText">Show/hide filters</span>
             </button>
             <span className="fill"></span>
@@ -39,7 +89,9 @@ const Blog = ({ data }) => {
           <section className="filteredContent">
             <span className="filterCount">
               {articles.length}
-              {articles.length > 1 ? " articles" : " article"}{" "}
+              {articles.length > 1 || articles.length === 0
+                ? " articles"
+                : " article"}{" "}
             </span>
             {articles.map(article => (
               <BlogArticleList article={article.node} key={article.node.id} />
@@ -64,14 +116,10 @@ export const pageQuery = graphql`
       edges {
         node {
           id
-          excerpt
-          title
-          created_at
-          section {
-            content
+          blog_article_topic {
             id
+            topicName
           }
-          cover_image_description
           cover {
             childImageSharp {
               fluid(maxWidth: 960) {
@@ -79,9 +127,22 @@ export const pageQuery = graphql`
               }
             }
           }
-          blog_category {
-            category
+          cover_image_description
+          created_at
+          excerpt
+          section {
+            content
+            id
           }
+          title
+        }
+      }
+    }
+    allStrapiBlogArticleTopics {
+      edges {
+        node {
+          id
+          topicName
         }
       }
     }

@@ -2,6 +2,14 @@
   box-shadow: 0rem 0.25rem 0.5rem rgba(19, 34, 54, 0.06); // $blueDark
 }
 
+@mixin shadowSoftDistant {
+  box-shadow: 0rem 0.25rem 0.75rem rgba(19, 34, 54, 0.06); // $blueDark
+}
+
 @mixin shadowHard {
   box-shadow: 0rem 0.25rem 0.5rem rgba(19, 34, 54, 0.12); // $blueDark
+}
+
+@mixin shadowHardDistant {
+  box-shadow: 0rem 0.25rem 0.75rem rgba(19, 34, 54, 0.12); // $blueDark
 }

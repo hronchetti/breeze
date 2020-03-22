@@ -4,11 +4,25 @@
   @include shadowSoft;
   margin: 0 0 1.25rem 0;
   display: block;
+  position: relative;
 
   &:last-of-type {
     margin: 0;
   }
 
+  &:focus {
+    .linkArrow {
+      padding: 0 0 0 2.125rem;
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      .linkArrow {
+        padding: 0 0 0 2.125rem;
+      }
+    }
+  }
   .cover {
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;

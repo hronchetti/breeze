@@ -1,9 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-const FilterOption = ({ value, applied }) => {
+const FilterOption = ({ clickFunc, filteredValue, mobileOnly, value }) => {
   return (
-    <button className={`filterOption${applied ? " applied" : ""}`}>
+    <button
+      className={`filterOption${filteredValue === value ? " applied" : ""}${
+        mobileOnly ? " mobileOnly" : ""
+      }`}
+      onClick={() => clickFunc(value)}
+    >
       <span className="selector"></span>
       <span className="text">{value}</span>
     </button>
@@ -11,8 +16,9 @@ const FilterOption = ({ value, applied }) => {
 }
 
 FilterOption.propTypes = {
+  clickFunc: PropTypes.func.isRequired,
+  filteredValue: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  applied: PropTypes.bool.isRequired,
 }
 
 export default FilterOption

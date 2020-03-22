@@ -9,10 +9,11 @@
 @import "02-base/site";
 @import "02-base/forms";
 
-// 03 UTILITIES - Re-usable classes
+// 03 UTILITIES - Re-usable classes using OOCSS logic
 @import "03-utilities/wrappers";
 @import "03-utilities/layouts";
 @import "03-utilities/accessibility";
+@import "03-utilities/links";
 
 // 04 COMPONENTS - Nested component styles in respective component folders
 @import "../components/BlogArticleList/blogArticleList";

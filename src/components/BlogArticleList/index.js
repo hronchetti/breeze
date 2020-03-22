@@ -6,7 +6,7 @@ import { createSlug } from "../../functions/createSlug"
 
 const BlogArticleList = ({ article }) => {
   return (
-    <Link className="blogArticleList" to={`blog/${createSlug(article.title)}`}>
+    <Link className="blogArticleList" to={`/blog/${createSlug(article.title)}`}>
       <Img
         className="cover"
         fluid={article.cover.childImageSharp.fluid}

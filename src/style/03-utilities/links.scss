@@ -1,0 +1,30 @@
+.linkArrow {
+  display: block;
+  line-height: 1.5rem;
+  position: relative;
+  padding: 0 0 0 1.875rem;
+  transition: padding 150ms ease-in;
+
+  &:focus {
+    padding: 0 0 0 2.125rem;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      padding: 0 0 0 2.125rem;
+    }
+  }
+
+  &:before {
+    content: "";
+    display: block;
+    background-image: url("../images/icons/arrow--blue.svg");
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
