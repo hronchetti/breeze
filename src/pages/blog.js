@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import BlogArticleList from "../components/BlogArticleList"
+import BlogArticlePreview from "../components/BlogArticlePreview"
 import Header from "../components/Header"
 import Layout from "../components/Layout"
 import PropTypes from "prop-types"
@@ -15,17 +15,27 @@ const Blog = ({ data }) => {
   const [topicsVisibilityMobile, setTopicsVisibilityMobile] = useState(false)
 
   useEffect(() => {
-    data.allStrapiBlogArticleTopics.edges.map(topicItem =>
+    prepareArticleTopics(data.allStrapiBlogArticleTopics.edges)
+    setArticles(data.allStrapiBlogArticles.edges)
+  }, [])
+
+  const prepareArticleTopics = strapiArticleTopics => {
+    strapiArticleTopics.sort((a, b) => {
+      const topicName1 = a.node.name.toUpperCase()
+      const topicName2 = b.node.name.toUpperCase()
+      return topicName1 < topicName2 ? -1 : topicName1 > topicName2 ? 1 : 0
+    })
+
+    strapiArticleTopics.map(topicItem =>
       setArticleTopics(articleTopics => [
         ...articleTopics,
         {
           id: topicItem.node.id,
-          topic: topicItem.node.topicName,
+          topic: topicItem.node.name,
         },
       ])
     )
-    setArticles(data.allStrapiBlogArticles.edges)
-  }, [])
+  }
 
   const toggleFilteredTopic = clickedTopicName => {
     if (
@@ -38,7 +48,7 @@ const Blog = ({ data }) => {
       setArticleTopicFiltered(clickedTopicName)
       setArticles([])
       data.allStrapiBlogArticles.edges.map(article =>
-        article.node.blog_article_topic.topicName === clickedTopicName
+        article.node.blog_article_topic.name === clickedTopicName
           ? setArticles(oldArticles => [...oldArticles, article])
           : null
       )
@@ -91,10 +101,16 @@ const Blog = ({ data }) => {
               {articles.length}
               {articles.length > 1 || articles.length === 0
                 ? " articles"
-                : " article"}{" "}
+                : " article"}
+              {articleTopicFiltered !== "All topics"
+                ? ` in '${articleTopicFiltered}'`
+                : ""}
             </span>
             {articles.map(article => (
-              <BlogArticleList article={article.node} key={article.node.id} />
+              <BlogArticlePreview
+                article={article.node}
+                key={article.node.id}
+              />
             ))}
           </section>
         </section>
@@ -118,7 +134,7 @@ export const pageQuery = graphql`
           id
           blog_article_topic {
             id
-            topicName
+            name
           }
           cover {
             childImageSharp {
@@ -142,7 +158,7 @@ export const pageQuery = graphql`
       edges {
         node {
           id
-          topicName
+          name
         }
       }
     }

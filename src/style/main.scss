@@ -14,16 +14,21 @@
 @import "03-utilities/layouts";
 @import "03-utilities/accessibility";
 @import "03-utilities/links";
+@import "03-utilities/responsivity";
 
 // 04 COMPONENTS - Nested component styles in respective component folders
-@import "../components/BlogArticleList/blogArticleList";
+@import "../components/BlogArticlePreview/blogArticlePreview";
 @import "../components/Button/button";
+@import "../components/Course/course";
+@import "../components/CourseBooking/courseBooking";
 @import "../components/FilterOption/filterOption";
 @import "../components/Footer/footer";
 @import "../components/Header/header";
 @import "../components/Layout/layout";
 @import "../components/Nav/nav";
+@import "../components/Resource/resource";
 @import "../components/Review/review";
 
 // 05 PAGES - styles related to Gatsby pages and templates
 @import "05-pages/blogArticle";
+@import "05-pages/resources";

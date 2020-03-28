@@ -16,7 +16,7 @@ const BlogArticle = ({ data }) => {
       <SEO title={article.title} />
       <header className="articleHeader">
         <section className="content">
-          <span className="label">{article.blog_article_topic.topic}</span>
+          <span className="label">{article.blog_article_topic.name}</span>
           <h1>{article.title}</h1>
           <div className="author">
             <Img
@@ -66,12 +66,12 @@ BlogArticle.propTypes = {
 export default BlogArticle
 
 export const pageQuery = graphql`
-  query Article($title: String!) {
-    strapiBlogArticles(title: { eq: $title }) {
+  query Article($id: String!) {
+    strapiBlogArticles(id: { eq: $id }) {
       id
       blog_article_topic {
         id
-        topic
+        name
       }
       created_at
       cover_image_description
