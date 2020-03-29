@@ -80,16 +80,25 @@ exports.createPages = ({ actions, graphql }) => {
       })
     })
 
-    // Course bookings /courses/course_topic_name/course_name/booking_id
     result.data.allStrapiCourses.edges.forEach(({ node }) => {
+      // Course bookings /courses/course_topic_name/course_name
+      createPage({
+        path: createSlug.courseSlug(node.course_topic.name, node.name),
+        component: path.resolve(`src/templates/courseView.js`),
+        context: {
+          name: node.name,
+        },
+      })
+
       node.bookings.forEach(booking => {
+        // Course bookings /courses/course_topic_name/course_name/booking_id
         createPage({
           path: createSlug.courseBookingSlug(
             node.course_topic.name,
             node.name,
             booking.id
           ),
-          component: path.resolve(`src/templates/courseBooking.js`),
+          component: path.resolve(`src/templates/courseViewWithBooking.js`),
           context: {
             id: booking.id,
           },

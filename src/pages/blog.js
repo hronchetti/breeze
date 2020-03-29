@@ -12,7 +12,7 @@ const Blog = ({ data }) => {
   const [articles, setArticles] = useState([])
   const [articleTopics, setArticleTopics] = useState([])
   const [articleTopicFiltered, setArticleTopicFiltered] = useState("All topics")
-  const [topicsVisibilityMobile, setTopicsVisibilityMobile] = useState(false)
+  const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
 
   useEffect(() => {
     prepareArticleTopics(data.allStrapiBlogArticleTopics.edges)
@@ -55,24 +55,24 @@ const Blog = ({ data }) => {
     }
 
     setTimeout(() => {
-      setTopicsVisibilityMobile(false)
+      setSidebarVisibilityMobile(false)
     }, 250)
   }
 
-  const toggleTopicsVisibilityOnMobile = () => {
-    setTopicsVisibilityMobile(!topicsVisibilityMobile)
+  const toggleSidebarVisibilityMobile = () => {
+    setSidebarVisibilityMobile(!sidebarVisibileMobile)
   }
   return (
     <Layout>
       <SEO title="Blog" />
       <Header title="Blog" />
       <main className="backgroundGreyLightSuper">
-        <section className="wrapper wrapperFilterSystem">
+        <section className="wrapper wrapperSidebarLayout">
           <aside
-            className={`wrapperFilters${topicsVisibilityMobile ? " open" : ""}`}
+            className={`wrapperSidebar${sidebarVisibileMobile ? " open" : ""}`}
           >
-            <div className="filters">
-              <span className="filtersHeading">Topics</span>
+            <div className="sidebar">
+              <span className="sidebarHeading">Filter by topic</span>
               <FilterOption
                 value="All topics"
                 clickFunc={toggleFilteredTopic}
@@ -89,8 +89,8 @@ const Blog = ({ data }) => {
               ))}
             </div>
             <button
-              className="filtersToggle"
-              onClick={toggleTopicsVisibilityOnMobile}
+              className="sidebarControl"
+              onClick={toggleSidebarVisibilityMobile}
             >
               <span className="accessibleText">Show/hide filters</span>
             </button>
@@ -98,10 +98,9 @@ const Blog = ({ data }) => {
           </aside>
           <section className="filteredContent">
             <span className="filterCount">
-              {articles.length}
               {articles.length > 1 || articles.length === 0
-                ? " articles"
-                : " article"}
+                ? `${articles.length} articles`
+                : `${articles.length} article`}
               {articleTopicFiltered !== "All topics"
                 ? ` in '${articleTopicFiltered}'`
                 : ""}

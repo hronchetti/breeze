@@ -12,7 +12,7 @@ const Resources = ({ data }) => {
   const [resources, setResources] = useState([])
   const [resourceGroups, setResourceGroups] = useState([])
   const [currentResourceTopic, setCurrentResourceTopic] = useState("All topics")
-  const [topicsVisibilityMobile, setTopicsVisibilityMobile] = useState(false)
+  const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
 
   useEffect(() => {
     orderGroupsAlphabetically(data.allStrapiResources.edges)
@@ -40,20 +40,20 @@ const Resources = ({ data }) => {
     })
   }
 
-  const toggleTopicsVisibilityOnMobile = () => {
-    setTopicsVisibilityMobile(!topicsVisibilityMobile)
+  const toggleSidebarVisibilityMobile = () => {
+    setSidebarVisibilityMobile(!sidebarVisibileMobile)
   }
   return (
     <Layout>
       <SEO title="Resources" />
       <Header title="Resources" />
       <main className="backgroundGreyLightSuper">
-        <section className="wrapper wrapperFilterSystem">
+        <section className="wrapper wrapperSidebarLayout">
           <aside
-            className={`wrapperFilters${topicsVisibilityMobile ? " open" : ""}`}
+            className={`wrapperSidebar${sidebarVisibileMobile ? " open" : ""}`}
           >
-            <div className="filters">
-              <span className="filtersHeading">Topics</span>
+            <div className="sidebar">
+              <span className="sidebarHeading">Topics</span>
               {resourceGroups.map(topic => (
                 <FilterOption
                   key={topic.id}
@@ -64,8 +64,8 @@ const Resources = ({ data }) => {
               ))}
             </div>
             <button
-              className="filtersToggle"
-              onClick={toggleTopicsVisibilityOnMobile}
+              className="sidebarControl"
+              onClick={toggleSidebarVisibilityMobile}
             >
               <span className="accessibleText">Show/hide filters</span>
             </button>

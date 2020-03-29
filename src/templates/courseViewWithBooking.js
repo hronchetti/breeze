@@ -3,7 +3,7 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import Header from "../components/Header"
 
-const CourseBooking = ({ data }) => {
+const CourseViewWithBooking = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
@@ -13,4 +13,4 @@ const CourseBooking = ({ data }) => {
   )
 }
 
-export default CourseBooking
+export default CourseViewWithBooking

@@ -1,13 +1,13 @@
-.wrapperFilterSystem {
+.wrapperSidebarLayout {
   padding: 1.5rem 0;
 
-  .wrapperFilters {
+  .wrapperSidebar {
     position: fixed;
     z-index: 1000;
     left: 0;
     top: 0;
 
-    .filters {
+    .sidebar {
       position: fixed;
       left: 0;
       top: 4.75rem;
@@ -21,14 +21,14 @@
       transition: all 150ms ease-in;
       pointer-events: none;
 
-      .filtersHeading {
+      .sidebarHeading {
         font: 600 1rem/1.25rem "Inter", Arial, sans-serif;
         display: block;
         margin: 0 0 1.5rem 0;
       }
     }
 
-    .filtersToggle {
+    .sidebarControl {
       @extend %buttonStyleReset;
       @include shadowHard;
       background-color: $blue;
@@ -49,7 +49,7 @@
         height: 1.5rem;
         background-repeat: no-repeat;
         background-position: center;
-        background-image: url("../images/icons/sort.svg");
+        background-image: url("../images/icons/search.svg");
       }
     }
 
@@ -67,14 +67,14 @@
     }
 
     &.open {
-      .filters {
+      .sidebar {
         top: 4rem;
         opacity: 1;
         transition-delay: 450ms;
         pointer-events: all;
       }
 
-      .filtersToggle {
+      .sidebarControl {
         &:before {
           background-image: url("../images/icons/cross.svg");
         }
@@ -97,13 +97,13 @@
 }
 
 @media all and (min-width: 600px) {
-  .wrapperFilterSystem {
+  .wrapperSidebarLayout {
     padding: 2rem 0;
   }
 }
 
 @media all and (min-width: 800px) {
-  .wrapperFilterSystem {
+  .wrapperSidebarLayout {
     display: grid;
     grid-template-columns: 14rem 1fr;
     grid-gap: 3rem;
@@ -111,11 +111,11 @@
     padding: 3rem 0;
     min-height: 534px;
 
-    .wrapperFilters {
+    .wrapperSidebar {
       position: static;
       padding: 0;
 
-      .filters {
+      .sidebar {
         height: auto;
         opacity: 1;
         padding: 0;
@@ -124,12 +124,12 @@
         top: 0;
         transition: none;
 
-        .filtersHeading {
+        .sidebarHeading {
           margin: 0 0 2rem 0;
         }
       }
 
-      .filtersToggle {
+      .sidebarControl {
         display: none;
       }
 
@@ -148,7 +148,7 @@
 }
 
 @media all and (min-width: 1100px) {
-  .wrapperFilterSystem {
+  .wrapperSidebarLayout {
     grid-template-columns: 16.5rem 1fr;
     grid-gap: 4rem;
     gap: 4rem;

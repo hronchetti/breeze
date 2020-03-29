@@ -10,6 +10,9 @@ module.exports = {
   courseTopicSlug: name => {
     return `/courses/${createSlug(name)}`
   },
+  courseSlug: (courseTopic, courseName) => {
+    return `/courses/${createSlug(courseTopic)}/${createSlug(courseName)}`
+  },
   courseBookingSlug: (courseTopic, courseName, bookingId) => {
     return `/courses/${createSlug(courseTopic)}/${createSlug(
       courseName
