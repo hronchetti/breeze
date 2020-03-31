@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import Moment from "moment"
 
-export const createBookingDates = teachingPeriods => {
+const createBookingDates = teachingPeriods => {
   let bookingDates = []
 
   teachingPeriods.forEach(teachingPeriod => {
@@ -40,6 +40,8 @@ export const createBookingDates = teachingPeriods => {
 
   return bookingDates
 }
+
+export default createBookingDates
 
 createBookingDates.propTypes = {
   teachingPeriods: PropTypes.array.isRequired,

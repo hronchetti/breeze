@@ -120,12 +120,17 @@
         opacity: 1;
         padding: 0;
         pointer-events: all;
-        position: static;
-        top: 0;
+        position: sticky;
+        top: 9rem;
         transition: none;
 
         .sidebarHeading {
           margin: 0 0 2rem 0;
+        }
+
+        .sidebarItems {
+          max-height: calc(100vh - 12.25rem);
+          overflow-y: auto;
         }
       }
 

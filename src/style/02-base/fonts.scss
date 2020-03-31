@@ -57,6 +57,11 @@ h4 {
   color: $blueDark;
 }
 
+h5 {
+  font: 600 1rem/1.5rem "Inter", Arial, sans-serif;
+  color: $grey;
+}
+
 a {
   font: 600 1rem/1.5rem "Inter", Arial, sans-serif;
   color: $blue;
@@ -76,6 +81,10 @@ strong {
   h1 {
     font-size: 2.5rem;
     line-height: 3.25rem;
+  }
+
+  h5 {
+    font: 600 1.125rem/2rem "Inter", Arial, sans-serif;
   }
 }
 

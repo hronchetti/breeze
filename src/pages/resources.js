@@ -7,15 +7,16 @@ import FilterOption from "../components/FilterOption"
 import SignOffMailingList from "../components/SignOffMailingList"
 import Resource from "../components/Resource"
 import { graphql } from "gatsby"
+import { trackScroll } from "../utilities/trackScroll"
 
 const Resources = ({ data }) => {
-  const [resources, setResources] = useState([])
   const [resourceGroups, setResourceGroups] = useState([])
-  const [currentResourceTopic, setCurrentResourceTopic] = useState("All topics")
+  const [currentResourceTopic, setCurrentResourceTopic] = useState("")
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
+  const resources = data.allStrapiResources.edges
 
   useEffect(() => {
-    orderGroupsAlphabetically(data.allStrapiResources.edges)
+    orderGroupsAlphabetically(resources)
 
     data.allStrapiResources.edges.map(group =>
       setResourceGroups(resourceGroups => [
@@ -26,11 +27,16 @@ const Resources = ({ data }) => {
         },
       ])
     )
-
-    setResources(data.allStrapiResources.edges)
   }, [])
 
-  const scrollToGroup = clickedGroupName => {}
+  const scrollToGroup = clickedTopic => {
+    document.getElementById(clickedTopic).scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    })
+    setCurrentResourceTopic(clickedTopic)
+  }
 
   const orderGroupsAlphabetically = allResources => {
     allResources.sort((a, b) => {
@@ -43,6 +49,7 @@ const Resources = ({ data }) => {
   const toggleSidebarVisibilityMobile = () => {
     setSidebarVisibilityMobile(!sidebarVisibileMobile)
   }
+
   return (
     <Layout>
       <SEO title="Resources" />
@@ -53,7 +60,7 @@ const Resources = ({ data }) => {
             className={`wrapperSidebar${sidebarVisibileMobile ? " open" : ""}`}
           >
             <div className="sidebar">
-              <span className="sidebarHeading">Topics</span>
+              <span className="sidebarHeading">Quick access</span>
               {resourceGroups.map(topic => (
                 <FilterOption
                   key={topic.id}
@@ -72,6 +79,11 @@ const Resources = ({ data }) => {
             <span className="fill"></span>
           </aside>
           <section className="filteredContent">
+            <span className="filterCount">
+              {resources.length > 1 || resources.length === 0
+                ? `${resources.length} resources`
+                : `${resources.length} resources`}
+            </span>
             {resources.map(resourceGroup => (
               <article
                 key={resourceGroup.node.id}

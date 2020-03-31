@@ -11,12 +11,14 @@
 
 // 03 UTILITIES - Re-usable classes using OOCSS logic
 @import "03-utilities/wrappers";
-@import "03-utilities/layouts";
+@import "03-utilities/sidebarLayout";
 @import "03-utilities/accessibility";
 @import "03-utilities/links";
 @import "03-utilities/responsivity";
+@import "03-utilities/content";
 
 // 04 COMPONENTS - Nested component styles in respective component folders
+@import "../components/AgendaItem/agendaItem";
 @import "../components/BlogArticlePreview/blogArticlePreview";
 @import "../components/Button/button";
 @import "../components/Course/course";

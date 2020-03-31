@@ -38,7 +38,7 @@ const BlogArticle = ({ data }) => {
       <main>
         <article className="article">
           {article.section.map(section => (
-            <section key={section.id}>
+            <section key={section.id} className="content">
               <ReactMarkdown source={section.content} />
               {section.image && section.image_description ? (
                 <Img

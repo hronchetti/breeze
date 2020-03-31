@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Course from "../components/Course"
 import FilterOption from "../components/FilterOption"
 import Layout from "../components/Layout"
@@ -12,8 +12,29 @@ const CourseList = ({ data }) => {
   const courses = data.allStrapiCourses.edges
   const courseTopic = data.strapiCourseTopics
 
+  useEffect(() => {
+    orderCoursesAlphabetically(courses)
+  }, [courses])
+
   const toggleSidebarVisibilityMobile = () => {
     setSidebarVisibilityMobile(!sidebarVisibileMobile)
+  }
+
+  const scrollToGroup = clickedTopic => {
+    document.getElementById(clickedTopic).scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+      inline: "nearest",
+    })
+    setCurrentCourse(clickedTopic)
+  }
+
+  const orderCoursesAlphabetically = allResources => {
+    allResources.sort((a, b) => {
+      const topicName1 = a.node.name.toUpperCase()
+      const topicName2 = b.node.name.toUpperCase()
+      return topicName1 < topicName2 ? -1 : topicName1 > topicName2 ? 1 : 0
+    })
   }
 
   return (
@@ -30,14 +51,16 @@ const CourseList = ({ data }) => {
           >
             <div className="sidebar">
               <span className="sidebarHeading">Quick access</span>
-              {courses.map(course => (
-                <FilterOption
-                  key={course.node.id}
-                  value={course.node.name}
-                  clickFunc={() => {}}
-                  filteredValue={currentCourse}
-                />
-              ))}
+              <section className="sidebarItems">
+                {courses.map(course => (
+                  <FilterOption
+                    key={course.node.id}
+                    value={course.node.name}
+                    clickFunc={scrollToGroup}
+                    filteredValue={currentCourse}
+                  />
+                ))}
+              </section>
             </div>
             <button
               className="sidebarControl"

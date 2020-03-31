@@ -1,23 +1,23 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { courseBookingSlug, courseSlug } from "../../utilities/createSlug"
-import { createBookingDates } from "../../utilities/createBookingDates"
+import createBookingDates from "../../utilities/createBookingDates"
 import AcuphysLogo from "../../images/acuphys-logo.svg"
 import Button from "../Button"
 import { Link } from "gatsby"
 
 const Course = ({ course }) => {
   return (
-    <section className="courseItem">
+    <section className="courseItem" id={course.name}>
       <div className="details">
         <h3>{course.name}</h3>
         <section className="facts">
-        <span className="fact">
-          <b>Skill level:</b> {course.skill_level}
-        </span>
-        <span className="fact">
-          <b>Teaching hours:</b> {course.teaching_hours}
-        </span>
+          <span className="fact">
+            <b>Skill level:</b> {course.skill_level}
+          </span>
+          <span className="fact">
+            <b>Teaching hours:</b> {course.teaching_hours}
+          </span>
         </section>
         <p className="summary">{course.summary}</p>
         {course.course_topic.name === "Acupuncture" ? (
