@@ -48,7 +48,7 @@ const Course = ({ course }) => {
                   text="Find out more"
                 />
                 <Button
-                  styles="buttonPrimary"
+                  styles="buttonPrimary iconLeft iconArrow"
                   text="Book now"
                   href={booking.stripe_product}
                 />

@@ -3,6 +3,7 @@ import Course from "../components/Course"
 import FilterOption from "../components/FilterOption"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
+import HeaderBlob from "../components/HeaderBlob"
 import { graphql } from "gatsby"
 
 const CourseList = ({ data }) => {
@@ -40,10 +41,13 @@ const CourseList = ({ data }) => {
   return (
     <Layout>
       <SEO title="Home" />
-      <header className="wrapper">
-        <h1>{courseTopic.name} courses</h1>
+      <HeaderBlob
+        title={`${courseTopic.name} courses`}
+        image={courseTopic.image.childImageSharp.fluid}
+        imageDescription={courseTopic.image_description}
+      >
         <p>{courseTopic.description}</p>
-      </header>
+      </HeaderBlob>
       <main className="backgroundGreyLightSuper">
         <section className="wrapper wrapperSidebarLayout">
           <aside

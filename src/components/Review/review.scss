@@ -4,6 +4,17 @@
   border-radius: 0.5rem;
   padding: 1.5rem;
   margin: 0 0 1.5rem 0;
+  transition: box-shadow 0.2s ease-in;
+
+  &:last-of-type {
+    margin: 0;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      @include shadowHardDistant;
+    }
+  }
 
   .name {
     @include flexJustifyStart;
@@ -75,6 +86,16 @@
       .source {
         display: inline;
       }
+    }
+  }
+}
+
+@media all and (min-width: 1280px) {
+  .review {
+    padding: 2rem;
+
+    .continueReading {
+      margin: 1.25rem 0 0.25rem 0;
     }
   }
 }

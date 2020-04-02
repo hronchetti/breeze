@@ -26,6 +26,7 @@
 @import "../components/FilterOption/filterOption";
 @import "../components/Footer/footer";
 @import "../components/Header/header";
+@import "../components/HeaderBlob/headerBlob";
 @import "../components/Layout/layout";
 @import "../components/Nav/nav";
 @import "../components/Resource/resource";
@@ -34,3 +35,4 @@
 // 05 PAGES - styles related to Gatsby pages and templates
 @import "05-pages/blogArticle";
 @import "05-pages/resources";
+@import "05-pages/courseView";

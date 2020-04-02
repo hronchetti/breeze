@@ -1,34 +1,70 @@
-import React from "react"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
+import React, { useState, useEffect } from "react"
+import AcuphysLogo from "../images/acuphys-logo.svg"
+import AgendaItem from "../components/AgendaItem"
+import Button from "../components/Button"
 import Header from "../components/Header"
+import Layout from "../components/Layout"
 import ReactMarkdown from "react-markdown"
 import Review from "../components/Review"
-import AgendaItem from "../components/AgendaItem"
+import SEO from "../components/SEO"
+import SignOffStillLooking from "../components/SignOffStillLooking"
 import createBookingDates from "../utilities/createBookingDates"
 import { Link } from "gatsby"
-import Button from "../components/Button"
 
 const CourseView = ({ data }) => {
-  console.log(data)
   const course = data.strapiCourses
+  const topic = course.course_topic.name
+  const [primaryBooking, setPrimaryBooking] = useState()
+  console.log(course)
+
+  useEffect(() => {
+    let locationArray = window.location.href.split("/")
+    let requestQuery = locationArray[locationArray.length - 1]
+
+    if (locationArray && requestQuery) {
+      setPrimaryBooking(requestQuery)
+    }
+  }, [])
   return (
     <Layout>
       <SEO title="Home" />
-      <Header title={course.name} />
+      <Header
+        title={course.name}
+        styles={`headerCourse${
+          topic === "Acupuncture" ? " headerAcupuncture" : ""
+        }`}
+      >
+        {console.log(primaryBooking)}
+        <section className="facts">
+          <span className="fact">
+            <b>Skill level:</b> {course.skill_level}
+          </span>
+          <span className="fact">
+            <b>Teaching hours:</b> {course.teaching_hours}
+          </span>
+        </section>
+        {topic === "Acupuncture" ? (
+          <section className="acuphys">
+            <b>Brought to you by:</b>
+            <img className="acuphysLogo" src={AcuphysLogo} alt="Acuphys logo" />
+          </section>
+        ) : (
+          ""
+        )}
+      </Header>
       <main className="backgroundGreyLightSuper">
-        <section className="wrapper">
-          <section>
-            <h2>Course details</h2>
+        <section className="wrapper courseWrapper">
+          <section className="courseContent">
             <div className="content">
+              <h2>Course details</h2>
               <ReactMarkdown source={course.details} />
             </div>
-
             {course.agenda.length > 0 ? (
-              <>
+              <div className="agenda">
                 <h2>Agenda</h2>
-                {course.agenda.map(agendaDay => (
+                {course.agenda.map((agendaDay, index) => (
                   <div key={agendaDay.id}>
+                    <h5>Day {index + 1}</h5>
                     {agendaDay.event.map(event => (
                       <AgendaItem
                         key={event.id}
@@ -39,14 +75,18 @@ const CourseView = ({ data }) => {
                     ))}
                   </div>
                 ))}
-              </>
+              </div>
             ) : (
               ""
             )}
             {course.bookings.length > 0 ? (
-              <>
-                <h2>Course bookings</h2>
-                <Link to="/request-a-course">Request this course near you</Link>
+              <div className="bookings">
+                <section className="heading">
+                  <h2>Course bookings</h2>
+                  <Link to="/request-a-course">
+                    Request this course near you
+                  </Link>
+                </section>
                 {course.bookings.map(booking => (
                   <section className="booking" key={booking.id}>
                     <div className="information">
@@ -57,19 +97,29 @@ const CourseView = ({ data }) => {
                     </div>
                     <div className="actions">
                       <Button
-                        styles="buttonPrimary"
+                        styles="buttonPrimary iconLeft iconArrow"
                         text="Book now"
                         href={booking.stripe_product}
                       />
                     </div>
                   </section>
                 ))}
-              </>
+              </div>
             ) : (
-              ""
+              <div className="bookings">
+                <section className="heading">
+                  <h2>Course bookings</h2>
+                </section>
+                <Link className="booking noBookings" to="/request-a-course">
+                  <span>
+                    No bookings scheduled,{" "}
+                    <span>request this course near you</span>
+                  </span>
+                </Link>
+              </div>
             )}
           </section>
-          <aside>
+          <aside className="courseSidebar">
             {course.reviews.length > 0
               ? course.reviews.map(review => (
                   <Review
@@ -85,6 +135,7 @@ const CourseView = ({ data }) => {
               : ""}
           </aside>
         </section>
+        <SignOffStillLooking />
       </main>
     </Layout>
   )

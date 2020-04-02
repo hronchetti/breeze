@@ -98,8 +98,9 @@ exports.createPages = ({ actions, graphql }) => {
             node.name,
             booking.id
           ),
-          component: path.resolve(`src/templates/courseViewWithBooking.js`),
+          component: path.resolve(`src/templates/courseView.js`),
           context: {
+            name: node.name,
             id: booking.id,
           },
         })

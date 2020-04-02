@@ -5,7 +5,7 @@ import Verified from "../../images/icons/verified.svg"
 
 const Review = ({ link, source, review, summary, location, name }) => {
   return (
-    <a className="review" href={link}>
+    <a className="review" href={link} target="_blank" rel="noopener noreferrer">
       <div className="name">
         <h5>{name}</h5>
         <img src={Verified} alt="Verified" />

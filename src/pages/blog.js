@@ -17,7 +17,7 @@ const Blog = ({ data }) => {
   useEffect(() => {
     prepareArticleTopics(data.allStrapiBlogArticleTopics.edges)
     setArticles(data.allStrapiBlogArticles.edges)
-  }, [])
+  }, [data.allStrapiBlogArticleTopics.edges, data.allStrapiBlogArticles.edges])
 
   const prepareArticleTopics = strapiArticleTopics => {
     strapiArticleTopics.sort((a, b) => {

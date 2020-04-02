@@ -7,7 +7,7 @@ import FilterOption from "../components/FilterOption"
 import SignOffMailingList from "../components/SignOffMailingList"
 import Resource from "../components/Resource"
 import { graphql } from "gatsby"
-import { trackScroll } from "../utilities/trackScroll"
+//import { trackScroll } from "../utilities/trackScroll"
 
 const Resources = ({ data }) => {
   const [resourceGroups, setResourceGroups] = useState([])
@@ -18,7 +18,7 @@ const Resources = ({ data }) => {
   useEffect(() => {
     orderGroupsAlphabetically(resources)
 
-    data.allStrapiResources.edges.map(group =>
+    resources.map(group =>
       setResourceGroups(resourceGroups => [
         ...resourceGroups,
         {
@@ -27,7 +27,7 @@ const Resources = ({ data }) => {
         },
       ])
     )
-  }, [])
+  }, [resources])
 
   const scrollToGroup = clickedTopic => {
     document.getElementById(clickedTopic).scrollIntoView({
