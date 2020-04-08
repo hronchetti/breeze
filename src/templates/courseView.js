@@ -14,16 +14,18 @@ import { Link } from "gatsby"
 const CourseView = ({ data }) => {
   const course = data.strapiCourses
   const topic = course.course_topic.name
-  const [primaryBooking, setPrimaryBooking] = useState()
+  //const [primaryBooking, setPrimaryBooking] = useState()
   console.log(course)
 
   useEffect(() => {
     let locationArray = window.location.href.split("/")
     let requestQuery = locationArray[locationArray.length - 1]
 
-    if (locationArray && requestQuery) {
-      setPrimaryBooking(requestQuery)
-    }
+    course.bookings.forEach(booking => {
+      if (booking.id === requestQuery) {
+        console.log(booking)
+      }
+    })
   }, [])
   return (
     <Layout>
@@ -34,7 +36,6 @@ const CourseView = ({ data }) => {
           topic === "Acupuncture" ? " headerAcupuncture" : ""
         }`}
       >
-        {console.log(primaryBooking)}
         <section className="facts">
           <span className="fact">
             <b>Skill level:</b> {course.skill_level}
