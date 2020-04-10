@@ -22,7 +22,7 @@ const BlogArticleList = ({ article }) => {
 }
 
 BlogArticleList.propTypes = {
-  article: PropTypes.object,
+  article: PropTypes.object.isRequired,
 }
 
 export default BlogArticleList

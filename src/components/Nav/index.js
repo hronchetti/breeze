@@ -110,7 +110,7 @@ const Nav = () => {
         </ul>
       </section>
       <section className="fill"></section>
-      <section className="overlay" onClick={toggleMobileNav}></section>
+      <button className="overlay" onClick={toggleMobileNav}></button>
     </nav>
   )
 }

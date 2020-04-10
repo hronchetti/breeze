@@ -5,6 +5,7 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import HeaderBlob from "../components/HeaderBlob"
 import { graphql } from "gatsby"
+import PropTypes from "prop-types"
 
 const CourseList = ({ data }) => {
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
@@ -88,6 +89,10 @@ const CourseList = ({ data }) => {
       </main>
     </Layout>
   )
+}
+
+CourseList.propTypes = {
+  data: PropTypes.object.isRequired,
 }
 
 export default CourseList

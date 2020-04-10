@@ -9,7 +9,9 @@ import Review from "../components/Review"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import createBookingDates from "../utilities/createBookingDates"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
+
+import PropTypes from "prop-types"
 
 const CourseView = ({ data }) => {
   const course = data.strapiCourses
@@ -25,7 +27,8 @@ const CourseView = ({ data }) => {
         setPrimaryBooking(booking)
       }
     })
-  }, [])
+  }, [course.bookings])
+
   return (
     <Layout>
       <SEO title="Home" />
@@ -140,6 +143,10 @@ const CourseView = ({ data }) => {
       </main>
     </Layout>
   )
+}
+
+CourseView.propTypes = {
+  data: PropTypes.object.isRequired,
 }
 
 export default CourseView

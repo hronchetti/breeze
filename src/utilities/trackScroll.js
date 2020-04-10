@@ -4,7 +4,7 @@ export const trackScroll = setScrollY => {
 
   window.addEventListener("scroll", e => {
     last_known_scroll_position = window.scrollY
-
+    console.log(e)
     if (!ticking) {
       window.requestAnimationFrame(() => {
         setScrollY(last_known_scroll_position)

@@ -8,10 +8,15 @@ const Header = ({ title, children, styles }) => (
   </header>
 )
 
+Header.defaultProps = {
+  children: "",
+  styles: "",
+}
+
 Header.propTypes = {
-  paragraph: PropTypes.string,
   title: PropTypes.string.isRequired,
   children: PropTypes.node,
+  styles: PropTypes.string,
 }
 
 export default Header

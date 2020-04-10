@@ -115,7 +115,7 @@ const Resources = ({ data }) => {
 }
 
 Resources.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.object.isRequired,
 }
 
 export default Resources

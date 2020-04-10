@@ -120,7 +120,7 @@ const Blog = ({ data }) => {
 }
 
 Blog.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.object.isRequired,
 }
 
 export default Blog

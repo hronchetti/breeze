@@ -60,7 +60,7 @@ const BlogArticle = ({ data }) => {
 }
 
 BlogArticle.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.object.isRequired,
 }
 
 export default BlogArticle

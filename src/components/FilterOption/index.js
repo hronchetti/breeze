@@ -15,10 +15,15 @@ const FilterOption = ({ clickFunc, filteredValue, mobileOnly, value }) => {
   )
 }
 
+FilterOption.defaultProps = {
+  mobileOnly: false,
+}
+
 FilterOption.propTypes = {
   clickFunc: PropTypes.func.isRequired,
   filteredValue: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  mobileOnly: PropTypes.bool,
 }
 
 export default FilterOption

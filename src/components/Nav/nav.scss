@@ -19,6 +19,7 @@
   }
 
   .overlay {
+    @extend %buttonStyleReset;
     background-color: $greyLight;
     opacity: 0;
     position: fixed;
@@ -30,6 +31,8 @@
     transition: opacity 300ms ease-in-out;
     transition-delay: 200ms;
     pointer-events: none;
+    width: 100%;
+    height: 100%;
   }
 
   .nav {
