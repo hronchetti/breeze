@@ -59,7 +59,7 @@ const Resources = ({ data }) => {
           <aside
             className={`wrapperSidebar${sidebarVisibileMobile ? " open" : ""}`}
           >
-            <div className="sidebar">
+            <div className="sidebar notSticky">
               <span className="sidebarHeading">Quick access</span>
               {resourceGroups.map(topic => (
                 <FilterOption
