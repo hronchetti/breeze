@@ -14,16 +14,15 @@ import { Link } from "gatsby"
 const CourseView = ({ data }) => {
   const course = data.strapiCourses
   const topic = course.course_topic.name
-  //const [primaryBooking, setPrimaryBooking] = useState()
+  const [primaryBooking, setPrimaryBooking] = useState()
   console.log(course)
 
   useEffect(() => {
     let locationArray = window.location.href.split("/")
     let requestQuery = locationArray[locationArray.length - 1]
-
     course.bookings.forEach(booking => {
-      if (booking.id === requestQuery) {
-        console.log(booking)
+      if (booking.id.toString() === requestQuery) {
+        setPrimaryBooking(booking)
       }
     })
   }, [])
@@ -36,6 +35,7 @@ const CourseView = ({ data }) => {
           topic === "Acupuncture" ? " headerAcupuncture" : ""
         }`}
       >
+        {console.log(primaryBooking)}
         <section className="facts">
           <span className="fact">
             <b>Skill level:</b> {course.skill_level}
@@ -60,10 +60,10 @@ const CourseView = ({ data }) => {
               <h2>Course details</h2>
               <ReactMarkdown source={course.details} />
             </div>
-            {course.agenda.length > 0 ? (
+            {course.agenda_days.length > 0 ? (
               <div className="agenda">
                 <h2>Agenda</h2>
-                {course.agenda.map((agendaDay, index) => (
+                {course.agenda_days.map((agendaDay, index) => (
                   <div key={agendaDay.id}>
                     <h5>Day {index + 1}</h5>
                     {agendaDay.event.map(event => (
@@ -162,7 +162,7 @@ export const pageQuery = graphql`
           start
         }
       }
-      agenda {
+      agenda_days {
         id
         event {
           id

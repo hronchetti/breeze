@@ -19,7 +19,7 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: `http://localhost:1337`,
+        apiURL: `https://breeze-academy.herokuapp.com`,
         contentTypes: [
           `blog-article-topics`,
           `blog-articles`,
@@ -27,7 +27,6 @@ module.exports = {
           `courses`,
           `resources`,
         ],
-        singleTypes: [`homepage`],
         queryLimit: 1000,
       },
     },
