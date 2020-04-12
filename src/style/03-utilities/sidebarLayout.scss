@@ -26,6 +26,12 @@
         display: block;
         margin: 0 0 1.5rem 0;
       }
+
+      .filterOption {
+        &:last-of-type {
+          margin-bottom: 9rem;
+        }
+      }
     }
 
     .sidebarControl {
@@ -33,7 +39,7 @@
       @include shadowHard;
       background-color: $blue;
       padding: 2.25rem;
-      border-radius: 100%;
+      border-radius: 50%;
       position: fixed;
       bottom: 2.5rem;
       right: 1.25rem;
@@ -135,6 +141,12 @@
         .sidebarItems {
           max-height: calc(100vh - 12.25rem);
           overflow-y: auto;
+        }
+
+        .filterOption {
+          &:last-of-type {
+            margin-bottom: 0;
+          }
         }
       }
 

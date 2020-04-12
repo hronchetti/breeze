@@ -11,8 +11,13 @@ const HeaderBlob = ({ title, children, image, imageDescription }) => {
         {children}
       </div>
       <div className="imageWrapper">
-        <Img className="image" fluid={image} alt={imageDescription} />
-        <img className="blob" src={Blob} alt="blob" />
+        <Img
+          className="image"
+          fluid={image}
+          alt={imageDescription}
+          title={imageDescription}
+        />
+        <img className="blob" src={Blob} alt="Blob" title="Blob" />
       </div>
     </header>
   )

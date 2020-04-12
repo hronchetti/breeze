@@ -8,15 +8,19 @@ const Review = ({ link, source, review, summary, location, name }) => {
     <a className="review" href={link} target="_blank" rel="noopener noreferrer">
       <div className="name">
         <h5>{name}</h5>
-        <img src={Verified} alt="Verified" />
+        <img
+          src={Verified}
+          alt="Verified confirmation"
+          title="Verified confirmation"
+        />
       </div>
       <span className="location">{location}</span>
       <div className="stars">
-        <img src={Star} alt="Star" />
-        <img src={Star} alt="Star" />
-        <img src={Star} alt="Star" />
-        <img src={Star} alt="Star" />
-        <img src={Star} alt="Star" />
+        <img src={Star} alt="Star rating" title="Star rating" />
+        <img src={Star} alt="Star rating" title="Star rating" />
+        <img src={Star} alt="Star rating" title="Star rating" />
+        <img src={Star} alt="Star rating" title="Star rating" />
+        <img src={Star} alt="Star rating" title="Star rating" />
       </div>
       <span className="summary">{summary}</span>
       <div className="fullText">

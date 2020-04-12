@@ -19,7 +19,12 @@ const Nav = () => {
     <nav className={`navWrapper${mobileNav ? " active" : ""}`}>
       <section className="nav">
         <Link to="/" className="logo">
-          <img className="symbol" src={Logo} alt="Breeze Logo" />
+          <img
+            className="symbol"
+            src={Logo}
+            alt="Breeze Logo"
+            title="Breeze Logo"
+          />
           <span className="type">Breeze</span>
         </Link>
         <button

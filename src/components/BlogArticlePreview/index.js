@@ -11,6 +11,7 @@ const BlogArticleList = ({ article }) => {
         className="cover"
         fluid={article.cover.childImageSharp.fluid}
         alt={article.cover_image_description}
+        title={article.cover_image_description}
       />
       <div className="content">
         <h3>{article.title}</h3>

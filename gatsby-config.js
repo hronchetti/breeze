@@ -28,6 +28,13 @@ module.exports = {
           `courses`,
           `resources`,
         ],
+        singleTypes: [
+          `homepage`,
+          `contact-us`,
+          `about`,
+          `request-a-course`,
+          `terms-and-conditions`,
+        ],
         queryLimit: 1000,
       },
     },

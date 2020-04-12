@@ -33,6 +33,7 @@ const BlogArticle = ({ data }) => {
           className="cover"
           fluid={article.cover.childImageSharp.fluid}
           alt={article.cover_image_description}
+          title={article.cover_image_description}
         />
       </header>
       <main>
@@ -45,6 +46,7 @@ const BlogArticle = ({ data }) => {
                   className="sectionImage"
                   fluid={section.image.childImageSharp.fluid}
                   alt={section.image_description}
+                  title={section.image_description}
                 />
               ) : null}
             </section>

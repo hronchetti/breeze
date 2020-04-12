@@ -9,12 +9,13 @@ const Header = ({ title, children, styles }) => (
 )
 
 Header.defaultProps = {
+  title: "",
   children: "",
   styles: "",
 }
 
 Header.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   children: PropTypes.node,
   styles: PropTypes.string,
 }

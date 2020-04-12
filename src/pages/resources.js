@@ -36,6 +36,9 @@ const Resources = ({ data }) => {
       inline: "nearest",
     })
     setCurrentResourceTopic(clickedTopic)
+    setTimeout(() => {
+      setSidebarVisibilityMobile(false)
+    }, 350)
   }
 
   const orderGroupsAlphabetically = allResources => {
@@ -44,10 +47,6 @@ const Resources = ({ data }) => {
       const topicName2 = b.node.group_name.toUpperCase()
       return topicName1 < topicName2 ? -1 : topicName1 > topicName2 ? 1 : 0
     })
-  }
-
-  const toggleSidebarVisibilityMobile = () => {
-    setSidebarVisibilityMobile(!sidebarVisibileMobile)
   }
 
   return (
@@ -72,7 +71,7 @@ const Resources = ({ data }) => {
             </div>
             <button
               className="sidebarControl"
-              onClick={toggleSidebarVisibilityMobile}
+              onClick={() => setSidebarVisibilityMobile(!sidebarVisibileMobile)}
             >
               <span className="accessibleText">Show/hide filters</span>
             </button>
@@ -81,8 +80,8 @@ const Resources = ({ data }) => {
           <section className="filteredContent">
             <span className="filterCount">
               {resources.length > 1 || resources.length === 0
-                ? `${resources.length} resources`
-                : `${resources.length} resources`}
+                ? `${resources.length} resource groups`
+                : `${resources.length} resource group`}
             </span>
             {resources.map(resourceGroup => (
               <article

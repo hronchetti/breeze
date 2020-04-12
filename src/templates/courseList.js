@@ -111,7 +111,7 @@ export const pageQuery = graphql`
             id
             address
             discount_percentage
-            price
+            booking_price
             stripe_product
             teaching_period {
               end

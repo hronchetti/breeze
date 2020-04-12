@@ -1,0 +1,96 @@
+.howItWorks {
+  margin: 0 auto;
+  max-width: 1152px;
+
+  .step {
+    margin: 0 0 3rem 0;
+
+    &:last-of-type {
+      margin: 0;
+    }
+
+    .illustration {
+      position: relative;
+      background-color: white;
+      border-radius: 50%;
+      width: 9.5rem;
+      height: 9.5rem;
+      margin: 0 auto;
+
+      .stepNumber {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: $yellow;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+
+        .number {
+          display: block;
+          color: white;
+          font: 700 1.375rem/3rem "Inter", Arial, sans-serif;
+          text-align: center;
+        }
+      }
+
+      img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  h4 {
+    margin: 0 auto;
+    text-align: center;
+    margin: 1rem 0 0.5rem;
+  }
+
+  p {
+    max-width: 17.5rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .howItWorks {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 3.5rem;
+    gap: 3.5rem;
+
+    .step {
+      margin: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .howItWorks {
+    .step {
+      .illustration {
+        width: 12.5rem;
+        height: 12.5rem;
+
+        .stepNumber {
+          width: 3.5rem;
+          height: 3.5rem;
+
+          .number {
+            font-size: 1.75rem;
+            line-height: 3.5rem;
+          }
+        }
+      }
+
+      h4 {
+        margin: 1.75rem 0 1.125rem;
+      }
+    }
+  }
+}

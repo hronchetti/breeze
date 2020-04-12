@@ -1,0 +1,9 @@
+.textCenterAlways {
+  text-align: center !important;
+}
+
+@media screen and (min-width: 800px) {
+  .textCenter {
+    text-align: center !important;
+  }
+}

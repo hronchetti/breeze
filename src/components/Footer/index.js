@@ -19,7 +19,11 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="logo"
             >
-              <img src={FacebookLogo} alt="Facebook Logo" />
+              <img
+                src={FacebookLogo}
+                alt="Facebook Logo"
+                title="Facebook Logo"
+              />
             </a>
             <a
               href="/"
@@ -27,7 +31,11 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="logo"
             >
-              <img src={LinkedInLogo} alt="LinkedIn Logo" />
+              <img
+                src={LinkedInLogo}
+                alt="LinkedIn Logo"
+                title="LinkedIn Logo"
+              />
             </a>
             <a
               href="/"
@@ -35,7 +43,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="logo"
             >
-              <img src={TwitterLogo} alt="Twitter Logo" />
+              <img src={TwitterLogo} alt="Twitter Logo" title="Twitter Logo" />
             </a>
             <a
               href="/"
@@ -43,7 +51,11 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="logo"
             >
-              <img src={InstagramLogo} alt="Instagram Logo" />
+              <img
+                src={InstagramLogo}
+                alt="Instagram Logo"
+                title="Instagram Logo"
+              />
             </a>
           </div>
         </div>

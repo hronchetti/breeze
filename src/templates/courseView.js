@@ -96,7 +96,7 @@ const CourseView = ({ data }) => {
                     <div className="information">
                       <h4>{createBookingDates(booking.teaching_period)}</h4>
                       <p>
-                        £{booking.price} &bull; {booking.address}
+                        {booking.booking_price} &bull; {booking.address}
                       </p>
                     </div>
                     <div className="actions">
@@ -162,7 +162,7 @@ export const pageQuery = graphql`
         address
         discount_percentage
         id
-        price
+        booking_price
         stripe_product
         teaching_period {
           end

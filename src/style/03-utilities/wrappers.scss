@@ -3,6 +3,18 @@
   display: block;
   max-width: 1248px;
   margin: 0 auto;
+
+  &.padded {
+    padding: 2rem 0 3.5rem;
+
+    > h2 {
+      margin: 0 0 1.5rem 0;
+    }
+
+    > .divider {
+      margin-bottom: 2rem;
+    }
+  }
 }
 
 .backgroundGreyLightSuper {
@@ -12,11 +24,35 @@
 @media screen and (min-width: 800px) {
   .wrapper {
     width: calc(100% - 6rem);
+
+    &.padded {
+      padding: 4rem 0 5rem;
+
+      > h2 {
+        margin-bottom: 2rem;
+      }
+
+      > .divider {
+        margin-bottom: 3.5rem;
+      }
+    }
   }
 }
 
 @media screen and (min-width: 1024px) {
   .wrapper {
     width: calc(100% - 8rem);
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .wrapper {
+    &.padded {
+      padding: 5rem 0 8.5rem;
+
+      > .divider {
+        margin-bottom: 4.5rem;
+      }
+    }
   }
 }

@@ -21,7 +21,12 @@ const Course = ({ course }) => {
         </section>
         <p className="summary">{course.summary}</p>
         {course.course_topic.name === "Acupuncture" ? (
-          <img className="acuphysLogo" src={AcuphysLogo} alt="Acuphys logo" />
+          <img
+            className="acuphysLogo"
+            src={AcuphysLogo}
+            alt="Acuphys logo"
+            title="Acuphys logo"
+          />
         ) : (
           ""
         )}
@@ -34,7 +39,7 @@ const Course = ({ course }) => {
               <div className="information">
                 <h4>{createBookingDates(booking.teaching_period)}</h4>
                 <p>
-                  £{booking.price} &bull; {booking.address}
+                  {booking.booking_price} &bull; {booking.address}
                 </p>
               </div>
               <div className="actions">
