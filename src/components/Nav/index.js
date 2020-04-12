@@ -2,8 +2,10 @@ import React, { useState } from "react"
 import Logo from "../../images/Logo.svg"
 import Button from "../Button"
 import { Link } from "gatsby"
+import PropTypes from "prop-types"
+import { courseTopicSlug } from "../../utilities/createSlug"
 
-const Nav = () => {
+const Nav = ({ courses }) => {
   const [mobileNav, openMobileNav] = useState(false)
   const [courseTypes, showCourseTypes] = useState(false)
 
@@ -57,60 +59,38 @@ const Nav = () => {
               active={courseTypes}
               clickFunc={toggleCourseTypes}
               styles="buttonPrimary iconRight iconChevron"
-              text="View courses"
-            />
-            <ul className={`coursesDesktop${courseTypes ? " active" : ""}`}>
-              <li className="course">
-                <Link
-                  to="/courses/acupuncture"
-                  tabIndex={courseTypes ? "0" : "-1"}
-                >
-                  Acupuncture
-                </Link>
-                <span className="background"></span>
-              </li>
-              <li className="course">
-                <Link
-                  to="/courses/general-cpd"
-                  tabIndex={courseTypes ? "0" : "-1"}
-                >
-                  General CPD
-                </Link>
-                <span className="background"></span>
-              </li>
-              <li className="course">
-                <Link
-                  to="/courses/coaching"
-                  tabIndex={courseTypes ? "0" : "-1"}
-                >
-                  Coaching
-                </Link>
-                <span className="background"></span>
-              </li>
-            </ul>
-            <ul className="coursesMobile">
-              <li className="course">
-                <Button
-                  to="/courses/acupuncture"
-                  text="Acupuncture courses"
-                  styles="buttonPrimary iconRight iconArrow"
-                />
-              </li>
-              <li className="course">
-                <Button
-                  to="/courses/general-cpd"
-                  text="General CPD courses"
-                  styles="buttonPrimary iconRight iconArrow"
-                />
-              </li>
-              <li className="course">
-                <Button
-                  to="/courses/coaching"
-                  text="Coaching courses"
-                  styles="buttonPrimary iconRight iconArrow"
-                />
-              </li>
-            </ul>
+            >
+              View courses
+            </Button>
+            {courses && courses.length > 0 ? (
+              <>
+                <ul className={`coursesDesktop${courseTypes ? " active" : ""}`}>
+                  {courses.map(course => (
+                    <li className="course" key={course.node.id}>
+                      <Link
+                        to={courseTopicSlug(course.node.name)}
+                        tabIndex={courseTypes ? "0" : "-1"}
+                      >
+                        {course.node.name}
+                      </Link>
+                      <span className="background"></span>
+                    </li>
+                  ))}
+                </ul>
+                <ul className="coursesMobile">
+                  {courses.map(course => (
+                    <li className="course" key={course.node.id}>
+                      <Button
+                        to={courseTopicSlug(course.node.name)}
+                        styles="buttonPrimary iconRight iconArrow"
+                      >{`${course.node.name} courses`}</Button>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              ""
+            )}
           </li>
         </ul>
       </section>
@@ -120,4 +100,7 @@ const Nav = () => {
   )
 }
 
+Nav.propTypes = {
+  courses: PropTypes.array.isRequired,
+}
 export default Nav

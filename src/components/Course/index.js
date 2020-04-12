@@ -50,13 +50,15 @@ const Course = ({ course }) => {
                     booking.id
                   )}
                   styles="buttonSecondaryWhite"
-                  text="Find out more"
-                />
+                >
+                  Find out more
+                </Button>
                 <Button
                   styles="buttonPrimary iconLeft iconArrow"
-                  text="Book now"
                   href={booking.stripe_product}
-                />
+                >
+                  Book now
+                </Button>
               </div>
             </section>
           ))

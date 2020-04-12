@@ -2,11 +2,19 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
 
-const Button = ({ active, clickFunc, href, styles, text, to, ...props }) => {
+const Button = ({
+  active,
+  clickFunc,
+  href,
+  styles,
+  children,
+  to,
+  ...props
+}) => {
   if (to) {
     return (
       <Link className={`button ${styles}`} to={to} {...props}>
-        {text}
+        {children}
       </Link>
     )
   } else if (clickFunc) {
@@ -16,7 +24,7 @@ const Button = ({ active, clickFunc, href, styles, text, to, ...props }) => {
         onClick={clickFunc}
         {...props}
       >
-        {text}
+        {children}
       </button>
     )
   } else if (href) {
@@ -28,7 +36,7 @@ const Button = ({ active, clickFunc, href, styles, text, to, ...props }) => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        {text}
+        {children}
       </a>
     )
   } else {
@@ -39,7 +47,7 @@ const Button = ({ active, clickFunc, href, styles, text, to, ...props }) => {
 Button.propTypes = {
   styles: PropTypes.string.isRequired,
   clickFunc: PropTypes.func,
-  text: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   to: PropTypes.string,
   href: PropTypes.string,
 }

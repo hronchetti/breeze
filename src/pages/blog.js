@@ -10,32 +10,12 @@ import { graphql } from "gatsby"
 
 const Blog = ({ data }) => {
   const [articles, setArticles] = useState([])
-  const [articleTopics, setArticleTopics] = useState([])
   const [articleTopicFiltered, setArticleTopicFiltered] = useState("All topics")
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
 
   useEffect(() => {
-    prepareArticleTopics(data.allStrapiBlogArticleTopics.edges)
     setArticles(data.allStrapiBlogArticles.edges)
   }, [data.allStrapiBlogArticleTopics.edges, data.allStrapiBlogArticles.edges])
-
-  const prepareArticleTopics = strapiArticleTopics => {
-    strapiArticleTopics.sort((a, b) => {
-      const topicName1 = a.node.name.toUpperCase()
-      const topicName2 = b.node.name.toUpperCase()
-      return topicName1 < topicName2 ? -1 : topicName1 > topicName2 ? 1 : 0
-    })
-
-    strapiArticleTopics.map(topicItem =>
-      setArticleTopics(articleTopics => [
-        ...articleTopics,
-        {
-          id: topicItem.node.id,
-          topic: topicItem.node.name,
-        },
-      ])
-    )
-  }
 
   const toggleFilteredTopic = clickedTopicName => {
     if (
@@ -79,10 +59,10 @@ const Blog = ({ data }) => {
                 filteredValue={articleTopicFiltered}
                 mobileOnly={true}
               />
-              {articleTopics.map(topic => (
+              {data.allStrapiBlogArticleTopics.edges.map(topic => (
                 <FilterOption
-                  key={topic.id}
-                  value={topic.topic}
+                  key={topic.node.id}
+                  value={topic.node.name}
                   clickFunc={toggleFilteredTopic}
                   filteredValue={articleTopicFiltered}
                 />
@@ -127,7 +107,7 @@ export default Blog
 
 export const pageQuery = graphql`
   query allBlogArticles {
-    allStrapiBlogArticles {
+    allStrapiBlogArticles(sort: { order: ASC, fields: updated_at }) {
       edges {
         node {
           id
@@ -153,7 +133,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allStrapiBlogArticleTopics {
+    allStrapiBlogArticleTopics(sort: { order: ASC, fields: name }) {
       edges {
         node {
           id

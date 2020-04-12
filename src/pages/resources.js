@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import Header from "../components/Header"
 import Layout from "../components/Layout"
 import PropTypes from "prop-types"
@@ -10,24 +10,9 @@ import { graphql } from "gatsby"
 //import { trackScroll } from "../utilities/trackScroll"
 
 const Resources = ({ data }) => {
-  const [resourceGroups, setResourceGroups] = useState([])
   const [currentResourceTopic, setCurrentResourceTopic] = useState("")
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
   const resources = data.allStrapiResources.edges
-
-  useEffect(() => {
-    orderGroupsAlphabetically(resources)
-
-    resources.map(group =>
-      setResourceGroups(resourceGroups => [
-        ...resourceGroups,
-        {
-          id: group.node.id,
-          topic: group.node.group_name,
-        },
-      ])
-    )
-  }, [resources])
 
   const scrollToGroup = clickedTopic => {
     document.getElementById(clickedTopic).scrollIntoView({
@@ -41,14 +26,6 @@ const Resources = ({ data }) => {
     }, 350)
   }
 
-  const orderGroupsAlphabetically = allResources => {
-    allResources.sort((a, b) => {
-      const topicName1 = a.node.group_name.toUpperCase()
-      const topicName2 = b.node.group_name.toUpperCase()
-      return topicName1 < topicName2 ? -1 : topicName1 > topicName2 ? 1 : 0
-    })
-  }
-
   return (
     <Layout>
       <SEO title="Resources" />
@@ -60,10 +37,10 @@ const Resources = ({ data }) => {
           >
             <div className="sidebar notSticky">
               <span className="sidebarHeading">Quick access</span>
-              {resourceGroups.map(topic => (
+              {resources.map(topic => (
                 <FilterOption
-                  key={topic.id}
-                  value={topic.topic}
+                  key={topic.node.id}
+                  value={topic.node.group_name}
                   clickFunc={scrollToGroup}
                   filteredValue={currentResourceTopic}
                 />
@@ -121,7 +98,7 @@ export default Resources
 
 export const pageQuery = graphql`
   query allResources {
-    allStrapiResources {
+    allStrapiResources(sort: { order: ASC, fields: group_name }) {
       edges {
         node {
           id

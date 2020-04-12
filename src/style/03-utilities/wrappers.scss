@@ -21,6 +21,10 @@
   background-color: $greyLightSuper;
 }
 
+.backgroundBlueDark {
+  background-color: $blueDark;
+}
+
 @media screen and (min-width: 800px) {
   .wrapper {
     width: calc(100% - 6rem);

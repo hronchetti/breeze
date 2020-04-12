@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import Course from "../components/Course"
 import FilterOption from "../components/FilterOption"
 import Layout from "../components/Layout"
@@ -14,10 +14,6 @@ const CourseList = ({ data }) => {
   const courses = data.allStrapiCourses.edges
   const courseTopic = data.strapiCourseTopics
 
-  useEffect(() => {
-    orderCoursesAlphabetically(courses)
-  }, [courses])
-
   const toggleSidebarVisibilityMobile = () => {
     setSidebarVisibilityMobile(!sidebarVisibileMobile)
   }
@@ -29,14 +25,6 @@ const CourseList = ({ data }) => {
       inline: "nearest",
     })
     setCurrentCourse(clickedTopic)
-  }
-
-  const orderCoursesAlphabetically = allResources => {
-    allResources.sort((a, b) => {
-      const topicName1 = a.node.name.toUpperCase()
-      const topicName2 = b.node.name.toUpperCase()
-      return topicName1 < topicName2 ? -1 : topicName1 > topicName2 ? 1 : 0
-    })
   }
 
   return (
@@ -99,7 +87,10 @@ export default CourseList
 
 export const pageQuery = graphql`
   query AllCoursesInTopic($name: String!) {
-    allStrapiCourses(filter: { course_topic: { name: { eq: $name } } }) {
+    allStrapiCourses(
+      sort: { fields: name, order: ASC }
+      filter: { course_topic: { name: { eq: $name } } }
+    ) {
       edges {
         node {
           id

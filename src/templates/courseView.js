@@ -102,9 +102,10 @@ const CourseView = ({ data }) => {
                     <div className="actions">
                       <Button
                         styles="buttonPrimary iconLeft iconArrow"
-                        text="Book now"
                         href={booking.stripe_product}
-                      />
+                      >
+                        Book now
+                      </Button>
                     </div>
                   </section>
                 ))}
