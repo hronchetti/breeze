@@ -1,0 +1,30 @@
+.courseButtons {
+  margin: 1.5rem 0 0 0;
+
+  .iconArrow {
+    margin: 0 0 0.5rem 0;
+
+    &:last-of-type {
+      margin: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 1001px) {
+  .courseButtons {
+    @include flexJustifyStart;
+
+    .iconArrow {
+      padding: 1rem 1.375rem;
+      margin: 0 0.5rem 0 0;
+
+      &:before {
+        display: none;
+      }
+
+      span {
+        display: none;
+      }
+    }
+  }
+}
