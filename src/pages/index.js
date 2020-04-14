@@ -3,6 +3,7 @@ import React from "react"
 import Button from "../components/Button"
 import Divider from "../components/Divider"
 import HeaderBlob from "../components/HeaderBlob"
+import ImageSection from "../components/ImageSection"
 import Layout from "../components/Layout"
 import PropTypes from "prop-types"
 import SEO from "../components/SEO"
@@ -10,18 +11,17 @@ import { courseTopicSlug } from "../utilities/createSlug"
 import { graphql } from "gatsby"
 
 const LandingPage = ({ data }) => {
-  console.log(data)
   const homepage = data.strapiHomepage
-  const courses = data.allStrapiCourseTopics.edges
+  const courseGroups = data.allStrapiCourseTopics.edges
 
   return (
     <Layout>
-      <SEO title="Home" />
-      <HeaderBlob title={homepage.title}>
+      <SEO title={homepage.title} description={homepage.introduction} />
+      <HeaderBlob title={homepage.title} type="video">
         <p>{homepage.introduction}</p>
-        {courses && courses.length > 0 ? (
+        {courseGroups && courseGroups.length > 0 ? (
           <div className="courseButtons">
-            {courses.map(course => (
+            {courseGroups.map(course => (
               <Button
                 key={course.node.id}
                 to={courseTopicSlug(course.node.name)}
@@ -48,19 +48,56 @@ const LandingPage = ({ data }) => {
                 </section>
               ) : index === 1 ? (
                 <section key={section.id} className="backgroundBlueDark">
-                  <div className="wrapper padded">
+                  <ImageSection
+                    image={section.image.childImageSharp.fluid}
+                    imageDesc={section.image_description}
+                    order="reverse"
+                  >
                     <h2>{section.heading}</h2>
                     <Divider />
                     <p>{section.paragraph}</p>
-                  </div>
+                    {courseGroups && courseGroups.length > 0 ? (
+                      <div className="courseButtons">
+                        {courseGroups.map(course => (
+                          <Button
+                            key={course.node.id}
+                            to={courseTopicSlug(course.node.name)}
+                            styles="buttonPrimary iconRight iconArrow "
+                          >
+                            {course.node.name} <span>courses</span>
+                          </Button>
+                        ))}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </ImageSection>
                 </section>
               ) : (
                 <section key={section.id}>
-                  <div className="wrapper padded">
-                    <Divider />
+                  <ImageSection
+                    image={section.image.childImageSharp.fluid}
+                    imageDesc={section.image_description}
+                  >
                     <h2>{section.heading}</h2>
+                    <Divider />
                     <p>{section.paragraph}</p>
-                  </div>
+                    {courseGroups && courseGroups.length > 0 ? (
+                      <div className="courseButtons light">
+                        {courseGroups.map(course => (
+                          <Button
+                            key={course.node.id}
+                            to={courseTopicSlug(course.node.name)}
+                            styles="buttonPrimary iconRight iconArrow "
+                          >
+                            {course.node.name} <span>courses</span>
+                          </Button>
+                        ))}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </ImageSection>
                 </section>
               )
             )

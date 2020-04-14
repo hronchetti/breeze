@@ -1,6 +1,17 @@
 .courseButtons {
   margin: 1.5rem 0 0 0;
 
+  &.light {
+    .iconArrow {
+      background-color: $blueLight;
+      color: $blue;
+
+      &:before {
+        background-image: url("../images/icons/arrow--blue.svg");
+      }
+    }
+  }
+
   .iconArrow {
     margin: 0 0 0.5rem 0;
 
@@ -10,13 +21,13 @@
   }
 }
 
-@media screen and (min-width: 1001px) {
+@media screen and (min-width: 1100px) {
   .courseButtons {
     @include flexJustifyStart;
 
     .iconArrow {
-      padding: 1rem 1.375rem;
-      margin: 0 0.5rem 0 0;
+      padding: 0.875rem 1.375rem;
+      margin: 0 1rem 0 0;
 
       &:before {
         display: none;
