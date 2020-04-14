@@ -32,8 +32,10 @@ const CourseList = ({ data }) => {
       <SEO title="Home" />
       <HeaderBlob
         title={`${courseTopic.name} courses`}
-        image={courseTopic.image.childImageSharp.fluid}
-        imageDescription={courseTopic.image_description}
+        image={courseTopic.image ? courseTopic.image.childImageSharp.fluid : ""}
+        imageDescription={
+          courseTopic.image_description ? courseTopic.image_description : ""
+        }
       >
         <p>{courseTopic.description}</p>
       </HeaderBlob>
