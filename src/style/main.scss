@@ -7,7 +7,6 @@
 // 02 BASE - Site-wide styles on HTML elements
 @import "02-base/fonts";
 @import "02-base/site";
-@import "02-base/forms";
 
 // 03 UTILITIES - Re-usable classes using OOCSS logic
 @import "03-utilities/wrappers";
@@ -22,12 +21,14 @@
 @import "../components/AgendaItem/agendaItem";
 @import "../components/BlogArticlePreview/blogArticlePreview";
 @import "../components/Button/button";
+@import "../components/Card/card";
 @import "../components/Course/course";
 @import "../components/CourseBooking/courseBooking";
 @import "../components/Divider/divider";
 @import "../components/FAQ/faq";
 @import "../components/FilterOption/filterOption";
 @import "../components/Footer/footer";
+@import "../components/Form/form";
 @import "../components/Header/header";
 @import "../components/HeaderBlob/headerBlob";
 @import "../components/ImageSection/imageSection";
@@ -35,8 +36,10 @@
 @import "../components/Nav/nav";
 @import "../components/Resource/resource";
 @import "../components/Review/review";
+@import "../components/SignOffMailingList/signOffMailingList";
 
 // 05 PAGES - styles related to Gatsby pages and templates
+@import "05-pages/about";
 @import "05-pages/blogArticle";
 @import "05-pages/contact";
 @import "05-pages/courseView";

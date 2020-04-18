@@ -1,12 +1,13 @@
 import React from "react"
 import Img from "gatsby-image"
-import Layout from "../components/Layout"
 import Moment from "moment"
 import PropTypes from "prop-types"
 import ReactMarkdown from "react-markdown"
+import { graphql } from "gatsby"
+
+import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffMailingList from "../components/SignOffMailingList"
-import { graphql } from "gatsby"
 
 const BlogArticle = ({ data }) => {
   const article = data.strapiBlogArticles

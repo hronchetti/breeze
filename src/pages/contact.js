@@ -1,13 +1,16 @@
 import React from "react"
+import PropTypes from "prop-types"
+import { graphql } from "gatsby"
+
+import FAQ from "../components/FAQ"
+import Divider from "../components/Divider"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import Header from "../components/Header"
-import { graphql } from "gatsby"
-import PropTypes from "prop-types"
+import SignOffMailingList from "../components/SignOffMailingList"
+
 import PhoneIcon from "../images/icons/big/phone.svg"
 import EmailIcon from "../images/icons/big/email.svg"
-import FAQ from "../components/FAQ"
-import Divider from "../components/Divider"
 import FacebookLogo from "../images/icons/facebook--blue.svg"
 import InstagramLogo from "../images/icons/instagram--blue.svg"
 import LinkedInLogo from "../images/icons/linkedIn--blue.svg"
@@ -97,19 +100,18 @@ const Contact = ({ data }) => {
           )}
         </div>
       </Header>
-      <main>
-        <section className="backgroundGreyLightSuper">
-          <section className="wrapper padded">
-            <h2 className="textCenter">Frequently asked questions</h2>
-            <Divider align="center" />
-            <div className="faqs">
-              {contactUs.faq.map(faq => (
-                <FAQ key={faq.id} question={faq.question} answer={faq.answer} />
-              ))}
-            </div>
-          </section>
+      <main className="backgroundGreyLightSuper">
+        <section className="wrapper padded">
+          <h2 className="textCenter">Frequently asked questions</h2>
+          <Divider align="center" />
+          <div className="faqs narrowContent">
+            {contactUs.faq.map(faq => (
+              <FAQ key={faq.id} question={faq.question} answer={faq.answer} />
+            ))}
+          </div>
         </section>
       </main>
+      <SignOffMailingList />
     </Layout>
   )
 }

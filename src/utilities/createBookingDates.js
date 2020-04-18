@@ -3,6 +3,13 @@ import Moment from "moment"
 
 const createBookingDates = teachingPeriods => {
   let bookingDates = []
+  let multipleTeachingPeriods = false
+
+  if (teachingPeriods.length > 1) {
+    multipleTeachingPeriods = true
+  }
+
+  console.log(multipleTeachingPeriods)
 
   teachingPeriods.forEach(teachingPeriod => {
     const startDate = Moment(teachingPeriod.start).format("Do")
@@ -14,9 +21,27 @@ const createBookingDates = teachingPeriods => {
     const endYear = Moment(teachingPeriod.end).format("YYYY")
 
     if (startYear === endYear) {
-      bookingDates.push(
-        startDate + "-" + endDate + " " + startMonth + " " + startYear
-      )
+      if (startMonth === endMonth) {
+        if (startDate === endDate) {
+          bookingDates.push(startDate + " " + startMonth + " " + startYear)
+        } else {
+          bookingDates.push(
+            startDate + "-" + endDate + " " + startMonth + " " + startYear
+          )
+        }
+      } else {
+        bookingDates.push(
+          startDate +
+            " " +
+            startMonth +
+            " - " +
+            endDate +
+            " " +
+            endMonth +
+            " " +
+            startYear
+        )
+      }
     } else {
       bookingDates.push(
         startDate +
@@ -34,7 +59,7 @@ const createBookingDates = teachingPeriods => {
     }
   })
 
-  if (bookingDates.length > 1) {
+  if (multipleTeachingPeriods && bookingDates.length > 1) {
     bookingDates = bookingDates.join(", ")
   }
 

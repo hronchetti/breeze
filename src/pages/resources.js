@@ -1,12 +1,13 @@
 import React, { useState } from "react"
+import PropTypes from "prop-types"
+import { graphql } from "gatsby"
+
+import FilterOption from "../components/FilterOption"
 import Header from "../components/Header"
 import Layout from "../components/Layout"
-import PropTypes from "prop-types"
-import SEO from "../components/SEO"
-import FilterOption from "../components/FilterOption"
-import SignOffMailingList from "../components/SignOffMailingList"
 import Resource from "../components/Resource"
-import { graphql } from "gatsby"
+import SEO from "../components/SEO"
+import SignOffStillLooking from "../components/SignOffStillLooking"
 //import { trackScroll } from "../utilities/trackScroll"
 
 const Resources = ({ data }) => {
@@ -85,7 +86,7 @@ const Resources = ({ data }) => {
           </section>
         </section>
       </main>
-      <SignOffMailingList />
+      <SignOffStillLooking />
     </Layout>
   )
 }

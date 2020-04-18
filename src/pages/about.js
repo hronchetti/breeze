@@ -1,14 +1,17 @@
 import React from "react"
-import Divider from "../components/Divider"
-import Header from "../components/Header"
 import Img from "gatsby-image"
-import Layout from "../components/Layout"
 import PropTypes from "prop-types"
-import SEO from "../components/SEO"
+import ReactMarkdown from "react-markdown"
 import { graphql } from "gatsby"
 
+import Card from "../components/Card"
+import Divider from "../components/Divider"
+import Header from "../components/Header"
+import Layout from "../components/Layout"
+import SEO from "../components/SEO"
+import SignOffMailingList from "../components/SignOffMailingList"
+
 const About = ({ data }) => {
-  console.log(data)
   const about = data.strapiAbout
 
   return (
@@ -16,27 +19,32 @@ const About = ({ data }) => {
       <SEO title={`${about.title} | About us`} />
       <Header title={about.title} styles="textCenter">
         <Img
+          className="headerImage"
           fluid={about.image.childImageSharp.fluid}
           alt={about.image_description}
         />
-        <div>
-          <h2>{about.image_section_heading}</h2>
-          <Divider />
-          <p>{about.image_section_paragraph}</p>
-        </div>
+        <section className="columnedHeader">
+          <div className="columnsTitle">
+            <h2>{about.header_sub_title}</h2>
+            <Divider />
+          </div>
+          <div className="columns">
+            <ReactMarkdown source={about.header_content} />
+          </div>
+        </section>
       </Header>
       <main>
         <section className="backgroundGreyLightSuper">
           <section className="wrapper padded">
-            <h2>{about.quality_assurance_heading}</h2>
-            <Divider />
+            <h2 className="textCenter">{about.quality_assurance_heading}</h2>
+            <Divider align="center" />
             {about.quality_assurance.length > 0 ? (
-              <div>
+              <div className="narrowContent">
                 {about.quality_assurance.map(section => (
-                  <section key={section.id}>
+                  <Card key={section.id}>
                     <h4>{section.section_heading}</h4>
-                    <p>{section.section_paragraph}</p>
-                  </section>
+                    <ReactMarkdown source={section.content} />
+                  </Card>
                 ))}
               </div>
             ) : (
@@ -44,6 +52,7 @@ const About = ({ data }) => {
             )}
           </section>
         </section>
+        <SignOffMailingList />
       </main>
     </Layout>
   )
@@ -68,13 +77,13 @@ export const pageQuery = graphql`
         }
       }
       image_description
-      image_section_heading
-      image_section_paragraph
+      header_sub_title
+      header_content
       quality_assurance_heading
       quality_assurance {
         id
         section_heading
-        section_paragraph
+        content
       }
     }
   }

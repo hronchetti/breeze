@@ -1,4 +1,5 @@
 import React from "react"
+import { graphql } from "gatsby"
 
 import Button from "../components/Button"
 import Divider from "../components/Divider"
@@ -8,11 +9,13 @@ import Layout from "../components/Layout"
 import PropTypes from "prop-types"
 import SEO from "../components/SEO"
 import { courseTopicSlug } from "../utilities/createSlug"
-import { graphql } from "gatsby"
+import Review from "../components/Review"
+import SignOffStillLooking from "../components/SignOffStillLooking"
 
 const LandingPage = ({ data }) => {
   const homepage = data.strapiHomepage
   const courseGroups = data.allStrapiCourseTopics.edges
+  const coursesForReviews = data.allStrapiCourses.edges
 
   return (
     <Layout>
@@ -44,6 +47,19 @@ const LandingPage = ({ data }) => {
                     <h2 className="textCenter">{section.heading}</h2>
                     <Divider align="center" />
                     <p>{section.paragraph}</p>
+                    {coursesForReviews.map(course =>
+                      course.node.reviews.map(review => (
+                        <Review
+                          key={review.id}
+                          link={review.continue_reading_link}
+                          source={review.continue_reading_source}
+                          review={review.review_full}
+                          summary={review.review_summary}
+                          location={review.reviewer_location}
+                          name={review.reviewer_name}
+                        />
+                      ))
+                    )}
                   </div>
                 </section>
               ) : index === 1 ? (
@@ -103,6 +119,7 @@ const LandingPage = ({ data }) => {
             )
           : ""}
       </main>
+      <SignOffStillLooking />
     </Layout>
   )
 }
@@ -142,7 +159,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allStrapiCourses {
+    allStrapiCourses(limit: 5) {
       edges {
         node {
           reviews {

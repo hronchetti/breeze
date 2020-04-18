@@ -16,7 +16,7 @@ const Course = ({ course }) => {
             <b>Skill level:</b> {course.skill_level}
           </span>
           <span className="fact">
-            <b>Teaching hours:</b> {course.teaching_hours}
+            <b>Teaching time:</b> {course.teaching_hours}
           </span>
         </section>
         <p className="summary">{course.summary}</p>

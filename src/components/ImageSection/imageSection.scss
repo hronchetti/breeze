@@ -4,7 +4,7 @@
   gap: 3rem;
 
   &.reverse {
-    .imageWrapper {
+    .imageSectionHalf {
       order: 2;
     }
     .content {
@@ -54,7 +54,7 @@
     gap: 4rem;
 
     &.reverse {
-      .imageWrapper {
+      .imageSectionHalf {
         order: 1;
       }
       .content {

@@ -1,11 +1,13 @@
 import React, { useState } from "react"
+import PropTypes from "prop-types"
+import { graphql } from "gatsby"
+
 import Course from "../components/Course"
 import FilterOption from "../components/FilterOption"
+import HeaderBlob from "../components/HeaderBlob"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
-import HeaderBlob from "../components/HeaderBlob"
-import { graphql } from "gatsby"
-import PropTypes from "prop-types"
+import SignOffStillLooking from "../components/SignOffStillLooking"
 
 const CourseList = ({ data }) => {
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
@@ -25,6 +27,10 @@ const CourseList = ({ data }) => {
       inline: "nearest",
     })
     setCurrentCourse(clickedTopic)
+
+    setTimeout(() => {
+      setSidebarVisibilityMobile(false)
+    }, 350)
   }
 
   return (
@@ -77,6 +83,7 @@ const CourseList = ({ data }) => {
           </section>
         </section>
       </main>
+      <SignOffStillLooking />
     </Layout>
   )
 }

@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react"
+import { Link, graphql } from "gatsby"
+import ReactMarkdown from "react-markdown"
+
 import AcuphysLogo from "../images/acuphys-logo.svg"
 import AgendaItem from "../components/AgendaItem"
 import Button from "../components/Button"
 import Header from "../components/Header"
 import Layout from "../components/Layout"
-import ReactMarkdown from "react-markdown"
 import Review from "../components/Review"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import createBookingDates from "../utilities/createBookingDates"
-import { Link, graphql } from "gatsby"
 
 import PropTypes from "prop-types"
 
@@ -140,8 +141,8 @@ const CourseView = ({ data }) => {
               : ""}
           </aside>
         </section>
-        <SignOffStillLooking />
       </main>
+      <SignOffStillLooking />
     </Layout>
   )
 }

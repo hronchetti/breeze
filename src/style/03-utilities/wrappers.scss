@@ -34,6 +34,11 @@
   }
 }
 
+.narrowContent {
+  max-width: 45rem;
+  margin: 0 auto;
+}
+
 @media screen and (min-width: 800px) {
   .wrapper {
     width: calc(100% - 6rem);
@@ -62,10 +67,6 @@
   .wrapper {
     &.padded {
       padding: 5rem 0 8.5rem;
-
-      > .divider {
-        margin-bottom: 4.5rem;
-      }
     }
   }
 }

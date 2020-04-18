@@ -1,0 +1,77 @@
+.input {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    font: 600 1rem/1.5rem "Inter", Arial, sans-serif;
+    margin: 0 0 0.75rem 0;
+    display: flex;
+    justify-content: space-between;
+
+    .optional {
+      font: 400 1rem/1.5rem "Inter", Arial, sans-serif;
+      font-style: italic;
+      color: $greyLight;
+    }
+  }
+
+  input[type="email"],
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    display: block;
+    margin: 0;
+    padding: 0.875rem 1.125rem;
+    border-radius: 0.25rem;
+    border: none;
+    appearance: none;
+    font: 400 1rem/1.5rem "Inter", Arial, sans-serif;
+    color: $blueDark;
+    position: relative;
+    outline: none;
+
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      background-color: black;
+      height: 0.125rem;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    &::placeholder,
+    &::-webkit-input-placeholder,
+    &::-moz-placeholder,
+    &::-ms-placeholder {
+      color: $greyLight;
+    }
+
+    &:focus {
+      &:after {
+        background-color: $blue;
+      }
+    }
+  }
+
+  .errorText {
+    font: 400 1rem/1.5rem "Inter", Arial, sans-serif;
+    margin-top: 0.25rem;
+    display: block;
+    color: $red;
+    min-height: 1.5rem;
+  }
+}
+
+.backgroundBlueDark {
+  .input {
+    label {
+      color: white;
+    }
+
+    .errorText {
+      color: #ff3853;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.signOffMailingList {
+  h2,
+  p {
+    margin: 0 0 1rem 0;
+  }
+}
+
+@media all and (min-width: 800px) {
+  .signOffMailingList {
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+    .input {
+      max-width: 22rem;
+      margin: 0 auto;
+    }
+
+    .button {
+      margin: 0 auto;
+    }
+  }
+}

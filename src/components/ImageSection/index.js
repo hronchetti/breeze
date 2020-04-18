@@ -8,7 +8,7 @@ const ImageSection = ({ children, image, imageDesc, order }) => {
   if (order === "reverse") {
     return (
       <div className="wrapper padded imageSection reverse">
-        <section>
+        <section className="imageSectionHalf">
           <section className="imageWrapper">
             <Img
               className="image"
@@ -26,7 +26,7 @@ const ImageSection = ({ children, image, imageDesc, order }) => {
     return (
       <div className="wrapper padded imageSection">
         <section className="content">{children}</section>
-        <section>
+        <section className="imageSectionHalf">
           <section className="imageWrapper">
             <Img
               className="image"
