@@ -1,15 +1,24 @@
-import React from "react"
+import React, { useState } from "react"
 import addToMailchimp from "gatsby-plugin-mailchimp"
 import * as Yup from "yup"
 import { Formik, Form } from "formik"
 
-import { Input } from "../Form"
+import { Input, Toast } from "../Form"
 
 const SignOffMailingList = () => {
+  const [toast, setToast] = useState({
+    message: "",
+    visible: false,
+    type: true,
+  })
   const handleSubmit = async (values, actions) => {
-    addToMailchimp(values.email, {
-      PATHNAME: "",
+    const response = await addToMailchimp(values.email)
+    setToast({
+      type: response.result === "success" ? true : false,
+      visible: true,
+      message: response.msg,
     })
+    console.log(response)
     actions.setSubmitting(false)
   }
   return (
@@ -21,9 +30,7 @@ const SignOffMailingList = () => {
           }}
           validationSchema={Yup.object().shape({
             email: Yup.string()
-              .email(
-                "Must be a valid email address in the format 'example@example.com'"
-              )
+              .email("Must be a valid email address")
               .required("Required"),
           })}
           onSubmit={handleSubmit}
@@ -46,6 +53,17 @@ const SignOffMailingList = () => {
           )}
         </Formik>
       </section>
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        visible={toast.visible}
+        onClick={() =>
+          setToast(toast => ({
+            ...toast,
+            visible: false,
+          }))
+        }
+      />
     </section>
   )
 }

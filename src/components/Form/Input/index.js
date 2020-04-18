@@ -6,7 +6,7 @@ export const Input = props => {
   const [field, meta] = useField(props)
 
   return (
-    <div className="input">
+    <div className="inputWrapper">
       {props.label ? (
         <label htmlFor={props.name}>
           <span>{props.label}</span>
@@ -19,7 +19,12 @@ export const Input = props => {
       ) : (
         ""
       )}
-      <input name={props.name} {...field} {...props} />
+      <div className="input">
+        <input name={props.name} {...field} {...props} />
+        <span
+          className={`selector${meta.touched && meta.error ? " error" : ""}`}
+        ></span>
+      </div>
       <span className="errorText">{meta.touched ? meta.error : ""}</span>
     </div>
   )

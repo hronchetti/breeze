@@ -1,0 +1,57 @@
+.SelectWrapper {
+  max-width: 24rem;
+
+  .select {
+    position: relative;
+
+    .selector {
+      display: block;
+      position: absolute;
+      background-color: $blue;
+      height: 0.125rem;
+      left: 0;
+      bottom: 0;
+      right: 100%;
+      background-color: $blue;
+      transition: right 250ms ease-in;
+
+      &.error {
+        right: 0;
+        background-color: $red;
+      }
+    }
+
+    .reactSelect__control {
+      background-color: $greyLightSuper;
+      border: none;
+      box-shadow: none;
+
+      .reactSelect__value-container {
+        padding: 0.4375rem 1rem;
+      }
+
+      .reactSelect__indicators {
+        .reactSelect__indicator {
+          padding-right: 0.875rem;
+        }
+
+        .reactSelect__indicator-separator {
+          display: none;
+        }
+      }
+    }
+
+    .reactSelect__menu {
+      border: none;
+      @include shadowHard;
+
+      // .reactSelect__menu-list {
+      //   .reactSelect__option {
+      //     &.active {
+      //       font-weight: 600;
+      //     }
+      //   }
+      // }
+    }
+  }
+}

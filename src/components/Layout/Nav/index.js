@@ -1,9 +1,10 @@
 import React, { useState } from "react"
-import Logo from "../../images/Logo.svg"
-import Button from "../Button"
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import { courseTopicSlug } from "../../utilities/createSlug"
+
+import Button from "../../Button"
+import Logo from "../../../images/Logo.svg"
+import { courseTopicSlug } from "../../../utilities/createSlug"
 
 const Nav = ({ courses }) => {
   const [mobileNav, openMobileNav] = useState(false)

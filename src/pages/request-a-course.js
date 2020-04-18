@@ -1,19 +1,17 @@
 import React from "react"
-import { graphql } from "gatsby"
 import PropTypes from "prop-types"
+import { graphql } from "gatsby"
 
-import Divider from "../components/Divider"
 import HeaderBlob from "../components/HeaderBlob"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
-// Icons
-import DiaryIcon from "../images/icons/big/diary.svg"
-import VenueIcon from "../images/icons/big/venue.svg"
-import RequestIcon from "../images/icons/big/request.svg"
+import HowItWorks from "../components/HowItWorks"
+import RequestACourseForm from "../components/RequestACourse"
 
 const RequestACourse = ({ data }) => {
   const requestCourse = data.strapiRequestACourse
+  const allCourses = data.allStrapiCourses.edges
 
   return (
     <Layout>
@@ -22,57 +20,16 @@ const RequestACourse = ({ data }) => {
         title={requestCourse.title}
         image={requestCourse.image.childImageSharp.fluid}
         imageDescription={requestCourse.image_description}
+        align="top"
       >
         <p>{requestCourse.paragraph}</p>
+        <RequestACourseForm courses={allCourses} />
       </HeaderBlob>
       <main className="backgroundGreyLightSuper">
-        <section className="wrapper padded">
-          <h2 className="textCenterAlways">
-            {requestCourse.how_it_works_heading}
-          </h2>
-          <Divider align="centerAlways" />
-          {requestCourse.how_it_works &&
-          requestCourse.how_it_works.length > 0 ? (
-            <div className="howItWorks">
-              {requestCourse.how_it_works.map((step, index) => (
-                <div key={step.id} className="step">
-                  <section className="illustration">
-                    <span className="stepNumber">
-                      <span className="number">{index + 1}</span>
-                    </span>
-                    <img
-                      src={
-                        index === 1
-                          ? VenueIcon
-                          : index === 2
-                          ? DiaryIcon
-                          : RequestIcon
-                      }
-                      alt={
-                        index === 1
-                          ? "Small Building Illustration"
-                          : index === 2
-                          ? "Personal Diary Illustration"
-                          : "Email envelope with arrow Illustration"
-                      }
-                      title={
-                        index === 1
-                          ? "Small Building Illustration"
-                          : index === 2
-                          ? "Personal Diary Illustration"
-                          : "Email envelope with arrow Illustration"
-                      }
-                    />
-                  </section>
-                  <h4>{step.step_heading}</h4>
-                  <p>{step.step_description}</p>
-                </div>
-              ))}
-            </div>
-          ) : (
-            ""
-          )}
-        </section>
+        <HowItWorks
+          Heading={requestCourse.how_it_works_heading}
+          Steps={requestCourse.how_it_works}
+        />
       </main>
       <SignOffStillLooking />
     </Layout>
@@ -104,6 +61,14 @@ export const pageQuery = graphql`
         step_description
         step_heading
         id
+      }
+    }
+    allStrapiCourses {
+      edges {
+        node {
+          name
+          id
+        }
       }
     }
   }

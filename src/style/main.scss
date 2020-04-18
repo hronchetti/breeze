@@ -27,22 +27,28 @@
 @import "../components/Divider/divider";
 @import "../components/FAQ/faq";
 @import "../components/FilterOption/filterOption";
-@import "../components/Footer/footer";
+@import "../components/Form/Input/input";
+@import "../components/Form/Select/select";
+@import "../components/Form/TextArea/textArea";
 @import "../components/Form/form";
+@import "../components/Form/Toast/toast";
 @import "../components/Header/header";
 @import "../components/HeaderBlob/headerBlob";
+@import "../components/HowItWorks/howItWorks";
 @import "../components/ImageSection/imageSection";
+@import "../components/Layout/Footer/footer";
+@import "../components/Layout/Nav/nav";
 @import "../components/Layout/layout";
-@import "../components/Nav/nav";
+@import "../components/RequestACourse/requestACourse";
 @import "../components/Resource/resource";
 @import "../components/Review/review";
 @import "../components/SignOffMailingList/signOffMailingList";
+@import "../components/SignOffStillLooking/signOffStillLooking";
 
 // 05 PAGES - styles related to Gatsby pages and templates
 @import "05-pages/about";
 @import "05-pages/blogArticle";
 @import "05-pages/contact";
 @import "05-pages/courseView";
-@import "05-pages/requestACourse";
 @import "05-pages/resources";
 @import "05-pages/landingPage";

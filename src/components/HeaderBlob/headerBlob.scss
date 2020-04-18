@@ -42,6 +42,17 @@
     padding: 5.5rem 1.25rem 2rem 1.25rem;
     padding-right: 1.25rem;
 
+    &.alignTop {
+      align-items: flex-start;
+
+      .content {
+        h1,
+        p {
+          max-width: 30rem;
+        }
+      }
+    }
+
     .content {
       margin: 0 0 0.5rem 0;
     }

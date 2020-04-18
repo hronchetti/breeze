@@ -7,6 +7,7 @@
     .imageSectionHalf {
       order: 2;
     }
+
     .content {
       order: 1;
     }
@@ -35,12 +36,7 @@
   }
 
   .content {
-    h2 {
-      margin: 0 0 1.5rem 0;
-    }
-
     p {
-      margin: 1.5rem 0 1rem;
       max-width: 28rem;
     }
   }
@@ -57,6 +53,7 @@
       .imageSectionHalf {
         order: 1;
       }
+
       .content {
         order: 2;
       }
@@ -74,16 +71,6 @@
 
       .blob {
         padding: 0 3%;
-      }
-    }
-
-    .content {
-      h2 {
-        margin-bottom: 2rem;
-      }
-
-      p {
-        margin: 2rem 0;
       }
     }
   }

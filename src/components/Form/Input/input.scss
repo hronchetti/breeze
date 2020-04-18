@@ -1,0 +1,61 @@
+.inputWrapper {
+  max-width: 24rem;
+
+  .input {
+    position: relative;
+
+    input {
+      width: 100%;
+      display: block;
+      margin: 0;
+      padding: 0.875rem 1.125rem;
+      border-radius: 0.25rem;
+      border: none;
+      appearance: none;
+      font: 400 1rem/1.5rem "Inter", Arial, sans-serif;
+      color: $blueDark;
+      position: relative;
+      outline: none;
+      background-color: $greyLightSuper;
+
+      &::placeholder,
+      &::-webkit-input-placeholder,
+      &::-moz-placeholder,
+      &::-ms-placeholder {
+        color: $greyLight;
+      }
+
+      &:focus {
+        + .selector {
+          right: 0;
+        }
+      }
+    }
+
+    .selector {
+      display: block;
+      position: absolute;
+      background-color: $blue;
+      height: 0.125rem;
+      left: 0;
+      bottom: 0;
+      right: 100%;
+      transition: right 250ms ease-in;
+
+      &.error {
+        right: 0;
+        background-color: $red;
+      }
+    }
+  }
+}
+
+.backgroundBlueDark {
+  .inputWrapper {
+    .input {
+      input {
+        background-color: white;
+      }
+    }
+  }
+}

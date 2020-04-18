@@ -6,6 +6,7 @@
   text-align: center;
   cursor: pointer;
   display: block;
+  min-width: 6rem;
 
   &.buttonPrimary {
     background-color: $blue;

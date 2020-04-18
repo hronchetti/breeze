@@ -3,10 +3,17 @@ import PropTypes from "prop-types"
 import Blob from "../../images/blob.svg"
 import Img from "gatsby-image"
 
-const HeaderBlob = ({ title, children, image, imageDescription, type }) => {
+const HeaderBlob = ({
+  align,
+  children,
+  image,
+  imageDescription,
+  title,
+  type,
+}) => {
   if (type === "video") {
     return (
-      <header className="headerBlob">
+      <header className={`headerBlob${align === "top" ? " alignTop" : ""}`}>
         <div className="content">
           <h1>{title}</h1>
           {children}
@@ -18,7 +25,7 @@ const HeaderBlob = ({ title, children, image, imageDescription, type }) => {
     )
   } else {
     return (
-      <header className="headerBlob">
+      <header className={`headerBlob${align === "top" ? " alignTop" : ""}`}>
         <div className="content">
           <h1>{title}</h1>
           {children}
@@ -42,16 +49,18 @@ const HeaderBlob = ({ title, children, image, imageDescription, type }) => {
 }
 
 HeaderBlob.defaultProps = {
+  align: "center",
   image: {},
   imageDescription: "",
   type: "image",
 }
 
 HeaderBlob.propTypes = {
-  title: PropTypes.string.isRequired,
+  align: PropTypes.string,
+  children: PropTypes.node.isRequired,
   image: PropTypes.object,
   imageDescription: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
   type: PropTypes.string,
 }
 
