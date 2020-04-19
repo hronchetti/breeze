@@ -1,6 +1,8 @@
 import React from "react"
 import * as Yup from "yup"
-import { Formik, Form } from "formik"
+import { Formik, Form, Field } from "formik"
+import axios from "axios"
+import qs from "qs"
 
 import Divider from "../Divider"
 import { Input, TextArea } from "../Form"
@@ -8,8 +10,37 @@ import { Input, TextArea } from "../Form"
 import MagnifyingGlass from "../../images/magnifying-glass.svg"
 
 const SignOffStillLooking = () => {
+  // useEffect(() => {
+  //   const handleSubmit = async (values) => {
+  //     const options = {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  //       data: qs.stringify(values),
+  //       url: "/"
+  //     };
+  //     try {
+  //       await axios(options);
+  //       console.log('Success')
+  //     } catch (e) {
+  //       console.log('Failed')
+  //     }
+  //   };
+  // }, [values]);
+
   const handleSubmit = async (values, actions) => {
     actions.setSubmitting(false)
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      data: qs.stringify(values),
+      url: "/",
+    }
+    try {
+      await axios(options)
+      console.log("Success")
+    } catch (e) {
+      console.log("Failed")
+    }
   }
   return (
     <section className="backgroundBlueDark">
@@ -21,6 +52,8 @@ const SignOffStillLooking = () => {
             initialValues={{
               fullname: "",
               email: "",
+              "bot-field": "",
+              "form-name": "like_to_see",
               like_to_see: "",
             }}
             validationSchema={Yup.object().shape({
@@ -33,7 +66,14 @@ const SignOffStillLooking = () => {
             onSubmit={handleSubmit}
           >
             {({ isSubmitting }) => (
-              <Form method="POST" data-netlify="true">
+              <Form
+                name="like_to_see"
+                method="post"
+                netlify-honeypot="bot-field"
+                data-netlify="true"
+              >
+                <Field type="hidden" name="bot-field" />
+                <Field type="hidden" name="form-name" />
                 <p>
                   If you’re a healthcare professional and you think there’s a
                   course missing from our platform we want to hear from you!
@@ -44,7 +84,6 @@ const SignOffStillLooking = () => {
                   name="like_to_see"
                   label="What would you like to see on Breeze?"
                 />
-                <div data-netlify-recaptcha="true"></div>
                 <button
                   disabled={isSubmitting}
                   className="button buttonPrimary"
