@@ -11,9 +11,8 @@
   bottom: -8rem;
   border-radius: 0.25rem;
   @include shadowHard;
-  width: calc(100% - 1.5rem);
+  max-width: calc(100% - 1.5rem);
   z-index: 1002;
-  max-width: 30rem;
   transition: all 0.3s ease-in-out;
   opacity: 0;
   user-select: none;
@@ -156,6 +155,6 @@
 
 @media screen and (min-width: 600px) {
   .toast {
-    width: 50%;
+    max-width: 30rem;
   }
 }

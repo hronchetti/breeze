@@ -23,7 +23,7 @@
       &::-webkit-input-placeholder,
       &::-moz-placeholder,
       &::-ms-placeholder {
-        color: $greyLight;
+        color: hsl(0%, 0%, 50%);
       }
 
       &:focus {

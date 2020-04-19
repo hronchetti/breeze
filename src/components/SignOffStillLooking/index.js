@@ -29,7 +29,7 @@ const SignOffStillLooking = () => {
       setToast({
         type: true,
         visible: true,
-        message: "Message sent successfully",
+        message: "Message sent, thank you for your feedback",
       })
       resetForm({})
     } catch (e) {
@@ -37,7 +37,7 @@ const SignOffStillLooking = () => {
       setToast({
         type: false,
         visible: true,
-        message: "Could not send message",
+        message: "Could not send message, please try again",
       })
     }
     setSubmitting(false)

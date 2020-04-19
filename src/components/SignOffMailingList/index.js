@@ -20,6 +20,7 @@ const SignOffMailingList = () => {
       message: response.msg,
     })
     setSubmitting(false)
+
     if (response.result === "success") {
       resetForm({})
     }
