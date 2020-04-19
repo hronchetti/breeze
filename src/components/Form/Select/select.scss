@@ -25,6 +25,7 @@
       background-color: $greyLightSuper;
       border: none;
       box-shadow: none;
+      border-radius: 0.25rem;
 
       .reactSelect__value-container {
         padding: 0.4375rem 1rem;
@@ -47,9 +48,7 @@
 
       // .reactSelect__menu-list {
       //   .reactSelect__option {
-      //     &.active {
-      //       font-weight: 600;
-      //     }
+      //     font-weight: 600;
       //   }
       // }
     }

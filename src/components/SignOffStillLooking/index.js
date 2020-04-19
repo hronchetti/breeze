@@ -9,7 +9,6 @@ import MagnifyingGlass from "../../images/magnifying-glass.svg"
 
 const SignOffStillLooking = () => {
   const handleSubmit = async (values, actions) => {
-    console.log(values)
     actions.setSubmitting(false)
   }
   return (
@@ -34,7 +33,7 @@ const SignOffStillLooking = () => {
             onSubmit={handleSubmit}
           >
             {({ isSubmitting }) => (
-              <Form>
+              <Form method="POST" data-netlify="true">
                 <p>
                   If you’re a healthcare professional and you think there’s a
                   course missing from our platform we want to hear from you!
@@ -45,12 +44,13 @@ const SignOffStillLooking = () => {
                   name="like_to_see"
                   label="What would you like to see on Breeze?"
                 />
+                <div data-netlify-recaptcha="true"></div>
                 <button
                   disabled={isSubmitting}
                   className="button buttonPrimary"
                   type="submit"
                 >
-                  Help us improve
+                  Send us your ideas
                 </button>
               </Form>
             )}
