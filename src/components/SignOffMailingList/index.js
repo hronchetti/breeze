@@ -11,15 +11,18 @@ const SignOffMailingList = () => {
     visible: false,
     type: true,
   })
-  const handleSubmit = async (values, actions) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const response = await addToMailchimp(values.email)
+
     setToast({
       type: response.result === "success" ? true : false,
       visible: true,
       message: response.msg,
     })
-    console.log(response)
-    actions.setSubmitting(false)
+    setSubmitting(false)
+    if (response.result === "success") {
+      resetForm({})
+    }
   }
   return (
     <section className="backgroundBlueDark">

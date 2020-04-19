@@ -1,34 +1,22 @@
-import React from "react"
+import React, { useState } from "react"
 import * as Yup from "yup"
 import { Formik, Form, Field } from "formik"
 import axios from "axios"
 import qs from "qs"
 
 import Divider from "../Divider"
-import { Input, TextArea } from "../Form"
+import { Input, TextArea, Toast } from "../Form"
 
 import MagnifyingGlass from "../../images/magnifying-glass.svg"
 
 const SignOffStillLooking = () => {
-  // useEffect(() => {
-  //   const handleSubmit = async (values) => {
-  //     const options = {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  //       data: qs.stringify(values),
-  //       url: "/"
-  //     };
-  //     try {
-  //       await axios(options);
-  //       console.log('Success')
-  //     } catch (e) {
-  //       console.log('Failed')
-  //     }
-  //   };
-  // }, [values]);
+  const [toast, setToast] = useState({
+    message: "",
+    visible: false,
+    type: true,
+  })
 
-  const handleSubmit = async (values, actions) => {
-    actions.setSubmitting(false)
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -37,10 +25,22 @@ const SignOffStillLooking = () => {
     }
     try {
       await axios(options)
-      console.log("Success")
+      // Success
+      setToast({
+        type: true,
+        visible: true,
+        message: "Message sent successfully",
+      })
+      resetForm({})
     } catch (e) {
-      console.log("Failed")
+      // Failed
+      setToast({
+        type: false,
+        visible: true,
+        message: "Could not send message",
+      })
     }
+    setSubmitting(false)
   }
   return (
     <section className="backgroundBlueDark">
@@ -53,7 +53,7 @@ const SignOffStillLooking = () => {
               fullname: "",
               email: "",
               "bot-field": "",
-              "form-name": "like_to_see",
+              "form-name": "Can't find what you're looking for?",
               like_to_see: "",
             }}
             validationSchema={Yup.object().shape({
@@ -67,7 +67,7 @@ const SignOffStillLooking = () => {
           >
             {({ isSubmitting }) => (
               <Form
-                name="like_to_see"
+                name="Can't find what you're looking for?"
                 method="post"
                 netlify-honeypot="bot-field"
                 data-netlify="true"
@@ -102,6 +102,17 @@ const SignOffStillLooking = () => {
           />
         </div>
       </section>
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        visible={toast.visible}
+        onClick={() =>
+          setToast(toast => ({
+            ...toast,
+            visible: false,
+          }))
+        }
+      />
     </section>
   )
 }
