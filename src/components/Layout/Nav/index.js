@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 
-import Button from "../../Button"
+import { Button } from "../../Button"
 import Logo from "../../../images/Logo.svg"
 import { courseTopicSlug } from "../../../utilities/createSlug"
 
@@ -58,7 +58,7 @@ const Nav = ({ courses }) => {
           <li>
             <Button
               active={courseTypes}
-              clickFunc={toggleCourseTypes}
+              onClick={toggleCourseTypes}
               styles="buttonPrimary iconRight iconChevron"
             >
               View courses

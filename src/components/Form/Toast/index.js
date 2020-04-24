@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { CloseButton } from "../../Button"
 
 export const Toast = ({ onClick, type, message, visible }) => (
   <div
@@ -9,12 +10,7 @@ export const Toast = ({ onClick, type, message, visible }) => (
   >
     <span className="icon" />
     <span className="message" dangerouslySetInnerHTML={{ __html: message }} />
-    <button className="close" onClick={onClick} aria-label="Close pop up">
-      <span className="closeIcon">
-        <span className="line" />
-        <span className="line" />
-      </span>
-    </button>
+    <CloseButton onClick={onClick} />
   </div>
 )
 

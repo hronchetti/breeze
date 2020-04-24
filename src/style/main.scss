@@ -21,17 +21,19 @@
 @import "../components/AgendaItem/agendaItem";
 @import "../components/BlogArticlePreview/blogArticlePreview";
 @import "../components/Button/button";
+@import "../components/Button/CloseButton/closeButton";
 @import "../components/Card/card";
 @import "../components/Course/course";
 @import "../components/CourseBooking/courseBooking";
 @import "../components/Divider/divider";
 @import "../components/FAQ/faq";
 @import "../components/FilterOption/filterOption";
+@import "../components/Form/Checkbox/checkbox";
 @import "../components/Form/Input/input";
 @import "../components/Form/Select/select";
 @import "../components/Form/TextArea/textarea";
-@import "../components/Form/form";
 @import "../components/Form/Toast/toast";
+@import "../components/Form/form";
 @import "../components/Header/header";
 @import "../components/HeaderBlob/headerBlob";
 @import "../components/HowItWorks/howItWorks";
@@ -42,6 +44,7 @@
 @import "../components/RequestACourse/requestACourse";
 @import "../components/Resource/resource";
 @import "../components/Review/review";
+@import "../components/Modal/modal";
 @import "../components/SignOffMailingList/signOffMailingList";
 @import "../components/SignOffStillLooking/signOffStillLooking";
 

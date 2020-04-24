@@ -8,6 +8,12 @@
   display: block;
   min-width: 6rem;
 
+  &[disabled],
+  &:disabled {
+    background-color: $greyLightSuper !important;
+    color: $greyLight !important;
+  }
+
   &.buttonPrimary {
     background-color: $blue;
     color: white;

@@ -9,8 +9,6 @@ const createBookingDates = teachingPeriods => {
     multipleTeachingPeriods = true
   }
 
-  console.log(multipleTeachingPeriods)
-
   teachingPeriods.forEach(teachingPeriod => {
     const startDate = Moment(teachingPeriod.start).format("Do")
     const startMonth = Moment(teachingPeriod.start).format("MMM")

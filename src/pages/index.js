@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
-import Button from "../components/Button"
+import { Button } from "../components/Button"
 import Divider from "../components/Divider"
 import HeaderBlob from "../components/HeaderBlob"
 import ImageSection from "../components/ImageSection"

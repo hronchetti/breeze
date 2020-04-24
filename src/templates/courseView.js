@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react"
 import { Link, graphql } from "gatsby"
 import ReactMarkdown from "react-markdown"
+import PropTypes from "prop-types"
 
 import AcuphysLogo from "../images/acuphys-logo.svg"
 import AgendaItem from "../components/AgendaItem"
-import Button from "../components/Button"
+import { Button } from "../components/Button"
 import Header from "../components/Header"
 import Layout from "../components/Layout"
 import Review from "../components/Review"
@@ -12,13 +13,10 @@ import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import createBookingDates from "../utilities/createBookingDates"
 
-import PropTypes from "prop-types"
-
 const CourseView = ({ data }) => {
   const course = data.strapiCourses
   const topic = course.course_topic.name
   const [primaryBooking, setPrimaryBooking] = useState()
-  console.log(course)
 
   useEffect(() => {
     let locationArray = window.location.href.split("/")
@@ -64,7 +62,7 @@ const CourseView = ({ data }) => {
               <h2>Course details</h2>
               <ReactMarkdown source={course.details} />
             </div>
-            {course.agenda_days.length > 0 ? (
+            {course.agenda_days && course.agenda_days.length > 0 ? (
               <div className="agenda">
                 <h2>Agenda</h2>
                 {course.agenda_days.map((agendaDay, index) => (
@@ -84,7 +82,7 @@ const CourseView = ({ data }) => {
             ) : (
               ""
             )}
-            {course.bookings.length > 0 ? (
+            {course.bookings && course.bookings.length > 0 ? (
               <div className="bookings">
                 <section className="heading">
                   <h2>Course bookings</h2>
@@ -126,7 +124,7 @@ const CourseView = ({ data }) => {
             )}
           </section>
           <aside className="courseSidebar">
-            {course.reviews.length > 0
+            {course.reviews && course.reviews.length > 0
               ? course.reviews.map(review => (
                   <Review
                     key={review.id}

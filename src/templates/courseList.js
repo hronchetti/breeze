@@ -8,16 +8,25 @@ import HeaderBlob from "../components/HeaderBlob"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
+import { HealthcareProfessionalsOnly } from "../components/Modal"
+import { clearAllBodyScrollLocks } from "body-scroll-lock"
 
 const CourseList = ({ data }) => {
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
   const [currentCourse, setCurrentCourse] = useState("")
+  const [modalVisible, setModalVisibility] = useState(false)
+  const [stripeUrl, setStripeUrl] = useState("")
 
   const courses = data.allStrapiCourses.edges
   const courseTopic = data.strapiCourseTopics
 
   const toggleSidebarVisibilityMobile = () => {
     setSidebarVisibilityMobile(!sidebarVisibileMobile)
+  }
+
+  const prepareModal = stripeUrl => {
+    setModalVisibility(true)
+    setStripeUrl(stripeUrl)
   }
 
   const scrollToGroup = clickedTopic => {
@@ -78,12 +87,25 @@ const CourseList = ({ data }) => {
                 : `${courses.length} course`}
             </span>
             {courses.map(course => (
-              <Course key={course.node.id} course={course.node} />
+              <Course
+                key={course.node.id}
+                course={course.node}
+                prepareModal={prepareModal}
+              />
             ))}
           </section>
         </section>
       </main>
       <SignOffStillLooking />
+      {modalVisible ? (
+        <HealthcareProfessionalsOnly
+          closeFn={() => setModalVisibility(false)}
+          stripeUrl={stripeUrl}
+          isVisible={modalVisible}
+        />
+      ) : (
+        clearAllBodyScrollLocks()
+      )}
     </Layout>
   )
 }

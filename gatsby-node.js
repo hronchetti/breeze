@@ -49,9 +49,6 @@ exports.createPages = ({ actions, graphql }) => {
             course_topic {
               name
             }
-            bookings {
-              id
-            }
           }
         }
       }
@@ -88,22 +85,6 @@ exports.createPages = ({ actions, graphql }) => {
         context: {
           name: node.name,
         },
-      })
-
-      node.bookings.forEach(booking => {
-        // Course bookings /courses/course_topic_name/course_name/booking_id
-        createPage({
-          path: createSlug.courseBookingSlug(
-            node.course_topic.name,
-            node.name,
-            booking.id
-          ),
-          component: path.resolve(`src/templates/courseView.js`),
-          context: {
-            name: node.name,
-            id: booking.id,
-          },
-        })
       })
     })
   })
