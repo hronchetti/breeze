@@ -41,8 +41,10 @@ const SignOffMailingList = () => {
         >
           {({ isSubmitting }) => (
             <Form className="signOffMailingList">
-              <h2 className="textCenter">Don&apos;t miss out, stay updated</h2>
-              <p className="textCenter">
+              <h2 className="textCenterAlways">
+                Don&apos;t miss out, stay updated
+              </h2>
+              <p className="textCenterAlways">
                 We&apos;ll email you about new courses and discounts
               </p>
               <Input name="email" type="email" placeholder="Your email" />

@@ -30,6 +30,9 @@ exports.createPages = ({ actions, graphql }) => {
             id
             title
           }
+          next {
+            id
+          }
         }
       }
 
@@ -56,12 +59,18 @@ exports.createPages = ({ actions, graphql }) => {
     `
   ).then(result => {
     // Blog articles /blog/blog_title
-    result.data.allStrapiBlogArticles.edges.forEach(({ node }) => {
+    const posts = result.data.allStrapiBlogArticles.edges
+    const firstPost = result.data.allStrapiBlogArticles.edges[0]
+
+    posts.forEach((post, index) => {
+      const next = index === posts.length - 1 ? firstPost.node.id : post.next.id
+
       createPage({
-        path: createSlug.blogArticleSlug(node.title),
+        path: createSlug.blogArticleSlug(post.node.title),
         component: path.resolve(`src/templates/blogArticle.js`),
         context: {
-          id: node.id,
+          id: post.node.id,
+          next: next,
         },
       })
     })

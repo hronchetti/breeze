@@ -16,6 +16,6 @@ module.exports = {
   courseBookingSlug: (courseTopic, courseName, bookingId) => {
     return `/courses/${createSlug(courseTopic)}/${createSlug(
       courseName
-    )}/${bookingId}`
+    )}?booking=${bookingId}`
   },
 }

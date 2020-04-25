@@ -5,6 +5,7 @@
   margin: 0 0 1.25rem 0;
   display: block;
   position: relative;
+  transition: box-shadow 250ms ease-in-out;
 
   &:last-of-type {
     margin: 0;
@@ -18,6 +19,8 @@
 
   @media (hover: hover) {
     &:hover {
+      @include shadowHardDistant;
+
       .linkArrow {
         padding: 0 0 0 2.125rem;
       }
