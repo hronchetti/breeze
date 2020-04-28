@@ -13,19 +13,22 @@ import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import createBookingDates from "../utilities/createBookingDates"
 
-const CourseView = ({ data }) => {
+const CourseView = ({ data, location }) => {
   const course = data.strapiCourses
   const topic = course.course_topic.name
   const [primaryBooking, setPrimaryBooking] = useState()
 
   useEffect(() => {
-    let locationArray = window.location.href.split("/")
-    let requestQuery = locationArray[locationArray.length - 1]
-    course.bookings.forEach(booking => {
-      if (booking.id.toString() === requestQuery) {
-        setPrimaryBooking(booking)
-      }
-    })
+    if (location.href) {
+      const locationArray = location.href.split("?booking=")
+      const requestQuery = locationArray[locationArray.length - 1]
+
+      course.bookings.forEach(booking => {
+        if (booking.id.toString() === requestQuery) {
+          setPrimaryBooking(booking)
+        }
+      })
+    }
   }, [course.bookings])
 
   return (
@@ -124,6 +127,23 @@ const CourseView = ({ data }) => {
             )}
           </section>
           <aside className="courseSidebar">
+            {primaryBooking ? (
+              <section className="primaryBooking">
+                <h3 className="price">{primaryBooking.booking_price}</h3>
+                <span className="dates">
+                  {createBookingDates(primaryBooking.teaching_period)}
+                </span>
+                <p className="address">{primaryBooking.address}</p>
+                <Button
+                  styles="buttonPrimary iconLeft iconArrow"
+                  href={primaryBooking.stripe_product}
+                >
+                  Book now
+                </Button>
+              </section>
+            ) : (
+              ""
+            )}
             {course.reviews && course.reviews.length > 0
               ? course.reviews.map(review => (
                   <Review
@@ -147,6 +167,7 @@ const CourseView = ({ data }) => {
 
 CourseView.propTypes = {
   data: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 export default CourseView

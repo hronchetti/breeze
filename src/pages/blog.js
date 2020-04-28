@@ -108,7 +108,7 @@ export default Blog
 
 export const pageQuery = graphql`
   query allBlogArticles {
-    allStrapiBlogArticles(sort: { order: ASC, fields: updated_at }) {
+    allStrapiBlogArticles(sort: { order: DESC, fields: created_at }) {
       edges {
         node {
           id

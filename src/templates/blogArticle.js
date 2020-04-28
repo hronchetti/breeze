@@ -22,13 +22,17 @@ const BlogArticle = ({ data, location }) => {
   const article = data.strapiBlogArticles
   const url = location.href ? location.href : ""
   const nextArticle = data.allStrapiBlogArticles.edges[0].node
-  console.log(data.allStrapiBlogArticles)
+
   return (
     <Layout>
       <SEO title={article.title} description={article.excerpt} />
       <header className="articleHeader">
         <section className="content">
-          <span className="label">{article.blog_article_topic.name}</span>
+          <span className="label">
+            {article.blog_article_topic
+              ? article.blog_article_topic.name
+              : "General"}
+          </span>
           <h1>{article.title}</h1>
           <div className="author">
             <Img

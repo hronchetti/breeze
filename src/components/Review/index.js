@@ -3,9 +3,22 @@ import PropTypes from "prop-types"
 import Star from "../../images/icons/star.svg"
 import Verified from "../../images/icons/verified.svg"
 
-const Review = ({ link, source, review, summary, location, name }) => {
+const Review = ({
+  className,
+  link,
+  location,
+  name,
+  review,
+  source,
+  summary,
+}) => {
   return (
-    <a className="review" href={link} target="_blank" rel="noopener noreferrer">
+    <a
+      className={`review${className ? ` ${className}` : ""}`}
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       <div className="name">
         <h5>{name}</h5>
         <img
@@ -22,8 +35,8 @@ const Review = ({ link, source, review, summary, location, name }) => {
         <img src={Star} alt="Star rating" title="Star rating" />
         <img src={Star} alt="Star rating" title="Star rating" />
       </div>
-      <span className="summary">{summary}</span>
-      <div className="fullText">
+      <div className="content">
+        <span className="summary">{summary}</span>
         <p>{review}</p>
         <span className="gradientOverlay"></span>
       </div>
@@ -35,6 +48,10 @@ const Review = ({ link, source, review, summary, location, name }) => {
   )
 }
 
+Review.defaultProps = {
+  className: "",
+}
+
 Review.propTypes = {
   link: PropTypes.string.isRequired,
   source: PropTypes.string.isRequired,
@@ -42,6 +59,7 @@ Review.propTypes = {
   summary: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  className: PropTypes.string,
 }
 
 export default Review
