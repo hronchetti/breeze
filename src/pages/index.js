@@ -7,18 +7,18 @@ import "../style/03-utilities/swiper.scss"
 import { Button } from "../components/Button"
 import Divider from "../components/Divider"
 import Header from "../components/Header"
-import ImageSection from "../components/ImageSection"
 import Layout from "../components/Layout"
 import PropTypes from "prop-types"
 import SEO from "../components/SEO"
 import { courseTopicSlug } from "../utilities/createSlug"
 import Review from "../components/Review"
 import SignOffStillLooking from "../components/SignOffStillLooking"
+import HowItWorks from "../components/HowItWorks"
 
 const LandingPage = ({ data }) => {
   const homepage = data.strapiHomepage
   const courseGroups = data.allStrapiCourseTopics.edges
-  const coursesForReviews = data.allStrapiCourses.edges
+  const courseReviews = data.allStrapiCourses.edges
   let ReviewsSwiper
 
   useEffect(() => {
@@ -49,92 +49,39 @@ const LandingPage = ({ data }) => {
         </Button>
       </Header>
       <main>
-        {homepage.section && homepage.section.length > 0
-          ? homepage.section.map((section, index) =>
-              index === 0 ? (
-                <section key={section.id} className="backgroundGreyLightSuper">
-                  <div className="reviews">
-                    <h2 className="textCenter heading">{section.heading}</h2>
-                    <Divider align="center" />
-                    <p className="textCenter paragraph">{section.paragraph}</p>
-                  </div>
-                  <div className="swiper-container">
-                    <div className="swiper-wrapper">
-                      {coursesForReviews.map(course =>
-                        course.node.reviews.map(review => (
-                          <Review
-                            key={review.id}
-                            link={review.continue_reading_link}
-                            source={review.continue_reading_source}
-                            review={review.review_full}
-                            summary={review.review_summary}
-                            location={review.reviewer_location}
-                            name={review.reviewer_name}
-                            className="swiper-slide"
-                          />
-                        ))
-                      )}
-                    </div>
-                    <div className="swiper-button-next"></div>
-                    <div className="swiper-button-prev"></div>
-                  </div>
-                </section>
-              ) : index === 1 ? (
-                <section key={section.id} className="backgroundBlueDark">
-                  <ImageSection
-                    image={section.image.childImageSharp.fluid}
-                    imageDesc={section.image_description}
-                    order="reverse"
-                  >
-                    <h2>{section.heading}</h2>
-                    <Divider />
-                    <p>{section.paragraph}</p>
-                    {courseGroups && courseGroups.length > 0 ? (
-                      <div className="courseButtons">
-                        {courseGroups.map(course => (
-                          <Button
-                            key={course.node.id}
-                            to={courseTopicSlug(course.node.name)}
-                            styles="buttonPrimary iconRight iconArrow "
-                          >
-                            {course.node.name} <span>courses</span>
-                          </Button>
-                        ))}
-                      </div>
-                    ) : (
-                      ""
-                    )}
-                  </ImageSection>
-                </section>
-              ) : (
-                <section key={section.id}>
-                  <ImageSection
-                    image={section.image.childImageSharp.fluid}
-                    imageDesc={section.image_description}
-                  >
-                    <h2>{section.heading}</h2>
-                    <Divider />
-                    <p>{section.paragraph}</p>
-                    {courseGroups && courseGroups.length > 0 ? (
-                      <div className="courseButtons light">
-                        {courseGroups.map(course => (
-                          <Button
-                            key={course.node.id}
-                            to={courseTopicSlug(course.node.name)}
-                            styles="buttonPrimary iconRight iconArrow "
-                          >
-                            {course.node.name} <span>courses</span>
-                          </Button>
-                        ))}
-                      </div>
-                    ) : (
-                      ""
-                    )}
-                  </ImageSection>
-                </section>
-              )
-            )
-          : ""}
+        <section className="backgroundGreyLightSuper">
+          <div className="reviews">
+            <h2 className="textCenter heading">{homepage.reviews_header}</h2>
+            <Divider align="center" />
+            <p className="textCenter paragraph">{homepage.reviews_paragraph}</p>
+          </div>
+          <div className="swiper-container">
+            <div className="swiper-wrapper">
+              {courseReviews.map(course =>
+                course.node.reviews.map(review => (
+                  <Review
+                    key={review.id}
+                    link={review.continue_reading_link}
+                    source={review.continue_reading_source}
+                    review={review.review_full}
+                    summary={review.review_summary}
+                    location={review.reviewer_location}
+                    name={review.reviewer_name}
+                    className="swiper-slide"
+                  />
+                ))
+              )}
+            </div>
+            <div className="swiper-button-next"></div>
+            <div className="swiper-button-prev"></div>
+          </div>
+        </section>
+        <section className="backgroundBlueDark">
+          <HowItWorks steps={homepage.how_it_works} />
+        </section>
+        <section className="backgroundGreyLightSuper">
+          <section className="wrapper padded"></section>
+        </section>
       </main>
       <SignOffStillLooking />
     </Layout>
@@ -150,23 +97,17 @@ export default LandingPage
 export const pageQuery = graphql`
   query getLandingPageContent {
     strapiHomepage {
-      id
-      title
-      introduction
-      section {
-        buttons
-        heading
+      how_it_works {
         id
-        image_description
-        paragraph
-        image {
-          childImageSharp {
-            fluid(maxWidth: 1600) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
+        step_description
+        step_heading
       }
+      introduction
+      title
+      video_link
+      reviews_header
+      reviews_paragraph
+      id
     }
     allStrapiCourseTopics(sort: { fields: name, order: ASC }) {
       edges {

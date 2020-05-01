@@ -7,14 +7,14 @@ import DiaryIcon from "../../images/icons/big/diary.svg"
 import VenueIcon from "../../images/icons/big/venue.svg"
 import RequestIcon from "../../images/icons/big/request.svg"
 
-const HowItWorks = ({ Heading, Steps }) => {
+const HowItWorks = ({ steps }) => {
   return (
     <section className="wrapper padded">
-      <h2 className="textCenterAlways">{Heading}</h2>
+      <h2 className="textCenterAlways">How it works</h2>
       <Divider align="centerAlways" />
-      {Steps && Steps.length > 0 ? (
+      {steps && steps.length > 0 ? (
         <div className="howItWorks">
-          {Steps.map((step, index) => (
+          {steps.map((step, index) => (
             <div key={step.id} className="step">
               <section className="illustration">
                 <span className="stepNumber">
@@ -57,8 +57,7 @@ const HowItWorks = ({ Heading, Steps }) => {
 }
 
 HowItWorks.propTypes = {
-  Heading: PropTypes.string.isRequired,
-  Steps: PropTypes.array.isRequired,
+  steps: PropTypes.array.isRequired,
 }
 
 export default HowItWorks

@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
+import onClickOutside from "react-onclickoutside"
 
 import { Button } from "../../Button"
 import Logo from "../../../images/Logo.svg"
@@ -10,13 +11,7 @@ const Nav = ({ courses }) => {
   const [mobileNav, openMobileNav] = useState(false)
   const [courseTypes, showCourseTypes] = useState(false)
 
-  const toggleCourseTypes = () => {
-    showCourseTypes(!courseTypes)
-  }
-
-  const toggleMobileNav = () => {
-    openMobileNav(!mobileNav)
-  }
+  Nav.handleClickOutside = () => showCourseTypes(false)
 
   return (
     <nav className={`navWrapper${mobileNav ? " active" : ""}`}>
@@ -31,7 +26,7 @@ const Nav = ({ courses }) => {
           <span className="type">Breeze</span>
         </Link>
         <button
-          onClick={toggleMobileNav}
+          onClick={() => openMobileNav(!mobileNav)}
           className="mobileNavControl"
           aria-label="Toggle Mobile Navigation"
         >
@@ -58,7 +53,7 @@ const Nav = ({ courses }) => {
           <li>
             <Button
               active={courseTypes}
-              onClick={toggleCourseTypes}
+              onClick={() => showCourseTypes(!courseTypes)}
               styles="buttonPrimary iconRight iconChevron"
             >
               View courses
@@ -96,12 +91,22 @@ const Nav = ({ courses }) => {
         </ul>
       </section>
       <section className="fill"></section>
-      <button className="overlay" onClick={toggleMobileNav}></button>
+      <button
+        className="overlay"
+        onClick={() => openMobileNav(!mobileNav)}
+      ></button>
     </nav>
   )
+}
+
+Nav.prototype = {}
+
+const clickOutsideConfig = {
+  handleClickOutside: () => Nav.handleClickOutside,
 }
 
 Nav.propTypes = {
   courses: PropTypes.array.isRequired,
 }
-export default Nav
+
+export default onClickOutside(Nav, clickOutsideConfig)

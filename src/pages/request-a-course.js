@@ -26,10 +26,7 @@ const RequestACourse = ({ data }) => {
         <RequestACourseForm courses={allCourses} />
       </HeaderBlob>
       <main className="backgroundGreyLightSuper">
-        <HowItWorks
-          Heading={requestCourse.how_it_works_heading}
-          Steps={requestCourse.how_it_works}
-        />
+        <HowItWorks steps={requestCourse.how_it_works} />
       </main>
       <SignOffStillLooking />
     </Layout>
@@ -56,7 +53,6 @@ export const pageQuery = graphql`
         }
       }
       image_description
-      how_it_works_heading
       how_it_works {
         step_description
         step_heading
