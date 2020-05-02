@@ -1,11 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
+import Img from "gatsby-image"
 
 import Divider from "../Divider"
-
-import DiaryIcon from "../../images/icons/big/diary.svg"
-import VenueIcon from "../../images/icons/big/venue.svg"
-import RequestIcon from "../../images/icons/big/request.svg"
 
 const HowItWorks = ({ steps }) => {
   return (
@@ -20,28 +17,11 @@ const HowItWorks = ({ steps }) => {
                 <span className="stepNumber">
                   <span className="number">{index + 1}</span>
                 </span>
-                <img
-                  src={
-                    index === 1
-                      ? VenueIcon
-                      : index === 2
-                      ? DiaryIcon
-                      : RequestIcon
-                  }
-                  alt={
-                    index === 1
-                      ? "Small Building Illustration"
-                      : index === 2
-                      ? "Personal Diary Illustration"
-                      : "Email envelope with arrow Illustration"
-                  }
-                  title={
-                    index === 1
-                      ? "Small Building Illustration"
-                      : index === 2
-                      ? "Personal Diary Illustration"
-                      : "Email envelope with arrow Illustration"
-                  }
+                <Img
+                  className="image"
+                  fluid={step.icon.childImageSharp.fluid}
+                  alt={step.icon_description}
+                  title={step.icon_description}
                 />
               </section>
               <h4>{step.step_heading}</h4>

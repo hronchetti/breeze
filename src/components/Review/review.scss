@@ -9,6 +9,10 @@
     margin: 0;
   }
 
+  &:focus {
+    @include shadowHardDistant;
+  }
+
   @media (hover: hover) {
     &:hover {
       @include shadowHardDistant;

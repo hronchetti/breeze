@@ -4,7 +4,7 @@ import { graphql } from "gatsby"
 
 import Course from "../components/Course"
 import FilterOption from "../components/FilterOption"
-import HeaderBlob from "../components/HeaderBlob"
+import { HeaderBlob } from "../components/Layout/Headers"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"

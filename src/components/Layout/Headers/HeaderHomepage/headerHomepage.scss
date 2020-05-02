@@ -1,0 +1,129 @@
+.headerHomepage {
+  padding-left: 1.25rem;
+
+  .content {
+    padding-right: 1.25rem;
+
+    h1 {
+      max-width: 36rem;
+    }
+    p {
+      max-width: 27rem;
+    }
+
+    .buttons {
+      margin-top: 1.75rem;
+
+      .button {
+        box-shadow: 0rem 0.125rem 0.25rem rgba($blueDark, 0.1);
+
+        &.iconLeft {
+          padding: 1rem 1.25rem 1rem 3rem;
+          text-align: left;
+          position: relative;
+          margin-bottom: 0.75rem;
+
+          &:before {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+
+  .illustrationWrapper {
+    margin-top: 1.25rem;
+    overflow: hidden;
+
+    .illustration {
+      max-width: none;
+      width: 140%;
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .headerHomepage {
+    .illustrationWrapper {
+      .illustration {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .headerHomepage {
+    padding-left: 3rem;
+
+    .content {
+      padding-right: 3rem;
+
+      .buttons {
+        @include flexJustifyStart;
+
+        .button {
+          &.iconLeft {
+            margin: 0 1rem 0 0;
+          }
+        }
+      }
+    }
+
+    .illustrationWrapper {
+      margin-top: 3rem;
+
+      .illustration {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .headerHomepage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding-left: 0;
+
+    .content {
+      padding-right: 0;
+      padding-left: 3rem;
+    }
+
+    .illustrationWrapper {
+      margin-top: 0;
+      max-width: 800px;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .headerHomepage {
+    padding-bottom: 8rem;
+
+    .content {
+      padding-left: 4rem;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .headerHomepage {
+    padding-top: 9rem;
+  }
+}
+
+@media screen and (min-width: 1376px) {
+  .headerHomepage {
+    gap: 6rem;
+
+    .content {
+      padding-left: calc(4rem + ((100vw - 1376px) / 2));
+    }
+  }
+}

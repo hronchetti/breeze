@@ -1,21 +1,24 @@
-import React, { useEffect } from "react"
-import { graphql } from "gatsby"
+import React, { useState, useEffect } from "react"
+import { graphql, Link } from "gatsby"
 import Swiper from "swiper"
 import "swiper/css/swiper.min.css"
 import "../style/03-utilities/swiper.scss"
 
-import { Button } from "../components/Button"
 import Divider from "../components/Divider"
-import Header from "../components/Header"
+import HowItWorks from "../components/HowItWorks"
 import Layout from "../components/Layout"
 import PropTypes from "prop-types"
-import SEO from "../components/SEO"
-import { courseTopicSlug } from "../utilities/createSlug"
 import Review from "../components/Review"
+import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
-import HowItWorks from "../components/HowItWorks"
+import { HeaderHomepage } from "../components/Layout/Headers"
+import { ImageCard } from "../components/Cards"
+import { VideoPlayer } from "../components/Modal"
+import { courseTopicSlug } from "../utilities/createSlug"
 
 const LandingPage = ({ data }) => {
+  const [playerVisible, setPlayerVisibility] = useState(false)
+
   const homepage = data.strapiHomepage
   const courseGroups = data.allStrapiCourseTopics.edges
   const courseReviews = data.allStrapiCourses.edges
@@ -39,15 +42,18 @@ const LandingPage = ({ data }) => {
       },
     })
   }, [])
+
+  const scrollToCourses = () => {}
+
   return (
     <Layout>
       <SEO title={homepage.title} description={homepage.introduction} />
-      <Header title={homepage.title} type="video">
-        <p>{homepage.introduction}</p>
-        <Button onClick={() => {}} styles="buttonPrimary iconLeft">
-          Watch the video
-        </Button>
-      </Header>
+      <HeaderHomepage
+        title={homepage.title}
+        paragraph={homepage.introduction}
+        showVideoPlayer={() => setPlayerVisibility(true)}
+        scrollToCourses={() => scrollToCourses}
+      />
       <main>
         <section className="backgroundGreyLightSuper">
           <div className="reviews">
@@ -80,10 +86,35 @@ const LandingPage = ({ data }) => {
           <HowItWorks steps={homepage.how_it_works} />
         </section>
         <section className="backgroundGreyLightSuper">
-          <section className="wrapper padded"></section>
+          <section className="wrapper padded">
+            <h2 className="heading">Our courses</h2>
+            <Divider />
+            <div className="courseGroups">
+              {courseGroups.map(({ node }) => (
+                <Link key={node.id} to={courseTopicSlug(node.name)}>
+                  <ImageCard
+                    image={node.image}
+                    imageDescription={node.image_description}
+                  >
+                    <h3>{node.name}</h3>
+                    <p>{node.description}</p>
+                    <span className="linkArrow">Get started</span>
+                  </ImageCard>
+                </Link>
+              ))}
+            </div>
+          </section>
         </section>
       </main>
       <SignOffStillLooking />
+      {playerVisible ? (
+        <VideoPlayer
+          YouTubeURL={homepage.video_link}
+          closeFn={() => setPlayerVisibility(false)}
+        />
+      ) : (
+        ""
+      )}
     </Layout>
   )
 }
@@ -101,6 +132,14 @@ export const pageQuery = graphql`
         id
         step_description
         step_heading
+        icon {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        icon_description
       }
       introduction
       title
@@ -114,6 +153,15 @@ export const pageQuery = graphql`
         node {
           id
           name
+          description
+          image_description
+          image {
+            childImageSharp {
+              fluid(maxWidth: 1600) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
         }
       }
     }

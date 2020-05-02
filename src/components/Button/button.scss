@@ -30,22 +30,8 @@
     }
   }
 
-  &.buttonSecondaryWhite {
+  &.buttonSecondary {
     background-color: white;
-    color: $blue;
-    transition: background-color 0.2s ease-in-out;
-
-    &:focus {
-    }
-
-    @media (hover: hover) {
-      &:hover {
-      }
-    }
-  }
-
-  &.buttonSecondaryBlue {
-    background-color: $blueLight;
     color: $blue;
     transition: background-color 0.2s ease-in-out;
 
@@ -76,9 +62,29 @@
     }
   }
 
+  &.iconLeft {
+    &:before {
+      display: none;
+      content: "";
+      position: absolute;
+      left: 1rem;
+      top: 0.875rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
   &.iconArrow {
     &:before {
       background-image: url("../images/icons/arrow--white.svg");
+    }
+  }
+
+  &.iconVideo {
+    &:before {
+      background-image: url("../images/icons/video--fill.svg");
     }
   }
 
@@ -118,14 +124,6 @@
 
       &:before {
         display: block;
-        content: "";
-        position: absolute;
-        left: 1rem;
-        top: 0.875rem;
-        width: 1.5rem;
-        height: 1.5rem;
-        background-repeat: no-repeat;
-        background-position: center;
       }
     }
   }

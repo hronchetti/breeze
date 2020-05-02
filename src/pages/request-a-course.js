@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 
-import HeaderBlob from "../components/HeaderBlob"
+import { HeaderBlob } from "../components/Layout/Headers"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
@@ -57,6 +57,14 @@ export const pageQuery = graphql`
         step_description
         step_heading
         id
+        icon {
+          childImageSharp {
+            fluid(maxWidth: 400) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+        icon_description
       }
     }
     allStrapiCourses {

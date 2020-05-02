@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 
 import FilterOption from "../components/FilterOption"
-import Header from "../components/Header"
+import { Header } from "../components/Layout/Headers"
 import Layout from "../components/Layout"
 import Resource from "../components/Resource"
 import SEO from "../components/SEO"

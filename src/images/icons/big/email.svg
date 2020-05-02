@@ -1,1 +1,15 @@
-<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path d="M0 0v32.727h48V0H0zm24 22.457L3.724 2.182h40.552L24 22.457zm-9.179-6.093L2.181 29.003V3.724l12.64 12.64zm1.543 1.542L24 25.543l7.636-7.637 12.64 12.64H3.724l12.64-12.64zm16.815-1.542l12.64-12.64v25.279l-12.64-12.64z" id="a"/></defs><use fill="#006CF9" fill-rule="nonzero" xlink:href="#a" transform="translate(8 16)"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icon/Big/email</title>
+    <defs>
+        <path d="M0,-5.32907052e-15 L0,32.7272727 L48,32.7272727 L48,-5.32907052e-15 L0,-5.32907052e-15 Z M24,22.4573864 L3.72443182,2.18181818 L44.2755682,2.18181818 L24,22.4573864 Z M14.8210227,16.3636364 L2.18181818,29.0028409 L2.18181818,3.72443182 L14.8210227,16.3636364 Z M16.3636364,17.90625 L24,25.5426136 L31.6363636,17.90625 L44.2755682,30.5454545 L3.72443182,30.5454545 L16.3636364,17.90625 Z M33.1789773,16.3636364 L45.8181818,3.72443182 L45.8181818,29.0028409 L33.1789773,16.3636364 Z" id="path-1"></path>
+    </defs>
+    <g id="Icon/Big/email" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Colour/Blue/03-Primary" transform="translate(8.000000, 16.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Mask" fill="#006CF9" fill-rule="nonzero" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>

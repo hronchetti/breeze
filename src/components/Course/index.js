@@ -50,7 +50,7 @@ const Course = ({ course, prepareModal }) => (
                   course.name,
                   booking.id
                 )}
-                styles="buttonSecondaryWhite"
+                styles="buttonSecondary"
               >
                 Find out more
               </Button>

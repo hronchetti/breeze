@@ -6,7 +6,7 @@ import FAQ from "../components/FAQ"
 import Divider from "../components/Divider"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
-import Header from "../components/Header"
+import { Header } from "../components/Layout/Headers"
 import SignOffMailingList from "../components/SignOffMailingList"
 
 import PhoneIcon from "../images/icons/big/phone.svg"

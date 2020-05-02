@@ -22,7 +22,8 @@
 @import "../components/BlogArticlePreview/blogArticlePreview";
 @import "../components/Button/button";
 @import "../components/Button/CloseButton/closeButton";
-@import "../components/Card/card";
+@import "../components/Cards/TextCard/textCard";
+@import "../components/Cards/ImageCard/ImageCard";
 @import "../components/Course/course";
 @import "../components/CourseBooking/courseBooking";
 @import "../components/Divider/divider";
@@ -34,10 +35,10 @@
 @import "../components/Form/TextArea/textarea";
 @import "../components/Form/Toast/toast";
 @import "../components/Form/form";
-@import "../components/Header/header";
-@import "../components/HeaderBlob/headerBlob";
+@import "../components/Layout/Headers/Header/header";
+@import "../components/Layout/Headers/HeaderBlob/headerBlob";
+@import "../components/Layout/Headers/HeaderHomepage/headerHomepage";
 @import "../components/HowItWorks/howItWorks";
-@import "../components/ImageSection/imageSection";
 @import "../components/Layout/Footer/footer";
 @import "../components/Layout/Nav/nav";
 @import "../components/Layout/layout";
