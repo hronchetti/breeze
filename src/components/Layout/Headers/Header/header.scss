@@ -11,9 +11,41 @@ header {
   }
 }
 
+.headerButtons {
+  .button {
+    box-shadow: 0rem 0.125rem 0.25rem rgba($blueDark, 0.1);
+    width: fit-content;
+
+    &.buttonPrimary,
+    &.iconLeft {
+      margin-bottom: 0.75rem;
+    }
+
+    &.iconLeft {
+      padding: 1rem 1.25rem 1rem 3rem;
+      text-align: left;
+      position: relative;
+
+      &:before {
+        display: block;
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 800px) {
   header {
     padding: 8rem 0 4rem;
+  }
+
+  .headerButtons {
+    @include flexJustifyStart;
+
+    .button {
+      &.buttonPrimary {
+        margin: 0 1rem 0 0;
+      }
+    }
   }
 }
 

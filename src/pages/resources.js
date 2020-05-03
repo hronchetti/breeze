@@ -11,21 +11,8 @@ import SignOffStillLooking from "../components/SignOffStillLooking"
 //import { trackScroll } from "../utilities/trackScroll"
 
 const Resources = ({ data }) => {
-  const [currentResourceTopic, setCurrentResourceTopic] = useState("")
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
   const resources = data.allStrapiResources.edges
-
-  const scrollToGroup = clickedTopic => {
-    document.getElementById(clickedTopic).scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    })
-    setCurrentResourceTopic(clickedTopic)
-    setTimeout(() => {
-      setSidebarVisibilityMobile(false)
-    }, 350)
-  }
 
   return (
     <Layout>
@@ -42,8 +29,7 @@ const Resources = ({ data }) => {
                 <FilterOption
                   key={topic.node.id}
                   value={topic.node.group_name}
-                  clickFunc={scrollToGroup}
-                  filteredValue={currentResourceTopic}
+                  scroll
                 />
               ))}
             </div>

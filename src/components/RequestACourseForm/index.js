@@ -4,6 +4,7 @@ import { Formik, Form, Field } from "formik"
 import axios from "axios"
 import qs from "qs"
 import PropTypes from "prop-types"
+import { Link } from "react-scroll"
 
 import { Input, TextArea, Select, Toast } from "../Form"
 
@@ -117,13 +118,24 @@ const RequestACourse = ({ courses }) => {
               optional="true"
               placeholder="Any extra information that might help us organise the course"
             />
-            <button
-              disabled={isSubmitting}
-              className="button buttonPrimary"
-              type="submit"
-            >
-              Request course
-            </button>
+            <section className="headerButtons">
+              <button
+                disabled={isSubmitting}
+                className="button buttonPrimary"
+                type="submit"
+              >
+                Request course
+              </button>
+              <Link
+                to="howItWorks"
+                className="button buttonSecondary"
+                smooth={true}
+                offset={-96}
+                duration={500}
+              >
+                How it works
+              </Link>
+            </section>
           </Form>
         )}
       </Formik>

@@ -9,18 +9,12 @@ import { disableBodyScroll } from "body-scroll-lock"
 import { Button, CloseButton } from "../../Button"
 import { Checkbox } from "../../Form"
 
-export const HealthcareProfessionalsOnly = ({
-  closeFn,
-  stripeUrl,
-  isVisible,
-}) => {
+export const HealthcareProfessionalsOnly = ({ closeFn, stripeUrl }) => {
   const modal = useRef(null)
 
   useEffect(() => {
-    if (isVisible) {
-      disableBodyScroll(modal)
-    }
-  }, [isVisible])
+    disableBodyScroll(modal)
+  }, [])
 
   const onSubmit = ({ setSubmitting }) => {
     window.location.href = stripeUrl
@@ -101,5 +95,4 @@ export const HealthcareProfessionalsOnly = ({
 HealthcareProfessionalsOnly.propTypes = {
   closeFn: PropTypes.func.isRequired,
   stripeUrl: PropTypes.string.isRequired,
-  isVisible: PropTypes.bool.isRequired,
 }

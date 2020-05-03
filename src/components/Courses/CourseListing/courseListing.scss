@@ -35,6 +35,24 @@
     }
   }
 
+  .onlineOnly {
+    display: grid;
+
+    .button {
+      width: 100%;
+
+      &.buttonSecondary {
+        order: 1;
+        background-color: $blueLight;
+        margin: 0 0 0.635rem 0;
+      }
+
+      &.buttonPrimary {
+        order: 2;
+      }
+    }
+  }
+
   .bookings {
     grid-column: 1/3;
 
@@ -55,6 +73,7 @@
       background-color: $blueLight;
       padding: 1rem 1.25rem;
       border-radius: 0.5rem;
+      width: 100%;
       margin: 0 0 0.75rem 0;
 
       &:last-of-type {
@@ -119,6 +138,24 @@
         grid-row: 1/4;
         margin: 0;
         padding: 0 1rem 0 0;
+      }
+    }
+
+    .onlineOnly {
+      @include flexJustifyStart;
+
+      .button {
+        width: fit-content;
+
+        &.buttonPrimary {
+          order: 1;
+          margin: 0 0.75rem 0 0;
+        }
+
+        &.buttonSecondary {
+          order: 2;
+          margin: 0;
+        }
       }
     }
 

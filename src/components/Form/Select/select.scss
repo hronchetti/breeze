@@ -28,7 +28,9 @@
       border-radius: 0.25rem;
 
       .reactSelect__value-container {
-        padding: 0.4375rem 1rem;
+        padding: 0.625rem 1rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
       }
 
       .reactSelect__indicators {
@@ -50,11 +52,12 @@
       border: none;
       @include shadowHard;
 
-      // .reactSelect__menu-list {
-      //   .reactSelect__option {
-      //     font-weight: 600;
-      //   }
-      // }
+      .reactSelect__menu-list {
+        .reactSelect__option {
+          font-size: 1rem;
+          line-height: 1.75rem;
+        }
+      }
     }
   }
 }

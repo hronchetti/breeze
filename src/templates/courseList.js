@@ -1,19 +1,18 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
+import { clearAllBodyScrollLocks } from "body-scroll-lock"
 
-import Course from "../components/Course"
+import { CourseListing } from "../components/Courses"
 import FilterOption from "../components/FilterOption"
 import { HeaderBlob } from "../components/Layout/Headers"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import { HealthcareProfessionalsOnly } from "../components/Modal"
-import { clearAllBodyScrollLocks } from "body-scroll-lock"
 
 const CourseList = ({ data }) => {
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
-  const [currentCourse, setCurrentCourse] = useState("")
   const [modalVisible, setModalVisibility] = useState(false)
   const [stripeUrl, setStripeUrl] = useState("")
 
@@ -27,19 +26,6 @@ const CourseList = ({ data }) => {
   const prepareModal = stripeUrl => {
     setModalVisibility(true)
     setStripeUrl(stripeUrl)
-  }
-
-  const scrollToGroup = clickedTopic => {
-    document.getElementById(clickedTopic).scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    })
-    setCurrentCourse(clickedTopic)
-
-    setTimeout(() => {
-      setSidebarVisibilityMobile(false)
-    }, 350)
   }
 
   return (
@@ -66,8 +52,7 @@ const CourseList = ({ data }) => {
                   <FilterOption
                     key={course.node.id}
                     value={course.node.name}
-                    clickFunc={scrollToGroup}
-                    filteredValue={currentCourse}
+                    scroll
                   />
                 ))}
               </section>
@@ -87,7 +72,7 @@ const CourseList = ({ data }) => {
                 : `${courses.length} course`}
             </span>
             {courses.map(course => (
-              <Course
+              <CourseListing
                 key={course.node.id}
                 course={course.node}
                 prepareModal={prepareModal}
@@ -101,7 +86,6 @@ const CourseList = ({ data }) => {
         <HealthcareProfessionalsOnly
           closeFn={() => setModalVisibility(false)}
           stripeUrl={stripeUrl}
-          isVisible={modalVisible}
         />
       ) : (
         clearAllBodyScrollLocks()
@@ -128,7 +112,14 @@ export const pageQuery = graphql`
           name
           skill_level
           summary
-          teaching_hours
+          teaching_time
+          online_only
+          thinkific_training {
+            course_link
+            course_duration
+            course_name
+            id
+          }
           bookings {
             id
             address

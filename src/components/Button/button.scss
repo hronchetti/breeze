@@ -7,25 +7,46 @@
   cursor: pointer;
   display: block;
   min-width: 6rem;
+  outline: none;
+  transition: filter 200ms ease-in;
+
+  &:focus {
+    filter: brightness(95%);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      filter: brightness(95%);
+    }
+  }
 
   &[disabled],
   &:disabled {
     background-color: $greyLightSuper !important;
     color: $greyLight !important;
+
+    &:focus {
+      filter: brightness(100%);
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        filter: brightness(100%);
+      }
+    }
   }
 
   &.buttonPrimary {
     background-color: $blue;
     color: white;
-    transition: background-color 0.2s ease-in-out;
 
     &:focus {
-      background-color: #0054c2;
+      filter: brightness(85%);
     }
 
     @media (hover: hover) {
       &:hover {
-        background-color: #0054c2;
+        filter: brightness(85%);
       }
     }
   }
@@ -33,15 +54,6 @@
   &.buttonSecondary {
     background-color: white;
     color: $blue;
-    transition: background-color 0.2s ease-in-out;
-
-    &:focus {
-    }
-
-    @media (hover: hover) {
-      &:hover {
-      }
-    }
   }
 
   &.iconRight {

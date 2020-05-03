@@ -1,13 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="31px" height="37px" viewBox="0 0 31 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
-    <title>Triangle</title>
-    <desc>Created with Sketch.</desc>
-    <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="01-Homepage/01-Initial" transform="translate(-1047.000000, -357.000000)" fill="#132236">
-            <g id="Group-2" transform="translate(1003.000000, 319.000000)">
-                <path d="M73.2729745,58.9662296 L49.061126,73.7205259 C47.6462758,74.582712 45.8003732,74.1346893 44.9381871,72.719839 C44.6516,72.2495488 44.5,71.7094444 44.5,71.158713 L44.5,41.8110179 C44.5,40.1541636 45.8431458,38.8110179 47.5,38.8110179 C48.0457799,38.8110179 48.5812199,38.9599059 49.0486567,39.2416478 L73.2605052,53.8350467 C74.6795291,54.6903462 75.136518,56.5340495 74.2812185,57.9530734 C74.0316738,58.367092 73.6857754,58.7146757 73.2729745,58.9662296 Z" id="Triangle"></path>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg width="21" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M19.536 13.685L3.096 23.702A2.037 2.037 0 010 21.962V2.038A2.037 2.037 0 013.088.292l16.44 9.909a2.037 2.037 0 01.008 3.484z" fill="#132236" fill-rule="evenodd"/></svg>

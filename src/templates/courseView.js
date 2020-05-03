@@ -2,21 +2,29 @@ import React, { useState, useEffect } from "react"
 import { Link, graphql } from "gatsby"
 import ReactMarkdown from "react-markdown"
 import PropTypes from "prop-types"
+import { clearAllBodyScrollLocks } from "body-scroll-lock"
 
-import AcuphysLogo from "../images/acuphys-logo.svg"
-import AgendaItem from "../components/AgendaItem"
-import { Button } from "../components/Button"
-import { Header } from "../components/Layout/Headers"
 import Layout from "../components/Layout"
-import Review from "../components/Review"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import createBookingDates from "../utilities/createBookingDates"
+import { Button } from "../components/Button"
+import { HeaderViewCourse } from "../components/Layout/Headers"
+import { HealthcareProfessionalsOnly } from "../components/Modal"
+import {
+  AgendaItem,
+  OnlineBooking,
+  PrimaryBooking,
+  RequestNearYou,
+  Review,
+} from "../components/Courses"
 
 const CourseView = ({ data, location }) => {
   const course = data.strapiCourses
-  const topic = course.course_topic.name
   const [primaryBooking, setPrimaryBooking] = useState()
+  const [modalVisible, setModalVisibility] = useState(false)
+  const [stripeUrl, setStripeUrl] = useState("")
+  const onlineCourse = course.online_only ? true : false
 
   useEffect(() => {
     if (location.href) {
@@ -31,33 +39,29 @@ const CourseView = ({ data, location }) => {
     }
   }, [course.bookings])
 
+  const prepareModal = stripeUrl => {
+    setModalVisibility(true)
+    setStripeUrl(stripeUrl)
+  }
+
   return (
     <Layout>
-      <SEO title="Home" />
-      <Header
+      {console.log(data.imageSharp.fluid)}
+      <SEO title={course.name} description={course.summary} />
+      <HeaderViewCourse
         title={course.name}
-        styles={`headerCourse${
-          topic === "Acupuncture" ? " headerAcupuncture" : ""
-        }`}
-      >
-        {console.log(primaryBooking)}
-        <section className="facts">
-          <span className="fact">
-            <b>Skill level:</b> {course.skill_level}
-          </span>
-          <span className="fact">
-            <b>Teaching hours:</b> {course.teaching_hours}
-          </span>
-        </section>
-        {topic === "Acupuncture" ? (
-          <section className="acuphys">
-            <b>Brought to you by:</b>
-            <img className="acuphysLogo" src={AcuphysLogo} alt="Acuphys logo" />
-          </section>
-        ) : (
-          ""
-        )}
-      </Header>
+        image={
+          course.header_image ? course.header_image.childImageSharp.fluid : {}
+        }
+        imageDescription={
+          course.header_image_description ? course.header_image_description : ""
+        }
+        skillLevel={course.skill_level}
+        teachingTime={course.teaching_time}
+        topic={course.course_topic.name}
+        defaultVideo={data.strapiHomepage.video_link}
+        defaultImage={data.imageSharp.fluid}
+      />
       <main className="backgroundGreyLightSuper">
         <section className="wrapper courseWrapper">
           <section className="courseContent">
@@ -66,11 +70,11 @@ const CourseView = ({ data, location }) => {
               <ReactMarkdown source={course.details} />
             </div>
             {course.agenda_days && course.agenda_days.length > 0 ? (
-              <div className="agenda">
+              <div className={`agenda${onlineCourse ? " onlineOnly" : ""}`}>
                 <h2>Agenda</h2>
                 {course.agenda_days.map((agendaDay, index) => (
                   <div key={agendaDay.id}>
-                    <h5>Day {index + 1}</h5>
+                    {onlineCourse ? "" : <h5>Day {index + 1}</h5>}
                     {agendaDay.event.map(event => (
                       <AgendaItem
                         key={event.id}
@@ -85,7 +89,9 @@ const CourseView = ({ data, location }) => {
             ) : (
               ""
             )}
-            {course.bookings && course.bookings.length > 0 ? (
+            {onlineCourse ? (
+              ""
+            ) : course.bookings && course.bookings.length > 0 ? (
               <div className="bookings">
                 <section className="heading">
                   <h2>Course bookings</h2>
@@ -104,7 +110,7 @@ const CourseView = ({ data, location }) => {
                     <div className="actions">
                       <Button
                         styles="buttonPrimary iconLeft iconArrow"
-                        href={booking.stripe_product}
+                        onClick={() => prepareModal(booking.stripe_product)}
                       >
                         Book now
                       </Button>
@@ -120,7 +126,7 @@ const CourseView = ({ data, location }) => {
                 <Link className="booking noBookings" to="/request-a-course">
                   <span>
                     No bookings scheduled,{" "}
-                    <span>request this course near you</span>
+                    <span>request this course to be held near you</span>
                   </span>
                 </Link>
               </div>
@@ -128,21 +134,19 @@ const CourseView = ({ data, location }) => {
           </section>
           <aside className="courseSidebar">
             {primaryBooking ? (
-              <section className="primaryBooking">
-                <h3 className="price">{primaryBooking.booking_price}</h3>
-                <span className="dates">
-                  {createBookingDates(primaryBooking.teaching_period)}
-                </span>
-                <p className="address">{primaryBooking.address}</p>
-                <Button
-                  styles="buttonPrimary iconLeft iconArrow"
-                  href={primaryBooking.stripe_product}
-                >
-                  Book now
-                </Button>
-              </section>
+              <PrimaryBooking
+                price={primaryBooking.booking_price}
+                teachingPeriod={primaryBooking.teaching_period}
+                address={primaryBooking.address}
+                prepareModal={() => prepareModal(primaryBooking.stripe_product)}
+              />
+            ) : onlineCourse ? (
+              <OnlineBooking
+                price={course.thinkific_training.course_price}
+                link={course.thinkific_training.course_link}
+              />
             ) : (
-              ""
+              <RequestNearYou />
             )}
             {course.reviews && course.reviews.length > 0
               ? course.reviews.map(review => (
@@ -161,6 +165,14 @@ const CourseView = ({ data, location }) => {
         </section>
       </main>
       <SignOffStillLooking />
+      {modalVisible ? (
+        <HealthcareProfessionalsOnly
+          closeFn={() => setModalVisibility(false)}
+          stripeUrl={stripeUrl}
+        />
+      ) : (
+        clearAllBodyScrollLocks()
+      )}
     </Layout>
   )
 }
@@ -208,10 +220,36 @@ export const pageQuery = graphql`
         reviewer_name
         id
       }
-      teaching_hours
+      thinkific_training {
+        course_link
+        course_duration
+        course_name
+        id
+        course_price
+      }
+      teaching_time
       skill_level
       name
+      summary
       details
+      online_only
+      youtube_video
+      header_image_description
+      header_image {
+        childImageSharp {
+          fluid(maxWidth: 1600) {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+    strapiHomepage {
+      video_link
+    }
+    imageSharp(fluid: { originalName: { eq: "default-image.jpg" } }) {
+      fluid {
+        ...GatsbyImageSharpFluid
+      }
     }
   }
 `

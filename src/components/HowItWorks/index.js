@@ -6,7 +6,7 @@ import Divider from "../Divider"
 
 const HowItWorks = ({ steps }) => {
   return (
-    <section className="wrapper padded">
+    <section className="wrapper padded" id="howItWorks">
       <h2 className="textCenterAlways">How it works</h2>
       <Divider align="centerAlways" />
       {steps && steps.length > 0 ? (

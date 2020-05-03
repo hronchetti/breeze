@@ -1,9 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
-import Star from "../../images/icons/star.svg"
-import Verified from "../../images/icons/verified.svg"
+import Star from "../../../images/icons/star.svg"
+import Verified from "../../../images/icons/verified.svg"
 
-const Review = ({
+export const Review = ({
   className,
   link,
   location,
@@ -61,5 +61,3 @@ Review.propTypes = {
   name: PropTypes.string.isRequired,
   className: PropTypes.string,
 }
-
-export default Review

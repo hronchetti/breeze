@@ -18,14 +18,17 @@
 @import "03-utilities/textAlignment";
 
 // 04 COMPONENTS - Nested component styles in respective component folders
-@import "../components/AgendaItem/agendaItem";
 @import "../components/BlogArticlePreview/blogArticlePreview";
-@import "../components/Button/button";
 @import "../components/Button/CloseButton/closeButton";
-@import "../components/Cards/TextCard/textCard";
+@import "../components/Button/button";
 @import "../components/Cards/ImageCard/ImageCard";
-@import "../components/Course/course";
-@import "../components/CourseBooking/courseBooking";
+@import "../components/Cards/TextCard/textCard";
+@import "../components/Courses/CourseListing/courseListing";
+@import "../components/Courses/AgendaItem/agendaItem";
+@import "../components/Courses/PrimaryBooking/primaryBooking";
+@import "../components/Courses/OnlineBooking/onlineBooking";
+@import "../components/Courses/RequestNearYou/requestNearYou";
+@import "../components/Courses/Review/review";
 @import "../components/Divider/divider";
 @import "../components/FAQ/faq";
 @import "../components/FilterOption/filterOption";
@@ -35,17 +38,18 @@
 @import "../components/Form/TextArea/textarea";
 @import "../components/Form/Toast/toast";
 @import "../components/Form/form";
+@import "../components/HowItWorks/howItWorks";
+@import "../components/Layout/Footer/footer";
 @import "../components/Layout/Headers/Header/header";
 @import "../components/Layout/Headers/HeaderBlob/headerBlob";
 @import "../components/Layout/Headers/HeaderHomepage/headerHomepage";
-@import "../components/HowItWorks/howItWorks";
-@import "../components/Layout/Footer/footer";
+@import "../components/Layout/Headers/HeaderViewCourse/headerViewCourse";
 @import "../components/Layout/Nav/nav";
 @import "../components/Layout/layout";
-@import "../components/RequestACourse/requestACourse";
-@import "../components/Resource/resource";
-@import "../components/Review/review";
+@import "../components/Modal/VideoPlayer/videoPlayer";
 @import "../components/Modal/modal";
+@import "../components/RequestACourseForm/requestACourse";
+@import "../components/Resource/resource";
 @import "../components/SignOffMailingList/signOffMailingList";
 @import "../components/SignOffStillLooking/signOffStillLooking";
 

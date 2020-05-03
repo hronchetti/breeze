@@ -5,16 +5,6 @@
   padding: 0 0 0 1.875rem;
   transition: padding 150ms ease-in;
 
-  &:focus {
-    padding: 0 0 0 2.125rem;
-  }
-
-  @media (hover: hover) {
-    &:hover {
-      padding: 0 0 0 2.125rem;
-    }
-  }
-
   &:before {
     content: "";
     display: block;

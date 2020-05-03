@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"
-import { graphql, Link } from "gatsby"
+import React, { useEffect } from "react"
+import { graphql } from "gatsby"
 import Swiper from "swiper"
 import "swiper/css/swiper.min.css"
 import "../style/03-utilities/swiper.scss"
@@ -8,17 +8,15 @@ import Divider from "../components/Divider"
 import HowItWorks from "../components/HowItWorks"
 import Layout from "../components/Layout"
 import PropTypes from "prop-types"
-import Review from "../components/Review"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import { HeaderHomepage } from "../components/Layout/Headers"
 import { ImageCard } from "../components/Cards"
-import { VideoPlayer } from "../components/Modal"
+import { Review } from "../components/Courses"
+
 import { courseTopicSlug } from "../utilities/createSlug"
 
 const LandingPage = ({ data }) => {
-  const [playerVisible, setPlayerVisibility] = useState(false)
-
   const homepage = data.strapiHomepage
   const courseGroups = data.allStrapiCourseTopics.edges
   const courseReviews = data.allStrapiCourses.edges
@@ -28,10 +26,6 @@ const LandingPage = ({ data }) => {
     ReviewsSwiper = new Swiper(".swiper-container", {
       slidesPerView: "auto",
       spaceBetween: 24,
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
       keyboard: {
         enabled: true,
       },
@@ -43,16 +37,13 @@ const LandingPage = ({ data }) => {
     })
   }, [])
 
-  const scrollToCourses = () => {}
-
   return (
     <Layout>
       <SEO title={homepage.title} description={homepage.introduction} />
       <HeaderHomepage
         title={homepage.title}
         paragraph={homepage.introduction}
-        showVideoPlayer={() => setPlayerVisibility(true)}
-        scrollToCourses={() => scrollToCourses}
+        videoLink={homepage.video_link}
       />
       <main>
         <section className="backgroundGreyLightSuper">
@@ -78,43 +69,33 @@ const LandingPage = ({ data }) => {
                 ))
               )}
             </div>
-            <div className="swiper-button-next"></div>
-            <div className="swiper-button-prev"></div>
           </div>
         </section>
         <section className="backgroundBlueDark">
           <HowItWorks steps={homepage.how_it_works} />
         </section>
         <section className="backgroundGreyLightSuper">
-          <section className="wrapper padded">
+          <section className="wrapper padded" id="courses">
             <h2 className="heading">Our courses</h2>
             <Divider />
             <div className="courseGroups">
               {courseGroups.map(({ node }) => (
-                <Link key={node.id} to={courseTopicSlug(node.name)}>
-                  <ImageCard
-                    image={node.image}
-                    imageDescription={node.image_description}
-                  >
-                    <h3>{node.name}</h3>
-                    <p>{node.description}</p>
-                    <span className="linkArrow">Get started</span>
-                  </ImageCard>
-                </Link>
+                <ImageCard
+                  key={node.id}
+                  image={node.image}
+                  imageDescription={node.image_description}
+                  to={courseTopicSlug(node.name)}
+                >
+                  <h3>{node.name}</h3>
+                  <p>{node.description}</p>
+                  <span className="linkArrow">Get started</span>
+                </ImageCard>
               ))}
             </div>
           </section>
         </section>
       </main>
       <SignOffStillLooking />
-      {playerVisible ? (
-        <VideoPlayer
-          YouTubeURL={homepage.video_link}
-          closeFn={() => setPlayerVisibility(false)}
-        />
-      ) : (
-        ""
-      )}
     </Layout>
   )
 }

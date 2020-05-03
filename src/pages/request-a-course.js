@@ -7,7 +7,7 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import HowItWorks from "../components/HowItWorks"
-import RequestACourseForm from "../components/RequestACourse"
+import RequestACourseForm from "../components/RequestACourseForm"
 
 const RequestACourse = ({ data }) => {
   const requestCourse = data.strapiRequestACourse

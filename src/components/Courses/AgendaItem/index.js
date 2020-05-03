@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-const AgendaItem = ({ type, title, description }) => {
+export const AgendaItem = ({ type, title, description }) => {
   if (type === "Break") {
     return (
       <section className="agendaItem break">
@@ -30,5 +30,3 @@ AgendaItem.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
 }
-
-export default AgendaItem

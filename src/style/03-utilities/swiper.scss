@@ -3,6 +3,8 @@
   width: calc(100% - 1.25rem);
   height: 100%;
   padding-bottom: 2.5rem;
+  overflow-y: visible;
+  overflow-x: hidden;
 
   @media screen and (min-width: 800px) {
     width: calc(100% - 3rem);
@@ -24,14 +26,20 @@
     margin: 0 auto;
   }
 
-  .swiper-button-next,
-  .swiper-button-prev {
-    display: none;
-  }
-
   .swiper-wrapper {
     .swiper-slide {
+      transition-property: transform, box-shadow;
       width: 240px;
+
+      @media (hover: hover) {
+        &:hover {
+          box-shadow: 0rem 0.75rem 0.75rem rgba(#132236, 0.06);
+        }
+      }
+
+      &:focus {
+        box-shadow: 0rem 0.75rem 0.75rem rgba(#132236, 0.06);
+      }
 
       @media all and (min-width: 375px) {
         width: 300px;

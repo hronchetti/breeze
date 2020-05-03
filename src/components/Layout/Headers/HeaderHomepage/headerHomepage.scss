@@ -11,23 +11,8 @@
       max-width: 27rem;
     }
 
-    .buttons {
+    .headerButtons {
       margin-top: 1.75rem;
-
-      .button {
-        box-shadow: 0rem 0.125rem 0.25rem rgba($blueDark, 0.1);
-
-        &.iconLeft {
-          padding: 1rem 1.25rem 1rem 3rem;
-          text-align: left;
-          position: relative;
-          margin-bottom: 0.75rem;
-
-          &:before {
-            display: block;
-          }
-        }
-      }
     }
   }
 
@@ -59,16 +44,6 @@
 
     .content {
       padding-right: 3rem;
-
-      .buttons {
-        @include flexJustifyStart;
-
-        .button {
-          &.iconLeft {
-            margin: 0 1rem 0 0;
-          }
-        }
-      }
     }
 
     .illustrationWrapper {
@@ -114,7 +89,7 @@
 
 @media screen and (min-width: 1024px) {
   .headerHomepage {
-    padding-top: 9rem;
+    padding-top: 8.5rem;
   }
 }
 
