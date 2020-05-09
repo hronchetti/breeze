@@ -120,17 +120,6 @@ export const pageQuery = graphql`
             course_name
             id
           }
-          bookings {
-            id
-            address
-            discount_percentage
-            booking_price
-            stripe_product
-            teaching_period {
-              end
-              start
-            }
-          }
           course_topic {
             name
           }

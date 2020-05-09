@@ -25,6 +25,7 @@ module.exports = {
           `blog-article-topics`,
           `blog-articles`,
           `course-topics`,
+          `course-bookings`,
           `courses`,
           `resources`,
         ],

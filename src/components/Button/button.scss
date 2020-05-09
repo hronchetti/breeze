@@ -115,6 +115,12 @@
       }
     }
   }
+
+  &.buttonShadow {
+    width: fit-content;
+    margin: 0 auto;
+    box-shadow: 0rem 0.125rem 0.25rem rgba($blueDark, 0.1);
+  }
 }
 
 @media screen and (min-width: 600px) {

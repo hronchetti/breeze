@@ -31,11 +31,12 @@ const CourseView = ({ data, location }) => {
       const locationArray = location.href.split("?booking=")
       const requestQuery = locationArray[locationArray.length - 1]
 
-      course.bookings.forEach(booking => {
-        if (booking.id.toString() === requestQuery) {
-          setPrimaryBooking(booking)
-        }
-      })
+      course.bookings &&
+        course.bookings.forEach(booking => {
+          if (booking.id.toString() === requestQuery) {
+            setPrimaryBooking(booking)
+          }
+        })
     }
   }, [course.bookings])
 
@@ -46,7 +47,6 @@ const CourseView = ({ data, location }) => {
 
   return (
     <Layout>
-      {console.log(data.imageSharp.fluid)}
       <SEO title={course.name} description={course.summary} />
       <HeaderViewCourse
         title={course.name}
@@ -145,6 +145,8 @@ const CourseView = ({ data, location }) => {
                 price={course.thinkific_training.course_price}
                 link={course.thinkific_training.course_link}
               />
+            ) : course.bookings && course.bookings.length > 0 ? (
+              ""
             ) : (
               <RequestNearYou />
             )}
@@ -190,17 +192,6 @@ export const pageQuery = graphql`
       id
       course_topic {
         name
-      }
-      bookings {
-        address
-        discount_percentage
-        id
-        booking_price
-        stripe_product
-        teaching_period {
-          end
-          start
-        }
       }
       agenda_days {
         id

@@ -8,7 +8,6 @@ import Layout from "../components/Layout"
 import Resource from "../components/Resource"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
-//import { trackScroll } from "../utilities/trackScroll"
 
 const Resources = ({ data }) => {
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
@@ -23,15 +22,17 @@ const Resources = ({ data }) => {
           <aside
             className={`wrapperSidebar${sidebarVisibileMobile ? " open" : ""}`}
           >
-            <div className="sidebar notSticky">
+            <div className="sidebar">
               <span className="sidebarHeading">Quick access</span>
-              {resources.map(topic => (
-                <FilterOption
-                  key={topic.node.id}
-                  value={topic.node.group_name}
-                  scroll
-                />
-              ))}
+              <section className="sidebarItems">
+                {resources.map(topic => (
+                  <FilterOption
+                    key={topic.node.id}
+                    value={topic.node.group_name}
+                    scroll
+                  />
+                ))}
+              </section>
             </div>
             <button
               className="sidebarControl"

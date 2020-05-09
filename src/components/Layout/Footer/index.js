@@ -1,12 +1,15 @@
 import React from "react"
 import { Link } from "gatsby"
+import PropTypes from "prop-types"
+
+import { courseTopicSlug } from "../../../utilities/createSlug"
 
 import FacebookLogo from "../../../images/icons/facebook.svg"
 import LinkedInLogo from "../../../images/icons/linkedIn.svg"
 import TwitterLogo from "../../../images/icons/twitter.svg"
 import InstagramLogo from "../../../images/icons/instagram.svg"
 
-const Footer = () => {
+const Footer = ({ courses, socialLinks }) => {
   return (
     <footer>
       <section className="wrapper">
@@ -15,7 +18,7 @@ const Footer = () => {
           <span>&copy; {new Date().getFullYear()} Breeze</span>
           <div className="logos">
             <a
-              href="/"
+              href={socialLinks.facebook_link}
               target="_blank"
               rel="noopener noreferrer"
               className="logo"
@@ -27,7 +30,7 @@ const Footer = () => {
               />
             </a>
             <a
-              href="/"
+              href={socialLinks.linkedin_link}
               target="_blank"
               rel="noopener noreferrer"
               className="logo"
@@ -39,7 +42,7 @@ const Footer = () => {
               />
             </a>
             <a
-              href="/"
+              href={socialLinks.twitter_link}
               target="_blank"
               rel="noopener noreferrer"
               className="logo"
@@ -47,7 +50,7 @@ const Footer = () => {
               <img src={TwitterLogo} alt="Twitter Logo" title="Twitter Logo" />
             </a>
             <a
-              href="/"
+              href={socialLinks.instagram_link}
               target="_blank"
               rel="noopener noreferrer"
               className="logo"
@@ -78,15 +81,11 @@ const Footer = () => {
           </ul>
           <ul>
             <li className="title">Courses</li>
-            <li>
-              <Link to="/courses/acupuncture">Acupuncture courses</Link>
-            </li>
-            <li>
-              <Link to="/courses/general-cpd">General CPD courses</Link>
-            </li>
-            <li>
-              <Link to="/courses/coaching">Coaching courses</Link>
-            </li>
+            {courses.map(({ node }) => (
+              <li key={node.id}>
+                <Link to={courseTopicSlug(node.name)}>{node.name} courses</Link>
+              </li>
+            ))}
             <li>
               <Link to="/resources">Resources</Link>
             </li>
@@ -105,6 +104,11 @@ const Footer = () => {
       </p>
     </footer>
   )
+}
+
+Footer.propTypes = {
+  socialLinks: PropTypes.object.isRequired,
+  courses: PropTypes.array.isRequired,
 }
 
 export default Footer

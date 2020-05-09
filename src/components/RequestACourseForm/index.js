@@ -29,8 +29,10 @@ const RequestACourse = ({ courses }) => {
         label: course.node.name,
       })
     })
-    setCourses(formattedCourses)
-    return formattedCourses
+    setCourses([
+      ...formattedCourses,
+      { value: "New course", label: "New course" },
+    ])
   }
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {

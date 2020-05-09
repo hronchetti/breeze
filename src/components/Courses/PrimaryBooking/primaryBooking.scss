@@ -23,6 +23,7 @@
   .address {
     font-size: 1rem;
     margin: 0 0 0.75rem 0;
+    display: none;
   }
 
   .button {
@@ -41,6 +42,7 @@
 
     .address {
       margin-bottom: 1.5rem;
+      display: block;
     }
 
     .button {

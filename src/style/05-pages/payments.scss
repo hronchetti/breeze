@@ -1,0 +1,45 @@
+.paymentStatus {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  position: relative;
+  margin-bottom: 1rem;
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 1.75rem;
+    height: 1.75rem;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &.successful {
+    background-color: $greenLight;
+
+    &:before {
+      background-image: url("../images/icons/tick.svg");
+    }
+  }
+
+  &.failed {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: $redLight;
+
+    &::before {
+      background-image: url("../images/icons/warning.svg");
+    }
+  }
+}
+
+.guidance {
+  text-align: center;
+  max-width: 25rem;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -55,6 +55,14 @@ exports.createPages = ({ actions, graphql }) => {
           }
         }
       }
+
+      allStrapiCourseBookings {
+        edges {
+          node {
+            strapiId
+          }
+        }
+      }
     }
     `
   ).then(result => {
@@ -67,7 +75,7 @@ exports.createPages = ({ actions, graphql }) => {
 
       createPage({
         path: createSlug.blogArticleSlug(post.node.title),
-        component: path.resolve(`src/templates/blogArticle.js`),
+        component: path.resolve(`src/templates/blog-article.js`),
         context: {
           id: post.node.id,
           next: next,
@@ -79,20 +87,39 @@ exports.createPages = ({ actions, graphql }) => {
     result.data.allStrapiCourseTopics.edges.forEach(({ node }) => {
       createPage({
         path: createSlug.courseTopicSlug(node.name),
-        component: path.resolve(`src/templates/courseList.js`),
+        component: path.resolve(`src/templates/course-list.js`),
+        context: {
+          name: node.name,
+        },
+      })
+    })
+    // View Course /courses/course_topic_name/course_name
+    result.data.allStrapiCourses.edges.forEach(({ node }) => {
+      createPage({
+        path: createSlug.courseSlug(node.course_topic.name, node.name),
+        component: path.resolve(`src/templates/view-course.js`),
         context: {
           name: node.name,
         },
       })
     })
 
-    result.data.allStrapiCourses.edges.forEach(({ node }) => {
-      // Course bookings /courses/course_topic_name/course_name
+    result.data.allStrapiCourseBookings.edges.forEach(({ node }) => {
       createPage({
-        path: createSlug.courseSlug(node.course_topic.name, node.name),
-        component: path.resolve(`src/templates/courseView.js`),
+        path: createSlug.coursePaymentSuccess(node.strapiId),
+        component: path.resolve(`src/templates/payment-success.js`),
         context: {
-          name: node.name,
+          strapiId: node.strapiId,
+        },
+      })
+    })
+
+    result.data.allStrapiCourseBookings.edges.forEach(({ node }) => {
+      createPage({
+        path: createSlug.coursePaymentFailed(node.strapiId),
+        component: path.resolve(`src/templates/payment-failed.js`),
+        context: {
+          strapiId: node.strapiId,
         },
       })
     })

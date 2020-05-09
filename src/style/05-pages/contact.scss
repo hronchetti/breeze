@@ -18,6 +18,16 @@
       margin: 0;
     }
 
+    &:focus {
+      @include shadowSoft;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        @include shadowSoft;
+      }
+    }
+
     h4 {
       margin: 0;
       word-break: break-all;
@@ -27,6 +37,8 @@
 
 .socialLinks {
   padding: 2.5rem 0 0 1.5rem;
+  @include flexJustifyStart;
+  align-items: center;
 
   a {
     padding: 0 0.75rem 0 0;
@@ -58,6 +70,10 @@
         grid-column: 4/5;
       }
     }
+  }
+
+  .socialLinks {
+    justify-content: center;
   }
 }
 

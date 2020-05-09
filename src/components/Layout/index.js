@@ -5,7 +5,7 @@ import Nav from "./Nav"
 import "../../style/main.scss"
 import { StaticQuery, graphql } from "gatsby"
 
-const Layout = ({ children }) => (
+const Layout = ({ children, footer }) => (
   <StaticQuery
     query={graphql`
       query getAllCourses {
@@ -17,20 +17,36 @@ const Layout = ({ children }) => (
             }
           }
         }
+        strapiContactUs {
+          twitter_link
+          linkedin_link
+          instagram_link
+          facebook_link
+        }
       }
     `}
     render={data => (
       <>
         <Nav courses={data.allStrapiCourseTopics.edges} />
         {children}
-        <Footer courses={data.allStrapiCourseTopics.edges} />
+        {footer && (
+          <Footer
+            courses={data.allStrapiCourseTopics.edges}
+            socialLinks={data.strapiContactUs}
+          />
+        )}
       </>
     )}
   />
 )
 
+Layout.defaultProps = {
+  footer: true,
+}
+
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  footer: PropTypes.bool,
 }
 
 export default Layout

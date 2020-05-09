@@ -18,4 +18,10 @@ module.exports = {
       courseName
     )}?booking=${bookingId}`
   },
+  coursePaymentSuccess: bookingId => {
+    return `/courses/payment-succeeded/${bookingId}`
+  },
+  coursePaymentFailed: bookingId => {
+    return `/courses/payment-failed/${bookingId}`
+  },
 }

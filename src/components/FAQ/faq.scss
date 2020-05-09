@@ -55,8 +55,6 @@
 
     .answer {
       max-height: 0;
-      transition: max-height 400ms ease-out;
-      transition-delay: 0;
 
       p {
         max-height: 0;
@@ -64,8 +62,6 @@
         margin: 0;
         opacity: 0;
         line-height: 1.625rem;
-        transition: opacity 300ms ease-out;
-        transition-delay: 300ms;
       }
     }
   }
