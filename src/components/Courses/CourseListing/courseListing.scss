@@ -84,6 +84,12 @@
         h4 {
           font-size: 1.25rem;
           margin: 0;
+          @include flexJustifyStart;
+          align-items: center;
+
+          .dates {
+            margin-right: 0.5rem;
+          }
         }
 
         p {

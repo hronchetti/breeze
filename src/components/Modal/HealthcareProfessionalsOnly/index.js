@@ -5,20 +5,40 @@ import { StaticQuery, graphql } from "gatsby"
 import * as Yup from "yup"
 import { Formik, Form } from "formik"
 import { disableBodyScroll } from "body-scroll-lock"
+import Stripe from "stripe"
 
 import { Button, CloseButton } from "../../Button"
 import { Checkbox } from "../../Form"
+import { coursePaymentSuccess, coursePaymentFailed } from "../../../utilities"
 
-export const HealthcareProfessionalsOnly = ({ closeFn, stripeUrl }) => {
+const stripe = Stripe("pk_test_AwpDuCjx8CdjU8LORtzWpywb00X77YGXPR")
+
+export const HealthcareProfessionalsOnly = ({
+  closeFn,
+  stripeProduct,
+  bookingId,
+  location,
+}) => {
   const modal = useRef(null)
 
   useEffect(() => {
     disableBodyScroll(modal)
   }, [])
-
+  console.log(location)
   const onSubmit = ({ setSubmitting }) => {
-    window.location.href = stripeUrl
+    //window.location.href = stripeProduct
     setSubmitting(false)
+
+    stripe
+      .redirectToCheckout({
+        items: [{ sku: stripeProduct, quantity: 1 }],
+
+        successUrl: location.origin + coursePaymentSuccess(bookingId),
+        cancelUrl: location.origin + coursePaymentFailed(bookingId),
+      })
+      .then(result => {
+        console.log(result)
+      })
   }
   return (
     <StaticQuery
@@ -94,5 +114,7 @@ export const HealthcareProfessionalsOnly = ({ closeFn, stripeUrl }) => {
 
 HealthcareProfessionalsOnly.propTypes = {
   closeFn: PropTypes.func.isRequired,
-  stripeUrl: PropTypes.string.isRequired,
+  stripeProduct: PropTypes.node.isRequired,
+  bookingId: PropTypes.number.isRequired,
+  location: PropTypes.object.isRequired,
 }

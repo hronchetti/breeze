@@ -1,14 +1,19 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
+import Moment from "moment"
 
-import { courseBookingSlug, courseSlug } from "../../../utilities/createSlug"
-import createBookingDates from "../../../utilities/createBookingDates"
+import {
+  courseBookingSlug,
+  courseSlug,
+  createBookingDates,
+} from "../../../utilities"
 import { Button } from "../../Button"
+import { Tag, CoursePrices } from "../"
 
 import AcuphysLogo from "../../../images/acuphys-logo.svg"
 
-export const CourseListing = ({ course, prepareModal }) => (
+export const CourseListing = ({ course, prepareModal, bookings }) => (
   <section className="courseItem" id={course.name}>
     <div className="details">
       <h3>{course.name}</h3>
@@ -50,35 +55,52 @@ export const CourseListing = ({ course, prepareModal }) => (
     ) : (
       <div className="bookings">
         <span className="bookingsHeading">Course bookings</span>
-        {course.bookings && course.bookings.length > 0 ? (
-          course.bookings.map(booking => (
-            <section className="booking" key={booking.id}>
-              <div className="information">
-                <h4>{createBookingDates(booking.teaching_period)}</h4>
-                <p>
-                  {booking.booking_price} &bull; {booking.address}
-                </p>
-              </div>
-              <div className="actions">
-                <Button
-                  to={courseBookingSlug(
-                    course.course_topic.name,
-                    course.name,
-                    booking.id
-                  )}
-                  styles="buttonSecondary"
-                >
-                  Find out more
-                </Button>
-                <Button
-                  styles="buttonPrimary iconLeft iconArrow"
-                  onClick={() => prepareModal(booking.stripe_product)}
-                >
-                  Book now
-                </Button>
-              </div>
-            </section>
-          ))
+        {bookings.length > 0 ? (
+          bookings
+            .filter(booking => Moment(booking.node.start_date).isAfter())
+            .map(({ node }) => (
+              <section className="booking" key={node.id}>
+                <div className="information">
+                  <h4>
+                    <span className="dates">
+                      {createBookingDates(node.teaching_period)}
+                    </span>
+                    {node.discount_percentage && (
+                      <Tag discountPercentage={node.discount_percentage} />
+                    )}
+                  </h4>
+                  <p>
+                    <CoursePrices
+                      price={node.booking_price}
+                      discount={
+                        node.discount_percentage && node.discount_percentage
+                      }
+                    />{" "}
+                    &bull; {node.address_full}
+                  </p>
+                </div>
+                <div className="actions">
+                  <Button
+                    to={courseBookingSlug(
+                      course.course_topic.name,
+                      course.name,
+                      node.strapiId
+                    )}
+                    styles="buttonSecondary"
+                  >
+                    Find out more
+                  </Button>
+                  <Button
+                    styles="buttonPrimary iconLeft iconArrow"
+                    onClick={() =>
+                      prepareModal(node.stripe_product, node.strapiId)
+                    }
+                  >
+                    Book now
+                  </Button>
+                </div>
+              </section>
+            ))
         ) : (
           <Link
             className="booking"
@@ -97,7 +119,12 @@ export const CourseListing = ({ course, prepareModal }) => (
   </section>
 )
 
+CourseListing.defaultProps = {
+  bookings: [],
+}
+
 CourseListing.propTypes = {
   course: PropTypes.object.isRequired,
   prepareModal: PropTypes.func.isRequired,
+  bookings: PropTypes.array,
 }

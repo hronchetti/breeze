@@ -39,7 +39,7 @@ exports.createPages = ({ actions, graphql }) => {
       allStrapiCourseTopics {
         edges {
           node {
-            id
+            strapiId
             name
           }
         }
@@ -48,6 +48,7 @@ exports.createPages = ({ actions, graphql }) => {
       allStrapiCourses {
         edges {
           node {
+            strapiId
             name
             course_topic {
               name
@@ -90,6 +91,7 @@ exports.createPages = ({ actions, graphql }) => {
         component: path.resolve(`src/templates/course-list.js`),
         context: {
           name: node.name,
+          strapiId: node.strapiId,
         },
       })
     })
@@ -100,6 +102,7 @@ exports.createPages = ({ actions, graphql }) => {
         component: path.resolve(`src/templates/view-course.js`),
         context: {
           name: node.name,
+          strapiId: node.strapiId,
         },
       })
     })

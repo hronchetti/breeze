@@ -19,9 +19,9 @@ module.exports = {
     )}?booking=${bookingId}`
   },
   coursePaymentSuccess: bookingId => {
-    return `/courses/payment-succeeded/${bookingId}`
+    return `/payment-succeeded/booking/${bookingId}`
   },
   coursePaymentFailed: bookingId => {
-    return `/courses/payment-failed/${bookingId}`
+    return `/payment-failed/booking/${bookingId}`
   },
 }

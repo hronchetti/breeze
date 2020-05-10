@@ -11,11 +11,13 @@ import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import { HealthcareProfessionalsOnly } from "../components/Modal"
 
-const CourseList = ({ data }) => {
+const CourseList = ({ data, location }) => {
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
   const [modalVisible, setModalVisibility] = useState(false)
-  const [stripeUrl, setStripeUrl] = useState("")
+  const [stripeProduct, setStripeProduct] = useState("")
+  const [bookingId, setBookingId] = useState()
 
+  const allCourseBookings = data.allStrapiCourseBookings.edges
   const courses = data.allStrapiCourses.edges
   const courseTopic = data.strapiCourseTopics
 
@@ -23,9 +25,10 @@ const CourseList = ({ data }) => {
     setSidebarVisibilityMobile(!sidebarVisibileMobile)
   }
 
-  const prepareModal = stripeUrl => {
+  const prepareModal = (stripeProduct, bookingId) => {
     setModalVisibility(true)
-    setStripeUrl(stripeUrl)
+    setStripeProduct(stripeProduct)
+    setBookingId(bookingId)
   }
 
   return (
@@ -75,6 +78,9 @@ const CourseList = ({ data }) => {
               <CourseListing
                 key={course.node.id}
                 course={course.node}
+                bookings={allCourseBookings.filter(
+                  booking => booking.node.course.id === course.node.strapiId
+                )}
                 prepareModal={prepareModal}
               />
             ))}
@@ -85,7 +91,9 @@ const CourseList = ({ data }) => {
       {modalVisible ? (
         <HealthcareProfessionalsOnly
           closeFn={() => setModalVisibility(false)}
-          stripeUrl={stripeUrl}
+          stripeProduct={stripeProduct}
+          bookingId={bookingId}
+          location={location}
         />
       ) : (
         clearAllBodyScrollLocks()
@@ -96,12 +104,13 @@ const CourseList = ({ data }) => {
 
 CourseList.propTypes = {
   data: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 export default CourseList
 
 export const pageQuery = graphql`
-  query AllCoursesInTopic($name: String!) {
+  query AllCoursesInTopic($name: String!, $topicId: Int) {
     allStrapiCourses(
       sort: { fields: name, order: ASC }
       filter: { course_topic: { name: { eq: $name } } }
@@ -109,6 +118,7 @@ export const pageQuery = graphql`
       edges {
         node {
           id
+          strapiId
           name
           skill_level
           summary
@@ -122,6 +132,30 @@ export const pageQuery = graphql`
           }
           course_topic {
             name
+          }
+        }
+      }
+    }
+    allStrapiCourseBookings(
+      filter: { course: { course_topic: { eq: $topicId } } }
+      sort: { fields: start_date, order: ASC }
+    ) {
+      edges {
+        node {
+          id
+          strapiId
+          address_full
+          start_date
+          booking_price
+          stripe_product
+          discount_percentage
+          teaching_period {
+            end
+            start
+            id
+          }
+          course {
+            id
           }
         }
       }

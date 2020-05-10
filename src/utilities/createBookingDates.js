@@ -1,7 +1,6 @@
-import PropTypes from "prop-types"
 import Moment from "moment"
 
-const createBookingDates = teachingPeriods => {
+export const createBookingDates = teachingPeriods => {
   let bookingDates = []
   let multipleTeachingPeriods = false
 
@@ -62,10 +61,4 @@ const createBookingDates = teachingPeriods => {
   }
 
   return bookingDates
-}
-
-export default createBookingDates
-
-createBookingDates.propTypes = {
-  teachingPeriods: PropTypes.array.isRequired,
 }

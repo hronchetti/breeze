@@ -1,11 +1,18 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
+import Moment from "moment"
 
+import { TextCard } from "../components/Cards"
 import Layout from "../components/Layout"
+import { Button } from "../components/Button"
+import { createBookingDates } from "../utilities"
 
 const paymentSuccess = ({ data }) => {
+  const thinkificTrainingAvailable =
+    data.strapiCourseBookings.course.thinkific_training !== null
   const thinkificTraining = data.strapiCourseBookings.course.thinkific_training
+
   const courseBooking = data.strapiCourseBookings
   console.log(data.strapiCourseBookings)
   return (
@@ -19,7 +26,44 @@ const paymentSuccess = ({ data }) => {
         <p>A payment reciept has been sent to your email</p>
       </header>
       <main className="backgroundGreyLightSuper">
-        <div className="wrapper padded"></div>
+        <div className="wrapper bookingInformation">
+          {thinkificTrainingAvailable && (
+            <section>
+              <b className="subHeading">
+                Online training you must complete before you arrive:
+              </b>
+              <TextCard styles="paymentCard">
+                <h4 className="cardHeading">{thinkificTraining.course_name}</h4>
+                <div className="courseStats">
+                  <p>
+                    <b>Duration: </b>
+                    {thinkificTraining.course_duration}
+                  </p>
+                  <p>
+                    <b>Due date: </b>
+                    {Moment(courseBooking.start_date).format("ll")}
+                  </p>
+                </div>
+                <Button
+                  styles="buttonPrimary iconLeft iconArrow"
+                  href={thinkificTraining.course_link}
+                >
+                  Complete training now
+                </Button>
+              </TextCard>
+            </section>
+          )}
+          <section>
+            <b className="subHeading">We&apos;ll see you there!</b>
+            <TextCard styles="paymentCard">
+              <h4 className="cardHeading">{courseBooking.course.name}</h4>
+              <b className="dates">
+                {createBookingDates(courseBooking.teaching_period)}
+              </b>
+              <p>{courseBooking.address_full}</p>
+            </TextCard>
+          </section>
+        </div>
       </main>
     </Layout>
   )
@@ -39,6 +83,7 @@ export const pageQuery = graphql`
       booking_price
       address_full
       strapiId
+      start_date
       teaching_period {
         end
         start
@@ -46,6 +91,7 @@ export const pageQuery = graphql`
       }
       course {
         id
+        name
         thinkific_training {
           course_duration
           course_link

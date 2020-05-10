@@ -20,9 +20,13 @@
     margin: 0.25rem 0 0 0;
   }
 
-  .address {
+  .address,
+  .shortAddress {
     font-size: 1rem;
     margin: 0 0 0.75rem 0;
+  }
+
+  .address {
     display: none;
   }
 
@@ -43,6 +47,9 @@
     .address {
       margin-bottom: 1.5rem;
       display: block;
+    }
+    .shortAddress {
+      display: none;
     }
 
     .button {

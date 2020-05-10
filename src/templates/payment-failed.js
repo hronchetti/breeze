@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 
@@ -6,8 +6,14 @@ import Layout from "../components/Layout"
 import { Button } from "../components/Button"
 
 const paymentFailed = ({ data }) => {
-  console.log(data)
   const booking = data.strapiCourseBookings
+
+  useEffect(() => {
+    if (document && document.querySelector('[id^="checkout-button-"]')) {
+      document.querySelector('[id^="checkout-button-"]').innerHTML = "Try again"
+    }
+  }, [data])
+
   return (
     <Layout footer={false}>
       <header className="wrapper">

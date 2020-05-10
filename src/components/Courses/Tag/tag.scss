@@ -1,0 +1,15 @@
+.tag {
+  display: inline-block;
+  background-color: white;
+  border-radius: 0.25rem;
+  font: 600 0.75rem/1rem "Inter", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: $blue;
+  padding: 0.1875rem 0.3125rem;
+  margin: 0.3125rem 0;
+
+  &.blue {
+    background-color: $blueLight;
+  }
+}

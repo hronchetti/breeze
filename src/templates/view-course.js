@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react"
-import { Link, graphql } from "gatsby"
-import ReactMarkdown from "react-markdown"
+import Moment from "moment"
 import PropTypes from "prop-types"
+import ReactMarkdown from "react-markdown"
+import { Link, graphql } from "gatsby"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
 
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
-import createBookingDates from "../utilities/createBookingDates"
+import { createBookingDates } from "../utilities"
 import { Button } from "../components/Button"
 import { HeaderViewCourse } from "../components/Layout/Headers"
 import { HealthcareProfessionalsOnly } from "../components/Modal"
@@ -17,13 +18,17 @@ import {
   PrimaryBooking,
   RequestNearYou,
   Review,
+  CoursePrices,
+  Tag,
 } from "../components/Courses"
 
 const CourseView = ({ data, location }) => {
-  const course = data.strapiCourses
   const [primaryBooking, setPrimaryBooking] = useState()
   const [modalVisible, setModalVisibility] = useState(false)
-  const [stripeUrl, setStripeUrl] = useState("")
+  const [stripeProduct, setStripeProduct] = useState("")
+
+  const course = data.strapiCourses
+  const courseBookings = data.allStrapiCourseBookings.edges
   const onlineCourse = course.online_only ? true : false
 
   useEffect(() => {
@@ -31,25 +36,25 @@ const CourseView = ({ data, location }) => {
       const locationArray = location.href.split("?booking=")
       const requestQuery = locationArray[locationArray.length - 1]
 
-      course.bookings &&
-        course.bookings.forEach(booking => {
-          if (booking.id.toString() === requestQuery) {
-            setPrimaryBooking(booking)
+      courseBookings &&
+        courseBookings.forEach(({ node }) => {
+          if (node.strapiId.toString() === requestQuery) {
+            setPrimaryBooking(node)
           }
         })
     }
-  }, [course.bookings])
+  }, [courseBookings])
 
-  const prepareModal = stripeUrl => {
+  const prepareModal = stripeProduct => {
     setModalVisibility(true)
-    setStripeUrl(stripeUrl)
+    setStripeProduct(stripeProduct)
   }
 
   return (
     <Layout>
       <SEO title={course.name} description={course.summary} />
       <HeaderViewCourse
-        title={course.name}
+        title={onlineCourse ? `${course.name} (Online only)` : course.name}
         image={
           course.header_image ? course.header_image.childImageSharp.fluid : {}
         }
@@ -91,7 +96,7 @@ const CourseView = ({ data, location }) => {
             )}
             {onlineCourse ? (
               ""
-            ) : course.bookings && course.bookings.length > 0 ? (
+            ) : courseBookings && courseBookings.length > 0 ? (
               <div className="bookings">
                 <section className="heading">
                   <h2>Course bookings</h2>
@@ -99,24 +104,43 @@ const CourseView = ({ data, location }) => {
                     Request this course near you
                   </Link>
                 </section>
-                {course.bookings.map(booking => (
-                  <section className="booking" key={booking.id}>
-                    <div className="information">
-                      <h4>{createBookingDates(booking.teaching_period)}</h4>
-                      <p>
-                        {booking.booking_price} &bull; {booking.address}
-                      </p>
-                    </div>
-                    <div className="actions">
-                      <Button
-                        styles="buttonPrimary iconLeft iconArrow"
-                        onClick={() => prepareModal(booking.stripe_product)}
-                      >
-                        Book now
-                      </Button>
-                    </div>
-                  </section>
-                ))}
+                {courseBookings
+                  .filter(booking => Moment(booking.node.start_date).isAfter())
+                  .map(({ node }) => (
+                    <section className="booking" key={node.id}>
+                      <div className="information">
+                        <h4>
+                          <span className="dates">
+                            {createBookingDates(node.teaching_period)}
+                          </span>
+                          {node.discount_percentage && (
+                            <Tag
+                              color="blue"
+                              discountPercentage={node.discount_percentage}
+                            />
+                          )}
+                        </h4>
+                        <p>
+                          <CoursePrices
+                            price={node.booking_price}
+                            discount={
+                              node.discount_percentage &&
+                              node.discount_percentage
+                            }
+                          />{" "}
+                          &bull; {node.address_full}
+                        </p>
+                      </div>
+                      <div className="actions">
+                        <Button
+                          styles="buttonPrimary iconLeft iconArrow"
+                          onClick={() => prepareModal(node.stripe_product)}
+                        >
+                          Book now
+                        </Button>
+                      </div>
+                    </section>
+                  ))}
               </div>
             ) : (
               <div className="bookings">
@@ -136,8 +160,10 @@ const CourseView = ({ data, location }) => {
             {primaryBooking ? (
               <PrimaryBooking
                 price={primaryBooking.booking_price}
-                teachingPeriod={primaryBooking.teaching_period}
-                address={primaryBooking.address}
+                discount={primaryBooking.discount_percentage}
+                teachingPeriods={primaryBooking.teaching_period}
+                fullAddress={primaryBooking.address_full}
+                shortAddress={primaryBooking.address_short}
                 prepareModal={() => prepareModal(primaryBooking.stripe_product)}
               />
             ) : onlineCourse ? (
@@ -145,7 +171,7 @@ const CourseView = ({ data, location }) => {
                 price={course.thinkific_training.course_price}
                 link={course.thinkific_training.course_link}
               />
-            ) : course.bookings && course.bookings.length > 0 ? (
+            ) : courseBookings && courseBookings.length > 0 ? (
               ""
             ) : (
               <RequestNearYou />
@@ -170,7 +196,7 @@ const CourseView = ({ data, location }) => {
       {modalVisible ? (
         <HealthcareProfessionalsOnly
           closeFn={() => setModalVisibility(false)}
-          stripeUrl={stripeUrl}
+          stripeProduct={stripeProduct}
         />
       ) : (
         clearAllBodyScrollLocks()
@@ -187,7 +213,7 @@ CourseView.propTypes = {
 export default CourseView
 
 export const pageQuery = graphql`
-  query getCourse($name: String!) {
+  query getCourse($name: String!, $strapiId: Int) {
     strapiCourses(name: { eq: $name }) {
       id
       course_topic {
@@ -231,6 +257,27 @@ export const pageQuery = graphql`
           fluid(maxWidth: 1600) {
             ...GatsbyImageSharpFluid
           }
+        }
+      }
+    }
+    allStrapiCourseBookings(
+      filter: { course: { id: { eq: $strapiId } } }
+      sort: { fields: start_date, order: ASC }
+    ) {
+      edges {
+        node {
+          strapiId
+          address_full
+          address_short
+          booking_price
+          stripe_product
+          discount_percentage
+          teaching_period {
+            end
+            id
+          }
+          updated_at
+          start_date
         }
       }
     }
