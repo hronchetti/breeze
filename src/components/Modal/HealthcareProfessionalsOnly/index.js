@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from "react"
 import PropTypes from "prop-types"
 import ReactMarkdown from "react-markdown"
 import { StaticQuery, graphql } from "gatsby"
-import * as Yup from "yup"
-import { Formik, Form } from "formik"
 import { disableBodyScroll } from "body-scroll-lock"
 import { loadStripe } from "@stripe/stripe-js"
 
@@ -13,9 +11,10 @@ import { coursePaymentSuccess, coursePaymentFailed } from "../../../utilities"
 
 const stripePromise = loadStripe("pk_test_AwpDuCjx8CdjU8LORtzWpywb00X77YGXPR")
 
-const redirectToCheckout = async (stripeProduct, bookingId, location) => {
-  const stripe = await stripePromise
-  const { error } = await stripe.redirectToCheckout({
+const redirectToCheckout = e => (stripeProduct, bookingId, location) => {
+  e.preventDefault()
+  const stripe = stripePromise
+  const { error } = stripe.redirectToCheckout({
     items: [{ sku: stripeProduct, quantity: 1 }],
     successUrl: location.origin + coursePaymentSuccess(bookingId),
     cancelUrl: location.origin + coursePaymentFailed(bookingId),
@@ -38,10 +37,6 @@ export const HealthcareProfessionalsOnly = ({
     disableBodyScroll(modal)
   }, [])
 
-  const onSubmit = ({ setSubmitting }) => {
-    setSubmitting(false)
-    redirectToCheckout(stripeProduct, bookingId, location)
-  }
   return (
     <StaticQuery
       query={graphql`
@@ -72,34 +67,22 @@ export const HealthcareProfessionalsOnly = ({
               />
             </section>
             <footer>
-              <Formik
-                initialValues={{
-                  healthcare_professional: false,
-                }}
-                validationSchema={Yup.object().shape({
-                  healthcare_professional: Yup.bool().oneOf([true], "Required"),
-                })}
-                onSubmit={onSubmit}
-              >
-                {({ isSubmitting }) => (
-                  <Form>
-                    <div className="checkboxFooter">
-                      <Checkbox
-                        name="healthcare_professional"
-                        label="I confirm, I am a licensed healthcare professional"
-                      />
+              <div className="checkboxFooter">
+                {/* <Checkbox
+                  name="healthcare_professional"
+                  label="I confirm, I am a licensed healthcare professional"
+                /> */}
 
-                      <Button
-                        styles="buttonPrimary"
-                        type="submit"
-                        disabled={isSubmitting}
-                      >
-                        Continue
-                      </Button>
-                    </div>
-                  </Form>
-                )}
-              </Formik>
+                <Button
+                  styles="buttonPrimary"
+                  type="submit"
+                  onClick={e =>
+                    redirectToCheckout(stripeProduct, bookingId, location)
+                  }
+                >
+                  Continue
+                </Button>
+              </div>
             </footer>
           </div>
           <div
