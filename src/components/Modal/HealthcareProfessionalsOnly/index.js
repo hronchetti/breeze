@@ -24,7 +24,7 @@ export const HealthcareProfessionalsOnly = ({
   useEffect(() => {
     disableBodyScroll(modal)
   }, [])
-  console.log(location)
+
   const onSubmit = ({ setSubmitting }) => {
     //window.location.href = stripeProduct
     setSubmitting(false)
@@ -32,7 +32,6 @@ export const HealthcareProfessionalsOnly = ({
     stripe
       .redirectToCheckout({
         items: [{ sku: stripeProduct, quantity: 1 }],
-
         successUrl: location.origin + coursePaymentSuccess(bookingId),
         cancelUrl: location.origin + coursePaymentFailed(bookingId),
       })
