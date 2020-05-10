@@ -5,13 +5,26 @@ import { StaticQuery, graphql } from "gatsby"
 import * as Yup from "yup"
 import { Formik, Form } from "formik"
 import { disableBodyScroll } from "body-scroll-lock"
-import Stripe from "stripe"
+import { loadStripe } from "@stripe/stripe-js"
 
 import { Button, CloseButton } from "../../Button"
 import { Checkbox } from "../../Form"
 import { coursePaymentSuccess, coursePaymentFailed } from "../../../utilities"
 
-const stripe = Stripe("pk_test_AwpDuCjx8CdjU8LORtzWpywb00X77YGXPR")
+const stripePromise = loadStripe("pk_test_AwpDuCjx8CdjU8LORtzWpywb00X77YGXPR")
+
+const redirectToCheckout = async (stripeProduct, bookingId, location) => {
+  const stripe = await stripePromise
+  const { error } = await stripe.redirectToCheckout({
+    items: [{ sku: stripeProduct, quantity: 1 }],
+    successUrl: location.origin + coursePaymentSuccess(bookingId),
+    cancelUrl: location.origin + coursePaymentFailed(bookingId),
+  })
+
+  if (error) {
+    console.warn("Error:", error)
+  }
+}
 
 export const HealthcareProfessionalsOnly = ({
   closeFn,
@@ -26,18 +39,8 @@ export const HealthcareProfessionalsOnly = ({
   }, [])
 
   const onSubmit = ({ setSubmitting }) => {
-    //window.location.href = stripeProduct
     setSubmitting(false)
-
-    stripe
-      .redirectToCheckout({
-        items: [{ sku: stripeProduct, quantity: 1 }],
-        successUrl: location.origin + coursePaymentSuccess(bookingId),
-        cancelUrl: location.origin + coursePaymentFailed(bookingId),
-      })
-      .then(result => {
-        console.log(result)
-      })
+    redirectToCheckout(stripeProduct, bookingId, location)
   }
   return (
     <StaticQuery
@@ -85,6 +88,7 @@ export const HealthcareProfessionalsOnly = ({
                         name="healthcare_professional"
                         label="I confirm, I am a licensed healthcare professional"
                       />
+
                       <Button
                         styles="buttonPrimary"
                         type="submit"
