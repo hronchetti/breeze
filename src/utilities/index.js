@@ -7,3 +7,4 @@ export {
   coursePaymentFailed,
 } from "./createSlug"
 export { createBookingDates } from "./createBookingDates"
+export { redirectToCheckout } from "./stripeRedirectToCheckout"

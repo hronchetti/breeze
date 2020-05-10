@@ -26,6 +26,7 @@ const CourseView = ({ data, location }) => {
   const [primaryBooking, setPrimaryBooking] = useState()
   const [modalVisible, setModalVisibility] = useState(false)
   const [stripeProduct, setStripeProduct] = useState("")
+  const [bookingId, setBookingId] = useState()
 
   const course = data.strapiCourses
   const courseBookings = data.allStrapiCourseBookings.edges
@@ -45,9 +46,10 @@ const CourseView = ({ data, location }) => {
     }
   }, [courseBookings])
 
-  const prepareModal = stripeProduct => {
+  const prepareModal = (stripeProduct, bookingId) => {
     setModalVisibility(true)
     setStripeProduct(stripeProduct)
+    setBookingId(bookingId)
   }
 
   return (
@@ -134,7 +136,9 @@ const CourseView = ({ data, location }) => {
                       <div className="actions">
                         <Button
                           styles="buttonPrimary iconLeft iconArrow"
-                          onClick={() => prepareModal(node.stripe_product)}
+                          onClick={() =>
+                            prepareModal(node.stripe_product, node.strapiId)
+                          }
                         >
                           Book now
                         </Button>
@@ -164,7 +168,12 @@ const CourseView = ({ data, location }) => {
                 teachingPeriods={primaryBooking.teaching_period}
                 fullAddress={primaryBooking.address_full}
                 shortAddress={primaryBooking.address_short}
-                prepareModal={() => prepareModal(primaryBooking.stripe_product)}
+                prepareModal={() =>
+                  prepareModal(
+                    primaryBooking.stripe_product,
+                    primaryBooking.strapiId
+                  )
+                }
               />
             ) : onlineCourse ? (
               <OnlineBooking
@@ -197,6 +206,8 @@ const CourseView = ({ data, location }) => {
         <HealthcareProfessionalsOnly
           closeFn={() => setModalVisibility(false)}
           stripeProduct={stripeProduct}
+          location={location}
+          bookingId={bookingId}
         />
       ) : (
         clearAllBodyScrollLocks()

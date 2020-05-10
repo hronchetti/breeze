@@ -37,41 +37,23 @@
   }
 }
 
-[id*="checkout-button-"] {
-  @extend %buttonStyleReset;
-  margin: 1.5rem auto 1rem !important;
+.buttonShadow {
+  width: fit-content;
+  margin: 0 auto 0.75rem;
   box-shadow: 0rem 0.125rem 0.25rem rgba($blueDark, 0.1);
-  font: 600 1rem/1.25rem "Inter", Arial, sans-serif !important;
-  padding: 1rem 1.375rem !important;
-  text-align: center;
-  cursor: pointer;
-  display: block;
-  outline: none;
-  transition: filter 200ms ease-in;
-  background-color: $blue !important;
-  color: white !important;
   width: 10rem;
 
-  &:focus {
-    filter: brightness(95%) !important;
-  }
-
-  @media (hover: hover) {
-    &:hover {
-      filter: brightness(95%) !important;
-    }
+  &.buttonMargin {
+    margin-top: 1.5rem;
   }
 
   @media (min-width: 800px) {
-    margin: 2rem auto 1rem !important;
-  }
-}
+    margin-bottom: 1.5rem;
 
-.buttonShadow {
-  width: fit-content;
-  margin: 0 auto;
-  box-shadow: 0rem 0.125rem 0.25rem rgba($blueDark, 0.1);
-  width: 10rem;
+    &.buttonMargin {
+      margin-top: 2rem;
+    }
+  }
 }
 
 .guidance {
