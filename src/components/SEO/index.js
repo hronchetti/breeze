@@ -34,16 +34,17 @@ function SEO({
 
 SEO.defaultProps = {
   ogType: "website",
+  schema: "",
 }
 
 SEO.propTypes = {
-  description: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
   canonicalHref: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  ogImage: PropTypes.string,
   ogType: PropTypes.string,
   ogUrl: PropTypes.string.isRequired,
-  ogImage: PropTypes.string,
   schema: PropTypes.any,
+  title: PropTypes.string.isRequired,
 }
 
 export default SEO

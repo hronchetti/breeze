@@ -13,6 +13,7 @@ const Blog = ({ data }) => {
   const [articles, setArticles] = useState([])
   const [articleTopicFiltered, setArticleTopicFiltered] = useState("All topics")
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
+  const blogSEO = data.strapiBlogPage.seo
 
   useEffect(() => {
     setArticles(data.allStrapiBlogArticles.edges)
@@ -45,7 +46,14 @@ const Blog = ({ data }) => {
   }
   return (
     <Layout>
-      <SEO title="Blog" />
+      <SEO
+        title={blogSEO.title}
+        description={blogSEO.description}
+        canonicalHref={blogSEO.canonical_href}
+        ogImage={blogSEO.image.absolutePath}
+        ogType={blogSEO.og_type}
+        ogUrl={blogSEO.og_url}
+      />
       <Header title="Blog" />
       <main className="backgroundGreyLightSuper">
         <section className="wrapper wrapperSidebarLayout">
@@ -139,6 +147,18 @@ export const pageQuery = graphql`
         node {
           id
           name
+        }
+      }
+    }
+    strapiBlogPage {
+      seo {
+        canonical_href
+        description
+        og_type
+        og_url
+        title
+        image {
+          absolutePath
         }
       }
     }

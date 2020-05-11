@@ -15,7 +15,14 @@ const RequestACourse = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={`${requestCourse.title} | Request a course`} />
+      <SEO
+        title={requestCourse.seo.title}
+        description={requestCourse.seo.description}
+        canonicalHref={requestCourse.seo.canonical_href}
+        ogImage={requestCourse.seo.image.absolutePath}
+        ogType={requestCourse.seo.og_type}
+        ogUrl={requestCourse.seo.og_url}
+      />
       <HeaderBlob
         title={requestCourse.title}
         image={requestCourse.image.childImageSharp.fluid}
@@ -65,6 +72,17 @@ export const pageQuery = graphql`
           }
         }
         icon_description
+      }
+      seo {
+        canonical_href
+        description
+        id
+        og_type
+        og_url
+        title
+        image {
+          absolutePath
+        }
       }
     }
     allStrapiCourses {

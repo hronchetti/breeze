@@ -21,7 +21,14 @@ const Contact = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={`${contactUs.title} | Contact us`} />
+      <SEO
+        title={contactUs.seo.title}
+        description={contactUs.seo.description}
+        canonicalHref={contactUs.seo.canonical_href}
+        ogImage={contactUs.seo.image.absolutePath}
+        ogType={contactUs.seo.og_type}
+        ogUrl={contactUs.seo.og_url}
+      />
       <Header title={contactUs.title} styles="textCenter">
         <div className="contactMethods">
           <a href={`tel:${contactUs.phone}`} className="contactMethod">
@@ -138,6 +145,17 @@ export const pageQuery = graphql`
       }
       email
       phone
+      seo {
+        canonical_href
+        description
+        id
+        og_type
+        og_url
+        title
+        image {
+          absolutePath
+        }
+      }
     }
   }
 `

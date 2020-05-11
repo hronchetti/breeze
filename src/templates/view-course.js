@@ -54,7 +54,15 @@ const CourseView = ({ data, location }) => {
 
   return (
     <Layout>
-      <SEO title={course.name} description={course.summary} />
+      <SEO
+        title={course.seo.title}
+        description={course.seo.description}
+        canonicalHref={course.seo.canonical_href}
+        ogImage={course.seo.image.absolutePath}
+        ogType={course.seo.og_type}
+        ogUrl={course.seo.og_url}
+        schema={course.seo.schema_json_string}
+      />
       <HeaderViewCourse
         title={onlineCourse ? `${course.name} (Online only)` : course.name}
         image={
@@ -269,6 +277,18 @@ export const pageQuery = graphql`
             ...GatsbyImageSharpFluid
           }
         }
+      }
+      seo {
+        canonical_href
+        description
+        id
+        og_type
+        og_url
+        title
+        image {
+          absolutePath
+        }
+        schema_json_string
       }
     }
     allStrapiCourseBookings(

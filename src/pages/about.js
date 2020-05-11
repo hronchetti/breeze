@@ -16,7 +16,14 @@ const About = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={`${about.title} | About us`} />
+      <SEO
+        title={about.seo.title}
+        description={about.seo.description}
+        canonicalHref={about.seo.canonical_href}
+        ogImage={about.seo.image.absolutePath}
+        ogType={about.seo.og_type}
+        ogUrl={about.seo.og_url}
+      />
       <Header title={about.title} styles="textCenter">
         <Img
           className="headerImage"
@@ -84,6 +91,17 @@ export const pageQuery = graphql`
         id
         section_heading
         content
+      }
+      seo {
+        canonical_href
+        description
+        id
+        og_type
+        og_url
+        title
+        image {
+          absolutePath
+        }
       }
     }
   }

@@ -33,6 +33,8 @@ module.exports = {
           `homepage`,
           `contact-us`,
           `about`,
+          `resources-page`,
+          `blog-page`,
           `request-a-course`,
           `terms-and-conditions`,
         ],

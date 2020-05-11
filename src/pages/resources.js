@@ -12,10 +12,17 @@ import SignOffStillLooking from "../components/SignOffStillLooking"
 const Resources = ({ data }) => {
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
   const resources = data.allStrapiResources.edges
-
+  const resourcesSeo = data.strapiResourcesPage.seo
   return (
     <Layout>
-      <SEO title="Resources" />
+      <SEO
+        title={resourcesSeo.title}
+        description={resourcesSeo.description}
+        canonicalHref={resourcesSeo.canonical_href}
+        ogImage={resourcesSeo.image.absolutePath}
+        ogType={resourcesSeo.og_type}
+        ogUrl={resourcesSeo.og_url}
+      />
       <Header title="Resources" />
       <main className="backgroundGreyLightSuper">
         <section className="wrapper wrapperSidebarLayout">
@@ -98,6 +105,18 @@ export const pageQuery = graphql`
             name
             type
           }
+        }
+      }
+    }
+    strapiResourcesPage {
+      seo {
+        canonical_href
+        description
+        og_type
+        og_url
+        title
+        image {
+          absolutePath
         }
       }
     }

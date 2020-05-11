@@ -39,7 +39,14 @@ const LandingPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={homepage.title} description={homepage.introduction} />
+      <SEO
+        title={homepage.seo.title}
+        description={homepage.seo.description}
+        canonicalHref={homepage.seo.canonical_href}
+        ogImage={homepage.seo.image.absolutePath}
+        ogType={homepage.seo.og_type}
+        ogUrl={homepage.seo.og_url}
+      />
       <HeaderHomepage
         title={homepage.title}
         paragraph={homepage.introduction}
@@ -128,6 +135,17 @@ export const pageQuery = graphql`
       reviews_header
       reviews_paragraph
       id
+      seo {
+        canonical_href
+        description
+        id
+        og_type
+        og_url
+        title
+        image {
+          absolutePath
+        }
+      }
     }
     allStrapiCourseTopics(sort: { fields: name, order: ASC }) {
       edges {

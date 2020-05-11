@@ -33,7 +33,14 @@ const CourseList = ({ data, location }) => {
 
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO
+        title={courseTopic.seo.title}
+        description={courseTopic.seo.description}
+        canonicalHref={courseTopic.seo.canonical_href}
+        ogImage={courseTopic.seo.image.absolutePath}
+        ogType={courseTopic.seo.og_type}
+        ogUrl={courseTopic.seo.og_url}
+      />
       <HeaderBlob
         title={`${courseTopic.name} courses`}
         image={courseTopic.image ? courseTopic.image.childImageSharp.fluid : ""}
@@ -171,6 +178,17 @@ export const pageQuery = graphql`
         }
       }
       image_description
+      seo {
+        canonical_href
+        description
+        id
+        og_type
+        og_url
+        title
+        image {
+          absolutePath
+        }
+      }
     }
   }
 `

@@ -25,7 +25,15 @@ const BlogArticle = ({ data, location }) => {
 
   return (
     <Layout>
-      <SEO title={article.title} description={article.excerpt} />
+      <SEO
+        title={article.seo.title}
+        description={article.seo.description}
+        canonicalHref={article.seo.canonical_href}
+        ogImage={article.seo.image.absolutePath}
+        ogType={article.seo.og_type}
+        ogUrl={article.seo.og_url}
+        schema={article.seo.schema_json_string}
+      />
       <header className="articleHeader">
         <section className="content">
           <span className="label">
@@ -136,6 +144,18 @@ export const pageQuery = graphql`
       }
       title
       excerpt
+      seo {
+        canonical_href
+        description
+        id
+        og_type
+        og_url
+        title
+        image {
+          absolutePath
+        }
+        schema_json_string
+      }
     }
     allStrapiBlogArticles(filter: { id: { eq: $next } }) {
       edges {
