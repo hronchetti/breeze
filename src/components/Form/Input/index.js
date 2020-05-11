@@ -20,7 +20,7 @@ export const Input = props => {
         ""
       )}
       <div className="input">
-        <input name={props.name} {...field} {...props} />
+        <input name={props.name} {...field} {...props} id={props.name} />
         <span
           className={`selector${meta.touched && meta.error ? " error" : ""}`}
         ></span>

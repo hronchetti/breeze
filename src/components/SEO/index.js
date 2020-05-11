@@ -1,88 +1,49 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({ description, lang, meta, title }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
-      }
-    `
-  )
-
-  const metaDescription = description || site.siteMetadata.description
-
+function SEO({
+  description,
+  title,
+  canonicalHref,
+  ogType,
+  ogUrl,
+  ogImage,
+  schema,
+}) {
   return (
     <Helmet
       htmlAttributes={{
-        lang,
+        lang: "en",
       }}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
-    />
+    >
+      <title>{title}</title>
+      <link rel="canonical" href={canonicalHref} />
+      <meta name="author" content="Breeze Academy" />
+      <meta name="description" content={description} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:site_name" content="Breeze Academy" />
+      <meta property="og:title" content={title} />
+      <meta property="og:type" content={ogType} />
+      <meta property="og:url" content={ogUrl} />
+      <script type="application/ld+json">{schema}</script>
+    </Helmet>
   )
 }
 
 SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
+  ogType: "website",
 }
 
 SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
+  description: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  canonicalHref: PropTypes.string.isRequired,
+  ogType: PropTypes.string,
+  ogUrl: PropTypes.string.isRequired,
+  ogImage: PropTypes.string,
+  schema: PropTypes.any,
 }
 
 export default SEO

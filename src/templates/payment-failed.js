@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
+import { Helmet } from "react-helmet"
 
 import Layout from "../components/Layout"
 import { Button } from "../components/Button"
@@ -14,6 +15,10 @@ const paymentFailed = ({ data, location }) => {
   console.log(courseTopic)
   return (
     <Layout footer={false}>
+      <Helmet>
+        <meta name="robots" content="none" />
+        <meta name="googlebot" content="none" />
+      </Helmet>
       <header className="wrapper">
         <span
           className="paymentStatus failed"

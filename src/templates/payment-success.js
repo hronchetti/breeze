@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import Moment from "moment"
+import { Helmet } from "react-helmet"
 
 import { TextCard } from "../components/Cards"
 import Layout from "../components/Layout"
@@ -17,6 +18,10 @@ const paymentSuccess = ({ data }) => {
   console.log(data.strapiCourseBookings)
   return (
     <Layout footer={false}>
+      <Helmet>
+        <meta name="robots" content="none" />
+        <meta name="googlebot" content="none" />
+      </Helmet>
       <header className="wrapper">
         <span
           className="paymentStatus successful"

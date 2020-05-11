@@ -35,6 +35,7 @@ export const VideoPlayer = ({ YouTubeURL, closeFn }) => {
           </div>
           <div
             className="overlay dark"
+            aria-label="button"
             onClick={closeFn}
             role="button"
             onKeyDown={e => (e.keyCode === 13 ? closeFn() : null)}

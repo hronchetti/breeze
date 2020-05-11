@@ -40,14 +40,10 @@
   .body {
     padding: 1rem 1.25rem;
     overflow: auto;
-    max-height: calc(100vh - 18.25rem);
+    max-height: calc(100vh - 13rem);
 
-    @media screen and (min-width: 384px) {
-      max-height: calc(100vh - 16.25rem);
-    }
-
-    @media screen and (min-width: 457px) {
-      max-height: calc(100vh - 14.5rem);
+    @media (min-width: 384px) {
+      max-height: calc(100vh - 11rem);
     }
 
     p {
@@ -59,7 +55,7 @@
     box-shadow: 0rem -0.125rem 0.5rem rgba($blueDark, 0.06);
     padding: 1.5rem 1.25rem;
 
-    .checkboxFooter {
+    &.modalFooter {
       display: grid;
       grid-template-columns: 1fr;
 
@@ -73,21 +69,13 @@
 @media screen and (min-width: 600px) {
   .modal {
     .body {
-      max-height: calc(100vh - 11.25rem);
+      max-height: calc(100vh - 10.75rem);
     }
 
     footer {
-      .checkboxFooter {
-        align-items: center;
-        grid-template-columns: 1fr 7.5rem;
-
-        .checkboxWrapper {
-          .errorText {
-            min-height: 0;
-          }
-        }
-
+      &.modalFooter {
         .button {
+          margin: 0 auto;
           height: fit-content;
           width: fit-content;
         }

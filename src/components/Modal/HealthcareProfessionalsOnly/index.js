@@ -48,24 +48,23 @@ export const HealthcareProfessionalsOnly = ({
                 }
               />
             </section>
-            <footer>
-              <div className="checkboxFooter">
-                <Button
-                  styles="buttonPrimary"
-                  type="submit"
-                  onClick={() =>
-                    redirectToCheckout(stripeProduct, bookingId, location)
-                  }
-                >
-                  Continue
-                </Button>
-              </div>
+            <footer className="modalFooter">
+              <Button
+                styles="buttonPrimary iconRight iconArrow"
+                type="submit"
+                onClick={() =>
+                  redirectToCheckout(stripeProduct, bookingId, location)
+                }
+              >
+                Continue
+              </Button>
             </footer>
           </div>
           <div
             className="overlay"
             onClick={closeFn}
             role="button"
+            aria-label="button"
             onKeyDown={e => (e.keyCode === 13 ? closeFn() : null)}
             tabIndex={0}
           ></div>

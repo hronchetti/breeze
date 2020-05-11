@@ -22,6 +22,7 @@ export const TextArea = props => {
           {...field}
           {...props}
           placeholder={props.placeholder}
+          id={props.name}
         ></textarea>
         <span
           className={`selector${meta.touched && meta.error ? " error" : ""}`}
