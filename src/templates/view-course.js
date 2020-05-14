@@ -29,6 +29,17 @@ const CourseView = ({ data, location }) => {
   const [bookingId, setBookingId] = useState()
 
   const course = data.strapiCourses
+  const courseSEO = course.seo
+    ? course.seo
+    : {
+        title: course.name,
+        description: course.summary,
+        canonical_href: location,
+        og_type: "",
+        og_url: location,
+        schema_json_string: "",
+        image: { absolutePath: "" },
+      }
   const courseBookings = data.allStrapiCourseBookings.edges
   const onlineCourse = course.online_only ? true : false
 
@@ -55,13 +66,13 @@ const CourseView = ({ data, location }) => {
   return (
     <Layout>
       <SEO
-        title={course.seo.title}
-        description={course.seo.description}
-        canonicalHref={course.seo.canonical_href}
-        ogImage={course.seo.image.absolutePath}
-        ogType={course.seo.og_type}
-        ogUrl={course.seo.og_url}
-        schema={course.seo.schema_json_string}
+        title={courseSEO.title}
+        description={courseSEO.description}
+        canonicalHref={courseSEO.canonical_href}
+        ogImage={courseSEO.image.absolutePath}
+        ogType={courseSEO.og_type}
+        ogUrl={courseSEO.og_url}
+        schema={courseSEO.schema_json_string}
       />
       <HeaderViewCourse
         title={onlineCourse ? `${course.name} (Online only)` : course.name}
