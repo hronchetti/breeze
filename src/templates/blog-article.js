@@ -17,22 +17,26 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffMailingList from "../components/SignOffMailingList"
 import BlogArticlePreview from "../components/BlogArticlePreview"
+import { defaultSEO } from "../utilities"
 
 const BlogArticle = ({ data, location }) => {
   const article = data.strapiBlogArticles
+  const articleSEO = article.seo
+    ? article.seo
+    : defaultSEO(article.title, article.excerpt, location.href)
   const url = location.href ? location.href : ""
   const nextArticle = data.allStrapiBlogArticles.edges[0].node
 
   return (
     <Layout>
       <SEO
-        title={article.seo.title}
-        description={article.seo.description}
-        canonicalHref={article.seo.canonical_href}
-        ogImage={article.seo.image.absolutePath}
-        ogType={article.seo.og_type}
-        ogUrl={article.seo.og_url}
-        schema={article.seo.schema_json_string}
+        title={articleSEO.title}
+        description={articleSEO.description}
+        canonicalHref={articleSEO.canonical_href}
+        ogImage={articleSEO.image.absolutePath}
+        ogType={articleSEO.og_type}
+        ogUrl={articleSEO.og_url}
+        schema={articleSEO.schema_json_string}
       />
       <header className="articleHeader">
         <section className="content">

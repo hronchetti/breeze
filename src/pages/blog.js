@@ -8,12 +8,15 @@ import { Header } from "../components/Layout/Headers"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffMailingList from "../components/SignOffMailingList"
+import { defaultSEO } from "../utilities"
 
-const Blog = ({ data }) => {
+const Blog = ({ data, location }) => {
   const [articles, setArticles] = useState([])
   const [articleTopicFiltered, setArticleTopicFiltered] = useState("All topics")
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
   const blogSEO = data.strapiBlogPage.seo
+    ? data.strapiBlogPage.seo
+    : defaultSEO("Blog", "Our articles", location.href)
 
   useEffect(() => {
     setArticles(data.allStrapiBlogArticles.edges)
@@ -110,6 +113,7 @@ const Blog = ({ data }) => {
 
 Blog.propTypes = {
   data: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 export default Blog

@@ -8,7 +8,7 @@ import { clearAllBodyScrollLocks } from "body-scroll-lock"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
-import { createBookingDates } from "../utilities"
+import { createBookingDates, defaultSEO } from "../utilities"
 import { Button } from "../components/Button"
 import { HeaderViewCourse } from "../components/Layout/Headers"
 import { HealthcareProfessionalsOnly } from "../components/Modal"
@@ -31,15 +31,7 @@ const CourseView = ({ data, location }) => {
   const course = data.strapiCourses
   const courseSEO = course.seo
     ? course.seo
-    : {
-        title: course.name,
-        description: course.summary,
-        canonical_href: location,
-        og_type: "",
-        og_url: location,
-        schema_json_string: "",
-        image: { absolutePath: "" },
-      }
+    : defaultSEO(course.name, course.summary, location.href)
   const courseBookings = data.allStrapiCourseBookings.edges
   const onlineCourse = course.online_only ? true : false
 
@@ -69,7 +61,7 @@ const CourseView = ({ data, location }) => {
         title={courseSEO.title}
         description={courseSEO.description}
         canonicalHref={courseSEO.canonical_href}
-        ogImage={courseSEO.image.absolutePath}
+        ogImage={courseSEO.image && courseSEO.image.absolutePath}
         ogType={courseSEO.og_type}
         ogUrl={courseSEO.og_url}
         schema={courseSEO.schema_json_string}

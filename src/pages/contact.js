@@ -8,6 +8,7 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import { Header } from "../components/Layout/Headers"
 import SignOffMailingList from "../components/SignOffMailingList"
+import { defaultSEO } from "../utilities"
 
 import PhoneIcon from "../images/icons/big/phone.svg"
 import EmailIcon from "../images/icons/big/email.svg"
@@ -16,18 +17,20 @@ import InstagramLogo from "../images/icons/instagram--blue.svg"
 import LinkedInLogo from "../images/icons/linkedIn--blue.svg"
 import TwitterLogo from "../images/icons/twitter--blue.svg"
 
-const Contact = ({ data }) => {
+const Contact = ({ data, location }) => {
   const contactUs = data.strapiContactUs
-
+  const contactUsSEO = contactUs.seo
+    ? contactUs.seo
+    : defaultSEO(contactUs.title, "", location.href)
   return (
     <Layout>
       <SEO
-        title={contactUs.seo.title}
-        description={contactUs.seo.description}
-        canonicalHref={contactUs.seo.canonical_href}
-        ogImage={contactUs.seo.image.absolutePath}
-        ogType={contactUs.seo.og_type}
-        ogUrl={contactUs.seo.og_url}
+        title={contactUsSEO.title}
+        description={contactUsSEO.description}
+        canonicalHref={contactUsSEO.canonical_href}
+        ogImage={contactUsSEO.image.absolutePath}
+        ogType={contactUsSEO.og_type}
+        ogUrl={contactUsSEO.og_url}
       />
       <Header title={contactUs.title} styles="textCenter">
         <div className="contactMethods">
@@ -125,6 +128,7 @@ const Contact = ({ data }) => {
 
 Contact.propTypes = {
   data: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 export default Contact

@@ -10,6 +10,7 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import { HealthcareProfessionalsOnly } from "../components/Modal"
+import { defaultSEO } from "../utilities"
 
 const CourseList = ({ data, location }) => {
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
@@ -20,6 +21,9 @@ const CourseList = ({ data, location }) => {
   const allCourseBookings = data.allStrapiCourseBookings.edges
   const courses = data.allStrapiCourses.edges
   const courseTopic = data.strapiCourseTopics
+  const courseTopicSEO = courseTopic.seo
+    ? courseTopic.seo
+    : defaultSEO(courseTopic.name, courseTopic.description, location.href)
 
   const toggleSidebarVisibilityMobile = () => {
     setSidebarVisibilityMobile(!sidebarVisibileMobile)
@@ -34,12 +38,12 @@ const CourseList = ({ data, location }) => {
   return (
     <Layout>
       <SEO
-        title={courseTopic.seo.title}
-        description={courseTopic.seo.description}
-        canonicalHref={courseTopic.seo.canonical_href}
-        ogImage={courseTopic.seo.image.absolutePath}
-        ogType={courseTopic.seo.og_type}
-        ogUrl={courseTopic.seo.og_url}
+        title={courseTopicSEO.title}
+        description={courseTopicSEO.description}
+        canonicalHref={courseTopicSEO.canonical_href}
+        ogImage={courseTopicSEO.image.absolutePath}
+        ogType={courseTopicSEO.og_type}
+        ogUrl={courseTopicSEO.og_url}
       />
       <HeaderBlob
         title={`${courseTopic.name} courses`}

@@ -12,7 +12,6 @@ const paymentFailed = ({ data, location }) => {
   const courseTopic = data.allStrapiCourseTopics.edges.filter(
     topic => topic.node.strapiId === booking.course.course_topic
   )[0].node.name
-  console.log(courseTopic)
   return (
     <Layout footer={false}>
       <Helmet>

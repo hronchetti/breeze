@@ -13,9 +13,7 @@ const paymentSuccess = ({ data }) => {
   const thinkificTrainingAvailable =
     data.strapiCourseBookings.course.thinkific_training !== null
   const thinkificTraining = data.strapiCourseBookings.course.thinkific_training
-
   const courseBooking = data.strapiCourseBookings
-  console.log(data.strapiCourseBookings)
   return (
     <Layout footer={false}>
       <Helmet>

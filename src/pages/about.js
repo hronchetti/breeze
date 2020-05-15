@@ -10,19 +10,23 @@ import { Header } from "../components/Layout/Headers"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffMailingList from "../components/SignOffMailingList"
+import { defaultSEO } from "../utilities"
 
-const About = ({ data }) => {
+const About = ({ data, location }) => {
   const about = data.strapiAbout
+  const aboutSEO = about.seo
+    ? about.seo
+    : defaultSEO(about.title, about.header_content, location.href)
 
   return (
     <Layout>
       <SEO
-        title={about.seo.title}
-        description={about.seo.description}
-        canonicalHref={about.seo.canonical_href}
-        ogImage={about.seo.image.absolutePath}
-        ogType={about.seo.og_type}
-        ogUrl={about.seo.og_url}
+        title={aboutSEO.title}
+        description={aboutSEO.description}
+        canonicalHref={aboutSEO.canonical_href}
+        ogImage={aboutSEO.image.absolutePath}
+        ogType={aboutSEO.og_type}
+        ogUrl={aboutSEO.og_url}
       />
       <Header title={about.title} styles="textCenter">
         <Img
@@ -67,6 +71,7 @@ const About = ({ data }) => {
 
 About.propTypes = {
   data: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 export default About

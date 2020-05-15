@@ -8,11 +8,14 @@ import Layout from "../components/Layout"
 import Resource from "../components/Resource"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
+import { defaultSEO } from "../utilities"
 
-const Resources = ({ data }) => {
+const Resources = ({ data, location }) => {
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
   const resources = data.allStrapiResources.edges
   const resourcesSeo = data.strapiResourcesPage.seo
+    ? data.strapiResourcesPage.seo
+    : defaultSEO("Resources", "", location.href)
   return (
     <Layout>
       <SEO
@@ -87,6 +90,7 @@ const Resources = ({ data }) => {
 
 Resources.propTypes = {
   data: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 export default Resources

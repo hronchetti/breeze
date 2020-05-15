@@ -13,11 +13,13 @@ import SignOffStillLooking from "../components/SignOffStillLooking"
 import { HeaderHomepage } from "../components/Layout/Headers"
 import { ImageCard } from "../components/Cards"
 import { Review } from "../components/Courses"
+import { courseTopicSlug, defaultSEO } from "../utilities/createSlug"
 
-import { courseTopicSlug } from "../utilities/createSlug"
-
-const LandingPage = ({ data }) => {
+const LandingPage = ({ data, location }) => {
   const homepage = data.strapiHomepage
+  const homepageSEO = homepage.seo
+    ? homepage.seo
+    : defaultSEO(homepage.title, homepage.introduction, location.href)
   const courseGroups = data.allStrapiCourseTopics.edges
   const courseReviews = data.allStrapiCourses.edges
   let ReviewsSwiper
@@ -40,12 +42,12 @@ const LandingPage = ({ data }) => {
   return (
     <Layout>
       <SEO
-        title={homepage.seo.title}
-        description={homepage.seo.description}
-        canonicalHref={homepage.seo.canonical_href}
-        ogImage={homepage.seo.image.absolutePath}
-        ogType={homepage.seo.og_type}
-        ogUrl={homepage.seo.og_url}
+        title={homepageSEO.title}
+        description={homepageSEO.description}
+        canonicalHref={homepageSEO.canonical_href}
+        ogImage={homepageSEO.image.absolutePath}
+        ogType={homepageSEO.og_type}
+        ogUrl={homepageSEO.og_url}
       />
       <HeaderHomepage
         title={homepage.title}
@@ -109,6 +111,7 @@ const LandingPage = ({ data }) => {
 
 LandingPage.propTypes = {
   data: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 export default LandingPage

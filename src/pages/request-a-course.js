@@ -8,20 +8,24 @@ import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import HowItWorks from "../components/HowItWorks"
 import RequestACourseForm from "../components/RequestACourseForm"
+import { defaultSEO } from "../utilities"
 
-const RequestACourse = ({ data }) => {
+const RequestACourse = ({ data, location }) => {
   const requestCourse = data.strapiRequestACourse
+  const requestCourseSEO = requestCourse.seo
+    ? requestCourse.seo
+    : defaultSEO(requestCourse.title, "", location.href)
   const allCourses = data.allStrapiCourses.edges
 
   return (
     <Layout>
       <SEO
-        title={requestCourse.seo.title}
-        description={requestCourse.seo.description}
-        canonicalHref={requestCourse.seo.canonical_href}
-        ogImage={requestCourse.seo.image.absolutePath}
-        ogType={requestCourse.seo.og_type}
-        ogUrl={requestCourse.seo.og_url}
+        title={requestCourseSEO.title}
+        description={requestCourseSEO.description}
+        canonicalHref={requestCourseSEO.canonical_href}
+        ogImage={requestCourseSEO.image.absolutePath}
+        ogType={requestCourseSEO.og_type}
+        ogUrl={requestCourseSEO.og_url}
       />
       <HeaderBlob
         title={requestCourse.title}
@@ -42,6 +46,7 @@ const RequestACourse = ({ data }) => {
 
 RequestACourse.propTypes = {
   data: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 export default RequestACourse
