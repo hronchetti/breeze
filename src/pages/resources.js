@@ -40,6 +40,9 @@ const Resources = ({ data, location }) => {
                     key={topic.node.id}
                     value={topic.node.group_name}
                     scroll
+                    closeMobileWrapper={() =>
+                      setTimeout(setSidebarVisibilityMobile, 500)
+                    }
                   />
                 ))}
               </section>

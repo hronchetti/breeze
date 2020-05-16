@@ -66,6 +66,9 @@ const CourseList = ({ data, location }) => {
                   <FilterOption
                     key={course.node.id}
                     value={course.node.name}
+                    closeMobileWrapper={() =>
+                      setTimeout(toggleSidebarVisibilityMobile, 500)
+                    }
                     scroll
                   />
                 ))}

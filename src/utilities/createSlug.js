@@ -1,5 +1,7 @@
 function createSlug(text) {
   text = text.replace(/\s+/g, "-").toLowerCase()
+  text = text.replace(/,/g, "")
+  text = text.replace(/\./, "")
   return text
 }
 

@@ -8,16 +8,19 @@ const FilterOption = ({
   mobileOnly,
   value,
   scroll,
+  closeMobileWrapper,
 }) => {
   if (scroll) {
     return (
       <Link
         activeClass="applied"
         to={value}
+        spy={true}
         className={`filterOption${mobileOnly ? " mobileOnly" : ""}`}
         smooth={true}
         offset={-112}
         duration={500}
+        onSetInactive={closeMobileWrapper}
       >
         <span className="selector"></span>
         <span className="text">{value}</span>
@@ -43,6 +46,7 @@ FilterOption.defaultProps = {
   scroll: false,
   filteredValue: "",
   clickFunc: () => {},
+  closeMobileWrapper: () => {},
 }
 
 FilterOption.propTypes = {
@@ -51,6 +55,7 @@ FilterOption.propTypes = {
   value: PropTypes.string.isRequired,
   mobileOnly: PropTypes.bool,
   scroll: PropTypes.bool,
+  closeMobileWrapper: PropTypes.func,
 }
 
 export default FilterOption
