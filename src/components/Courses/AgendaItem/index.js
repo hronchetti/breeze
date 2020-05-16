@@ -30,7 +30,7 @@ AgendaItem.defaultProps = {
 }
 
 AgendaItem.propTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   title: PropTypes.string.isRequired,
   overview: PropTypes.node,
 }

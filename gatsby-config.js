@@ -38,6 +38,7 @@ module.exports = {
           `blog-page`,
           `request-a-course`,
           `terms-and-conditions`,
+          `privacy-policy`,
         ],
         queryLimit: 1000,
       },

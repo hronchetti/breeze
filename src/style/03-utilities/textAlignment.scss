@@ -5,5 +5,10 @@
 @media screen and (min-width: 800px) {
   .textCenter {
     text-align: center !important;
+
+    &.narrowText {
+      max-width: 30rem;
+      margin: 0 auto;
+    }
   }
 }
