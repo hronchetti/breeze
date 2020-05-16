@@ -1,7 +1,30 @@
 .content {
+  p:last-child {
+    margin-bottom: 0 !important;
+  }
+
   ul {
     li {
-      list-style-type: disc;
+      list-style-type: none;
+      display: table;
+      position: relative;
+      padding: 0 0 0.5rem 1.25rem;
+
+      &:before {
+        display: table-cell;
+        content: "\2022";
+        position: absolute;
+        left: 0;
+      }
+    }
+  }
+
+  ol {
+    padding: 0 0 0 1.25rem;
+
+    li {
+      list-style-type: decimal;
+      padding-bottom: 0.5rem;
     }
   }
 }

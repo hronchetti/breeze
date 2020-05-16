@@ -98,7 +98,7 @@ const CourseView = ({ data, location }) => {
                         key={event.id}
                         type={event.type}
                         title={event.title}
-                        description={event.description}
+                        overview={event.overview}
                       />
                     ))}
                   </div>
@@ -251,7 +251,7 @@ export const pageQuery = graphql`
           id
           title
           type
-          description
+          overview
         }
       }
       reviews {

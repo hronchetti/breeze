@@ -1,7 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
+import ReactMarkdown from "react-markdown"
 
-export const AgendaItem = ({ type, title, description }) => {
+export const AgendaItem = ({ type, title, overview }) => {
   if (type === "Break") {
     return (
       <section className="agendaItem break">
@@ -14,7 +15,9 @@ export const AgendaItem = ({ type, title, description }) => {
         <span className="selector"></span>
         <div className="text">
           <h4>{title}</h4>
-          {description ? <p>{description}</p> : ""}
+          <div className="content">
+            <ReactMarkdown source={overview} />
+          </div>
         </div>
       </section>
     )
@@ -23,10 +26,11 @@ export const AgendaItem = ({ type, title, description }) => {
 
 AgendaItem.defaultProps = {
   type: "Teaching",
+  overview: "",
 }
 
 AgendaItem.propTypes = {
-  type: PropTypes.string,
+  type: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string,
+  overview: PropTypes.node,
 }

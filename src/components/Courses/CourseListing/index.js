@@ -46,7 +46,7 @@ export const CourseListing = ({ course, prepareModal, bookings }) => (
           styles="buttonPrimary iconLeft iconArrow"
           href={course.thinkific_training.course_link}
         >
-          View on Thinkific
+          Book now on Thinkific
         </Button>
         <Button
           to={courseSlug(course.course_topic.name, course.name)}

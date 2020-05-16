@@ -40,7 +40,7 @@ export const HealthcareProfessionalsOnly = ({
               <h4>Healthcare Professionals only</h4>
               <CloseButton onClick={closeFn} />
             </header>
-            <section className="body">
+            <section className="body content">
               <ReactMarkdown
                 source={
                   data.allStrapiTermsAndConditions.edges[0].node

@@ -11,7 +11,7 @@ export const OnlineBooking = ({ price, link }) => {
         Access this course through Thinkific, our online training partner
       </p>
       <Button styles="buttonPrimary iconLeft iconArrow" href={link}>
-        View on Thinkific
+        Book now
       </Button>
     </section>
   )
