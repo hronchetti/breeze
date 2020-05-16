@@ -16,7 +16,10 @@ import AcuphysLogo from "../../../images/acuphys-logo.svg"
 export const CourseListing = ({ course, prepareModal, bookings }) => (
   <section className="courseItem" id={course.name}>
     <div className="details">
-      <h3>{course.name}</h3>
+      <h3>
+        {course.name}
+        {course.online_only ? " (Online)" : ""}
+      </h3>
       <section className="facts">
         <span className="fact">
           <b>Skill level:</b> {course.skill_level}

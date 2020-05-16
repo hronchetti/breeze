@@ -25,7 +25,10 @@ const paymentSuccess = ({ data }) => {
           className="paymentStatus successful"
           aria-label="Payment response"
         ></span>
-        <h1>Your space is booked!</h1>
+        <h1>
+          Your space is booked onto
+          <br /> {courseBooking.course.name}
+        </h1>
         <p>A payment reciept has been sent to your email</p>
       </header>
       <main className="backgroundGreyLightSuper">
@@ -59,10 +62,9 @@ const paymentSuccess = ({ data }) => {
           <section>
             <b className="subHeading">We&apos;ll see you there!</b>
             <TextCard styles="paymentCard">
-              <h4 className="cardHeading">{courseBooking.course.name}</h4>
-              <b className="dates">
+              <h4 className="cardHeading">
                 {createBookingDates(courseBooking.teaching_period)}
-              </b>
+              </h4>
               <p>{courseBooking.address_full}</p>
             </TextCard>
           </section>

@@ -22,8 +22,6 @@
     "gatsby-source-filesystem": "^2.1.46",
     "gatsby-source-strapi": "0.0.12",
     "gatsby-transformer-sharp": "^2.3.13",
-    "lodash": "^4.17.15",
-    "lodash.get": "^4.4.2",
     "moment": "^2.24.0",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",

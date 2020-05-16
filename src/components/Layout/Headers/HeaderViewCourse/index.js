@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import PropTypes from "prop-types"
 import Img from "gatsby-image"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
-import _ from "lodash"
 
 import AcuphysLogo from "../../../../images/acuphys-logo.svg"
 import Blob from "../../../../images/blob.svg"
@@ -20,7 +19,6 @@ export const HeaderViewCourse = ({
   video,
 }) => {
   const [playerVisible, setPlayerVisibility] = useState(false)
-
   return (
     <>
       <header className="headerBlob headerCourse">
@@ -59,7 +57,11 @@ export const HeaderViewCourse = ({
           >
             <Img
               className="image"
-              fluid={_.isEmpty(image) ? defaultImage : image}
+              fluid={
+                Object.keys(image).length === 0 && image.constructor === Object
+                  ? defaultImage
+                  : image
+              }
               alt={
                 imageDescription ? imageDescription : "Breeze Course Trailer"
               }

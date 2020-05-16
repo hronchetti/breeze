@@ -67,7 +67,7 @@ const CourseView = ({ data, location }) => {
         schema={courseSEO.schema_json_string}
       />
       <HeaderViewCourse
-        title={onlineCourse ? `${course.name} (Online only)` : course.name}
+        title={onlineCourse ? `${course.name} (Online)` : course.name}
         image={
           course.header_image ? course.header_image.childImageSharp.fluid : {}
         }
@@ -188,7 +188,11 @@ const CourseView = ({ data, location }) => {
               />
             ) : onlineCourse ? (
               <OnlineBooking
-                price={course.thinkific_training.course_price}
+                price={
+                  course.thinkific_training.course_price
+                    ? course.thinkific_training.course_price
+                    : "Free"
+                }
                 link={course.thinkific_training.course_link}
               />
             ) : courseBookings && courseBookings.length > 0 ? (
