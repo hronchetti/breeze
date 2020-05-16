@@ -10,7 +10,7 @@ import SEO from "../components/SEO"
 import { TextCard } from "../components/Cards"
 import { defaultSEO } from "../utilities"
 
-const PrivacyPolicy = ({ data }) => {
+const PrivacyPolicy = ({ data, location }) => {
   const privacyPolicy = data.strapiPrivacyPolicy
   const privacyPolicySeo = privacyPolicy.seo
     ? privacyPolicy.seo
