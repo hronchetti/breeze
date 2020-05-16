@@ -95,7 +95,7 @@ const Footer = ({ courses, socialLinks }) => {
       <p className="footNote">
         Website by{" "}
         <a
-          href="http://harryronchetti.com/"
+          href="https://harryronchetti.com/"
           target="_blank"
           rel="noopener noreferrer"
         >

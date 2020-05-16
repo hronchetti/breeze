@@ -34,6 +34,7 @@ function SEO({
 
 SEO.defaultProps = {
   ogType: "website",
+  ogImage: "",
   schema: "",
 }
 
