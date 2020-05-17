@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet"
 
 import Layout from "../components/Layout"
 import { Button } from "../components/Button"
-import { redirectToCheckout, courseSlug } from "../utilities"
+import { redirectToCheckout, courseBookingSlug } from "../utilities"
 
 const paymentFailed = ({ data, location }) => {
   const booking = data.strapiCourseBookings
@@ -44,7 +44,11 @@ const paymentFailed = ({ data, location }) => {
           Try again
         </Button>
         <Button
-          to={courseSlug(courseTopic, booking.course.name)}
+          to={courseBookingSlug(
+            courseTopic,
+            booking.course.name,
+            booking.strapiId
+          )}
           styles="buttonSecondary buttonShadow"
         >
           Back to course
