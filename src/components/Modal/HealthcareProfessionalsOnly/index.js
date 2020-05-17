@@ -56,7 +56,7 @@ export const HealthcareProfessionalsOnly = ({
                   redirectToCheckout(stripeProduct, bookingId, location)
                 }
               >
-                Continue
+                Pay with Stripe
               </Button>
             </footer>
           </div>

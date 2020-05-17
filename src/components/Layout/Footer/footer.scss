@@ -77,6 +77,12 @@ footer {
         display: grid;
         grid-template-columns: auto auto;
         gap: 3rem;
+
+        ul {
+          &:nth-child(2) {
+            padding: 0;
+          }
+        }
       }
     }
   }

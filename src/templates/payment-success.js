@@ -25,9 +25,8 @@ const paymentSuccess = ({ data }) => {
           className="paymentStatus successful"
           aria-label="Payment response"
         ></span>
-        <h1>
-          Your space is booked onto
-          <br /> {courseBooking.course.name}
+        <h1 className="headingMaxWidth">
+          Your space is booked onto {courseBooking.course.name}
         </h1>
         <p>A payment reciept has been sent to your email</p>
       </header>
@@ -47,7 +46,7 @@ const paymentSuccess = ({ data }) => {
                   </p>
                   <p>
                     <b>Due date: </b>
-                    {Moment(courseBooking.start_date).format("ll")}
+                    {Moment(courseBooking.start_date).format("Do MMMM YYYY")}
                   </p>
                 </div>
                 <Button

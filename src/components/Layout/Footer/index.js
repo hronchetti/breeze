@@ -79,12 +79,11 @@ const Footer = ({ courses, socialLinks }) => {
               <Link to="/contact">Contact</Link>
             </li>
             <li>
-              <Link to="/privacy-policy">Privacy Policy</Link>
+              <Link to="/privacy-policy">Privacy policy</Link>
             </li>
           </ul>
           <ul>
             <li className="title">Courses</li>
-
             {courses.map(({ node }) => (
               <li key={node.id}>
                 <Link to={courseTopicSlug(node.name)}>{node.name} courses</Link>

@@ -32,7 +32,7 @@ const PrivacyPolicy = ({ data, location }) => {
       </Header>
       <main className="backgroundGreyLightSuper">
         <div className="wrapper padded">
-          <TextCard styles="content">
+          <TextCard styles="content privacyPolicy">
             <ReactMarkdown source={privacyPolicy.policy} />
           </TextCard>
         </div>
@@ -43,6 +43,7 @@ const PrivacyPolicy = ({ data, location }) => {
 
 PrivacyPolicy.propTypes = {
   data: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 export default PrivacyPolicy
