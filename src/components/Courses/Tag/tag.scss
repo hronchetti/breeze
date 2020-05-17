@@ -12,4 +12,14 @@
   &.blue {
     background-color: $blueLight;
   }
+
+  &.yellow {
+    background-color: $yellow;
+    color: white;
+  }
+
+  &.green {
+    background-color: #00c2a6;
+    color: white;
+  }
 }

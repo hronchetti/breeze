@@ -1,19 +1,23 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-export const Tag = ({ discountPercentage, color }) => {
-  return (
-    <span className={`tag${color === "blue" ? " blue" : ""}`}>
-      {discountPercentage}% Discount
-    </span>
-  )
+export const Tag = ({ text, discount, color }) => {
+  if (discount) {
+    return (
+      <span className={`tag${color && ` ${color}`}`}>{text}% Discount</span>
+    )
+  } else {
+    return <span className={`tag${color && ` ${color}`}`}>{text}</span>
+  }
 }
 
 Tag.defaultProps = {
+  discount: false,
   color: "white",
 }
 
 Tag.propTypes = {
-  discountPercentage: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
+  discount: PropTypes.bool,
   color: PropTypes.string,
 }

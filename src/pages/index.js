@@ -12,7 +12,7 @@ import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import { HeaderHomepage } from "../components/Layout/Headers"
 import { ImageCard } from "../components/Cards"
-import { Review } from "../components/Courses"
+import { Review, Tag } from "../components/Courses"
 import { courseTopicSlug, defaultSEO } from "../utilities/createSlug"
 
 const LandingPage = ({ data, location }) => {
@@ -96,6 +96,12 @@ const LandingPage = ({ data, location }) => {
                   to={courseTopicSlug(node.name)}
                 >
                   <h3>{node.name}</h3>
+                  <div className="courseStyleWrapper">
+                    {/* {node.name === "Acupuncture" && (
+                      <Tag text="face-to-face" color="yellow" />
+                    )}
+                    <Tag text="Online" color="yellow" /> */}
+                  </div>
                   <p>{node.description}</p>
                   <span className="linkArrow">Get started</span>
                 </ImageCard>

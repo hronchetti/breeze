@@ -79,6 +79,7 @@ const CourseView = ({ data, location }) => {
         topic={course.course_topic.name}
         defaultVideo={data.strapiHomepage.video_link}
         defaultImage={data.imageSharp.fluid}
+        video={course.youtube_video}
       />
       <main className="backgroundGreyLightSuper">
         <section className="wrapper courseWrapper">
@@ -128,8 +129,9 @@ const CourseView = ({ data, location }) => {
                           </span>
                           {node.discount_percentage && (
                             <Tag
+                              discount
                               color="blue"
-                              discountPercentage={node.discount_percentage}
+                              text={node.discount_percentage}
                             />
                           )}
                         </h4>

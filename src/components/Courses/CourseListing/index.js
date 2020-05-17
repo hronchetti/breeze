@@ -69,7 +69,7 @@ export const CourseListing = ({ course, prepareModal, bookings }) => (
                       {createBookingDates(node.teaching_period)}
                     </span>
                     {node.discount_percentage && (
-                      <Tag discountPercentage={node.discount_percentage} />
+                      <Tag discount text={node.discount_percentage} />
                     )}
                   </h4>
                   <p>
