@@ -37,7 +37,7 @@ export const HealthcareProfessionalsOnly = ({
         <>
           <div className="modal" ref={modal}>
             <header>
-              <h4>Healthcare Professionals only</h4>
+              <h4>Terms and conditions</h4>
               <CloseButton onClick={closeFn} />
             </header>
             <section className="body content">

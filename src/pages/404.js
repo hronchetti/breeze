@@ -2,7 +2,6 @@ import React from "react"
 import Helmet from "react-helmet"
 
 import Layout from "../components/Layout"
-import { Header } from "../components/Layout/Headers"
 import { Button } from "../components/Button"
 
 const NotFoundPage = () => (
@@ -10,7 +9,8 @@ const NotFoundPage = () => (
     <Helmet>
       <title>404: Not found</title>
     </Helmet>
-    <Header title="404: Not found" styles="textCenter narrowText">
+    <header className="textCenter narrowText">
+      <h1>404: Not found</h1>
       <p>
         You just hit a route that doesn&#39;t exist. This may be because it was
         moved or deleted but don&apos;t worry, that&apos;s on us!
@@ -19,7 +19,7 @@ const NotFoundPage = () => (
       <Button styles="buttonPrimary centered" to="/">
         Go to homepage
       </Button>
-    </Header>
+    </header>
   </Layout>
 )
 

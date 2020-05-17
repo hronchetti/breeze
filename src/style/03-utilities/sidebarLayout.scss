@@ -121,6 +121,12 @@
       position: static;
       padding: 0;
 
+      &.open {
+        .sidebar {
+          top: 9rem;
+        }
+      }
+
       .sidebar {
         height: auto;
         opacity: 1;
