@@ -127,13 +127,14 @@ const CourseView = ({ data, location }) => {
                           <span className="dates">
                             {createBookingDates(node.teaching_period)}
                           </span>
-                          {node.discount_percentage && (
+                          {node.discount_percentage &&
+                          node.discount_percentage > 0 ? (
                             <Tag
                               discount
                               color="blue"
                               text={node.discount_percentage}
                             />
-                          )}
+                          ) : null}
                         </h4>
                         <p>
                           <CoursePrices
@@ -191,10 +192,12 @@ const CourseView = ({ data, location }) => {
             ) : onlineCourse ? (
               <OnlineBooking
                 price={
-                  course.thinkific_training.course_price
+                  course.thinkific_training.course_price ||
+                  course.thinkific_training.course_price === 0
                     ? course.thinkific_training.course_price
                     : "Free"
                 }
+                discount={course.thinkific_training.discount_percentage}
                 link={course.thinkific_training.course_link}
               />
             ) : courseBookings && courseBookings.length > 0 ? (
@@ -266,11 +269,12 @@ export const pageQuery = graphql`
         id
       }
       thinkific_training {
+        id
         course_link
         course_duration
         course_name
-        id
         course_price
+        discount_percentage
       }
       teaching_time
       skill_level

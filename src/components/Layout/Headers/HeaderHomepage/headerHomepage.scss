@@ -3,6 +3,8 @@
 
   .content {
     padding-right: 1.25rem;
+    opacity: 0;
+    transform: translateY(20px);
 
     h1 {
       max-width: 36rem;
@@ -23,6 +25,12 @@
     .illustration {
       max-width: none;
       width: 140%;
+    }
+  }
+
+  &.visible {
+    .content {
+      animation: fadeUp 1400ms forwards;
     }
   }
 }

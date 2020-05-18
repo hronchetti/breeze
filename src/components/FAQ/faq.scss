@@ -54,10 +54,10 @@
     }
 
     .answer {
-      max-height: 0;
+      height: 0;
 
       p {
-        max-height: 0;
+        height: 0;
         pointer-events: none;
         margin: 0;
         opacity: 0;
@@ -75,11 +75,11 @@
 
     div {
       .answer {
-        max-height: 300px;
+        height: auto;
         margin: 0.5rem 0 0 0;
 
         p {
-          max-height: 300px;
+          height: auto;
           pointer-events: all;
           opacity: 1;
         }

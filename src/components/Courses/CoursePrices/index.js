@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 
 export const CoursePrices = ({ price, discount }) => {
-  if (price && discount) {
+  if (price && discount && discount > 0) {
     const originalPriceString = price
     const currency = originalPriceString.slice(0, 1)
     const originalPrice = Number(

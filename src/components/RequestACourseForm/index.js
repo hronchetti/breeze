@@ -31,7 +31,7 @@ const RequestACourse = ({ courses }) => {
     })
     setCourses([
       ...formattedCourses,
-      { value: "New course", label: "New course" },
+      { value: "Tailor your own", label: "Tailor your own" },
     ])
   }
 

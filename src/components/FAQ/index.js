@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
+import ReactMarkdown from "react-markdown"
 
 const FAQ = ({ question, answer }) => {
   const [questionShown, setQuestionShown] = useState(false)
@@ -17,7 +18,7 @@ const FAQ = ({ question, answer }) => {
       <div>
         <h4>{question}</h4>
         <section className="answer">
-          <p>{answer}</p>
+          <ReactMarkdown source={answer} />
         </section>
       </div>
     </div>

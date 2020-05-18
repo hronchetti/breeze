@@ -79,7 +79,7 @@ const Nav = ({ courses }) => {
                       <Button
                         to={courseTopicSlug(course.node.name)}
                         styles="buttonPrimary iconRight iconArrow"
-                      >{`${course.node.name} courses`}</Button>
+                      >{`${course.node.name}`}</Button>
                     </li>
                   ))}
                 </ul>

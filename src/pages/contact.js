@@ -116,7 +116,11 @@ const Contact = ({ data, location }) => {
           <Divider align="center" />
           <div className="faqs narrowContent">
             {contactUs.faq.map(faq => (
-              <FAQ key={faq.id} question={faq.question} answer={faq.answer} />
+              <FAQ
+                key={faq.id}
+                question={faq.question}
+                answer={faq.question_answer}
+              />
             ))}
           </div>
         </section>
@@ -143,7 +147,7 @@ export const pageQuery = graphql`
       instagram_link
       facebook_link
       faq {
-        answer
+        question_answer
         question
         id
       }
