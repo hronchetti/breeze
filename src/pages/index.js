@@ -12,7 +12,7 @@ import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import { HeaderHomepage } from "../components/Layout/Headers"
 import { ImageCard } from "../components/Cards"
-import { Review, Tag } from "../components/Courses"
+import { Review } from "../components/Courses"
 import { courseTopicSlug, defaultSEO } from "../utilities/createSlug"
 
 const LandingPage = ({ data, location }) => {

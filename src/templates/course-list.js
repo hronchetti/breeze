@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
 
-import { CourseListing } from "../components/Courses"
+import { CourseListing, EmptyCourseList } from "../components/Courses"
 import FilterOption from "../components/FilterOption"
 import { HeaderBlob } from "../components/Layout/Headers"
 import Layout from "../components/Layout"
@@ -55,51 +55,59 @@ const CourseList = ({ data, location }) => {
         <p>{courseTopic.description}</p>
       </HeaderBlob>
       <main className="backgroundGreyLightSuper">
-        <section className="wrapper wrapperSidebarLayout">
-          <aside
-            className={`wrapperSidebar${sidebarVisibileMobile ? " open" : ""}`}
-          >
-            <div className="sidebar">
-              <span className="sidebarHeading">Quick access</span>
-              <section className="sidebarItems">
-                {courses.map(course => (
-                  <FilterOption
-                    key={course.node.id}
-                    value={course.node.name}
-                    closeMobileWrapper={() =>
-                      setTimeout(toggleSidebarVisibilityMobile, 500)
-                    }
-                    scroll
-                  />
-                ))}
-              </section>
-            </div>
-            <button
-              className="sidebarControl"
-              onClick={toggleSidebarVisibilityMobile}
+        {courses && courses.length > 0 ? (
+          <section className="wrapper wrapperSidebarLayout">
+            <aside
+              className={`wrapperSidebar${
+                sidebarVisibileMobile ? " open" : ""
+              }`}
             >
-              <span className="accessibleText">Show/hide filters</span>
-            </button>
-            <span className="fill"></span>
-          </aside>
-          <section className="filteredContent">
-            <span className="filterCount">
-              {courses.length > 1 || courses.length === 0
-                ? `${courses.length} courses`
-                : `${courses.length} course`}
-            </span>
-            {courses.map(course => (
-              <CourseListing
-                key={course.node.id}
-                course={course.node}
-                bookings={allCourseBookings.filter(
-                  booking => booking.node.course.id === course.node.strapiId
-                )}
-                prepareModal={prepareModal}
-              />
-            ))}
+              <div className="sidebar">
+                <span className="sidebarHeading">Quick access</span>
+                <section className="sidebarItems">
+                  {courses.map(course => (
+                    <FilterOption
+                      key={course.node.id}
+                      value={course.node.name}
+                      closeMobileWrapper={() =>
+                        setTimeout(toggleSidebarVisibilityMobile, 500)
+                      }
+                      scroll
+                    />
+                  ))}
+                </section>
+              </div>
+              <button
+                className="sidebarControl"
+                onClick={toggleSidebarVisibilityMobile}
+              >
+                <span className="accessibleText">Show/hide filters</span>
+              </button>
+              <span className="fill"></span>
+            </aside>
+            <section className="filteredContent">
+              <span className="filterCount">
+                {courses.length > 1 || courses.length === 0
+                  ? `${courses.length} courses`
+                  : `${courses.length} course`}
+              </span>
+              {courses.map(course => (
+                <CourseListing
+                  key={course.node.id}
+                  course={course.node}
+                  bookings={allCourseBookings.filter(
+                    booking => booking.node.course.id === course.node.strapiId
+                  )}
+                  prepareModal={prepareModal}
+                />
+              ))}
+            </section>
           </section>
-        </section>
+        ) : (
+          <section className="wrapper padded">
+            <EmptyCourseList />
+          </section>
+        )}
       </main>
       <SignOffStillLooking />
       {modalVisible ? (
