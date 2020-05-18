@@ -13,7 +13,14 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    /*     `gatsby-plugin-offline`, */
+    // {
+    //   resolve: `gatsby-plugin-offline`,
+    //   options: {
+    //     workboxConfig: {
+    //       globPatterns: ["**/*"],
+    //     },
+    //   },
+    // },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sass`,
