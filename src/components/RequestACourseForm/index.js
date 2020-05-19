@@ -31,6 +31,27 @@ const RequestACourse = ({ courses }) => {
     })
     setCourses([
       ...formattedCourses,
+      {
+        value: "Acupuncture General Update",
+        label: "Acupuncture General Update",
+      },
+      { value: "Acupuncture in Sport", label: "Acupuncture in Sport" },
+      {
+        value: "Acupuncture in Women's Health",
+        label: "Acupuncture in Women's Health",
+      },
+      { value: "Cupping", label: "Cupping" },
+      { value: "Dry Needling", label: "Dry Needling" },
+      {
+        value: "Surface anatomy palpation",
+        label: "Surface anatomy palpation",
+      },
+      { value: "Taping & Strapping", label: "Taping & Strapping" },
+      {
+        value: "Trigger Point Acupuncture",
+        label: "Trigger Point Acupuncture",
+      },
+      { value: "Understanding Research", label: "Understanding Research" },
       { value: "Tailor your own", label: "Tailor your own" },
     ])
   }
