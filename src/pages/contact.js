@@ -34,21 +34,28 @@ const Contact = ({ data, location }) => {
       />
       <Header title={contactUs.title} styles="textCenter">
         <div className="contactMethods">
-          <a href={`tel:${contactUs.phone}`} className="contactMethod">
-            <img
-              src={PhoneIcon}
-              alt="Mobile Phone Illustration"
-              title="Mobile Phone Illustration"
-            />
-            <h4>{contactUs.phone}</h4>
+          <a href={`tel:${contactUs.phone}`} className="contactMethodWrapper">
+            <div className="contactMethod">
+              <img
+                src={PhoneIcon}
+                alt="Mobile Phone Illustration"
+                title="Mobile Phone Illustration"
+              />
+              <h4>{contactUs.phone}</h4>
+            </div>
           </a>
-          <a href={`mailto:${contactUs.email}`} className="contactMethod">
-            <img
-              src={EmailIcon}
-              alt="Email/Envelope Illustration"
-              title="Email/Envelope Illustration"
-            />
-            <h4>{contactUs.email}</h4>
+          <a
+            href={`mailto:${contactUs.email}`}
+            className="contactMethodWrapper"
+          >
+            <div className="contactMethod">
+              <img
+                src={EmailIcon}
+                alt="Email/Envelope Illustration"
+                title="Email/Envelope Illustration"
+              />
+              <h4>{contactUs.email}</h4>
+            </div>
           </a>
         </div>
         <div className="socialLinks">

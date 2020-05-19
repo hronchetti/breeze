@@ -1,5 +1,8 @@
 .contactMethods {
   margin: 1.5rem 0 0 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
 
   .contactMethod {
     @include shadowSoft;
@@ -52,41 +55,66 @@
   border-radius: 1rem;
 }
 
-@media screen and (min-width: 858px) {
+@media screen and (min-width: 864px) {
   .contactMethods {
-    display: grid;
-    grid-template-columns: 1fr 22.25rem 2rem 22.25rem 1fr;
+    grid-template-columns: 1fr 23rem 2rem 23rem 1fr;
+    gap: 0;
 
-    .contactMethod {
-      margin: 0;
-      padding: 2rem;
-      grid-gap: 1rem;
-      gap: 1rem;
-
+    .contactMethodWrapper {
       &:first-of-type {
         grid-column: 2/3;
       }
       &:last-of-type {
         grid-column: 4/5;
       }
+
+      .contactMethod {
+        @include flexJustifyCenter;
+
+        img {
+          width: 3rem;
+          height: 3rem;
+          margin-right: 0.75rem;
+        }
+      }
     }
   }
-
   .socialLinks {
     justify-content: center;
   }
 }
 
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 1072px) {
+  .contactMethods {
+    grid-template-columns: 1fr 28.5rem 2rem 28.5rem 1fr;
+
+    .contactMethodWrapper {
+      .contactMethod {
+        padding: 2rem;
+
+        img {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1208px) {
   .contactMethods {
     margin: 2.5rem 0 0 0;
-    grid-template-columns: 1fr 28.75rem 3.5rem 28.75rem 1fr;
+    grid-template-columns: 1fr 32rem 3.5rem 32rem 1fr;
 
-    .contactMethod {
-      padding: 3rem;
-      grid-template-columns: 4rem 1fr;
-      grid-gap: 1.5rem;
-      gap: 1.5rem;
+    .contactMethodWrapper {
+      .contactMethod {
+        padding: 3rem;
+
+        img {
+          width: 4rem;
+          height: 4rem;
+          margin-right: 1.5rem;
+        }
+      }
     }
   }
 

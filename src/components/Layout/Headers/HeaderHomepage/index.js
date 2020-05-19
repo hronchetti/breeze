@@ -7,7 +7,7 @@ import TrackVisibility from "react-on-screen"
 import { Button } from "../../../Button"
 import { VideoPlayer } from "../../..//Modal"
 
-import HomepageHeaderIllustration from "../../../../images/homepage_illustration.svg"
+import HomepageHeaderIllustration from "../../../../images/illustration.svg"
 
 export const HeaderHomepage = ({ title, paragraph, videoLink }) => {
   const [playerVisible, setPlayerVisibility] = useState(false)
@@ -15,7 +15,9 @@ export const HeaderHomepage = ({ title, paragraph, videoLink }) => {
     <>
       <TrackVisibility partialVisibility once>
         {({ isVisible }) => (
-          <header className={`headerHomepage${isVisible && " visible"}`}>
+          <header
+            className={`headerHomepage wrapper${isVisible && " visible"}`}
+          >
             <div className="content">
               <h1>{title}</h1>
               <p>{paragraph}</p>
