@@ -3,17 +3,21 @@ import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import Moment from "moment"
 import { Helmet } from "react-helmet"
+import ReactMarkdown from "react-markdown"
 
 import { TextCard } from "../components/Cards"
 import Layout from "../components/Layout"
 import { Button } from "../components/Button"
 import { createBookingDates } from "../utilities"
+import FAQ from "../components/FAQ"
+import Divider from "../components/Divider"
 
 const paymentSuccess = ({ data }) => {
   const thinkificTrainingAvailable =
     data.strapiCourseBookings.course.thinkific_training !== null
   const thinkificTraining = data.strapiCourseBookings.course.thinkific_training
   const courseBooking = data.strapiCourseBookings
+  const faqs = data.strapiContactUs.faq
   return (
     <Layout footer={false}>
       <Helmet>
@@ -56,6 +60,26 @@ const paymentSuccess = ({ data }) => {
                   Complete training now
                 </Button>
               </TextCard>
+              <h2 className="faqs-header">Information about our courses</h2>
+              <Divider />
+              {faqs.length > 1 && (
+                <TextCard styles="declaration">
+                  <h4>{faqs[0].question}</h4>
+                  <ReactMarkdown source={faqs[0].question_answer} />
+                </TextCard>
+              )}
+              <div className="faqs">
+                {faqs.length > 1 &&
+                  faqs
+                    .filter((cur, index) => index > 0)
+                    .map(faq => (
+                      <FAQ
+                        key={faq.id}
+                        question={faq.question}
+                        answer={faq.question_answer}
+                      />
+                    ))}
+              </div>
             </section>
           )}
           <section>
@@ -102,6 +126,13 @@ export const pageQuery = graphql`
           course_name
           id
         }
+      }
+    }
+    strapiContactUs {
+      faq {
+        question_answer
+        question
+        id
       }
     }
   }

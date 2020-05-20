@@ -136,6 +136,26 @@
   }
 }
 
+.faqs-header {
+  margin: 2rem 0 1.5rem;
+
+  @media (min-width: 600px) {
+    margin: 3rem 0 1.5rem;
+  }
+
+  @media (min-width: 800px) {
+    margin: 3.5rem 0 2rem;
+  }
+}
+
+.declaration {
+  margin: 2rem 0;
+
+  @media (min-width: 800px) {
+    margin: 2.5rem 0 3rem;
+  }
+}
+
 .subHeading {
   display: block;
   font-size: 1rem;

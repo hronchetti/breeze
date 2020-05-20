@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
+import ReactMarkdown from "react-markdown"
 
 import FAQ from "../components/FAQ"
 import Divider from "../components/Divider"
@@ -9,6 +10,7 @@ import SEO from "../components/SEO"
 import { Header } from "../components/Layout/Headers"
 import SignOffMailingList from "../components/SignOffMailingList"
 import { defaultSEO } from "../utilities"
+import { TextCard } from "../components/Cards"
 
 import PhoneIcon from "../images/icons/big/phone.svg"
 import EmailIcon from "../images/icons/big/email.svg"
@@ -121,14 +123,23 @@ const Contact = ({ data, location }) => {
         <section className="wrapper padded">
           <h2 className="textCenter">Frequently asked questions</h2>
           <Divider align="center" />
+          {contactUs.faq.length > 1 && (
+            <TextCard styles="narrowContent">
+              <h4>{contactUs.faq[0].question}</h4>
+              <ReactMarkdown source={contactUs.faq[0].question_answer} />
+            </TextCard>
+          )}
           <div className="faqs narrowContent">
-            {contactUs.faq.map(faq => (
-              <FAQ
-                key={faq.id}
-                question={faq.question}
-                answer={faq.question_answer}
-              />
-            ))}
+            {contactUs.faq.length > 1 &&
+              contactUs.faq
+                .filter((cur, index) => index > 0)
+                .map(faq => (
+                  <FAQ
+                    key={faq.id}
+                    question={faq.question}
+                    answer={faq.question_answer}
+                  />
+                ))}
           </div>
         </section>
       </main>
