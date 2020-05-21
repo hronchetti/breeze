@@ -71,7 +71,7 @@ export const pageQuery = graphql`
         id
         icon {
           childImageSharp {
-            fluid(maxWidth: 400) {
+            fluid(maxWidth: 1600) {
               ...GatsbyImageSharpFluid
             }
           }

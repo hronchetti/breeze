@@ -131,7 +131,7 @@ export const pageQuery = graphql`
         step_heading
         icon {
           childImageSharp {
-            fluid {
+            fluid(maxWidth: 1600) {
               ...GatsbyImageSharpFluid
             }
           }

@@ -23,12 +23,6 @@
     margin-top: 1.25rem;
     padding-bottom: 1rem;
   }
-
-  &.visible {
-    .content {
-      animation: fadeUp 1400ms forwards;
-    }
-  }
 }
 
 @media screen and (min-width: 800px) {
@@ -68,6 +62,17 @@
     .illustrationWrapper {
       .illustration {
         transform: scale(1.04);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .headerHomepage {
+    .illustrationWrapper {
+      .illustration {
+        width: 576px;
+        height: 445px;
       }
     }
   }

@@ -4,6 +4,8 @@
   display: block;
 
   .content {
+    opacity: 0;
+    transform: translateY(20px);
     margin: 0 0 1.5rem 0;
   }
 

@@ -15,10 +15,8 @@ export const HeaderHomepage = ({ title, paragraph, videoLink }) => {
     <>
       <TrackVisibility partialVisibility once>
         {({ isVisible }) => (
-          <header
-            className={`headerHomepage wrapper${isVisible && " visible"}`}
-          >
-            <div className="content">
+          <header className="headerHomepage wrapper">
+            <div className={`content animateFadeUp${isVisible && " active"}`}>
               <h1>{title}</h1>
               <p>{paragraph}</p>
               <section className="headerButtons">

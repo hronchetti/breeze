@@ -1,19 +1,19 @@
-@keyframes fadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
+.animateFadeUp {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 800ms ease, transform 800ms ease;
+
+  &.active {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+.animateFadeIn {
+  opacity: 0;
+  transition: opacity 1000ms ease-in-out;
+
+  &.active {
+    opacity: 1 !important;
   }
 }

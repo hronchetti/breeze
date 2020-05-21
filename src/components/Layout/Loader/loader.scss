@@ -1,0 +1,53 @@
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.loaderWrapper {
+  background-color: white;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1005;
+  transition: top 500ms cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  .loader {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 2.25rem;
+    height: 2.25rem;
+
+    img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      animation: spin 500ms linear infinite;
+    }
+  }
+
+  &.loaded {
+    top: 100%;
+    transition-delay: 500ms;
+
+    .loader {
+      animation: fadeOut 500ms forwards;
+    }
+  }
+}

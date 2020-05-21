@@ -105,7 +105,7 @@ const CourseList = ({ data, location }) => {
           </section>
         ) : (
           <section className="wrapper padded">
-            <EmptyCourseList />
+            <EmptyCourseList courseTopic={courseTopic.name} />
           </section>
         )}
       </main>

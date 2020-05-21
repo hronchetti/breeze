@@ -11,6 +11,13 @@ header {
   }
 }
 
+.header {
+  h1 {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
 .headerButtons {
   .button {
     box-shadow: 0rem 0.125rem 0.25rem rgba($blueDark, 0.1);

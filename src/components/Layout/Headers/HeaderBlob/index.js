@@ -2,6 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import Blob from "../../../../images/blob.svg"
 import Img from "gatsby-image"
+import TrackVisibility from "react-on-screen"
 
 export const HeaderBlob = ({
   align,
@@ -10,27 +11,31 @@ export const HeaderBlob = ({
   imageDescription,
   title,
 }) => (
-  <header className={`headerBlob${align === "top" ? " alignTop" : ""}`}>
-    <div className="content">
-      <h1>{title}</h1>
-      {children}
-    </div>
-    <div className="imageWrapper">
-      <div className="imageContainer">
-        {image && imageDescription ? (
-          <Img
-            className="image"
-            fluid={image}
-            alt={imageDescription}
-            title={imageDescription}
-          />
-        ) : (
-          ""
-        )}
-      </div>
-      <img className="blob" src={Blob} alt="Blob" title="Blob" />
-    </div>
-  </header>
+  <TrackVisibility partialVisibility once>
+    {({ isVisible }) => (
+      <header className={`headerBlob${align === "top" ? " alignTop" : ""}`}>
+        <div className={`content animateFadeUp${isVisible && " active"}`}>
+          <h1>{title}</h1>
+          {children}
+        </div>
+        <div className="imageWrapper">
+          <div className="imageContainer">
+            {image && imageDescription ? (
+              <Img
+                className="image"
+                fluid={image}
+                alt={imageDescription}
+                title={imageDescription}
+              />
+            ) : (
+              ""
+            )}
+          </div>
+          <img className="blob" src={Blob} alt="Blob" title="Blob" />
+        </div>
+      </header>
+    )}
+  </TrackVisibility>
 )
 
 HeaderBlob.defaultProps = {

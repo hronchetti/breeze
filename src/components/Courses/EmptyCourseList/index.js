@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import PropTypes from "prop-types"
 import addToMailchimp from "gatsby-plugin-mailchimp"
 import * as Yup from "yup"
 import { Formik, Form } from "formik"
@@ -6,7 +7,7 @@ import { Formik, Form } from "formik"
 import { Input, Toast } from "../../Form"
 import SearchingIcon from "../../../images/icons/big/searching.svg"
 
-export const EmptyCourseList = () => {
+export const EmptyCourseList = ({ courseTopic }) => {
   const [toast, setToast] = useState({
     message: "",
     visible: false,
@@ -48,11 +49,12 @@ export const EmptyCourseList = () => {
               src={SearchingIcon}
               alt="Magnifying glass searching within computer screen"
             />
-            <h3>Coming soon</h3>
+            <h3>Courses coming soon</h3>
             <p>
-              We haven’t released any courses in this category yet but we’re
-              working on it! Join our mailing list using the form below to be
-              notified when we release the first courses
+              We haven&apos;t uploaded our {courseTopic.toLowerCase()} courses
+              yet, but they&apos;re on their way! To learn more about the
+              courses we offer that aren&apos;t on our website join our mailing
+              list or contact us directly by emailing enquiries@breeze.academy
             </p>
             <Input name="email" type="email" placeholder="Your email" />
             <button
@@ -60,7 +62,7 @@ export const EmptyCourseList = () => {
               className="button buttonPrimary"
               type="submit"
             >
-              Join the waiting list
+              Join mailing list
             </button>
           </Form>
         )}
@@ -78,4 +80,8 @@ export const EmptyCourseList = () => {
       />
     </section>
   )
+}
+
+EmptyCourseList.propTypes = {
+  courseTopic: PropTypes.string.isRequired,
 }
