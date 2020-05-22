@@ -192,13 +192,16 @@
         }
 
         .actions {
-          @include flexJustifyEnd;
+          @include flexJustifyStart;
 
           .button {
             width: fit-content;
 
             &.buttonSecondary {
               margin: 0 0.75rem 0 0;
+            }
+            &.buttonPrimary {
+              margin: 0;
             }
           }
         }
