@@ -45,13 +45,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Breeze Acamdemy`,
+        name: `Breeze Academy`,
         short_name: `Breeze`,
         start_url: `/`,
-        background_color: `#ffffff`,
-        theme_color: `#ffffff`,
+        background_color: `#fff`,
+        theme_color: `#fff`,
         display: `standalone`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/breeze-logo.png`, // This path is relative to the root of the site.
       },
     },
     {
