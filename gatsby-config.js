@@ -17,6 +17,7 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-eslint`,
+    `gatsby-plugin-offline`,
     {
       resolve: `gatsby-source-strapi`,
       options: {
