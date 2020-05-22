@@ -1,0 +1,15 @@
+.sidebarItem {
+  .title {
+    font-size: 1.5rem;
+    line-height: 1.625rem;
+  }
+}
+
+@media all and (min-width: 800px) {
+  .sidebarItem {
+    .title {
+      font-size: 1.75rem;
+      line-height: 2rem;
+    }
+  }
+}

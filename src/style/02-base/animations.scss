@@ -1,0 +1,19 @@
+.animateFadeUp {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 800ms ease, transform 800ms ease;
+
+  &.active {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+.animateFadeIn {
+  opacity: 0;
+  transition: opacity 1000ms ease-in-out;
+
+  &.active {
+    opacity: 1 !important;
+  }
+}

@@ -1,0 +1,124 @@
+.headerBlob {
+  margin: 0 auto;
+  width: calc(100% - 2.5rem);
+  display: block;
+
+  .content {
+    opacity: 0;
+    transform: translateY(20px);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .imageWrapper {
+    position: relative;
+    padding: 0 0 95% 0;
+
+    .imageContainer {
+      position: absolute;
+      width: 100%;
+      padding-bottom: 75%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      overflow: hidden;
+      cursor: pointer;
+      z-index: 1;
+
+      .image {
+        width: 100%;
+        height: 100%;
+        position: absolute !important;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 901;
+      }
+    }
+
+    .blob {
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .headerBlob {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3rem;
+    gap: 3rem;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    padding: 5.5rem 1.25rem 2rem 1.25rem;
+    padding-right: 1.25rem;
+
+    &.alignTop {
+      align-items: flex-start;
+
+      .content {
+        h1,
+        p {
+          max-width: 30rem;
+        }
+      }
+    }
+
+    .content {
+      margin: 0 0 0.5rem 0;
+    }
+
+    .imageWrapper {
+      position: relative;
+      padding: 0;
+
+      .imageContainer {
+        position: relative;
+        top: auto;
+        transform: none;
+        left: auto;
+      }
+
+      .blob {
+        max-width: none;
+        width: 150%;
+        left: 50%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .headerBlob {
+    padding: 9rem 3rem 3rem 3rem;
+    grid-gap: 4rem;
+    gap: 4rem;
+
+    .content {
+      margin: 0 0 10% 0;
+
+      p {
+        max-width: 27.5rem;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .headerBlob {
+    padding: 10rem 4rem 4rem 4rem;
+  }
+}
+
+@media screen and (min-width: 1376px) {
+  .headerBlob {
+    padding-right: calc(4rem + ((100% - 1376px) / 2));
+    padding-left: calc(4rem + ((100% - 1376px) / 2));
+  }
+}

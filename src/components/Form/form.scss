@@ -1,0 +1,35 @@
+label {
+  display: block;
+  font: 600 1rem/1.5rem "Inter", Arial, sans-serif;
+  margin: 0 0 0.875rem 0;
+  display: flex;
+  justify-content: space-between;
+
+  .optional {
+    font: 400 1rem/1.5rem "Inter", Arial, sans-serif;
+    font-style: italic;
+    color: $greyLight;
+  }
+}
+
+.errorText {
+  font: 400 1rem/1.5rem "Inter", Arial, sans-serif;
+  margin: 0.25rem 0;
+  display: block;
+  color: $red;
+  min-height: 1.5rem;
+}
+
+.backgroundBlueDark {
+  label {
+    color: white;
+  }
+
+  .errorText {
+    color: #ff3853;
+  }
+}
+
+button[type="submit"] {
+  margin-top: 0.875rem;
+}

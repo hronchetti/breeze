@@ -1,0 +1,132 @@
+.faq {
+  @extend %buttonStyleReset;
+  padding: 1.25rem;
+  border-bottom: #dcdee0 1px solid;
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  grid-gap: 1.25rem;
+  gap: 1.25rem;
+  text-align: left;
+  cursor: pointer;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+
+  &:focus {
+    outline: none;
+    background: transparent;
+  }
+
+  &:focus-visible {
+    outline: inherit;
+  }
+
+  .control {
+    background-color: $blueLight;
+    border-radius: 50%;
+    padding: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    position: relative;
+
+    &:before {
+      display: block;
+      content: "";
+      position: absolute;
+      right: 0.5rem;
+      top: 0.5rem;
+      width: 1rem;
+      height: 1rem;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-image: url("../images/icons/plus.svg");
+    }
+  }
+
+  div {
+    padding: 0 1rem 0 0;
+
+    h4 {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.75rem;
+    }
+
+    .answer {
+      height: 0;
+
+      p {
+        height: 0;
+        pointer-events: none;
+        margin: 0;
+        opacity: 0;
+        line-height: 1.625rem;
+      }
+    }
+  }
+
+  &.active {
+    .control {
+      &:before {
+        background-image: url("../images/icons/minus.svg");
+      }
+    }
+
+    div {
+      .answer {
+        height: auto;
+        margin: 0.5rem 0 0 0;
+
+        p {
+          height: auto;
+          pointer-events: all;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .faq {
+    padding: 1.75rem;
+    grid-template-columns: 2.5rem 1fr;
+
+    .control {
+      width: 2.5rem;
+      height: 2.5rem;
+
+      &:before {
+        left: 0.5rem;
+        top: 0.5rem;
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+
+    div {
+      padding: 0 1.5rem 0 0;
+
+      h4 {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        margin: 0.375rem 0 0 0;
+      }
+
+      .answer {
+        p {
+          line-height: 1.875rem;
+        }
+      }
+    }
+
+    &.active {
+      div {
+        .answer {
+          margin: 0.75rem 0 0 0;
+        }
+      }
+    }
+  }
+}

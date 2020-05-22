@@ -1,0 +1,129 @@
+.contactMethods {
+  margin: 1.5rem 0 0 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+
+  .contactMethod {
+    @include shadowSoft;
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    grid-gap: 0.75rem;
+    gap: 0.75rem;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1.5rem 1rem;
+    align-items: center;
+    margin: 0 0 1rem 0;
+    text-align: left;
+
+    &:last-of-type {
+      margin: 0;
+    }
+
+    &:focus {
+      @include shadowSoft;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        @include shadowSoft;
+      }
+    }
+
+    h4 {
+      margin: 0;
+      word-break: break-all;
+    }
+  }
+}
+
+.socialLinks {
+  padding: 2.5rem 0 0 1.5rem;
+  @include flexJustifyStart;
+  align-items: center;
+
+  a {
+    padding: 0 0.75rem 0 0;
+    margin: 0 0.75rem 0 0;
+  }
+}
+
+.faqs {
+  @include shadowSoft;
+  background-color: white;
+  border-radius: 1rem;
+}
+
+@media screen and (min-width: 864px) {
+  .contactMethods {
+    grid-template-columns: 1fr 23rem 2rem 23rem 1fr;
+    gap: 0;
+
+    .contactMethodWrapper {
+      &:first-of-type {
+        grid-column: 2/3;
+      }
+      &:last-of-type {
+        grid-column: 4/5;
+      }
+
+      .contactMethod {
+        @include flexJustifyCenter;
+
+        img {
+          width: 3rem;
+          height: 3rem;
+          margin-right: 0.75rem;
+        }
+      }
+    }
+  }
+  .socialLinks {
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 1072px) {
+  .contactMethods {
+    grid-template-columns: 1fr 28.5rem 2rem 28.5rem 1fr;
+
+    .contactMethodWrapper {
+      .contactMethod {
+        padding: 2rem;
+
+        img {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1208px) {
+  .contactMethods {
+    margin: 2.5rem 0 0 0;
+    grid-template-columns: 1fr 32rem 3.5rem 32rem 1fr;
+
+    .contactMethodWrapper {
+      .contactMethod {
+        padding: 3rem;
+
+        img {
+          width: 4rem;
+          height: 4rem;
+          margin-right: 1.5rem;
+        }
+      }
+    }
+  }
+
+  .socialLinks {
+    padding: 3.5rem 0 0 1.5rem;
+
+    a {
+      padding: 0 0.75rem 0 0;
+      margin: 0 1.25rem 0 0;
+    }
+  }
+}
