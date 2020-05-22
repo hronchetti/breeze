@@ -93,7 +93,6 @@ const Nav = ({ courses }) => {
       <section className="fill"></section>
       <button
         className="overlay"
-        aria-label="button"
         onClick={() => openMobileNav(!mobileNav)}
       ></button>
     </nav>

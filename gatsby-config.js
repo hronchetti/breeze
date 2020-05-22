@@ -45,13 +45,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Breeze`,
+        name: `Breeze Acamdemy`,
         short_name: `Breeze`,
         start_url: `/`,
-        background_color: `#fff`,
-        theme_color: `#fff`,
+        background_color: `#ffffff`,
+        theme_color: `#ffffff`,
         display: `standalone`,
-        icon: `src/images/breeze-logo.png`,
+        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
     {
@@ -60,6 +60,5 @@ module.exports = {
         endpoint: `https://hotmail.us9.list-manage.com/subscribe/post?u=e9728b56d79222d6a4f34a26d&amp;id=eec00e0717`, // add your MC list endpoint here; see instructions below
       },
     },
-    `gatsby-plugin-offline`,
   ],
 }
