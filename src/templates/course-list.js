@@ -18,7 +18,6 @@ const CourseList = ({ data, location }) => {
   const [stripeProduct, setStripeProduct] = useState("")
   const [bookingId, setBookingId] = useState()
 
-  const allCourseBookings = data.allStrapiCourseBookings.edges
   const courses = data.allStrapiCourses.edges
   const courseTopic = data.strapiCourseTopics
   const courseTopicSEO = courseTopic.seo
@@ -95,9 +94,7 @@ const CourseList = ({ data, location }) => {
                 <CourseListing
                   key={course.node.id}
                   course={course.node}
-                  bookings={allCourseBookings.filter(
-                    booking => booking.node.course.id === course.node.strapiId
-                  )}
+                  bookings={course.node.course_bookings}
                   prepareModal={prepareModal}
                 />
               ))}
@@ -132,7 +129,7 @@ CourseList.propTypes = {
 export default CourseList
 
 export const pageQuery = graphql`
-  query AllCoursesInTopic($name: String!, $topicId: Int) {
+  query AllCoursesInTopic($name: String!) {
     allStrapiCourses(
       sort: { fields: name, order: ASC }
       filter: { course_topic: { name: { eq: $name } } }
@@ -155,29 +152,23 @@ export const pageQuery = graphql`
           course_topic {
             name
           }
-        }
-      }
-    }
-    allStrapiCourseBookings(
-      filter: { course: { course_topic: { eq: $topicId } } }
-      sort: { fields: start_date, order: ASC }
-    ) {
-      edges {
-        node {
-          id
-          strapiId
-          address_full
-          start_date
-          booking_price
-          stripe_product
-          discount_percentage
-          teaching_period {
-            end
-            start
+          course_bookings {
+            address_full
+            address_short
+            booking_price
+            course
+            start_date
             id
-          }
-          course {
-            id
+            end_time
+            discount_percentage
+            created_at
+            start_time
+            stripe_product
+            teaching_period {
+              end
+              start
+              id
+            }
           }
         }
       }

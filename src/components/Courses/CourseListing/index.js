@@ -7,6 +7,7 @@ import {
   courseBookingSlug,
   courseSlug,
   createBookingDates,
+  convertToAmPmTime,
 } from "../../../utilities"
 import { Button } from "../../Button"
 import { Tag, CoursePrices } from "../"
@@ -29,7 +30,7 @@ export const CourseListing = ({ course, prepareModal, bookings }) => (
         </span>
       </section>
       <p className="summary">{course.summary}</p>
-      {course.course_topic.name === "Acupuncture" ? (
+      {course.course_topic.name === "Acupuncture & dry needling" ? (
         <img
           className="acuphysLogo"
           src={AcuphysLogo}
@@ -60,27 +61,31 @@ export const CourseListing = ({ course, prepareModal, bookings }) => (
         <span className="bookingsHeading">Course bookings</span>
         {bookings.length > 0 ? (
           bookings
-            .filter(booking => Moment(booking.node.start_date).isAfter())
-            .map(({ node }) => (
-              <section className="booking" key={node.id}>
+            .filter(booking => Moment(booking.start_date).isAfter())
+            .map(booking => (
+              <section className="booking" key={booking.id}>
                 <div className="information">
                   <h4>
                     <span className="dates">
-                      {createBookingDates(node.teaching_period)}
+                      {createBookingDates(booking.teaching_period)}
+                      {` (${convertToAmPmTime(
+                        booking.start_time
+                      )} - ${convertToAmPmTime(booking.end_time)})`}
                     </span>
-                    {node.discount_percentage &&
-                    node.discount_percentage > 0 ? (
-                      <Tag discount text={node.discount_percentage} />
+                    {booking.discount_percentage &&
+                    booking.discount_percentage > 0 ? (
+                      <Tag discount text={booking.discount_percentage} />
                     ) : null}
                   </h4>
                   <p>
                     <CoursePrices
-                      price={node.booking_price}
+                      price={booking.booking_price}
                       discount={
-                        node.discount_percentage && node.discount_percentage
+                        booking.discount_percentage &&
+                        booking.discount_percentage
                       }
                     />{" "}
-                    &bull; {node.address_full}
+                    &bull; {booking.address_full}
                   </p>
                 </div>
                 <div className="actions">
@@ -88,7 +93,7 @@ export const CourseListing = ({ course, prepareModal, bookings }) => (
                     to={courseBookingSlug(
                       course.course_topic.name,
                       course.name,
-                      node.strapiId
+                      booking.strapiId
                     )}
                     styles="buttonSecondary"
                   >
@@ -97,7 +102,7 @@ export const CourseListing = ({ course, prepareModal, bookings }) => (
                   <Button
                     styles="buttonPrimary iconLeft iconArrow"
                     onClick={() =>
-                      prepareModal(node.stripe_product, node.strapiId)
+                      prepareModal(booking.stripe_product, booking.strapiId)
                     }
                   >
                     Book now

@@ -2,7 +2,7 @@ import { loadStripe } from "@stripe/stripe-js"
 
 import { coursePaymentSuccess, coursePaymentFailed } from "./"
 
-const stripePromise = loadStripe("pk_test_AwpDuCjx8CdjU8LORtzWpywb00X77YGXPR")
+const stripePromise = loadStripe("pk_live_J12GUSpNDvSBoKImEzslnzjC00ppZQgzEW")
 
 export const redirectToCheckout = async (
   stripeProduct,
