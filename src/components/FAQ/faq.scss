@@ -59,9 +59,13 @@
       p {
         height: 0;
         pointer-events: none;
-        margin: 0;
+        margin: 0 0 1.25rem 0;
         opacity: 0;
         line-height: 1.625rem;
+
+        &:last-of-type {
+          margin: 0;
+        }
       }
     }
   }
