@@ -29,6 +29,7 @@ const Layout = ({ children, footer }) => (
       <>
         <Nav courses={data.allStrapiCourseTopics.edges} />
         {children}
+        {console.log(process.env.GATSBY_STRIPE)}
         {footer && (
           <Footer
             courses={data.allStrapiCourseTopics.edges}

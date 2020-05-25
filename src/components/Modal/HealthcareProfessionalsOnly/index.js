@@ -9,7 +9,7 @@ import { coursePaymentSuccess, coursePaymentFailed } from "../../../utilities"
 import { Toast } from "../../Form"
 import { Button, CloseButton } from "../../Button"
 
-const stripePromise = loadStripe("pk_live_J12GUSpNDvSBoKImEzslnzjC00ppZQgzEW")
+const stripePromise = loadStripe(process.env.GATSBY_STRIPE)
 
 export const HealthcareProfessionalsOnly = ({
   closeFn,

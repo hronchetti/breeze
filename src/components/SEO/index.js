@@ -16,7 +16,7 @@ function SEO({ description, title, canonicalHref, ogType, ogUrl, schema }) {
       <meta property="og:description" content={description} />
       <meta
         property="og:image"
-        content="https://res.cloudinary.com/harry-ronchetti/image/upload/v1589226187/bzzuszwgau2r4rkfxq6e.png"
+        content="https://res.cloudinary.com/harry-ronchetti/image/upload/v1590447393/Artboard_below7.jpg"
       />
       <meta property="og:site_name" content="Breeze Academy" />
       <meta property="og:title" content={title} />
