@@ -31,10 +31,6 @@ const RequestACourse = ({ courses }) => {
     })
     setCourses([
       ...formattedCourses,
-      {
-        value: "Acupuncture General Update",
-        label: "Acupuncture General Update",
-      },
       { value: "Acupuncture in Sport", label: "Acupuncture in Sport" },
       {
         value: "Acupuncture in Women's Health",

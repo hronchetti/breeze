@@ -7,6 +7,5 @@ export {
   coursePaymentFailed,
 } from "./createSlug"
 export { createBookingDates } from "./createBookingDates"
-export { redirectToCheckout } from "./stripeRedirectToCheckout"
 export { defaultSEO } from "./defaultSEO"
 export { convertToAmPmTime } from "./convertToAmPmTime"

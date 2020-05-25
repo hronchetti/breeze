@@ -52,11 +52,11 @@ export const EmptyCourseList = ({ courseTopic }) => {
             <h3>Courses coming soon</h3>
             <p>
               We haven&apos;t uploaded our {courseTopic.toLowerCase()} courses
-              yet, but they&apos;re on their way!
+              yet, but we do offer them!
             </p>
             <p>
-              To learn more about the courses we offer that aren&apos;t on our
-              website join our mailing list or contact us directly by emailing
+              To learn more about the courses not on our website join our
+              mailing list or contact us directly by emailing
               enquiries@breeze.academy
             </p>
             <Input name="email" type="email" placeholder="Your email" />

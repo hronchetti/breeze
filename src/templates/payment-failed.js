@@ -1,17 +1,50 @@
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import { Helmet } from "react-helmet"
+import { loadStripe } from "@stripe/stripe-js"
 
 import Layout from "../components/Layout"
 import { Button } from "../components/Button"
-import { redirectToCheckout, courseBookingSlug } from "../utilities"
+import { Toast } from "../components/Form"
+import {
+  courseBookingSlug,
+  coursePaymentFailed,
+  coursePaymentSuccess,
+} from "../utilities"
+
+const stripePromise = loadStripe("pk_live_J12GUSpNDvSBoKImEzslnzjC00ppZQgzEW")
 
 const paymentFailed = ({ data, location }) => {
   const booking = data.strapiCourseBookings
   const courseTopic = data.allStrapiCourseTopics.edges.filter(
     topic => topic.node.strapiId === booking.course.course_topic
   )[0].node.name
+
+  const [toast, setToast] = useState({
+    message: "",
+    visible: false,
+    type: false,
+  })
+
+  const redirectToCheckout = async (stripeProduct, bookingId, location) => {
+    const stripe = await stripePromise
+    await stripe
+      .redirectToCheckout({
+        lineItems: [{ price: stripeProduct, quantity: 1 }],
+        mode: "payment",
+        successUrl: location.origin + coursePaymentSuccess(bookingId),
+        cancelUrl: location.origin + coursePaymentFailed(bookingId),
+      })
+      .catch(() => {
+        setToast({
+          type: false,
+          visible: true,
+          message: "Something went wrong",
+        })
+      })
+  }
+
   return (
     <Layout footer={false}>
       <Helmet>
@@ -54,6 +87,17 @@ const paymentFailed = ({ data, location }) => {
           Back to course
         </Button>
       </header>
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        visible={toast.visible}
+        onClick={() =>
+          setToast(toast => ({
+            ...toast,
+            visible: false,
+          }))
+        }
+      />
     </Layout>
   )
 }
