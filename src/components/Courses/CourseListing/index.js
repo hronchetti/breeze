@@ -61,31 +61,30 @@ export const CourseListing = ({ course, prepareModal, bookings }) => (
         <span className="bookingsHeading">Course bookings</span>
         {bookings.length > 0 ? (
           bookings
-            .filter(booking => Moment(booking.start_date).isAfter())
-            .map(booking => (
-              <section className="booking" key={booking.id}>
+            .filter(booking => Moment(booking.node.start_date).isAfter())
+            .map(({ node }) => (
+              <section className="booking" key={node.id}>
                 <div className="information">
                   <h4>
                     <span className="dates">
-                      {createBookingDates(booking.teaching_period)}
+                      {createBookingDates(node.teaching_period)}
                       {` (${convertToAmPmTime(
-                        booking.start_time
-                      )} - ${convertToAmPmTime(booking.end_time)})`}
+                        node.start_time
+                      )} - ${convertToAmPmTime(node.end_time)})`}
                     </span>
-                    {booking.discount_percentage &&
-                    booking.discount_percentage > 0 ? (
-                      <Tag discount text={booking.discount_percentage} />
+                    {node.discount_percentage &&
+                    node.discount_percentage > 0 ? (
+                      <Tag discount text={node.discount_percentage} />
                     ) : null}
                   </h4>
                   <p>
                     <CoursePrices
-                      price={booking.booking_price}
+                      price={node.booking_price}
                       discount={
-                        booking.discount_percentage &&
-                        booking.discount_percentage
+                        node.discount_percentage && node.discount_percentage
                       }
                     />{" "}
-                    &bull; {booking.address_full}
+                    &bull; {node.address_full}
                   </p>
                 </div>
                 <div className="actions">
@@ -93,7 +92,7 @@ export const CourseListing = ({ course, prepareModal, bookings }) => (
                     to={courseBookingSlug(
                       course.course_topic.name,
                       course.name,
-                      booking.strapiId
+                      node.strapiId
                     )}
                     styles="buttonSecondary"
                   >
@@ -102,7 +101,7 @@ export const CourseListing = ({ course, prepareModal, bookings }) => (
                   <Button
                     styles="buttonPrimary iconLeft iconArrow"
                     onClick={() =>
-                      prepareModal(booking.stripe_product, booking.strapiId)
+                      prepareModal(node.stripe_product, node.strapiId)
                     }
                   >
                     Book now

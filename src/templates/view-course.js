@@ -8,7 +8,7 @@ import { clearAllBodyScrollLocks } from "body-scroll-lock"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
-import { createBookingDates, defaultSEO } from "../utilities"
+import { createBookingDates, defaultSEO, convertToAmPmTime } from "../utilities"
 import { Button } from "../components/Button"
 import { HeaderViewCourse } from "../components/Layout/Headers"
 import { HealthcareProfessionalsOnly } from "../components/Modal"
@@ -120,11 +120,14 @@ const CourseView = ({ data, location }) => {
                 {courseBookings
                   .filter(booking => Moment(booking.node.start_date).isAfter())
                   .map(({ node }) => (
-                    <section className="booking" key={node.id}>
+                    <section className="booking" key={node.strapiId}>
                       <div className="information">
                         <h4>
                           <span className="dates">
                             {createBookingDates(node.teaching_period)}
+                            {` (${convertToAmPmTime(
+                              node.start_time
+                            )} - ${convertToAmPmTime(node.end_time)})`}
                           </span>
                           {node.discount_percentage &&
                           node.discount_percentage > 0 ? (
@@ -187,6 +190,8 @@ const CourseView = ({ data, location }) => {
                     primaryBooking.strapiId
                   )
                 }
+                startTime={primaryBooking.start_time}
+                endTime={primaryBooking.end_time}
               />
             ) : onlineCourse ? (
               <OnlineBooking
@@ -306,13 +311,17 @@ export const pageQuery = graphql`
     ) {
       edges {
         node {
+          id
           strapiId
           address_full
           address_short
           booking_price
           stripe_product
+          start_time
+          end_time
           discount_percentage
           teaching_period {
+            start
             end
             id
           }

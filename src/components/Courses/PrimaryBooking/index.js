@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 
 import { Button } from "../../Button"
-import { createBookingDates } from "../../../utilities"
+import { createBookingDates, convertToAmPmTime } from "../../../utilities"
 import { CoursePrices } from ".."
 
 export const PrimaryBooking = ({
@@ -12,6 +12,8 @@ export const PrimaryBooking = ({
   price,
   shortAddress,
   teachingPeriods,
+  startTime,
+  endTime,
 }) => {
   return (
     <section className="sidebarItem">
@@ -20,6 +22,7 @@ export const PrimaryBooking = ({
       </h3>
       <span className="dates">
         {teachingPeriods && createBookingDates(teachingPeriods)}
+        {` (${convertToAmPmTime(startTime)} - ${convertToAmPmTime(endTime)})`}
       </span>
       <p className="address">{fullAddress}</p>
       <p className="shortAddress">{shortAddress}</p>
@@ -41,4 +44,6 @@ PrimaryBooking.propTypes = {
   price: PropTypes.string.isRequired,
   shortAddress: PropTypes.string.isRequired,
   teachingPeriods: PropTypes.array.isRequired,
+  startTime: PropTypes.string.isRequired,
+  endTime: PropTypes.string.isRequired,
 }
