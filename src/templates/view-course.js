@@ -61,7 +61,6 @@ const CourseView = ({ data, location }) => {
         title={courseSEO.title}
         description={courseSEO.description}
         canonicalHref={courseSEO.canonical_href}
-        ogImage={courseSEO.image && courseSEO.image.absolutePath}
         ogType={courseSEO.og_type}
         ogUrl={courseSEO.og_url}
         schema={courseSEO.schema_json_string}
@@ -298,9 +297,6 @@ export const pageQuery = graphql`
         og_type
         og_url
         title
-        image {
-          absolutePath
-        }
         schema_json_string
       }
     }

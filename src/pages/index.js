@@ -13,13 +13,11 @@ import SignOffStillLooking from "../components/SignOffStillLooking"
 import { HeaderHomepage } from "../components/Layout/Headers"
 import { ImageCard } from "../components/Cards"
 import { Review } from "../components/Courses"
-import { courseTopicSlug, defaultSEO } from "../utilities/createSlug"
+import { courseTopicSlug } from "../utilities/createSlug"
 
-const LandingPage = ({ data, location }) => {
+const LandingPage = ({ data }) => {
   const homepage = data.strapiHomepage
   const homepageSEO = homepage.seo
-    ? homepage.seo
-    : defaultSEO(homepage.title, homepage.introduction, location.href)
   const courseGroups = data.allStrapiCourseTopics.edges
   const courseReviews = data.allStrapiCourses.edges
   let ReviewsSwiper
@@ -45,7 +43,6 @@ const LandingPage = ({ data, location }) => {
         title={homepageSEO.title}
         description={homepageSEO.description}
         canonicalHref={homepageSEO.canonical_href}
-        ogImage={homepageSEO.image.absolutePath}
         ogType={homepageSEO.og_type}
         ogUrl={homepageSEO.og_url}
       />
@@ -81,7 +78,7 @@ const LandingPage = ({ data, location }) => {
           </div>
         </section>
         <section className="backgroundBlueDark">
-          <HowItWorks steps={homepage.how_it_works} />
+          <HowItWorks steps={homepage.how_it_works} page="homepage" />
         </section>
         <section className="backgroundGreyLightSuper">
           <section className="wrapper padded" id="courses">
@@ -117,7 +114,6 @@ const LandingPage = ({ data, location }) => {
 
 LandingPage.propTypes = {
   data: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
 }
 
 export default LandingPage
@@ -129,14 +125,6 @@ export const pageQuery = graphql`
         id
         step_description
         step_heading
-        icon {
-          childImageSharp {
-            fluid(maxWidth: 1600) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-        icon_description
       }
       introduction
       title
@@ -151,9 +139,6 @@ export const pageQuery = graphql`
         og_type
         og_url
         title
-        image {
-          absolutePath
-        }
       }
     }
     allStrapiCourseTopics(sort: { fields: name, order: ASC }) {

@@ -26,7 +26,7 @@ export const CourseListing = ({ course, prepareModal, bookings }) => (
           <b>Skill level:</b> {course.skill_level}
         </span>
         <span className="fact">
-          <b>Teaching time:</b> {course.teaching_time}
+          <b>CPD hours:</b> {course.teaching_time}
         </span>
       </section>
       <p className="summary">{course.summary}</p>

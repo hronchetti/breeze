@@ -33,7 +33,6 @@ const BlogArticle = ({ data, location }) => {
         title={articleSEO.title}
         description={articleSEO.description}
         canonicalHref={articleSEO.canonical_href}
-        ogImage={articleSEO.image.absolutePath}
         ogType={articleSEO.og_type}
         ogUrl={articleSEO.og_url}
         schema={articleSEO.schema_json_string}
@@ -155,9 +154,6 @@ export const pageQuery = graphql`
         og_type
         og_url
         title
-        image {
-          absolutePath
-        }
         schema_json_string
       }
     }

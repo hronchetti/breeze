@@ -31,7 +31,7 @@ export const HeaderViewCourse = ({
                   <b>Skill level:</b> {skillLevel}
                 </span>
                 <span className="fact">
-                  <b>Teaching time:</b> {teachingTime}
+                  <b>CPD hours:</b> {teachingTime}
                 </span>
               </section>
               {topic === "Acupuncture & dry needling" ? (

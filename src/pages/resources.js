@@ -8,21 +8,17 @@ import Layout from "../components/Layout"
 import Resource from "../components/Resource"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
-import { defaultSEO } from "../utilities"
 
-const Resources = ({ data, location }) => {
+const Resources = ({ data }) => {
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
   const resources = data.allStrapiResources.edges
   const resourcesSeo = data.strapiResourcesPage.seo
-    ? data.strapiResourcesPage.seo
-    : defaultSEO("Resources", "", location.href)
   return (
     <Layout>
       <SEO
         title={resourcesSeo.title}
         description={resourcesSeo.description}
         canonicalHref={resourcesSeo.canonical_href}
-        ogImage={resourcesSeo.image.absolutePath}
         ogType={resourcesSeo.og_type}
         ogUrl={resourcesSeo.og_url}
       />
@@ -93,7 +89,6 @@ const Resources = ({ data, location }) => {
 
 Resources.propTypes = {
   data: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
 }
 
 export default Resources
@@ -122,9 +117,6 @@ export const pageQuery = graphql`
         og_type
         og_url
         title
-        image {
-          absolutePath
-        }
       }
     }
   }

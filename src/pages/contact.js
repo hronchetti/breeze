@@ -9,7 +9,6 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import { Header } from "../components/Layout/Headers"
 import SignOffMailingList from "../components/SignOffMailingList"
-import { defaultSEO } from "../utilities"
 import { TextCard } from "../components/Cards"
 
 import PhoneIcon from "../images/icons/big/phone.svg"
@@ -19,18 +18,15 @@ import InstagramLogo from "../images/icons/instagram--blue.svg"
 import LinkedInLogo from "../images/icons/linkedIn--blue.svg"
 import TwitterLogo from "../images/icons/twitter--blue.svg"
 
-const Contact = ({ data, location }) => {
+const Contact = ({ data }) => {
   const contactUs = data.strapiContactUs
   const contactUsSEO = contactUs.seo
-    ? contactUs.seo
-    : defaultSEO(contactUs.title, "", location.href)
   return (
     <Layout>
       <SEO
         title={contactUsSEO.title}
         description={contactUsSEO.description}
         canonicalHref={contactUsSEO.canonical_href}
-        ogImage={contactUsSEO.image.absolutePath}
         ogType={contactUsSEO.og_type}
         ogUrl={contactUsSEO.og_url}
       />
@@ -150,7 +146,6 @@ const Contact = ({ data, location }) => {
 
 Contact.propTypes = {
   data: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
 }
 
 export default Contact
@@ -178,9 +173,6 @@ export const pageQuery = graphql`
         og_type
         og_url
         title
-        image {
-          absolutePath
-        }
       }
     }
   }

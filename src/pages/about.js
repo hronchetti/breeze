@@ -10,13 +10,10 @@ import { Header } from "../components/Layout/Headers"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffMailingList from "../components/SignOffMailingList"
-import { defaultSEO } from "../utilities"
 
-const About = ({ data, location }) => {
+const About = ({ data }) => {
   const about = data.strapiAbout
   const aboutSEO = about.seo
-    ? about.seo
-    : defaultSEO(about.title, about.header_content, location.href)
 
   return (
     <Layout>
@@ -24,7 +21,6 @@ const About = ({ data, location }) => {
         title={aboutSEO.title}
         description={aboutSEO.description}
         canonicalHref={aboutSEO.canonical_href}
-        ogImage={aboutSEO.image.absolutePath}
         ogType={aboutSEO.og_type}
         ogUrl={aboutSEO.og_url}
       />
@@ -71,7 +67,6 @@ const About = ({ data, location }) => {
 
 About.propTypes = {
   data: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired,
 }
 
 export default About
@@ -104,9 +99,6 @@ export const pageQuery = graphql`
         og_type
         og_url
         title
-        image {
-          absolutePath
-        }
       }
     }
   }

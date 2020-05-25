@@ -40,7 +40,6 @@ const CourseList = ({ data, location }) => {
         title={courseTopicSEO.title}
         description={courseTopicSEO.description}
         canonicalHref={courseTopicSEO.canonical_href}
-        ogImage={courseTopicSEO.image.absolutePath}
         ogType={courseTopicSEO.og_type}
         ogUrl={courseTopicSEO.og_url}
       />
@@ -191,9 +190,6 @@ export const pageQuery = graphql`
         og_type
         og_url
         title
-        image {
-          absolutePath
-        }
       }
     }
   }

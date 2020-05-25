@@ -55,6 +55,14 @@ export const pageQuery = graphql`
       policy
       title
       updated_at
+      seo {
+        canonical_href
+        description
+        id
+        og_type
+        og_url
+        title
+      }
     }
   }
 `
