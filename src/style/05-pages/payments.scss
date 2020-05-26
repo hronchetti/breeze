@@ -79,7 +79,7 @@
   }
 
   @media (min-width: 1100px) {
-    padding: 2.5rem 0 6rem;
+    padding: 3rem 0 6rem;
     grid-template-columns: 1fr 1fr;
     grid-auto-rows: 1fr;
     grid-template-columns: 1fr 24rem;
@@ -88,6 +88,16 @@
   }
 
   .paymentCard {
+    margin-bottom: 2rem;
+
+    @media (min-width: 600px) {
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: 800px) {
+      margin-bottom: 3.5rem;
+    }
+
     .cardHeading {
       margin-bottom: 0.75rem;
 
@@ -137,14 +147,14 @@
 }
 
 .faqs-header {
-  margin: 2rem 0 1.5rem;
+  margin: 0 0 1.5rem;
 
   @media (min-width: 600px) {
-    margin: 3rem 0 1.5rem;
+    margin: 0 0 1.5rem;
   }
 
   @media (min-width: 800px) {
-    margin: 3.5rem 0 2rem;
+    margin: 0 0 2rem;
   }
 }
 

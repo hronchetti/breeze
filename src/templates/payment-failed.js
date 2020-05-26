@@ -50,6 +50,7 @@ const paymentFailed = ({ data, location }) => {
       <Helmet>
         {/* <meta name="robots" content="none" />
         <meta name="googlebot" content="none" /> */}
+        <title>Payment failed</title>
       </Helmet>
       <header className="wrapper">
         <span
