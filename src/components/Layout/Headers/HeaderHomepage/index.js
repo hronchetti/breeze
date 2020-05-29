@@ -41,8 +41,8 @@ export const HeaderHomepage = ({ title, paragraph, videoLink }) => {
               <img
                 className="illustration"
                 src={HomepageHeaderIllustration}
-                alt="A team of healthcare professionals ready for work"
-                title="A team of healthcare professionals ready for work"
+                alt="Healthcare worker in relaxed clothing at home using a laptop completing online training"
+                title="Healthcare worker in relaxed clothing at home using a laptop completing online training"
               />
             </div>
           </header>

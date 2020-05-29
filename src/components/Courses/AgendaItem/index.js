@@ -2,6 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import ReactMarkdown from "react-markdown"
 
+import { Tag } from "../Tag"
+
 export const AgendaItem = ({ type, title, overview }) => {
   if (type === "Break") {
     return (
@@ -14,7 +16,10 @@ export const AgendaItem = ({ type, title, overview }) => {
       <section className="agendaItem teachingArea">
         <span className="selector"></span>
         <div className="text">
-          <h4>{title}</h4>
+          <h4>
+            {title}
+            {type === "Teaching_Online" && <Tag text="Online" color="yellow" />}
+          </h4>
           <div className="content">
             <ReactMarkdown source={overview} />
           </div>

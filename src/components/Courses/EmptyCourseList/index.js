@@ -55,9 +55,8 @@ export const EmptyCourseList = ({ courseTopic }) => {
               yet, but we do offer them!
             </p>
             <p>
-              To learn more about the courses not on our website join our
-              mailing list or contact us directly by emailing
-              enquiries@breeze.academy
+              To learn more about courses not on our website join our mailing
+              list or contact us directly, we&apos;d love to hear from you
             </p>
             <Input name="email" type="email" placeholder="Your email" />
             <button

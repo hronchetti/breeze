@@ -24,8 +24,8 @@ const paymentSuccess = ({ data }) => {
   return (
     <Layout footer={false}>
       <Helmet>
-        {/*         <meta name="robots" content="none" />
-        <meta name="googlebot" content="none" /> */}
+        <meta name="robots" content="none" />
+        <meta name="googlebot" content="none" />
         <title>Payment Succeeded</title>
       </Helmet>
       <header className="wrapper">

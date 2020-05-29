@@ -48,8 +48,8 @@ const paymentFailed = ({ data, location }) => {
   return (
     <Layout footer={false}>
       <Helmet>
-        {/* <meta name="robots" content="none" />
-        <meta name="googlebot" content="none" /> */}
+        <meta name="robots" content="none" />
+        <meta name="googlebot" content="none" />
         <title>Payment failed</title>
       </Helmet>
       <header className="wrapper">

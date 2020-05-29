@@ -43,6 +43,21 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-htaccess`,
+      options: {
+        redirect: [
+          `RewriteRule ^(.*[^/])$ /$1/ [L,R] # <- for test, for prod use [L,R=301]`,
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-robots-txt`,
+      options: {
+        /* sitemap: 'https://www.example.com/sitemap.xml', */
+        policy: [{ userAgent: `*`, allow: `/` }],
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Breeze Academy`,

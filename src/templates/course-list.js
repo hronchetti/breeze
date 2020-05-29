@@ -65,10 +65,10 @@ const CourseList = ({ data }) => {
                     <FilterOption
                       key={course.node.id}
                       value={course.node.name}
-                      closeMobileWrapper={() =>
-                        setTimeout(toggleSidebarVisibilityMobile, 500)
-                      }
                       scroll
+                      closeMobileWrapper={() =>
+                        setTimeout(setSidebarVisibilityMobile, 500)
+                      }
                     />
                   ))}
                 </section>
