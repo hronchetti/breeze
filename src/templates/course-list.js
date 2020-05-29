@@ -67,7 +67,7 @@ const CourseList = ({ data }) => {
                       value={course.node.name}
                       scroll
                       closeMobileWrapper={() =>
-                        setTimeout(setSidebarVisibilityMobile, 500)
+                        setTimeout(setSidebarVisibilityMobile(false), 500)
                       }
                     />
                   ))}

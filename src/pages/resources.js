@@ -37,7 +37,7 @@ const Resources = ({ data }) => {
                     value={topic.node.group_name}
                     scroll
                     closeMobileWrapper={() =>
-                      setTimeout(setSidebarVisibilityMobile, 500)
+                      setTimeout(setSidebarVisibilityMobile(false), 500)
                     }
                   />
                 ))}
