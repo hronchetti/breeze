@@ -13,8 +13,6 @@ import {
   coursePaymentSuccess,
 } from "../utilities"
 
-const stripePromise = loadStripe(process.env.GATSBY_STRIPE)
-
 const paymentFailed = ({ data, location }) => {
   const booking = data.strapiCourseBookings
   const courseTopic = data.allStrapiCourseTopics.edges.filter(
@@ -28,7 +26,7 @@ const paymentFailed = ({ data, location }) => {
   })
 
   const redirectToCheckout = async (stripeProduct, bookingId, location) => {
-    const stripe = await stripePromise
+    const stripe = await loadStripe(process.env.GATSBY_STRIPE)
     await stripe
       .redirectToCheckout({
         lineItems: [{ price: stripeProduct, quantity: 1 }],

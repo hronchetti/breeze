@@ -17,7 +17,6 @@
     "gatsby-plugin-manifest": "^2.2.39",
     "gatsby-plugin-offline": "^3.0.32",
     "gatsby-plugin-react-helmet": "^3.1.21",
-    "gatsby-plugin-remove-trailing-slashes": "^2.3.4",
     "gatsby-plugin-robots-txt": "^1.5.1",
     "gatsby-plugin-sass": "^2.1.29",
     "gatsby-plugin-sharp": "^2.4.3",
@@ -37,6 +36,7 @@
     "react-scroll": "^1.7.16",
     "react-select": "^3.1.0",
     "react-share": "^4.1.0",
+    "react-stripe-script-loader": "^1.1.1",
     "swiper": "^5.3.8",
     "yup": "^0.28.3"
   },

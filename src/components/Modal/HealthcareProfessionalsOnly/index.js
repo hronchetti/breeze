@@ -4,12 +4,11 @@ import ReactMarkdown from "react-markdown"
 import { StaticQuery, graphql } from "gatsby"
 import { disableBodyScroll } from "body-scroll-lock"
 import { loadStripe } from "@stripe/stripe-js"
+import StripeScriptLoader from "react-stripe-script-loader"
 
 import { coursePaymentSuccess, coursePaymentFailed } from "../../../utilities"
 import { Toast } from "../../Form"
 import { Button, CloseButton } from "../../Button"
-
-const stripePromise = loadStripe(process.env.GATSBY_STRIPE)
 
 export const HealthcareProfessionalsOnly = ({
   closeFn,
@@ -30,7 +29,7 @@ export const HealthcareProfessionalsOnly = ({
   }, [])
 
   const redirectToCheckout = async (stripeProduct, bookingId, location) => {
-    const stripe = await stripePromise
+    const stripe = await loadStripe(process.env.GATSBY_STRIPE)
     await stripe
       .redirectToCheckout({
         lineItems: [{ price: stripeProduct, quantity: 1 }],

@@ -18,7 +18,6 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-eslint`,
-    /*     `gatsby-plugin-remove-trailing-slashes`, */
     {
       resolve: `gatsby-source-strapi`,
       options: {
@@ -53,7 +52,6 @@ module.exports = {
     {
       resolve: `gatsby-plugin-robots-txt`,
       options: {
-        host: "https://breeze.academy/",
         policy: [{ userAgent: `*`, allow: `/` }],
       },
     },
