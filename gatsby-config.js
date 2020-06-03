@@ -3,6 +3,7 @@ module.exports = {
     title: `Breeze`,
     description: `Online courses and face-to-face training for Healthcare professionals, view our courses now to see how you can maximise your career potential today.`,
     author: `Dr. Carl Clarkson`,
+    siteUrl: `https://breeze.academy/`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -17,7 +18,7 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-eslint`,
-    `gatsby-plugin-remove-trailing-slashes`,
+    /*     `gatsby-plugin-remove-trailing-slashes`, */
     {
       resolve: `gatsby-source-strapi`,
       options: {
@@ -46,15 +47,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-htaccess`,
       options: {
-        redirect: [
-          `RewriteRule ^(.*[^/])$ /$1/ [L,R] # <- for test, for prod use [L,R=301]`,
-        ],
+        redirect: [`RewriteRule ^(.*[^/])$ /$1/ [L,R=301]`],
       },
     },
     {
       resolve: `gatsby-plugin-robots-txt`,
       options: {
-        /* sitemap: 'https://www.example.com/sitemap.xml', */
+        host: "https://breeze.academy/",
         policy: [{ userAgent: `*`, allow: `/` }],
       },
     },
