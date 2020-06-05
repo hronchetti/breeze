@@ -19,6 +19,12 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-plugin-eslint`,
     {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        exclude: [`/payment-failed/**`, `/payment-succeeded/**`],
+      },
+    },
+    {
       resolve: `gatsby-source-strapi`,
       options: {
         apiURL: `https://breeze-academy.herokuapp.com`,
