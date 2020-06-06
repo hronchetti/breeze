@@ -6,8 +6,8 @@ export const wrapPageElement = (
   { element } // eslint-disable-line
 ) => (
   <React.Fragment>
-    {element}
     <Loader />
+    {element}
     <FacebookCustomerChat />
   </React.Fragment>
 )
