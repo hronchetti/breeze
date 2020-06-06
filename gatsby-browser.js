@@ -1,8 +1,20 @@
 import React from "react"
-import Loader from "./src/components/Layout"
+import FacebookCustomerChat from "./src/components/FacebookCustomerChat"
+import { Loader } from "./src/components/Loader"
 
 export const wrapPageElement = (
-  { element, props } // eslint-disable-line
-) => <Loader {...props}>{element}</Loader>
+  { element } // eslint-disable-line
+) => (
+  <React.Fragment>
+    {element}
+    <Loader />
+    <FacebookCustomerChat />
+  </React.Fragment>
+)
 
-export const onClientEntry = () => (window.onload = () => {})
+export const onClientEntry = () => {
+  window.onload = () => {
+    document.getElementById("loader") &&
+      document.getElementById("loader").classList.add("loaded")
+  }
+}
