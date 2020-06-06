@@ -31,7 +31,7 @@ const Layout = ({ children, footer }) => (
       <>
         <Nav courses={data.allStrapiCourseTopics.edges} />
         {children}
-        <FacebookCustomerChat />
+        {/* <FacebookCustomerChat/> */}
         {footer && (
           <Footer
             courses={data.allStrapiCourseTopics.edges}
