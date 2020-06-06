@@ -14,7 +14,7 @@
     width: 0;
     border-top-left-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem;
-    background-color: $blue;
+    background-color: transparent;
     transition: width 100ms ease-in;
   }
 
@@ -29,6 +29,7 @@
   &.applied {
     .selector {
       width: 0.25rem;
+      background-color: $blue;
     }
 
     .text {

@@ -93,12 +93,7 @@ const LandingPage = ({ data }) => {
                   to={courseTopicSlug(node.name)}
                 >
                   <h3>{node.name}</h3>
-                  <div className="courseStyleWrapper">
-                    {/* {node.name === "Acupuncture" && (
-                      <Tag text="face-to-face" color="yellow" />
-                    )}
-                    <Tag text="Online" color="yellow" /> */}
-                  </div>
+                  <div className="courseStyleWrapper"></div>
                   <p>{node.description}</p>
                   <span className="linkArrow">Get started</span>
                 </ImageCard>
