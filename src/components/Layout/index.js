@@ -5,7 +5,6 @@ import { StaticQuery, graphql } from "gatsby"
 import Footer from "./Footer"
 import Nav from "./Nav"
 import "../../style/main.scss"
-import FacebookCustomerChat from "../FacebookCustomerChat"
 
 const Layout = ({ children, footer }) => (
   <StaticQuery
@@ -31,7 +30,6 @@ const Layout = ({ children, footer }) => (
       <>
         <Nav courses={data.allStrapiCourseTopics.edges} />
         {children}
-        {/* <FacebookCustomerChat/> */}
         {footer && (
           <Footer
             courses={data.allStrapiCourseTopics.edges}

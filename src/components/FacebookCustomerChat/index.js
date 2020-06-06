@@ -8,7 +8,7 @@ const FacebookCustomerChat = () => {
         version: "v7.0",
       })
     }
-    ;(function(d, s, id) {
+    ;((d, s, id) => {
       var js,
         fjs = d.getElementsByTagName(s)[0]
       if (d.getElementById(id)) return
