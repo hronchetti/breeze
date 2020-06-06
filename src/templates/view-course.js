@@ -14,11 +14,12 @@ import { HeaderViewCourse } from "../components/Layout/Headers"
 import { HealthcareProfessionalsOnly } from "../components/Modal"
 import {
   AgendaItem,
+  CoursePrices,
   OnlineBooking,
   PrimaryBooking,
   RequestNearYou,
   Review,
-  CoursePrices,
+  ScrollToBookings,
   Tag,
 } from "../components/Courses"
 
@@ -163,7 +164,7 @@ const CourseView = ({ data, location }) => {
                   ))}
               </div>
             ) : (
-              <div className="bookings">
+              <div className="bookings" id="bookings">
                 <section className="heading">
                   <h2>Course bookings</h2>
                 </section>
@@ -205,7 +206,7 @@ const CourseView = ({ data, location }) => {
                 link={course.thinkific_training.course_link}
               />
             ) : courseBookings && courseBookings.length > 0 ? (
-              ""
+              <ScrollToBookings />
             ) : (
               <RequestNearYou />
             )}
