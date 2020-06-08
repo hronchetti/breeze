@@ -119,7 +119,7 @@ export const CourseListing = ({ course, prepareModal, bookings }) => (
             </span>
           </Link>
         )}
-        <Link className="bookingsRequestCourse" to="/request-a-course">
+        <Link className="bookingsRequestCourse" to="/request-a-course/">
           Request this course near you
         </Link>
       </div>

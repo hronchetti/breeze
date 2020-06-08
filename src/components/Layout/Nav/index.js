@@ -39,16 +39,16 @@ const Nav = ({ courses }) => {
         </button>
         <ul className={`links${mobileNav ? " active" : ""}`}>
           <li className="link">
-            <Link to="/about">About</Link>
+            <Link to="/about/">About</Link>
           </li>
           <li className="link">
-            <Link to="/resources">Resources</Link>
+            <Link to="/resources/">Resources</Link>
           </li>
           <li className="link">
-            <Link to="/blog">Blog</Link>
+            <Link to="/blog/">Blog</Link>
           </li>
           <li className="link">
-            <Link to="/contact">Contact</Link>
+            <Link to="/contact/">Contact</Link>
           </li>
           <li>
             <Button

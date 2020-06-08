@@ -114,7 +114,7 @@ const CourseView = ({ data, location }) => {
               <div className="bookings">
                 <section className="heading">
                   <h2>Course bookings</h2>
-                  <Link to="/request-a-course">
+                  <Link to="/request-a-course/">
                     Request this course near you
                   </Link>
                 </section>
@@ -168,7 +168,7 @@ const CourseView = ({ data, location }) => {
                 <section className="heading">
                   <h2>Course bookings</h2>
                 </section>
-                <Link className="booking noBookings" to="/request-a-course">
+                <Link className="booking noBookings" to="/request-a-course/">
                   <span>
                     No bookings scheduled,{" "}
                     <span>request this course to be held near you</span>

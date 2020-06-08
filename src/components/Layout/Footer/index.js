@@ -70,16 +70,16 @@ const Footer = ({ courses, socialLinks }) => {
               <Link to="/">Homepage</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/about/">About</Link>
             </li>
             <li>
-              <Link to="/blog">Blog</Link>
+              <Link to="/blog/">Blog</Link>
             </li>
             <li>
-              <Link to="/contact">Contact</Link>
+              <Link to="/contact/">Contact</Link>
             </li>
             <li>
-              <Link to="/privacy-policy">Privacy policy</Link>
+              <Link to="/privacy-policy/">Privacy policy</Link>
             </li>
           </ul>
           <ul>
@@ -90,10 +90,10 @@ const Footer = ({ courses, socialLinks }) => {
               </li>
             ))}
             <li>
-              <Link to="/request-a-course">Request a course</Link>
+              <Link to="/request-a-course/">Request a course</Link>
             </li>
             <li>
-              <Link to="/resources">Resources</Link>
+              <Link to="/resources/">Resources</Link>
             </li>
           </ul>
         </div>
