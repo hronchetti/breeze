@@ -92,7 +92,9 @@ const CourseList = ({ data }) => {
                   key={course.node.id}
                   course={course.node}
                   bookings={allCourseBookings.filter(
-                    booking => booking.node.course.id === course.node.strapiId
+                    booking =>
+                      booking.node.course &&
+                      booking.node.course.id === course.node.strapiId
                   )}
                   prepareModal={prepareModal}
                 />
