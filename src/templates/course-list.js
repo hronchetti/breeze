@@ -166,6 +166,8 @@ export const pageQuery = graphql`
           address_full
           start_date
           booking_price
+          booking_price_currency
+          booking_price_value
           stripe_product
           discount_percentage
           start_time

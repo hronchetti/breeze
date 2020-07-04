@@ -1,28 +1,26 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-export const CoursePrices = ({ price, discount }) => {
+export const CoursePrices = ({ currency, price, discount }) => {
+  if (Number.isInteger(price)) {
+    price = price.toFixed(2)
+  }
+
   if (price && discount && discount > 0) {
-    const originalPriceString = price
-    const currency = originalPriceString.slice(0, 1)
-    const originalPrice = Number(
-      originalPriceString.slice(1, originalPriceString.length)
-    )
     const discountAsPercentage = discount / 100
 
-    const discountedNumber =
-      originalPrice - originalPrice * discountAsPercentage
+    const discountedNumber = price - price * discountAsPercentage
     const discountedPrice = (Math.round(discountedNumber * 100) / 100).toFixed(
       2
     )
     return (
       <>
-        <span className="price discounted">{originalPriceString}</span>{" "}
+        <span className="price discounted">{currency + price}</span>{" "}
         <span className="discount">{currency + discountedPrice}</span>
       </>
     )
   } else {
-    return <span>{price}</span>
+    return <span>{currency + price}</span>
   }
 }
 
@@ -31,6 +29,7 @@ CoursePrices.defaultProps = {
 }
 
 CoursePrices.propTypes = {
-  price: PropTypes.string.isRequired,
+  currency: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   discount: PropTypes.number,
 }

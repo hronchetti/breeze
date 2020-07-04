@@ -74,12 +74,16 @@ export const CourseListing = ({ course, prepareModal, bookings }) => (
                     </span>
                     {node.discount_percentage &&
                     node.discount_percentage > 0 ? (
-                      <Tag discount text={node.discount_percentage} />
+                      <Tag
+                        discount
+                        text={node.discount_percentage.toString()}
+                      />
                     ) : null}
                   </h4>
                   <p>
                     <CoursePrices
-                      price={node.booking_price}
+                      price={node.booking_price_value}
+                      currency={node.booking_price_currency}
                       discount={
                         node.discount_percentage && node.discount_percentage
                       }
