@@ -9,7 +9,8 @@ export const PrimaryBooking = ({
   discount,
   fullAddress,
   prepareModal,
-  price,
+  priceValue,
+  priceCurrency,
   shortAddress,
   teachingPeriods,
   startTime,
@@ -18,7 +19,11 @@ export const PrimaryBooking = ({
   return (
     <section className="sidebarItem">
       <h3 className="price">
-        <CoursePrices price={price} discount={discount} />
+        <CoursePrices
+          price={priceValue}
+          currency={priceCurrency}
+          discount={discount}
+        />
       </h3>
       <span className="dates">
         {teachingPeriods && createBookingDates(teachingPeriods)}
@@ -41,7 +46,8 @@ PrimaryBooking.propTypes = {
   discount: PropTypes.number,
   fullAddress: PropTypes.string.isRequired,
   prepareModal: PropTypes.func.isRequired,
-  price: PropTypes.string.isRequired,
+  priceValue: PropTypes.number.isRequired,
+  priceCurrency: PropTypes.number.isRequired,
   shortAddress: PropTypes.string.isRequired,
   teachingPeriods: PropTypes.array.isRequired,
   startTime: PropTypes.string.isRequired,

@@ -141,7 +141,8 @@ const CourseView = ({ data, location }) => {
                         </h4>
                         <p>
                           <CoursePrices
-                            price={node.booking_price}
+                            price={node.booking_price_value}
+                            currency={node.booking_price_currency}
                             discount={
                               node.discount_percentage &&
                               node.discount_percentage
@@ -180,7 +181,8 @@ const CourseView = ({ data, location }) => {
           <aside className="courseSidebar">
             {primaryBooking ? (
               <PrimaryBooking
-                price={primaryBooking.booking_price}
+                priceValue={primaryBooking.booking_price_value}
+                priceCurrency={primaryBooking.booking_price_currency}
                 discount={primaryBooking.discount_percentage}
                 teachingPeriods={primaryBooking.teaching_period}
                 fullAddress={primaryBooking.address_full}
@@ -316,7 +318,8 @@ export const pageQuery = graphql`
           strapiId
           address_full
           address_short
-          booking_price
+          booking_price_currency
+          booking_price_value
           stripe_product
           start_time
           end_time
