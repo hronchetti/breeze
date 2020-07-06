@@ -2,13 +2,13 @@ import React from "react"
 import PropTypes from "prop-types"
 
 import { Button } from "../../Button"
-import { CoursePrices } from "../"
+import { CoursePricesUKOnly } from "../"
 
 export const OnlineBooking = ({ price, discount, link }) => {
   return (
     <section className="sidebarItem">
       <h3 className="price">
-        <CoursePrices price={price} discount={discount} />
+        <CoursePricesUKOnly price={price} discount={discount} />
       </h3>
       <p className="sideNote">
         Access this course through Thinkific, our online training partner
