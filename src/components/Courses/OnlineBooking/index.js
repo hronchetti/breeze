@@ -2,13 +2,26 @@ import React from "react"
 import PropTypes from "prop-types"
 
 import { Button } from "../../Button"
-import { CoursePricesUKOnly } from "../"
+import { CoursePrices } from "../"
 
-export const OnlineBooking = ({ price, discount, link }) => {
+export const OnlineBooking = ({
+  priceValue,
+  priceCurrency,
+  discount,
+  link,
+}) => {
   return (
     <section className="sidebarItem">
       <h3 className="price">
-        <CoursePricesUKOnly price={price} discount={discount} />
+        {priceValue || priceValue !== 0 ? (
+          <CoursePrices
+            price={priceValue}
+            currency={priceCurrency}
+            discount={discount}
+          />
+        ) : (
+          "Free"
+        )}
       </h3>
       <p className="sideNote">
         Access this course through Thinkific, our online training partner
@@ -21,7 +34,8 @@ export const OnlineBooking = ({ price, discount, link }) => {
 }
 
 OnlineBooking.propTypes = {
-  price: PropTypes.string.isRequired,
+  priceCurrency: PropTypes.string.isRequired,
+  priceValue: PropTypes.string.isRequired,
   discount: PropTypes.number.isRequired,
   link: PropTypes.string.isRequired,
 }

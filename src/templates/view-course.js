@@ -198,12 +198,8 @@ const CourseView = ({ data, location }) => {
               />
             ) : onlineCourse ? (
               <OnlineBooking
-                price={
-                  course.thinkific_training.course_price ||
-                  course.thinkific_training.course_price === 0
-                    ? course.thinkific_training.course_price
-                    : "Free"
-                }
+                priceValue={course.thinkific_training.course_price_value}
+                priceCurrency={course.thinkific_training.course_price_currency}
                 discount={course.thinkific_training.discount_percentage}
                 link={course.thinkific_training.course_link}
               />
@@ -280,7 +276,8 @@ export const pageQuery = graphql`
         course_link
         course_duration
         course_name
-        course_price
+        course_price_currency
+        course_price_value
         discount_percentage
       }
       teaching_time
