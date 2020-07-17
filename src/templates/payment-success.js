@@ -29,7 +29,6 @@ const paymentSuccess = ({ data }) => {
         <title>Payment Succeeded</title>
       </Helmet>
       <header className="wrapper">
-        {console.log(thinkificTraining)}
         <span
           className="paymentStatus successful"
           aria-label="Payment response"
