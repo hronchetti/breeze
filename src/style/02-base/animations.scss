@@ -1,11 +1,13 @@
 .animateFadeUp {
+  @include presetAnimation;
   opacity: 0;
-  transform: translateY(20px);
+  transform: translate3d(0, 20px, 0);
+  //transform: translateY(20px);
   transition: opacity 800ms ease, transform 800ms ease;
 
   &.active {
     opacity: 1 !important;
-    transform: none !important;
+    transform: translate3d(0, 0, 0) !important;
   }
 }
 

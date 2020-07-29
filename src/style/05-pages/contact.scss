@@ -55,9 +55,9 @@
   border-radius: 1rem;
 }
 
-@media screen and (min-width: 864px) {
+@media screen and (min-width: 960px) {
   .contactMethods {
-    grid-template-columns: 1fr 23rem 2rem 23rem 1fr;
+    grid-template-columns: 1fr 26rem 2rem 26rem 1fr;
     gap: 0;
 
     .contactMethodWrapper {
@@ -84,9 +84,9 @@
   }
 }
 
-@media screen and (min-width: 1072px) {
+@media screen and (min-width: 1104px) {
   .contactMethods {
-    grid-template-columns: 1fr 28.5rem 2rem 28.5rem 1fr;
+    grid-template-columns: 1fr 29.5rem 2rem 29.5rem 1fr;
 
     .contactMethodWrapper {
       .contactMethod {
@@ -100,10 +100,10 @@
   }
 }
 
-@media screen and (min-width: 1208px) {
+@media screen and (min-width: 1240px) {
   .contactMethods {
     margin: 2.5rem 0 0 0;
-    grid-template-columns: 1fr 32rem 3.5rem 32rem 1fr;
+    grid-template-columns: 1fr 33rem 3.5rem 33rem 1fr;
 
     .contactMethodWrapper {
       .contactMethod {

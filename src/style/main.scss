@@ -1,7 +1,8 @@
 // 01 ABSTRACT - Sass only, no direct CSS output
+@import "01-abstract/buttonStyleReset";
 @import "01-abstract/colour";
 @import "01-abstract/flexbox";
-@import "01-abstract/buttonStyleReset";
+@import "01-abstract/presetAnimation";
 @import "01-abstract/shadows";
 
 // 02 BASE - Site-wide styles on HTML elements
