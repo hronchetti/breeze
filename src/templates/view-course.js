@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import Moment from "moment"
 import PropTypes from "prop-types"
 import ReactMarkdown from "react-markdown"
 import { Link, graphql } from "gatsby"
@@ -8,7 +7,12 @@ import { clearAllBodyScrollLocks } from "body-scroll-lock"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
-import { createBookingDates, defaultSEO, convertToAmPmTime } from "../utilities"
+import {
+  createBookingDates,
+  defaultSEO,
+  convertToAmPmTime,
+  createFutureBookings,
+} from "../utilities"
 import { Button } from "../components/Button"
 import { HeaderViewCourse } from "../components/Layout/Headers"
 import { HealthcareProfessionalsOnly } from "../components/Modal"
@@ -55,6 +59,8 @@ const CourseView = ({ data, location }) => {
     setStripeProduct(stripeProduct)
     setBookingId(bookingId)
   }
+
+  const futureBookings = createFutureBookings(courseBookings)
 
   return (
     <Layout>
@@ -110,7 +116,7 @@ const CourseView = ({ data, location }) => {
             )}
             {onlineCourse ? (
               ""
-            ) : courseBookings && courseBookings.length > 0 ? (
+            ) : courseBookings && futureBookings.length > 0 ? (
               <div className="bookings">
                 <section className="heading">
                   <h2>Course bookings</h2>
@@ -118,51 +124,48 @@ const CourseView = ({ data, location }) => {
                     Request this course near you
                   </Link>
                 </section>
-                {courseBookings
-                  .filter(booking => Moment(booking.node.start_date).isAfter())
-                  .map(({ node }) => (
-                    <section className="booking" key={node.strapiId}>
-                      <div className="information">
-                        <h4>
-                          <span className="dates">
-                            {createBookingDates(node.teaching_period)}
-                            {` (${convertToAmPmTime(
-                              node.start_time
-                            )} - ${convertToAmPmTime(node.end_time)})`}
-                          </span>
-                          {node.discount_percentage &&
-                          node.discount_percentage > 0 ? (
-                            <Tag
-                              discount
-                              color="blue"
-                              text={node.discount_percentage}
-                            />
-                          ) : null}
-                        </h4>
-                        <p>
-                          <CoursePrices
-                            price={node.booking_price_value}
-                            currency={node.booking_price_currency}
-                            discount={
-                              node.discount_percentage &&
-                              node.discount_percentage
-                            }
-                          />{" "}
-                          &bull; {node.address_full}
-                        </p>
-                      </div>
-                      <div className="actions">
-                        <Button
-                          styles="buttonPrimary iconLeft iconArrow"
-                          onClick={() =>
-                            prepareModal(node.stripe_product, node.strapiId)
+                {futureBookings.map(({ node }) => (
+                  <section className="booking" key={node.strapiId}>
+                    <div className="information">
+                      <h4>
+                        <span className="dates">
+                          {createBookingDates(node.teaching_period)}
+                          {` (${convertToAmPmTime(
+                            node.start_time
+                          )} - ${convertToAmPmTime(node.end_time)})`}
+                        </span>
+                        {node.discount_percentage &&
+                        node.discount_percentage > 0 ? (
+                          <Tag
+                            discount
+                            color="blue"
+                            text={node.discount_percentage}
+                          />
+                        ) : null}
+                      </h4>
+                      <p>
+                        <CoursePrices
+                          price={node.booking_price_value}
+                          currency={node.booking_price_currency}
+                          discount={
+                            node.discount_percentage && node.discount_percentage
                           }
-                        >
-                          Book now
-                        </Button>
-                      </div>
-                    </section>
-                  ))}
+                        />{" "}
+                        &bull; {node.address_full}
+                      </p>
+                    </div>
+                    <div className="actions">
+                      <Button
+                        styles="buttonPrimary iconLeft iconArrow"
+                        onClick={() =>
+                          prepareModal(node.stripe_product, node.strapiId)
+                        }
+                      >
+                        Book now
+                      </Button>
+                    </div>
+                  </section>
+                ))}
               </div>
             ) : (
               <div className="bookings" id="bookings">
@@ -172,7 +175,9 @@ const CourseView = ({ data, location }) => {
                 <Link className="booking noBookings" to="/request-a-course/">
                   <span>
                     No bookings scheduled,{" "}
-                    <span>request this course to be held near you</span>
+                    <span className="noBookingsLink">
+                      request this course to be held near you
+                    </span>
                   </span>
                 </Link>
               </div>

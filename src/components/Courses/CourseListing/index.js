@@ -8,6 +8,7 @@ import {
   courseSlug,
   createBookingDates,
   convertToAmPmTime,
+  createFutureBookings,
 } from "../../../utilities"
 import { Button } from "../../Button"
 import { Tag, CoursePrices } from "../"
@@ -15,9 +16,7 @@ import { Tag, CoursePrices } from "../"
 import AcuphysLogo from "../../../images/acuphys-logo.svg"
 
 export const CourseListing = ({ course, prepareModal, bookings }) => {
-  const futureBookings = bookings.filter(booking =>
-    Moment(booking.node.start_date).isAfter()
-  )
+  const futureBookings = createFutureBookings(bookings)
 
   return (
     <section className="courseItem" id={course.name}>
@@ -122,7 +121,8 @@ export const CourseListing = ({ course, prepareModal, bookings }) => {
               to={courseSlug(course.course_topic.name, course.name)}
             >
               <span className="noBookings">
-                No bookings scheduled, <span>view course information</span>
+                No bookings scheduled,{" "}
+                <span className="noBookingsLink">view course information</span>
               </span>
             </Link>
           )}
