@@ -75,8 +75,8 @@ const SignOffStillLooking = () => {
                 <Field type="hidden" name="bot-field" />
                 <Field type="hidden" name="form-name" />
                 <p>
-                  If you’re a healthcare professional and you think there’s a
-                  course missing from our platform we want to hear from you!
+                  If you’re a healthcare professional and you think there’s
+                  something missing from our platform we want to hear from you!
                 </p>
                 <Input name="fullname" label="Your name" type="text" />
                 <Input name="email" label="Your email" type="email" />

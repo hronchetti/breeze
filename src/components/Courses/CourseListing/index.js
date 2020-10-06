@@ -14,55 +14,58 @@ import { Tag, CoursePrices } from "../"
 
 import AcuphysLogo from "../../../images/acuphys-logo.svg"
 
-export const CourseListing = ({ course, prepareModal, bookings }) => (
-  <section className="courseItem" id={course.name}>
-    <div className="details">
-      <h3>
-        {course.name}
-        {course.online_only ? " (Online)" : ""}
-      </h3>
-      <section className="facts">
-        <span className="fact">
-          <b>Skill level:</b> {course.skill_level}
-        </span>
-        <span className="fact">
-          <b>CPD hours:</b> {course.teaching_time}
-        </span>
-      </section>
-      <p className="summary">{course.summary}</p>
-      {course.course_topic.name === "Acupuncture & dry needling" ? (
-        <img
-          className="acuphysLogo"
-          src={AcuphysLogo}
-          alt="Acuphys logo"
-          title="Acuphys logo"
-        />
-      ) : (
-        ""
-      )}
-    </div>
-    {course.online_only ? (
-      <div className="onlineOnly">
-        <Button
-          styles="buttonPrimary iconLeft iconArrow"
-          href={course.thinkific_training.course_link}
-        >
-          Book now on Thinkific
-        </Button>
-        <Button
-          to={courseSlug(course.course_topic.name, course.name)}
-          styles="buttonSecondary"
-        >
-          Find out more
-        </Button>
+export const CourseListing = ({ course, prepareModal, bookings }) => {
+  const futureBookings = bookings.filter(booking =>
+    Moment(booking.node.start_date).isAfter()
+  )
+
+  return (
+    <section className="courseItem" id={course.name}>
+      <div className="details">
+        <h3>
+          {course.name}
+          {course.online_only ? " (Online)" : ""}
+        </h3>
+        <section className="facts">
+          <span className="fact">
+            <b>Skill level:</b> {course.skill_level}
+          </span>
+          <span className="fact">
+            <b>CPD hours:</b> {course.teaching_time}
+          </span>
+        </section>
+        <p className="summary">{course.summary}</p>
+        {course.course_topic.name === "Acupuncture & dry needling" ? (
+          <img
+            className="acuphysLogo"
+            src={AcuphysLogo}
+            alt="Acuphys logo"
+            title="Acuphys logo"
+          />
+        ) : (
+          ""
+        )}
       </div>
-    ) : (
-      <div className="bookings">
-        <span className="bookingsHeading">Course bookings</span>
-        {bookings.length > 0 ? (
-          bookings
-            .filter(booking => Moment(booking.node.start_date).isAfter())
-            .map(({ node }) => (
+      {course.online_only ? (
+        <div className="onlineOnly">
+          <Button
+            styles="buttonPrimary iconLeft iconArrow"
+            href={course.thinkific_training.course_link}
+          >
+            Book now on Thinkific
+          </Button>
+          <Button
+            to={courseSlug(course.course_topic.name, course.name)}
+            styles="buttonSecondary"
+          >
+            Find out more
+          </Button>
+        </div>
+      ) : (
+        <div className="bookings">
+          <span className="bookingsHeading">Course bookings</span>
+          {futureBookings.length > 0 ? (
+            futureBookings.map(({ node }) => (
               <section className="booking" key={node.id}>
                 <div className="information">
                   <h4>
@@ -113,23 +116,24 @@ export const CourseListing = ({ course, prepareModal, bookings }) => (
                 </div>
               </section>
             ))
-        ) : (
-          <Link
-            className="booking"
-            to={courseSlug(course.course_topic.name, course.name)}
-          >
-            <span className="noBookings">
-              No bookings scheduled, <span>view course information</span>
-            </span>
+          ) : (
+            <Link
+              className="booking"
+              to={courseSlug(course.course_topic.name, course.name)}
+            >
+              <span className="noBookings">
+                No bookings scheduled, <span>view course information</span>
+              </span>
+            </Link>
+          )}
+          <Link className="bookingsRequestCourse" to="/request-a-course/">
+            Request this course near you
           </Link>
-        )}
-        <Link className="bookingsRequestCourse" to="/request-a-course/">
-          Request this course near you
-        </Link>
-      </div>
-    )}
-  </section>
-)
+        </div>
+      )}
+    </section>
+  )
+}
 
 CourseListing.defaultProps = {
   bookings: [],
