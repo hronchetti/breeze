@@ -23,6 +23,7 @@ export const CourseListing = ({ course, prepareModal, bookings }) => {
         <h3>
           {course.name}
           {course.online_only ? " (Online)" : ""}
+          {course.featured_course && <Tag text="Featured" color="yellow" />}
         </h3>
         <section className="facts">
           <span className="fact">

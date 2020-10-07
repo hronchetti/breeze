@@ -19,6 +19,7 @@ const LandingPage = ({ data }) => {
   const homepage = data.strapiHomepage
   const homepageSEO = homepage.seo
   const courseGroups = data.allStrapiCourseTopics.edges
+  const courseProfessions = data.allStrapiCourseProfessions.edges
   const courseReviews = data.allStrapiCourses.edges
   let ReviewsSwiper
 
@@ -82,10 +83,31 @@ const LandingPage = ({ data }) => {
         </section>
         <section className="backgroundGreyLightSuper">
           <section className="wrapper padded" id="courses">
-            <h2 className="heading">Our courses</h2>
+            <h2 className="heading">Courses by topic</h2>
             <Divider />
             <div className="courseGroups">
               {courseGroups.map(({ node }) => (
+                <ImageCard
+                  key={node.id}
+                  image={node.image}
+                  imageDescription={node.image_description}
+                  to={courseTopicSlug(node.name)}
+                >
+                  <h3>{node.name}</h3>
+                  <div className="courseStyleWrapper"></div>
+                  <p>{node.description}</p>
+                  <span className="linkArrow">Get started</span>
+                </ImageCard>
+              ))}
+            </div>
+          </section>
+        </section>
+        <section>
+          <section className="wrapper padded" id="courses">
+            <h2 className="heading">Courses by profession</h2>
+            <Divider />
+            <div className="courseGroups">
+              {courseProfessions.map(({ node }) => (
                 <ImageCard
                   key={node.id}
                   image={node.image}
@@ -137,6 +159,23 @@ export const pageQuery = graphql`
       }
     }
     allStrapiCourseTopics(sort: { fields: name, order: ASC }) {
+      edges {
+        node {
+          id
+          name
+          description
+          image_description
+          image {
+            childImageSharp {
+              fluid(maxWidth: 1600) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+      }
+    }
+    allStrapiCourseProfessions(sort: { fields: name, order: ASC }) {
       edges {
         node {
           id

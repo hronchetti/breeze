@@ -11,6 +11,8 @@ import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import { HealthcareProfessionalsOnly } from "../components/Modal"
 
+import { createCourseList } from "../utilities"
+
 const CourseList = ({ data }) => {
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
   const [modalVisible, setModalVisibility] = useState(false)
@@ -19,8 +21,8 @@ const CourseList = ({ data }) => {
 
   const allCourseBookings = data.allStrapiCourseBookings.edges
   const courses = data.allStrapiCourses.edges
-  const courseTopic = data.strapiCourseTopics
-  const courseTopicSEO = courseTopic.seo
+  const courseProfession = data.strapiCourseProfessions
+  const courseProfessionSEO = courseProfession.seo
 
   const toggleSidebarVisibilityMobile = () => {
     setSidebarVisibilityMobile(!sidebarVisibileMobile)
@@ -32,26 +34,37 @@ const CourseList = ({ data }) => {
     setBookingId(bookingId)
   }
 
+  const prioritisedCourses = createCourseList(
+    courses.filter(course => course.node.featured_course),
+    courses.filter(course => !course.node.featured_course)
+  )
+
   return (
     <Layout>
       <SEO
-        title={courseTopicSEO.title}
-        description={courseTopicSEO.description}
-        canonicalHref={courseTopicSEO.canonical_href}
-        ogType={courseTopicSEO.og_type}
-        ogUrl={courseTopicSEO.og_url}
+        title={courseProfessionSEO.title}
+        description={courseProfessionSEO.description}
+        canonicalHref={courseProfessionSEO.canonical_href}
+        ogType={courseProfessionSEO.og_type}
+        ogUrl={courseProfessionSEO.og_url}
       />
       <HeaderBlob
-        title={`${courseTopic.name} courses`}
-        image={courseTopic.image ? courseTopic.image.childImageSharp.fluid : ""}
+        title={`${courseProfession.name}`}
+        image={
+          courseProfession.image
+            ? courseProfession.image.childImageSharp.fluid
+            : ""
+        }
         imageDescription={
-          courseTopic.image_description ? courseTopic.image_description : ""
+          courseProfession.image_description
+            ? courseProfession.image_description
+            : ""
         }
       >
-        <p>{courseTopic.description}</p>
+        <p>{courseProfession.description}</p>
       </HeaderBlob>
       <main className="backgroundGreyLightSuper">
-        {courses && courses.length > 0 ? (
+        {prioritisedCourses && prioritisedCourses.length > 0 ? (
           <section className="wrapper wrapperSidebarLayout">
             <aside
               className={`wrapperSidebar${
@@ -61,7 +74,7 @@ const CourseList = ({ data }) => {
               <div className="sidebar">
                 <span className="sidebarHeading">Quick access</span>
                 <section className="sidebarItems">
-                  {courses.map(course => (
+                  {prioritisedCourses.map(course => (
                     <FilterOption
                       key={course.node.id}
                       value={course.node.name}
@@ -83,11 +96,12 @@ const CourseList = ({ data }) => {
             </aside>
             <section className="filteredContent">
               <span className="filterCount">
-                {courses.length > 1 || courses.length === 0
-                  ? `${courses.length} courses`
-                  : `${courses.length} course`}
+                {prioritisedCourses.length > 1 ||
+                prioritisedCourses.length === 0
+                  ? `${prioritisedCourses.length} courses`
+                  : `${prioritisedCourses.length} course`}
               </span>
-              {courses.map(course => (
+              {prioritisedCourses.map(course => (
                 <CourseListing
                   key={course.node.id}
                   course={course.node}
@@ -103,7 +117,7 @@ const CourseList = ({ data }) => {
           </section>
         ) : (
           <section className="wrapper padded">
-            <EmptyCourseList courseTopic={courseTopic.name} />
+            <EmptyCourseList courseTopic={courseProfession.name} />
           </section>
         )}
       </main>
@@ -129,10 +143,10 @@ CourseList.propTypes = {
 export default CourseList
 
 export const pageQuery = graphql`
-  query AllCoursesInTopic($name: String!, $topicId: Int) {
+  query AllCoursesInProfession($name: String!) {
     allStrapiCourses(
       sort: { fields: name, order: ASC }
-      filter: { course_topic: { name: { eq: $name } } }
+      filter: { course_professions: { elemMatch: { name: { eq: $name } } } }
     ) {
       edges {
         node {
@@ -143,6 +157,7 @@ export const pageQuery = graphql`
           summary
           teaching_time
           online_only
+          featured_course
           thinkific_training {
             course_link
             course_duration
@@ -155,10 +170,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allStrapiCourseBookings(
-      filter: { course: { course_topic: { eq: $topicId } } }
-      sort: { fields: start_date, order: ASC }
-    ) {
+    allStrapiCourseBookings(sort: { fields: start_date, order: ASC }) {
       edges {
         node {
           id
@@ -183,9 +195,26 @@ export const pageQuery = graphql`
         }
       }
     }
-    strapiCourseTopics(name: { eq: $name }) {
+    strapiCourseProfessions(name: { eq: $name }) {
+      courses {
+        id
+        online_only
+        teaching_time
+        skill_level
+        thinkific_training {
+          course_duration
+          course_link
+          course_name
+          id
+        }
+        course_topic
+        name
+        summary
+      }
+      image_description
       name
       description
+      id
       image {
         childImageSharp {
           fluid(maxWidth: 2000) {
@@ -193,7 +222,6 @@ export const pageQuery = graphql`
           }
         }
       }
-      image_description
       seo {
         canonical_href
         description

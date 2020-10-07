@@ -47,7 +47,7 @@ PrimaryBooking.propTypes = {
   fullAddress: PropTypes.string.isRequired,
   prepareModal: PropTypes.func.isRequired,
   priceValue: PropTypes.number.isRequired,
-  priceCurrency: PropTypes.number.isRequired,
+  priceCurrency: PropTypes.string.isRequired,
   shortAddress: PropTypes.string.isRequired,
   teachingPeriods: PropTypes.array.isRequired,
   startTime: PropTypes.string.isRequired,
