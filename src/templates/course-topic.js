@@ -35,8 +35,8 @@ const CourseList = ({ data }) => {
   }
 
   const prioritisedCourses = createCourseList(
-    courses.filter(course => course.node.featured_course),
-    courses.filter(course => !course.node.featured_course)
+    courses.filter(course => course.node.featured_course_in_topic),
+    courses.filter(course => !course.node.featured_course_in_topic)
   )
 
   return (
@@ -105,6 +105,7 @@ const CourseList = ({ data }) => {
                       booking.node.course.id === course.node.strapiId
                   )}
                   prepareModal={prepareModal}
+                  featuredCourse={course.node.featured_course_in_topic}
                 />
               ))}
             </section>
@@ -151,7 +152,7 @@ export const pageQuery = graphql`
           summary
           teaching_time
           online_only
-          featured_course
+          featured_course_in_topic
           thinkific_training {
             course_link
             course_duration

@@ -14,7 +14,12 @@ import { Tag, CoursePrices } from "../"
 
 import AcuphysLogo from "../../../images/acuphys-logo.svg"
 
-export const CourseListing = ({ course, prepareModal, bookings }) => {
+export const CourseListing = ({
+  course,
+  prepareModal,
+  bookings,
+  featuredCourse,
+}) => {
   const futureBookings = createFutureBookings(bookings)
 
   return (
@@ -23,7 +28,7 @@ export const CourseListing = ({ course, prepareModal, bookings }) => {
         <h3>
           {course.name}
           {course.online_only ? " (Online)" : ""}
-          {course.featured_course && <Tag text="Featured" color="yellow" />}
+          {featuredCourse ? <Tag text="Featured" color="yellow" /> : ""}
         </h3>
         <section className="facts">
           <span className="fact">
@@ -143,4 +148,5 @@ CourseListing.propTypes = {
   course: PropTypes.object.isRequired,
   prepareModal: PropTypes.func.isRequired,
   bookings: PropTypes.array,
+  featuredCourse: PropTypes.bool,
 }

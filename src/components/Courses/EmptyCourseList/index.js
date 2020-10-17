@@ -7,7 +7,7 @@ import { Formik, Form } from "formik"
 import { Input, Toast } from "../../Form"
 import SearchingIcon from "../../../images/icons/big/searching.svg"
 
-export const EmptyCourseList = ({ courseTopic }) => {
+export const EmptyCourseList = ({ courseTopic, professionPage }) => {
   const [toast, setToast] = useState({
     message: "",
     visible: false,
@@ -51,7 +51,8 @@ export const EmptyCourseList = ({ courseTopic }) => {
             />
             <h3>Courses coming soon</h3>
             <p>
-              We haven&apos;t uploaded our {courseTopic.toLowerCase()} courses
+              We haven&apos;t uploaded {professionPage ? "any" : "our"}{" "}
+              {courseTopic.toLowerCase()} {professionPage ? " " : "courses"}
               yet, but we do offer them!
             </p>
             <p>
@@ -86,4 +87,5 @@ export const EmptyCourseList = ({ courseTopic }) => {
 
 EmptyCourseList.propTypes = {
   courseTopic: PropTypes.string.isRequired,
+  professionPage: PropTypes.bool,
 }

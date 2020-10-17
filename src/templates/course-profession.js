@@ -34,9 +34,31 @@ const CourseList = ({ data }) => {
     setBookingId(bookingId)
   }
 
+  const featuredCourses = courses.filter(course =>
+    course.node.featured_course_professions.some(
+      featuredCourseProfession =>
+        featuredCourseProfession.name === courseProfession.name
+    )
+  )
+
   const prioritisedCourses = createCourseList(
-    courses.filter(course => course.node.featured_course),
-    courses.filter(course => !course.node.featured_course)
+    featuredCourses,
+    courses.reduce((remainingCourses, course) => {
+      if (course.node.not_included_in_course_professions.length > 0) {
+        course.node.not_included_in_course_professions.map(
+          professionNotIncludedWithin => {
+            if (professionNotIncludedWithin.name === courseProfession.name) {
+              return remainingCourses
+            }
+          }
+        )
+      } else {
+        if (!featuredCourses.includes(course)) {
+          remainingCourses.push(course)
+        }
+      }
+      return remainingCourses
+    }, [])
   )
 
   return (
@@ -111,13 +133,17 @@ const CourseList = ({ data }) => {
                       booking.node.course.id === course.node.strapiId
                   )}
                   prepareModal={prepareModal}
+                  featuredCourse={featuredCourses.includes(course)}
                 />
               ))}
             </section>
           </section>
         ) : (
           <section className="wrapper padded">
-            <EmptyCourseList courseTopic={courseProfession.name} />
+            <EmptyCourseList
+              courseTopic={courseProfession.name}
+              professionPage={true}
+            />
           </section>
         )}
       </main>
@@ -145,8 +171,8 @@ export default CourseList
 export const pageQuery = graphql`
   query AllCoursesInProfession($name: String!) {
     allStrapiCourses(
-      sort: { fields: name, order: ASC }
-      filter: { course_professions: { elemMatch: { name: { eq: $name } } } }
+      filter: { course_topic: { id: { eq: 1 } } }
+      sort: { order: ASC, fields: name }
     ) {
       edges {
         node {
@@ -157,7 +183,6 @@ export const pageQuery = graphql`
           summary
           teaching_time
           online_only
-          featured_course
           thinkific_training {
             course_link
             course_duration
@@ -165,6 +190,14 @@ export const pageQuery = graphql`
             id
           }
           course_topic {
+            name
+          }
+          not_included_in_course_professions {
+            name
+            id
+          }
+          featured_course_professions {
+            id
             name
           }
         }
@@ -196,21 +229,6 @@ export const pageQuery = graphql`
       }
     }
     strapiCourseProfessions(name: { eq: $name }) {
-      courses {
-        id
-        online_only
-        teaching_time
-        skill_level
-        thinkific_training {
-          course_duration
-          course_link
-          course_name
-          id
-        }
-        course_topic
-        name
-        summary
-      }
       image_description
       name
       description
