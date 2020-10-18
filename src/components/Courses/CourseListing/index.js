@@ -142,6 +142,7 @@ export const CourseListing = ({
 
 CourseListing.defaultProps = {
   bookings: [],
+  featuredCourse: false,
 }
 
 CourseListing.propTypes = {

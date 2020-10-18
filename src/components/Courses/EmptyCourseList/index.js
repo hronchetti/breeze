@@ -85,6 +85,10 @@ export const EmptyCourseList = ({ courseTopic, professionPage }) => {
   )
 }
 
+EmptyCourseList.defaultProps = {
+  professionPage: false,
+}
+
 EmptyCourseList.propTypes = {
   courseTopic: PropTypes.string.isRequired,
   professionPage: PropTypes.bool,
