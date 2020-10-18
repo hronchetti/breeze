@@ -84,6 +84,7 @@ const RequestACourse = ({ courses }) => {
         initialValues={{
           fullname: "",
           email: "",
+          phone: "",
           course: "",
           location: "",
           message: "",
@@ -95,6 +96,7 @@ const RequestACourse = ({ courses }) => {
           email: Yup.string()
             .email("Must be a valid email address")
             .required("Required"),
+          phone: Yup.string(),
           course: Yup.string().required("Required"),
           location: Yup.string().required("Required"),
           message: Yup.string(),
@@ -122,6 +124,13 @@ const RequestACourse = ({ courses }) => {
               name="email"
               type="email"
               placeholder="How we'll contact you"
+            />
+            <Input
+              label="Phone"
+              name="phone"
+              type="phone"
+              placeholder="Incase we need to ring"
+              optional="true"
             />
             <Select label="Course" name="course" options={coursesForSelect} />
             <Input

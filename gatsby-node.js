@@ -45,6 +45,15 @@ exports.createPages = ({ actions, graphql }) => {
         }
       }
 
+      allStrapiCourseProfessions {
+        edges {
+          node {
+            strapiId
+            name
+          }
+        }
+      }
+
       allStrapiCourses {
         edges {
           node {
@@ -88,13 +97,26 @@ exports.createPages = ({ actions, graphql }) => {
     result.data.allStrapiCourseTopics.edges.forEach(({ node }) => {
       createPage({
         path: createSlug.courseTopicSlug(node.name),
-        component: path.resolve(`src/templates/course-list.js`),
+        component: path.resolve(`src/templates/course-topic.js`),
         context: {
           name: node.name,
           strapiId: node.strapiId,
         },
       })
     })
+
+    // Course professions /courses/course_profession_name
+    result.data.allStrapiCourseProfessions.edges.forEach(({ node }) => {
+      createPage({
+        path: createSlug.courseTopicSlug(node.name),
+        component: path.resolve(`src/templates/course-profession.js`),
+        context: {
+          name: node.name,
+          strapiId: node.strapiId,
+        },
+      })
+    })
+
     // View Course /courses/course_topic_name/course_name
     result.data.allStrapiCourses.edges.forEach(({ node }) => {
       createPage({

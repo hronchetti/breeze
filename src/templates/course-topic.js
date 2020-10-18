@@ -11,6 +11,8 @@ import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import { HealthcareProfessionalsOnly } from "../components/Modal"
 
+import { createCourseList } from "../utilities"
+
 const CourseList = ({ data }) => {
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
   const [modalVisible, setModalVisibility] = useState(false)
@@ -32,6 +34,11 @@ const CourseList = ({ data }) => {
     setBookingId(bookingId)
   }
 
+  const prioritisedCourses = createCourseList(
+    courses.filter(course => course.node.featured_course_in_topic),
+    courses.filter(course => !course.node.featured_course_in_topic)
+  )
+
   return (
     <Layout>
       <SEO
@@ -51,7 +58,7 @@ const CourseList = ({ data }) => {
         <p>{courseTopic.description}</p>
       </HeaderBlob>
       <main className="backgroundGreyLightSuper">
-        {courses && courses.length > 0 ? (
+        {prioritisedCourses && prioritisedCourses.length > 0 ? (
           <section className="wrapper wrapperSidebarLayout">
             <aside
               className={`wrapperSidebar${
@@ -61,7 +68,7 @@ const CourseList = ({ data }) => {
               <div className="sidebar">
                 <span className="sidebarHeading">Quick access</span>
                 <section className="sidebarItems">
-                  {courses.map(course => (
+                  {prioritisedCourses.map(course => (
                     <FilterOption
                       key={course.node.id}
                       value={course.node.name}
@@ -83,11 +90,12 @@ const CourseList = ({ data }) => {
             </aside>
             <section className="filteredContent">
               <span className="filterCount">
-                {courses.length > 1 || courses.length === 0
-                  ? `${courses.length} courses`
-                  : `${courses.length} course`}
+                {prioritisedCourses.length > 1 ||
+                prioritisedCourses.length === 0
+                  ? `${prioritisedCourses.length} courses`
+                  : `${prioritisedCourses.length} course`}
               </span>
-              {courses.map(course => (
+              {prioritisedCourses.map(course => (
                 <CourseListing
                   key={course.node.id}
                   course={course.node}
@@ -97,6 +105,7 @@ const CourseList = ({ data }) => {
                       booking.node.course.id === course.node.strapiId
                   )}
                   prepareModal={prepareModal}
+                  featuredCourse={course.node.featured_course_in_topic}
                 />
               ))}
             </section>
@@ -143,6 +152,7 @@ export const pageQuery = graphql`
           summary
           teaching_time
           online_only
+          featured_course_in_topic
           thinkific_training {
             course_link
             course_duration
