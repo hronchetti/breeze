@@ -175,7 +175,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allStrapiCourseProfessions(sort: { fields: name, order: ASC }) {
+    allStrapiCourseProfessions(sort: { order: ASC, fields: id }) {
       edges {
         node {
           id
