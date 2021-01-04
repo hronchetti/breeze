@@ -47,7 +47,6 @@ const RequestACourse = () => {
           fullname: "",
           email: "",
           phone: "",
-          course: "",
           location: "",
           message: "",
           "bot-field": "",
@@ -59,7 +58,6 @@ const RequestACourse = () => {
             .email("Must be a valid email address")
             .required("Required"),
           phone: Yup.string(),
-          course: Yup.string().required("Required"),
           location: Yup.string().required("Required"),
           message: Yup.string().required("Required"),
         })}
