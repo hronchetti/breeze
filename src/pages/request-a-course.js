@@ -12,8 +12,6 @@ import RequestACourseForm from "../components/RequestACourseForm"
 const RequestACourse = ({ data }) => {
   const requestCourse = data.strapiRequestACourse
   const requestCourseSEO = requestCourse.seo
-  const allCourses = data.allStrapiCourses.edges
-
   return (
     <Layout>
       <SEO
@@ -30,7 +28,7 @@ const RequestACourse = ({ data }) => {
         align="top"
       >
         <p>{requestCourse.paragraph}</p>
-        <RequestACourseForm courses={allCourses} />
+        <RequestACourseForm />
       </HeaderBlob>
       <main className="backgroundGreyLightSuper">
         <HowItWorks
@@ -75,14 +73,6 @@ export const pageQuery = graphql`
         og_type
         og_url
         title
-      }
-    }
-    allStrapiCourses {
-      edges {
-        node {
-          name
-          id
-        }
       }
     }
   }
