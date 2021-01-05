@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import onClickOutside from "react-onclickoutside"
 
+import { useOnClickOutside } from "../../../hooks"
 import { Button } from "../../Button"
 import Logo from "../../../images/Logo.svg"
 import { courseTopicSlug } from "../../../utilities/createSlug"
@@ -10,11 +10,11 @@ import { courseTopicSlug } from "../../../utilities/createSlug"
 const Nav = ({ courses }) => {
   const [mobileNav, openMobileNav] = useState(false)
   const [courseTypes, showCourseTypes] = useState(false)
-
-  Nav.handleClickOutside = () => showCourseTypes(false)
+  const ref = React.useRef()
+  useOnClickOutside(ref, () => showCourseTypes(false))
 
   return (
-    <nav className={`navWrapper${mobileNav ? " active" : ""}`}>
+    <nav className={`navWrapper${mobileNav ? " active" : ""}`} ref={ref}>
       <section className="nav">
         <Link to="/" className="logo">
           <img
@@ -61,7 +61,7 @@ const Nav = ({ courses }) => {
             {courses && courses.length > 0 ? (
               <>
                 <ul className={`coursesDesktop${courseTypes ? " active" : ""}`}>
-                  {courses.map(course => (
+                  {courses.map((course) => (
                     <li className="course" key={course.node.id}>
                       <Link
                         to={courseTopicSlug(course.node.name)}
@@ -74,7 +74,7 @@ const Nav = ({ courses }) => {
                   ))}
                 </ul>
                 <ul className="coursesMobile">
-                  {courses.map(course => (
+                  {courses.map((course) => (
                     <li className="course" key={course.node.id}>
                       <Button
                         to={courseTopicSlug(course.node.name)}
@@ -100,14 +100,8 @@ const Nav = ({ courses }) => {
   )
 }
 
-Nav.prototype = {}
-
-const clickOutsideConfig = {
-  handleClickOutside: () => Nav.handleClickOutside,
-}
-
 Nav.propTypes = {
   courses: PropTypes.array.isRequired,
 }
 
-export default onClickOutside(Nav, clickOutsideConfig)
+export default Nav

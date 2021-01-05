@@ -17,7 +17,7 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sass`,
-    `gatsby-plugin-eslint`,
+    `gatsby-plugin-remove-serviceworker`,
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {

@@ -1,26 +1,39 @@
-import React, { useState } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import ReactMarkdown from "react-markdown"
+import Chevron from "../../images/icons/chevron--scalable.svg"
+import { ReactSVG } from "react-svg"
 
 const FAQ = ({ question, answer }) => {
-  const [questionShown, setQuestionShown] = useState(false)
+  const [isOpen, setIsOpen] = React.useState(false)
+  const FaqElement = React.useRef(null)
+
+  const toggleFaq = () => {
+    const FaqBody = FaqElement.current
+    const FaqBodyHeight = FaqBody.scrollHeight
+
+    if (FaqBody.style.maxHeight) {
+      FaqBody.style.maxHeight = null
+      setIsOpen(false)
+    } else {
+      FaqBody.style.maxHeight = FaqBodyHeight + "px"
+      setIsOpen(true)
+    }
+  }
   return (
-    <div
-      className={`faq ${questionShown ? "active" : ""}`}
-      onClick={() => setQuestionShown(!questionShown)}
-      role="button"
-      tabIndex="0"
-      onKeyDown={e =>
-        e.keyCode == 13 ? setQuestionShown(!questionShown) : null
-      }
-    >
-      <span className="control"></span>
-      <div>
+    <div className="faq">
+      <button className="faqButton" onClick={() => toggleFaq()}>
         <h4>{question}</h4>
-        <section className="answer">
+        <ReactSVG
+          className={`faqButtonIcon${isOpen ? " active" : ""}`}
+          src={Chevron}
+        />
+      </button>
+      <section className="faqAnswer" ref={FaqElement}>
+        <div className="faqAnswerContent">
           <ReactMarkdown source={answer} />
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   )
 }
