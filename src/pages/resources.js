@@ -5,11 +5,11 @@ import { graphql } from "gatsby"
 import {
   FilterOption,
   Header,
+  Layout,
   Resource,
+  SEO,
   SignOffStillLooking,
 } from "../components"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
 
 const Resources = ({ data }) => {
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)

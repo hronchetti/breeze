@@ -2,7 +2,14 @@ import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 
-const SEO = ({ description, title, canonicalHref, ogType, ogUrl, schema }) => (
+export const SEO = ({
+  description,
+  title,
+  canonicalHref,
+  ogType,
+  ogUrl,
+  schema,
+}) => (
   <Helmet
     htmlAttributes={{
       lang: "en",
@@ -44,5 +51,3 @@ SEO.propTypes = {
   schema: PropTypes.any,
   title: PropTypes.string,
 }
-
-export default SEO

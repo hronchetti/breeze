@@ -5,8 +5,7 @@ import Moment from "moment"
 import { Helmet } from "react-helmet"
 import ReactMarkdown from "react-markdown"
 
-import { TextCard, Button, FAQ, Divider } from "../components"
-import Layout from "../components/Layout"
+import { TextCard, Button, FAQ, Divider, Layout } from "../components"
 import { createBookingDates, convertToAmPmTime } from "../utilities"
 
 const paymentSuccess = ({ data }) => {

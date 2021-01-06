@@ -4,14 +4,14 @@ import { graphql } from "gatsby"
 import ReactMarkdown from "react-markdown"
 
 import {
-  FAQ,
   Divider,
+  FAQ,
   Header,
+  Layout,
+  SEO,
   SignOffMailingList,
   TextCard,
 } from "../components"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
 
 import PhoneIcon from "../images/icons/big/phone.svg"
 import EmailIcon from "../images/icons/big/email.svg"

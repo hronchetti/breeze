@@ -3,13 +3,13 @@ import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 
 import {
+  BlogArticleList,
   FilterOption,
   Header,
-  BlogArticleList,
+  Layout,
+  SEO,
   SignOffMailingList,
 } from "../components"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
 
 const Blog = ({ data }) => {
   const [articles, setArticles] = useState([])

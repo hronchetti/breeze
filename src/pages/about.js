@@ -4,9 +4,14 @@ import PropTypes from "prop-types"
 import ReactMarkdown from "react-markdown"
 import { graphql } from "gatsby"
 
-import { TextCard, Divider, Header, SignOffMailingList } from "../components"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
+import {
+  TextCard,
+  Divider,
+  Header,
+  Layout,
+  SEO,
+  SignOffMailingList,
+} from "../components"
 
 const About = ({ data }) => {
   const about = data.strapiAbout

@@ -10,10 +10,10 @@ import {
   FilterOption,
   HeaderBlob,
   HealthcareProfessionalsOnly,
+  Layout,
+  SEO,
   SignOffStillLooking,
 } from "../components"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
 
 import { createCourseList } from "../utilities"
 

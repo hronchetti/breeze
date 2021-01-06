@@ -25,8 +25,10 @@ export {
   HeaderViewCourse,
 } from "./Layout/Headers"
 export { HowItWorks } from "./HowItWorks"
+export { Layout } from "./Layout"
 export { HealthcareProfessionalsOnly, VideoPlayer } from "./Modal"
 export { Resource } from "./Resource"
 export { RequestACourseForm } from "./RequestACourseForm"
+export { SEO } from "./SEO"
 export { SignOffMailingList } from "./SignOffMailingList"
 export { SignOffStillLooking } from "./SignOffStillLooking"

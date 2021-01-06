@@ -4,22 +4,22 @@ import ReactMarkdown from "react-markdown"
 import { Link, graphql } from "gatsby"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
 
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
 import {
   AgendaItem,
   Button,
   CoursePrices,
   FAQ,
+  HeaderViewCourse,
   HealthcareProfessionalsOnly,
+  Layout,
   OnlineBooking,
   PrimaryBooking,
   RequestNearYou,
-  HeaderViewCourse,
   Review,
+  SEO,
   ScrollToBookings,
-  Tag,
   SignOffStillLooking,
+  Tag,
 } from "../components"
 import {
   createBookingDates,

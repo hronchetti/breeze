@@ -5,11 +5,11 @@ import { graphql } from "gatsby"
 import {
   HeaderBlob,
   HowItWorks,
+  Layout,
   RequestACourseForm,
+  SEO,
   SignOffStillLooking,
 } from "../components"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
 
 const RequestACourse = ({ data }) => {
   const requestCourse = data.strapiRequestACourse

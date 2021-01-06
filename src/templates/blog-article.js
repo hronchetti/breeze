@@ -13,9 +13,7 @@ import {
   TwitterShareButton,
 } from "react-share"
 
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
-import { BlogArticleList, SignOffMailingList } from "../components"
+import { BlogArticleList, Layout, SEO, SignOffMailingList } from "../components"
 import { defaultSEO } from "../utilities"
 
 const BlogArticle = ({ data, location }) => {

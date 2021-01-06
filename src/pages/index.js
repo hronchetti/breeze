@@ -1,18 +1,18 @@
 import React, { useEffect } from "react"
 import { graphql } from "gatsby"
+import PropTypes from "prop-types"
 import Swiper from "swiper"
 import "swiper/css/swiper.min.css"
 import "../style/03-utilities/_swiper.scss"
 
-import Layout from "../components/Layout"
-import PropTypes from "prop-types"
-import SEO from "../components/SEO"
 import {
-  HeaderHomepage,
   Divider,
+  HeaderHomepage,
   HowItWorks,
   ImageCard,
+  Layout,
   Review,
+  SEO,
   SignOffStillLooking,
 } from "../components"
 import { courseTopicSlug, cpdCourseSlug } from "../utilities/createSlug"
