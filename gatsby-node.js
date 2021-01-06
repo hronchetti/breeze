@@ -126,10 +126,10 @@ exports.createPages = ({ actions, graphql }) => {
       })
     })
 
-    // CPD Courses /courses/cpd_course_name
+    // CPD Courses /courses/cpd-courses/cpd_course_name
     result.data.allStrapiCpdCourses.edges.forEach(({ node }) => {
       createPage({
-        path: createSlug.courseTopicSlug(node.name),
+        path: createSlug.cpdCourseSlug(node.name),
         component: path.resolve(`src/templates/cpd-courses.js`),
         context: {
           name: node.name,

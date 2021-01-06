@@ -14,7 +14,9 @@ export const HeaderBlob = ({
   <TrackVisibility partialVisibility once>
     {({ isVisible }) => (
       <header className={`headerBlob${align === "top" ? " alignTop" : ""}`}>
-        <div className={`content animateFadeUp${isVisible && " active"}`}>
+        <div
+          className={`headerBlobBody animateFadeUp${isVisible && " active"}`}
+        >
           <h1>{title}</h1>
           {children}
         </div>

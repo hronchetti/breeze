@@ -20,7 +20,8 @@
 @import "03-utilities/textAlignment";
 
 // 04 COMPONENTS - Nested component styles in respective component folders
-@import "../components/BlogArticlePreview/blogArticlePreview";
+@import "../components/BlogArticleList/blogArticleList";
+@import "../components/BulletListWithIcon/bulletListWithIcon";
 @import "../components/Button/CloseButton/closeButton";
 @import "../components/Button/button";
 @import "../components/Cards/ImageCard/imageCard";

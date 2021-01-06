@@ -4,15 +4,16 @@ import { graphql } from "gatsby"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
 
 import {
+  BulletListWithIcon,
   CourseListing,
   EmptyCourseList,
   FilterOption,
   HeaderBlob,
+  HealthcareProfessionalsOnly,
 } from "../components"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
-import { HealthcareProfessionalsOnly } from "../components/Modal"
 
 import { createCourseList } from "../utilities"
 
@@ -87,6 +88,10 @@ const CourseList = ({ data }) => {
         }
       >
         <p>{courseProfession.description}</p>
+        {courseProfession.tick_bullets &&
+          courseProfession.tick_bullets.length > 0 && (
+            <BulletListWithIcon bullets={courseProfession.tick_bullets} />
+          )}
       </HeaderBlob>
       <main className="backgroundGreyLightSuper">
         {prioritisedCourses && prioritisedCourses.length > 0 ? (
@@ -242,6 +247,10 @@ export const pageQuery = graphql`
             ...GatsbyImageSharpFluid
           }
         }
+      }
+      tick_bullets {
+        bullet
+        id
       }
       seo {
         canonical_href

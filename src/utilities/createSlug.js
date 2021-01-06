@@ -6,11 +6,14 @@ function createSlug(text) {
 }
 
 module.exports = {
-  blogArticleSlug: title => {
+  blogArticleSlug: (title) => {
     return `/blog/${createSlug(title)}/`
   },
-  courseTopicSlug: name => {
+  courseTopicSlug: (name) => {
     return `/courses/${createSlug(name)}/`
+  },
+  cpdCourseSlug: (name) => {
+    return `/courses/cpd-courses/${createSlug(name)}/`
   },
   courseSlug: (courseTopic, courseName) => {
     return `/courses/${createSlug(courseTopic)}/${createSlug(courseName)}/`
@@ -20,10 +23,10 @@ module.exports = {
       courseName
     )}/?booking=${bookingId}`
   },
-  coursePaymentSuccess: bookingId => {
+  coursePaymentSuccess: (bookingId) => {
     return `/payment-succeeded/booking/${bookingId}/`
   },
-  coursePaymentFailed: bookingId => {
+  coursePaymentFailed: (bookingId) => {
     return `/payment-failed/booking/${bookingId}/`
   },
 }

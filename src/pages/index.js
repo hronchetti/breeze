@@ -13,7 +13,7 @@ import SignOffStillLooking from "../components/SignOffStillLooking"
 import { HeaderHomepage } from "../components/Layout/Headers"
 import { ImageCard } from "../components/Cards"
 import { Review } from "../components/Courses"
-import { courseTopicSlug } from "../utilities/createSlug"
+import { courseTopicSlug, cpdCourseSlug } from "../utilities/createSlug"
 
 const LandingPage = ({ data }) => {
   const homepage = data.strapiHomepage
@@ -139,7 +139,7 @@ const LandingPage = ({ data }) => {
                     key={node.id}
                     image={node.image}
                     imageDescription={node.image_description}
-                    to={courseTopicSlug(node.name)}
+                    to={cpdCourseSlug(node.name)}
                   >
                     <h3>{node.name}</h3>
                     <div className="courseStyleWrapper"></div>
@@ -203,7 +203,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allStrapiCourseProfessions(sort: { fields: name, order: ASC }) {
+    allStrapiCourseProfessions(sort: { fields: id, order: ASC }) {
       edges {
         node {
           id
@@ -220,7 +220,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allStrapiCpdCourses(sort: { order: ASC, fields: name }) {
+    allStrapiCpdCourses(sort: { fields: id, order: ASC }) {
       edges {
         node {
           image_description
@@ -237,7 +237,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allStrapiCourses(sort: { order: ASC, fields: id }) {
+    allStrapiCourses(sort: { fields: id, order: ASC }) {
       edges {
         node {
           reviews {

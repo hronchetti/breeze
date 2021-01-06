@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
 
 import {
+  BulletListWithIcon,
   CourseListing,
   EmptyCourseList,
   FilterOption,
@@ -78,6 +79,9 @@ const CourseList = ({ data }) => {
         }
       >
         <p>{cpdCourse.description}</p>
+        {cpdCourse.tick_bullets && cpdCourse.tick_bullets.length > 0 && (
+          <BulletListWithIcon bullets={cpdCourse.tick_bullets} />
+        )}
       </HeaderBlob>
       <main className="backgroundGreyLightSuper">
         {prioritisedCourses && prioritisedCourses.length > 0 ? (

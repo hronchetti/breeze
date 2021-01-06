@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
 
 import {
+  BulletListWithIcon,
   CourseListing,
   EmptyCourseList,
   FilterOption,
@@ -59,6 +60,9 @@ const CourseList = ({ data }) => {
         }
       >
         <p>{courseTopic.description}</p>
+        {courseTopic.tick_bullets && courseTopic.tick_bullets.length > 0 && (
+          <BulletListWithIcon bullets={courseTopic.tick_bullets} />
+        )}
       </HeaderBlob>
       <main className="backgroundGreyLightSuper">
         {prioritisedCourses && prioritisedCourses.length > 0 ? (
@@ -207,6 +211,10 @@ export const pageQuery = graphql`
         }
       }
       image_description
+      tick_bullets {
+        bullet
+        id
+      }
       seo {
         canonical_href
         description
