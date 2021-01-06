@@ -228,6 +228,7 @@ export const pageQuery = graphql`
     allStrapiCpdCourses(sort: { fields: id, order: ASC }) {
       edges {
         node {
+          id
           image_description
           image {
             childImageSharp {

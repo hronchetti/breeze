@@ -2,9 +2,8 @@ import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
 
-import Footer from "./Footer"
-import Nav from "./Nav"
-import "../../style/main.scss"
+import { Footer } from "./Footer"
+import { Nav } from "./Nav"
 
 export const Layout = ({ children, footer }) => (
   <StaticQuery

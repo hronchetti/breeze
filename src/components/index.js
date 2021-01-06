@@ -18,12 +18,7 @@ export { Divider } from "./Divider"
 export { FAQ } from "./FAQ"
 export { FilterOption } from "./FilterOption"
 export { Checkbox, Input, Select, TextArea, Toast } from "./Form"
-export {
-  Header,
-  HeaderBlob,
-  HeaderHomepage,
-  HeaderViewCourse,
-} from "./Layout/Headers"
+export { Header, HeaderBlob, HeaderHomepage, HeaderViewCourse } from "./Headers"
 export { HowItWorks } from "./HowItWorks"
 export { Layout } from "./Layout"
 export { HealthcareProfessionalsOnly, VideoPlayer } from "./Modal"

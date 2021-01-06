@@ -1,14 +1,14 @@
 import React, { useState } from "react"
-import PropTypes, { node } from "prop-types"
+import PropTypes from "prop-types"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
 import { Link as ScrollLink } from "react-scroll"
 import TrackVisibility from "react-on-screen"
 import { Link } from "gatsby"
 
-import { Button, VideoPlayer } from "../../../"
-import { courseTopicSlug } from "../../../../utilities"
+import { Button, VideoPlayer } from "../../"
+import { courseTopicSlug } from "../../../utilities"
 
-import HomepageHeaderIllustration from "../../../../images/illustration.svg"
+import HomepageHeaderIllustration from "../../../images/illustration.svg"
 
 export const HeaderHomepage = ({
   courseTopics,

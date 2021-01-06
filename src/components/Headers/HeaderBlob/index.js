@@ -1,8 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
-import Blob from "../../../../images/blob.svg"
 import Img from "gatsby-image"
 import TrackVisibility from "react-on-screen"
+
+import Blob from "../../../images/blob.svg"
 
 export const HeaderBlob = ({
   align,

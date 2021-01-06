@@ -7,7 +7,7 @@ import { Button } from "../../Button"
 import Logo from "../../../images/Logo.svg"
 import { courseTopicSlug } from "../../../utilities/createSlug"
 
-const Nav = ({ courses }) => {
+export const Nav = ({ courses }) => {
   const [mobileNav, openMobileNav] = useState(false)
   const [courseTypes, showCourseTypes] = useState(false)
   const ref = React.useRef()
@@ -103,5 +103,3 @@ const Nav = ({ courses }) => {
 Nav.propTypes = {
   courses: PropTypes.array.isRequired,
 }
-
-export default Nav
