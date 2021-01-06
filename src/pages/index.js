@@ -53,7 +53,6 @@ const LandingPage = ({ data }) => {
       <HeaderHomepage
         title={homepage.title}
         courseTopics={courseGroups}
-        paragraph={homepage.introduction}
         videoLink={homepage.video_link}
       />
       <main>
@@ -176,7 +175,6 @@ export const pageQuery = graphql`
         step_description
         step_heading
       }
-      introduction
       title
       video_link
       reviews_header

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
 import { Link as ScrollLink } from "react-scroll"
@@ -10,26 +10,30 @@ import { courseTopicSlug } from "../../../utilities"
 
 import HomepageHeaderIllustration from "../../../images/illustration.svg"
 
-export const HeaderHomepage = ({
-  courseTopics,
-  title,
-  paragraph,
-  videoLink,
-}) => {
-  const [playerVisible, setPlayerVisibility] = useState(false)
+export const HeaderHomepage = ({ courseTopics, title, videoLink }) => {
+  const [playerVisible, setPlayerVisibility] = React.useState(false)
   return (
     <>
       <TrackVisibility partialVisibility once>
         {({ isVisible }) => (
           <header className="headerHomepage wrapper">
-            <div className={`content animateFadeUp${isVisible && " active"}`}>
+            <div
+              className={`headerHomepageBody animateFadeUp${
+                isVisible && " active"
+              }`}
+            >
               <h1>{title}</h1>
-              <p>{paragraph}</p>
-              {courseTopics.map(({ node }) => (
-                <Link key={node.id} to={courseTopicSlug(node.name)}>
-                  {node.name}
-                </Link>
-              ))}
+              <section className="links">
+                {courseTopics.map(({ node }) => (
+                  <Link
+                    className="linkArrow"
+                    key={node.id}
+                    to={courseTopicSlug(node.name)}
+                  >
+                    {node.name} courses
+                  </Link>
+                ))}
+              </section>
               <section className="headerButtons">
                 <Button
                   onClick={() => setPlayerVisibility(true)}
@@ -75,6 +79,5 @@ export const HeaderHomepage = ({
 HeaderHomepage.propTypes = {
   courseTopics: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
-  paragraph: PropTypes.string.isRequired,
   videoLink: PropTypes.string.isRequired,
 }
