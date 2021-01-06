@@ -15,7 +15,7 @@ import {
   SEO,
   SignOffStillLooking,
 } from "../components"
-import { courseTopicSlug, cpdCourseSlug } from "../utilities/createSlug"
+import { courseTopicSlug } from "../utilities/createSlug"
 
 const LandingPage = ({ data }) => {
   const homepage = data.strapiHomepage
@@ -143,7 +143,7 @@ const LandingPage = ({ data }) => {
                     key={node.id}
                     image={node.image}
                     imageDescription={node.image_description}
-                    to={cpdCourseSlug(node.name)}
+                    to={courseTopicSlug(node.name)}
                   >
                     <h3>{node.name}</h3>
                     <div className="courseStyleWrapper"></div>
