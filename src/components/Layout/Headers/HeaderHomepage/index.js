@@ -1,15 +1,21 @@
 import React, { useState } from "react"
-import PropTypes from "prop-types"
+import PropTypes, { node } from "prop-types"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
-import { Link } from "react-scroll"
+import { Link as ScrollLink } from "react-scroll"
 import TrackVisibility from "react-on-screen"
+import { Link } from "gatsby"
 
-import { Button } from "../../../Button"
-import { VideoPlayer } from "../../..//Modal"
+import { Button, VideoPlayer } from "../../../"
+import { courseTopicSlug } from "../../../../utilities"
 
 import HomepageHeaderIllustration from "../../../../images/illustration.svg"
 
-export const HeaderHomepage = ({ title, paragraph, videoLink }) => {
+export const HeaderHomepage = ({
+  courseTopics,
+  title,
+  paragraph,
+  videoLink,
+}) => {
   const [playerVisible, setPlayerVisibility] = useState(false)
   return (
     <>
@@ -19,6 +25,11 @@ export const HeaderHomepage = ({ title, paragraph, videoLink }) => {
             <div className={`content animateFadeUp${isVisible && " active"}`}>
               <h1>{title}</h1>
               <p>{paragraph}</p>
+              {courseTopics.map(({ node }) => (
+                <Link key={node.id} to={courseTopicSlug(node.name)}>
+                  {node.name}
+                </Link>
+              ))}
               <section className="headerButtons">
                 <Button
                   onClick={() => setPlayerVisibility(true)}
@@ -26,15 +37,15 @@ export const HeaderHomepage = ({ title, paragraph, videoLink }) => {
                 >
                   Watch the video
                 </Button>
-                <Link
-                  to="courses"
+                <ScrollLink
+                  to="reviews"
                   className="button buttonSecondary"
                   smooth={true}
                   offset={-96}
                   duration={500}
                 >
-                  Get started now
-                </Link>
+                  Student reviews
+                </ScrollLink>
               </section>
             </div>
             <div className="illustrationWrapper">
@@ -62,6 +73,7 @@ export const HeaderHomepage = ({ title, paragraph, videoLink }) => {
 }
 
 HeaderHomepage.propTypes = {
+  courseTopics: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
   paragraph: PropTypes.string.isRequired,
   videoLink: PropTypes.string.isRequired,

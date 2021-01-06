@@ -4,12 +4,11 @@ import { Formik, Form, Field } from "formik"
 import axios from "axios"
 import qs from "qs"
 
-import Divider from "../Divider"
-import { Input, TextArea, Toast } from "../Form"
+import { Input, Divider, TextArea, Toast } from "../"
 
 import MagnifyingGlass from "../../images/magnifying-glass.svg"
 
-const SignOffStillLooking = () => {
+export const SignOffStillLooking = () => {
   const [toast, setToast] = useState({
     message: "",
     visible: false,
@@ -107,7 +106,7 @@ const SignOffStillLooking = () => {
         type={toast.type}
         visible={toast.visible}
         onClick={() =>
-          setToast(toast => ({
+          setToast((toast) => ({
             ...toast,
             visible: false,
           }))
@@ -116,5 +115,3 @@ const SignOffStillLooking = () => {
     </section>
   )
 }
-
-export default SignOffStillLooking

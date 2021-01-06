@@ -68,57 +68,15 @@ export const CourseListing = ({
       ) : (
         <div className="bookings">
           <span className="bookingsHeading">Course bookings</span>
-          {futureBookings.length > 0 ? (
+          {futureBookings && futureBookings.length > 0 ? (
             futureBookings.map(({ node }) => (
-              <section className="booking" key={node.id}>
-                <div className="information">
-                  <h4>
-                    <span className="dates">
-                      {createBookingDates(node.teaching_period)}
-                      {` (${convertToAmPmTime(
-                        node.start_time
-                      )} - ${convertToAmPmTime(node.end_time)})`}
-                    </span>
-                    {node.discount_percentage &&
-                    node.discount_percentage > 0 ? (
-                      <Tag
-                        discount
-                        text={node.discount_percentage.toString()}
-                      />
-                    ) : null}
-                  </h4>
-                  <p>
-                    <CoursePrices
-                      price={node.booking_price_value}
-                      currency={node.booking_price_currency}
-                      discount={
-                        node.discount_percentage && node.discount_percentage
-                      }
-                    />{" "}
-                    &bull; {node.address_full}
-                  </p>
-                </div>
-                <div className="actions">
-                  <Button
-                    to={courseBookingSlug(
-                      course.course_topic.name,
-                      course.name,
-                      node.strapiId
-                    )}
-                    styles="buttonSecondary"
-                  >
-                    Find out more
-                  </Button>
-                  <Button
-                    styles="buttonPrimary iconLeft iconArrow"
-                    onClick={() =>
-                      prepareModal(node.stripe_product, node.strapiId)
-                    }
-                  >
-                    Book now
-                  </Button>
-                </div>
-              </section>
+              <CourseBooking
+                node={node}
+                topicName={course.course_topic.name}
+                courseName={course.name}
+                key={node.id}
+                prepareModal={prepareModal}
+              />
             ))
           ) : (
             <Link
@@ -139,6 +97,45 @@ export const CourseListing = ({
     </section>
   )
 }
+
+const CourseBooking = ({ node, topicName, courseName, prepareModal }) => (
+  <section className="booking">
+    <div className="information">
+      <span className="dates">
+        {createBookingDates(node.teaching_period)}
+        {` (${convertToAmPmTime(node.start_time)} - ${convertToAmPmTime(
+          node.end_time
+        )})`}
+      </span>
+      <h4>{node.address_short}</h4>
+      {node.discount_percentage && node.discount_percentage > 0 ? (
+        <Tag discount text={node.discount_percentage.toString()} />
+      ) : null}
+      <p>
+        <CoursePrices
+          price={node.booking_price_value}
+          currency={node.booking_price_currency}
+          discount={node.discount_percentage && node.discount_percentage}
+        />{" "}
+        &bull; {node.address_full}
+      </p>
+    </div>
+    <div className="actions">
+      <Button
+        to={courseBookingSlug(topicName, courseName, node.strapiId)}
+        styles="buttonSecondary"
+      >
+        Find out more
+      </Button>
+      <Button
+        styles="buttonPrimary iconLeft iconArrow"
+        onClick={() => prepareModal(node.stripe_product, node.strapiId)}
+      >
+        Book now
+      </Button>
+    </div>
+  </section>
+)
 
 CourseListing.defaultProps = {
   bookings: [],

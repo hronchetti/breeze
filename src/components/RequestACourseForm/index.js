@@ -5,9 +5,9 @@ import axios from "axios"
 import qs from "qs"
 import { Link } from "react-scroll"
 
-import { Input, TextArea, Toast } from "../Form"
+import { Input, TextArea, Toast } from "../"
 
-const RequestACourse = () => {
+export const RequestACourseForm = () => {
   const [toast, setToast] = useState({
     message: "",
     visible: false,
@@ -130,7 +130,7 @@ const RequestACourse = () => {
         type={toast.type}
         visible={toast.visible}
         onClick={() =>
-          setToast(toast => ({
+          setToast((toast) => ({
             ...toast,
             visible: false,
           }))
@@ -139,5 +139,3 @@ const RequestACourse = () => {
     </>
   )
 }
-
-export default RequestACourse

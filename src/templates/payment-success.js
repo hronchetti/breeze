@@ -5,12 +5,9 @@ import Moment from "moment"
 import { Helmet } from "react-helmet"
 import ReactMarkdown from "react-markdown"
 
-import { TextCard } from "../components/Cards"
+import { TextCard, Button, FAQ, Divider } from "../components"
 import Layout from "../components/Layout"
-import { Button } from "../components/Button"
 import { createBookingDates, convertToAmPmTime } from "../utilities"
-import { FAQ } from "../components"
-import Divider from "../components/Divider"
 
 const paymentSuccess = ({ data }) => {
   const thinkificTraining = data.strapiCourseBookings.course.thinkific_training

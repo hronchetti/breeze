@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import Divider from "../Divider"
+import { Divider } from "../"
 
 import FindACourse from "../../images/icons/big/find-online.svg"
 import LearnOnline from "../../images/icons/big/online-training.svg"
@@ -10,7 +10,7 @@ import RequestACourse from "../../images/icons/big/request.svg"
 import AgreeOnDates from "../../images/icons/big/diary.svg"
 import EventLaunch from "../../images/icons/big/venue.svg"
 
-const HowItWorks = ({ steps, page }) => (
+export const HowItWorks = ({ steps, page }) => (
   <section className="wrapper padded" id="howItWorks">
     <h2 className="textCenterAlways">How it works</h2>
     <Divider align="centerAlways" />
@@ -83,5 +83,3 @@ HowItWorks.propTypes = {
   steps: PropTypes.array.isRequired,
   page: PropTypes.string.isRequired,
 }
-
-export default HowItWorks

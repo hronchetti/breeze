@@ -9,11 +9,11 @@ import {
   EmptyCourseList,
   FilterOption,
   HeaderBlob,
+  HealthcareProfessionalsOnly,
+  SignOffStillLooking,
 } from "../components"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
-import SignOffStillLooking from "../components/SignOffStillLooking"
-import { HealthcareProfessionalsOnly } from "../components/Modal"
 
 import { createCourseList } from "../utilities"
 
@@ -181,6 +181,7 @@ export const pageQuery = graphql`
           id
           strapiId
           address_full
+          address_short
           start_date
           booking_price
           booking_price_currency

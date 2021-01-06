@@ -6,11 +6,7 @@
   gap: 0;
 
   .courseContent {
-    .content {
-      h2 {
-        margin: 0 0 0.75rem 0;
-      }
-
+    .details {
       ul {
         li {
           position: relative;
@@ -29,6 +25,12 @@
             border-radius: 50%;
           }
         }
+      }
+    }
+
+    .content {
+      h2 {
+        margin: 0 0 0.75rem 0;
       }
 
       p {
@@ -142,7 +144,7 @@
     padding: 2.5rem 0;
 
     .courseContent {
-      .content {
+      .details {
         ul {
           li {
             padding-left: 2.5rem;
@@ -155,6 +157,7 @@
           }
         }
       }
+
       .agenda {
         margin: 2rem 0 0 0;
 

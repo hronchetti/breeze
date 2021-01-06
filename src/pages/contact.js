@@ -3,13 +3,15 @@ import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import ReactMarkdown from "react-markdown"
 
-import { FAQ } from "../components"
-import Divider from "../components/Divider"
+import {
+  FAQ,
+  Divider,
+  Header,
+  SignOffMailingList,
+  TextCard,
+} from "../components"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
-import { Header } from "../components/Layout/Headers"
-import SignOffMailingList from "../components/SignOffMailingList"
-import { TextCard } from "../components/Cards"
 
 import PhoneIcon from "../images/icons/big/phone.svg"
 import EmailIcon from "../images/icons/big/email.svg"

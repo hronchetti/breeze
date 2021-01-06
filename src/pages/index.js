@@ -4,15 +4,17 @@ import Swiper from "swiper"
 import "swiper/css/swiper.min.css"
 import "../style/03-utilities/_swiper.scss"
 
-import Divider from "../components/Divider"
-import HowItWorks from "../components/HowItWorks"
 import Layout from "../components/Layout"
 import PropTypes from "prop-types"
 import SEO from "../components/SEO"
-import SignOffStillLooking from "../components/SignOffStillLooking"
-import { HeaderHomepage } from "../components/Layout/Headers"
-import { ImageCard } from "../components/Cards"
-import { Review } from "../components/Courses"
+import {
+  HeaderHomepage,
+  Divider,
+  HowItWorks,
+  ImageCard,
+  Review,
+  SignOffStillLooking,
+} from "../components"
 import { courseTopicSlug, cpdCourseSlug } from "../utilities/createSlug"
 
 const LandingPage = ({ data }) => {
@@ -50,13 +52,16 @@ const LandingPage = ({ data }) => {
       />
       <HeaderHomepage
         title={homepage.title}
+        courseTopics={courseGroups}
         paragraph={homepage.introduction}
         videoLink={homepage.video_link}
       />
       <main>
         <section className="backgroundGreyLightSuper">
           <div className="reviews">
-            <h2 className="textCenter heading">{homepage.reviews_header}</h2>
+            <h2 className="textCenter heading" id="reviews">
+              {homepage.reviews_header}
+            </h2>
             <Divider align="center" />
             <p className="textCenter paragraph">{homepage.reviews_paragraph}</p>
           </div>
@@ -84,7 +89,7 @@ const LandingPage = ({ data }) => {
         </section>
         {courseGroups.length > 0 && (
           <section className="backgroundGreyLightSuper">
-            <section className="wrapper padded" id="courses">
+            <section className="wrapper padded">
               <h2 className="heading">Courses by topic</h2>
               <Divider />
               <div className="courseGroups">
@@ -107,7 +112,7 @@ const LandingPage = ({ data }) => {
         )}
         {courseProfessions.length > 0 && (
           <section>
-            <section className="wrapper padded" id="courses">
+            <section className="wrapper padded">
               <h2 className="heading">Courses by profession</h2>
               <Divider />
               <div className="courseGroups">
@@ -130,7 +135,7 @@ const LandingPage = ({ data }) => {
         )}
         {CpdCourses.length > 0 && (
           <section className="backgroundGreyLightSuper">
-            <section className="wrapper padded" id="courses">
+            <section className="wrapper padded">
               <h2 className="heading">CPD Courses</h2>
               <Divider />
               <div className="courseGroups">

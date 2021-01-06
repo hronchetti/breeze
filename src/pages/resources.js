@@ -2,10 +2,14 @@ import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 
-import { FilterOption, Header, Resource } from "../components"
+import {
+  FilterOption,
+  Header,
+  Resource,
+  SignOffStillLooking,
+} from "../components"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
-import SignOffStillLooking from "../components/SignOffStillLooking"
 
 const Resources = ({ data }) => {
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)

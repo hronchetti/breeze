@@ -2,12 +2,14 @@ import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 
-import { HeaderBlob } from "../components/Layout/Headers"
+import {
+  HeaderBlob,
+  HowItWorks,
+  RequestACourseForm,
+  SignOffStillLooking,
+} from "../components"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
-import SignOffStillLooking from "../components/SignOffStillLooking"
-import HowItWorks from "../components/HowItWorks"
-import RequestACourseForm from "../components/RequestACourseForm"
 
 const RequestACourse = ({ data }) => {
   const requestCourse = data.strapiRequestACourse

@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 
-import { FilterOption, Header, BlogArticleList } from "../components"
+import {
+  FilterOption,
+  Header,
+  BlogArticleList,
+  SignOffMailingList,
+} from "../components"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
-import SignOffMailingList from "../components/SignOffMailingList"
 
 const Blog = ({ data }) => {
   const [articles, setArticles] = useState([])

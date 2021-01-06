@@ -14,6 +14,7 @@ export {
   ScrollToBookings,
   Tag,
 } from "./Courses"
+export { Divider } from "./Divider"
 export { FAQ } from "./FAQ"
 export { FilterOption } from "./FilterOption"
 export { Checkbox, Input, Select, TextArea, Toast } from "./Form"
@@ -23,5 +24,9 @@ export {
   HeaderHomepage,
   HeaderViewCourse,
 } from "./Layout/Headers"
+export { HowItWorks } from "./HowItWorks"
 export { HealthcareProfessionalsOnly, VideoPlayer } from "./Modal"
 export { Resource } from "./Resource"
+export { RequestACourseForm } from "./RequestACourseForm"
+export { SignOffMailingList } from "./SignOffMailingList"
+export { SignOffStillLooking } from "./SignOffStillLooking"

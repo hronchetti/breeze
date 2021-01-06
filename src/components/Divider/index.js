@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import DividerSVG from "../../images/divider.svg"
 
-const Divider = ({ align }) => {
+export const Divider = ({ align }) => {
   return (
     <img
       className={`divider ${align}`}
@@ -20,5 +20,3 @@ Divider.defaultProps = {
 Divider.propTypes = {
   align: PropTypes.string,
 }
-
-export default Divider

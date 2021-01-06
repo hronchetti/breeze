@@ -15,8 +15,7 @@ import {
 
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
-import SignOffMailingList from "../components/SignOffMailingList"
-import { BlogArticleList } from "../components"
+import { BlogArticleList, SignOffMailingList } from "../components"
 import { defaultSEO } from "../utilities"
 
 const BlogArticle = ({ data, location }) => {

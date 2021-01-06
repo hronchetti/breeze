@@ -6,7 +6,6 @@ import { clearAllBodyScrollLocks } from "body-scroll-lock"
 
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
-import SignOffStillLooking from "../components/SignOffStillLooking"
 import {
   AgendaItem,
   Button,
@@ -20,6 +19,7 @@ import {
   Review,
   ScrollToBookings,
   Tag,
+  SignOffStillLooking,
 } from "../components"
 import {
   createBookingDates,
@@ -92,19 +92,21 @@ const CourseView = ({ data, location }) => {
       <main className="backgroundGreyLightSuper">
         <section className="wrapper courseWrapper">
           <section className="courseContent">
-            <div className="content">
-              <h2>Course details</h2>
-              <ReactMarkdown source={course.details} />
-            </div>
-            <div className="faqs">
-              {course.accordions &&
-                course.accordions.map((accordion) => (
-                  <FAQ
-                    key={accordion.heading}
-                    question={accordion.heading}
-                    answer={accordion.content}
-                  />
-                ))}
+            <div className="details">
+              <div className="content">
+                <h2>Course details</h2>
+                <ReactMarkdown source={course.details} />
+              </div>
+              <div className="faqs">
+                {course.accordions &&
+                  course.accordions.map((accordion) => (
+                    <FAQ
+                      key={accordion.heading}
+                      question={accordion.heading}
+                      answer={accordion.content}
+                    />
+                  ))}
+              </div>
             </div>
             {course.agenda_days && course.agenda_days.length > 0 ? (
               <div className={`agenda${onlineCourse ? " onlineOnly" : ""}`}>
