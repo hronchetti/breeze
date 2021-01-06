@@ -41,16 +41,8 @@ export const Review = ({
         <span className="gradientOverlay"></span>
       </div>
       <span className="continueReading">
-        {source && source === "YouTube" ? (
-          <>
-            Watch video <span className="source">on YouTube</span>
-          </>
-        ) : (
-          <>
-            Continue reading
-            <span className="source">{source && ` on ${source}`}</span>
-          </>
-        )}
+        Continue reading
+        {source && <span className="source"> on {source}</span>}
       </span>
     </a>
   )
