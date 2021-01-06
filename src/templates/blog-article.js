@@ -21,6 +21,7 @@ const BlogArticle = ({ data, location }) => {
   const articleSEO = article.seo
     ? article.seo
     : defaultSEO(article.title, article.excerpt, location.href)
+
   const url = location.href ? location.href : ""
   const nextArticle = data.allStrapiBlogArticles.edges[0].node
 

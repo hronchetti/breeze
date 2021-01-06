@@ -4,6 +4,7 @@ export { Button, CloseButton } from "./Button"
 export { TextCard, ImageCard } from "./Cards"
 export {
   AgendaItem,
+  CourseListPage,
   CourseListing,
   CoursePrices,
   EmptyCourseList,

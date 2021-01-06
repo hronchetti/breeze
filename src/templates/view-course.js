@@ -39,6 +39,7 @@ const CourseView = ({ data, location }) => {
   const courseSEO = course.seo
     ? course.seo
     : defaultSEO(course.name, course.summary, location.href)
+
   const courseBookings = data.allStrapiCourseBookings.edges
   const onlineCourse = course.online_only ? true : false
 
