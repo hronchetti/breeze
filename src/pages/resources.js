@@ -2,10 +2,8 @@ import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 
-import FilterOption from "../components/FilterOption"
-import { Header } from "../components/Layout/Headers"
+import { FilterOption, Header, Resource } from "../components"
 import Layout from "../components/Layout"
-import Resource from "../components/Resource"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 
@@ -31,7 +29,7 @@ const Resources = ({ data }) => {
             <div className="sidebar">
               <span className="sidebarHeading">Quick access</span>
               <section className="sidebarItems">
-                {resources.map(topic => (
+                {resources.map((topic) => (
                   <FilterOption
                     key={topic.node.id}
                     value={topic.node.group_name}
@@ -57,7 +55,7 @@ const Resources = ({ data }) => {
                 ? `${resources.length} resource groups`
                 : `${resources.length} resource group`}
             </span>
-            {resources.map(resourceGroup => (
+            {resources.map((resourceGroup) => (
               <article
                 key={resourceGroup.node.id}
                 className="resourceGroup"
@@ -69,7 +67,7 @@ const Resources = ({ data }) => {
                 ) : (
                   ""
                 )}
-                {resourceGroup.node.resources.map(resource => (
+                {resourceGroup.node.resources.map((resource) => (
                   <Resource
                     key={resource.id}
                     name={resource.name}

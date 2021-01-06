@@ -8,24 +8,25 @@ import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
 import {
+  AgendaItem,
+  Button,
+  CoursePrices,
+  FAQ,
+  HealthcareProfessionalsOnly,
+  OnlineBooking,
+  PrimaryBooking,
+  RequestNearYou,
+  HeaderViewCourse,
+  Review,
+  ScrollToBookings,
+  Tag,
+} from "../components"
+import {
   createBookingDates,
   defaultSEO,
   convertToAmPmTime,
   createFutureBookings,
 } from "../utilities"
-import { Button } from "../components/Button"
-import { HeaderViewCourse } from "../components/Layout/Headers"
-import { HealthcareProfessionalsOnly } from "../components/Modal"
-import {
-  AgendaItem,
-  CoursePrices,
-  OnlineBooking,
-  PrimaryBooking,
-  RequestNearYou,
-  Review,
-  ScrollToBookings,
-  Tag,
-} from "../components/Courses"
 
 const CourseView = ({ data, location }) => {
   const [primaryBooking, setPrimaryBooking] = useState()
@@ -34,6 +35,7 @@ const CourseView = ({ data, location }) => {
   const [bookingId, setBookingId] = useState()
 
   const course = data.strapiCourses
+
   const courseSEO = course.seo
     ? course.seo
     : defaultSEO(course.name, course.summary, location.href)
@@ -94,13 +96,23 @@ const CourseView = ({ data, location }) => {
               <h2>Course details</h2>
               <ReactMarkdown source={course.details} />
             </div>
+            <div className="faqs">
+              {course.accordions &&
+                course.accordions.map((accordion) => (
+                  <FAQ
+                    key={accordion.heading}
+                    question={accordion.heading}
+                    answer={accordion.content}
+                  />
+                ))}
+            </div>
             {course.agenda_days && course.agenda_days.length > 0 ? (
               <div className={`agenda${onlineCourse ? " onlineOnly" : ""}`}>
                 <h2>Agenda</h2>
                 {course.agenda_days.map((agendaDay, index) => (
                   <div key={agendaDay.id}>
                     {onlineCourse ? "" : <h5>Day {index + 1}</h5>}
-                    {agendaDay.event.map(event => (
+                    {agendaDay.event.map((event) => (
                       <AgendaItem
                         key={event.id}
                         type={event.type}
@@ -139,7 +151,7 @@ const CourseView = ({ data, location }) => {
                           <Tag
                             discount
                             color="blue"
-                            text={node.discount_percentage}
+                            text={node.discount_percentage.toString()}
                           />
                         ) : null}
                       </h4>
@@ -214,7 +226,7 @@ const CourseView = ({ data, location }) => {
               <RequestNearYou />
             )}
             {course.reviews && course.reviews.length > 0
-              ? course.reviews.map(review => (
+              ? course.reviews.map((review) => (
                   <Review
                     key={review.id}
                     link={review.continue_reading_link}
@@ -257,6 +269,11 @@ export const pageQuery = graphql`
       id
       course_topic {
         name
+      }
+      accordions {
+        content
+        heading
+        id
       }
       agenda_days {
         id

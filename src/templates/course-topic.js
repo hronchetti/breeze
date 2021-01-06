@@ -3,9 +3,12 @@ import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
 
-import { CourseListing, EmptyCourseList } from "../components/Courses"
-import FilterOption from "../components/FilterOption"
-import { HeaderBlob } from "../components/Layout/Headers"
+import {
+  CourseListing,
+  EmptyCourseList,
+  FilterOption,
+  HeaderBlob,
+} from "../components"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
@@ -35,8 +38,8 @@ const CourseList = ({ data }) => {
   }
 
   const prioritisedCourses = createCourseList(
-    courses.filter(course => course.node.featured_course_in_topic),
-    courses.filter(course => !course.node.featured_course_in_topic)
+    courses.filter((course) => course.node.featured_course_in_topic),
+    courses.filter((course) => !course.node.featured_course_in_topic)
   )
 
   return (
@@ -68,7 +71,7 @@ const CourseList = ({ data }) => {
               <div className="sidebar">
                 <span className="sidebarHeading">Quick access</span>
                 <section className="sidebarItems">
-                  {prioritisedCourses.map(course => (
+                  {prioritisedCourses.map((course) => (
                     <FilterOption
                       key={course.node.id}
                       value={course.node.name}
@@ -95,12 +98,12 @@ const CourseList = ({ data }) => {
                   ? `${prioritisedCourses.length} courses`
                   : `${prioritisedCourses.length} course`}
               </span>
-              {prioritisedCourses.map(course => (
+              {prioritisedCourses.map((course) => (
                 <CourseListing
                   key={course.node.id}
                   course={course.node}
                   bookings={allCourseBookings.filter(
-                    booking =>
+                    (booking) =>
                       booking.node.course &&
                       booking.node.course.id === course.node.strapiId
                   )}

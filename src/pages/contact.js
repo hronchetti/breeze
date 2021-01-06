@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import ReactMarkdown from "react-markdown"
 
-import FAQ from "../components/FAQ"
+import { FAQ } from "../components"
 import Divider from "../components/Divider"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
@@ -129,7 +129,7 @@ const Contact = ({ data }) => {
             {contactUs.faq.length > 1 &&
               contactUs.faq
                 .filter((cur, index) => index > 0)
-                .map(faq => (
+                .map((faq) => (
                   <FAQ
                     key={faq.id}
                     question={faq.question}

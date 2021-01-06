@@ -5,7 +5,7 @@ const makeRequest = (graphql, request) =>
   new Promise((resolve, reject) => {
     // Query for nodes to use in creating pages.
     resolve(
-      graphql(request).then(result => {
+      graphql(request).then((result) => {
         if (result.errors) {
           reject(result.errors)
         }
@@ -54,6 +54,15 @@ exports.createPages = ({ actions, graphql }) => {
         }
       }
 
+      allStrapiCpdCourses {
+        edges {
+          node {
+            strapiId
+            name
+          }
+        }
+      }
+
       allStrapiCourses {
         edges {
           node {
@@ -75,7 +84,7 @@ exports.createPages = ({ actions, graphql }) => {
       }
     }
     `
-  ).then(result => {
+  ).then((result) => {
     // Blog articles /blog/blog_title
     const posts = result.data.allStrapiBlogArticles.edges
     const firstPost = result.data.allStrapiBlogArticles.edges[0]
@@ -110,6 +119,18 @@ exports.createPages = ({ actions, graphql }) => {
       createPage({
         path: createSlug.courseTopicSlug(node.name),
         component: path.resolve(`src/templates/course-profession.js`),
+        context: {
+          name: node.name,
+          strapiId: node.strapiId,
+        },
+      })
+    })
+
+    // CPD Courses /courses/cpd_course_name
+    result.data.allStrapiCpdCourses.edges.forEach(({ node }) => {
+      createPage({
+        path: createSlug.courseTopicSlug(node.name),
+        component: path.resolve(`src/templates/cpd-courses.js`),
         context: {
           name: node.name,
           strapiId: node.strapiId,

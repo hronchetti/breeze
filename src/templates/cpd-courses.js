@@ -8,11 +8,11 @@ import {
   EmptyCourseList,
   FilterOption,
   HeaderBlob,
+  HealthcareProfessionalsOnly,
 } from "../components"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import SignOffStillLooking from "../components/SignOffStillLooking"
-import { HealthcareProfessionalsOnly } from "../components/Modal"
 
 import { createCourseList } from "../utilities"
 
@@ -24,8 +24,8 @@ const CourseList = ({ data }) => {
 
   const allCourseBookings = data.allStrapiCourseBookings.edges
   const courses = data.allStrapiCourses.edges
-  const courseProfession = data.strapiCourseProfessions
-  const courseProfessionSEO = courseProfession.seo
+  const cpdCourse = data.strapiCpdCourses
+  const cpdCourseSEO = cpdCourse.seo
 
   const toggleSidebarVisibilityMobile = () => {
     setSidebarVisibilityMobile(!sidebarVisibileMobile)
@@ -38,23 +38,20 @@ const CourseList = ({ data }) => {
   }
 
   const featuredCourses = courses.filter((course) =>
-    course.node.featured_course_professions.some(
-      (featuredCourseProfession) =>
-        featuredCourseProfession.name === courseProfession.name
+    course.node.featured_cpd_courses.some(
+      (featuredCpdCourse) => featuredCpdCourse.name === cpdCourse.name
     )
   )
 
   const prioritisedCourses = createCourseList(
     featuredCourses,
     courses.reduce((remainingCourses, course) => {
-      if (course.node.not_included_in_course_professions.length > 0) {
-        course.node.not_included_in_course_professions.map(
-          (professionNotIncludedWithin) => {
-            if (professionNotIncludedWithin.name === courseProfession.name) {
-              return remainingCourses
-            }
+      if (course.node.not_included_in_cpd_courses.length > 0) {
+        course.node.not_included_in_cpd_courses.map((NotIncludedCourses) => {
+          if (NotIncludedCourses.name === cpdCourse.name) {
+            return remainingCourses
           }
-        )
+        })
       } else {
         if (!featuredCourses.includes(course)) {
           remainingCourses.push(course)
@@ -67,26 +64,20 @@ const CourseList = ({ data }) => {
   return (
     <Layout>
       <SEO
-        title={courseProfessionSEO.title}
-        description={courseProfessionSEO.description}
-        canonicalHref={courseProfessionSEO.canonical_href}
-        ogType={courseProfessionSEO.og_type}
-        ogUrl={courseProfessionSEO.og_url}
+        title={cpdCourseSEO.title}
+        description={cpdCourseSEO.description}
+        canonicalHref={cpdCourseSEO.canonical_href}
+        ogType={cpdCourseSEO.og_type}
+        ogUrl={cpdCourseSEO.og_url}
       />
       <HeaderBlob
-        title={`${courseProfession.name}`}
-        image={
-          courseProfession.image
-            ? courseProfession.image.childImageSharp.fluid
-            : ""
-        }
+        title={`${cpdCourse.name}`}
+        image={cpdCourse.image ? cpdCourse.image.childImageSharp.fluid : ""}
         imageDescription={
-          courseProfession.image_description
-            ? courseProfession.image_description
-            : ""
+          cpdCourse.image_description ? cpdCourse.image_description : ""
         }
       >
-        <p>{courseProfession.description}</p>
+        <p>{cpdCourse.description}</p>
       </HeaderBlob>
       <main className="backgroundGreyLightSuper">
         {prioritisedCourses && prioritisedCourses.length > 0 ? (
@@ -144,7 +135,7 @@ const CourseList = ({ data }) => {
         ) : (
           <section className="wrapper padded">
             <EmptyCourseList
-              courseTopic={courseProfession.name}
+              courseTopic={cpdCourse.name}
               professionPage={true}
             />
           </section>
@@ -172,7 +163,7 @@ CourseList.propTypes = {
 export default CourseList
 
 export const pageQuery = graphql`
-  query AllCoursesInProfession($name: String!) {
+  query AllCoursesInCPD($name: String!) {
     allStrapiCourses(
       filter: { course_topic: { id: { eq: 1 } } }
       sort: { order: ASC, fields: name }
@@ -195,11 +186,11 @@ export const pageQuery = graphql`
           course_topic {
             name
           }
-          not_included_in_course_professions {
+          not_included_in_cpd_courses {
             name
             id
           }
-          featured_course_professions {
+          featured_cpd_courses {
             id
             name
           }
@@ -231,7 +222,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    strapiCourseProfessions(name: { eq: $name }) {
+    strapiCpdCourses(name: { eq: $name }) {
       image_description
       name
       description
@@ -242,6 +233,10 @@ export const pageQuery = graphql`
             ...GatsbyImageSharpFluid
           }
         }
+      }
+      tick_bullets {
+        bullet
+        id
       }
       seo {
         canonical_href

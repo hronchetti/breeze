@@ -33,6 +33,7 @@ module.exports = {
           `blog-articles`,
           `course-topics`,
           `course-professions`,
+          `cpd-courses`,
           `course-bookings`,
           `courses`,
           `resources`,

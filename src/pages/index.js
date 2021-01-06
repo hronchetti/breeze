@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { graphql } from "gatsby"
 import Swiper from "swiper"
 import "swiper/css/swiper.min.css"
-import "../style/03-utilities/swiper.scss"
+import "../style/03-utilities/_swiper.scss"
 
 import Divider from "../components/Divider"
 import HowItWorks from "../components/HowItWorks"
@@ -20,6 +20,7 @@ const LandingPage = ({ data }) => {
   const homepageSEO = homepage.seo
   const courseGroups = data.allStrapiCourseTopics.edges
   const courseProfessions = data.allStrapiCourseProfessions.edges
+  const CpdCourses = data.allStrapiCpdCourses.edges
   const courseReviews = data.allStrapiCourses.edges
   let ReviewsSwiper
 
@@ -61,8 +62,8 @@ const LandingPage = ({ data }) => {
           </div>
           <div className="swiper-container">
             <div className="swiper-wrapper">
-              {courseReviews.map(course =>
-                course.node.reviews.map(review => (
+              {courseReviews.map((course) =>
+                course.node.reviews.map((review) => (
                   <Review
                     key={review.id}
                     link={review.continue_reading_link}
@@ -81,48 +82,75 @@ const LandingPage = ({ data }) => {
         <section className="backgroundBlueDark">
           <HowItWorks steps={homepage.how_it_works} page="homepage" />
         </section>
-        <section className="backgroundGreyLightSuper">
-          <section className="wrapper padded" id="courses">
-            <h2 className="heading">Courses by topic</h2>
-            <Divider />
-            <div className="courseGroups">
-              {courseGroups.map(({ node }) => (
-                <ImageCard
-                  key={node.id}
-                  image={node.image}
-                  imageDescription={node.image_description}
-                  to={courseTopicSlug(node.name)}
-                >
-                  <h3>{node.name}</h3>
-                  <div className="courseStyleWrapper"></div>
-                  <p>{node.description}</p>
-                  <span className="linkArrow">Get started</span>
-                </ImageCard>
-              ))}
-            </div>
+        {courseGroups.length > 0 && (
+          <section className="backgroundGreyLightSuper">
+            <section className="wrapper padded" id="courses">
+              <h2 className="heading">Courses by topic</h2>
+              <Divider />
+              <div className="courseGroups">
+                {courseGroups.map(({ node }) => (
+                  <ImageCard
+                    key={node.id}
+                    image={node.image}
+                    imageDescription={node.image_description}
+                    to={courseTopicSlug(node.name)}
+                  >
+                    <h3>{node.name}</h3>
+                    <div className="courseStyleWrapper"></div>
+                    <p>{node.description}</p>
+                    <span className="linkArrow">Get started</span>
+                  </ImageCard>
+                ))}
+              </div>
+            </section>
           </section>
-        </section>
-        <section>
-          <section className="wrapper padded" id="courses">
-            <h2 className="heading">Courses by profession</h2>
-            <Divider />
-            <div className="courseGroups">
-              {courseProfessions.map(({ node }) => (
-                <ImageCard
-                  key={node.id}
-                  image={node.image}
-                  imageDescription={node.image_description}
-                  to={courseTopicSlug(node.name)}
-                >
-                  <h3>{node.name}</h3>
-                  <div className="courseStyleWrapper"></div>
-                  <p>{node.description}</p>
-                  <span className="linkArrow">Get started</span>
-                </ImageCard>
-              ))}
-            </div>
+        )}
+        {courseProfessions.length > 0 && (
+          <section>
+            <section className="wrapper padded" id="courses">
+              <h2 className="heading">Courses by profession</h2>
+              <Divider />
+              <div className="courseGroups">
+                {courseProfessions.map(({ node }) => (
+                  <ImageCard
+                    key={node.id}
+                    image={node.image}
+                    imageDescription={node.image_description}
+                    to={courseTopicSlug(node.name)}
+                  >
+                    <h3>{node.name}</h3>
+                    <div className="courseStyleWrapper"></div>
+                    <p>{node.description}</p>
+                    <span className="linkArrow">Get started</span>
+                  </ImageCard>
+                ))}
+              </div>
+            </section>
           </section>
-        </section>
+        )}
+        {CpdCourses.length > 0 && (
+          <section className="backgroundGreyLightSuper">
+            <section className="wrapper padded" id="courses">
+              <h2 className="heading">CPD Courses</h2>
+              <Divider />
+              <div className="courseGroups">
+                {CpdCourses.map(({ node }) => (
+                  <ImageCard
+                    key={node.id}
+                    image={node.image}
+                    imageDescription={node.image_description}
+                    to={courseTopicSlug(node.name)}
+                  >
+                    <h3>{node.name}</h3>
+                    <div className="courseStyleWrapper"></div>
+                    <p>{node.description}</p>
+                    <span className="linkArrow">Get started</span>
+                  </ImageCard>
+                ))}
+              </div>
+            </section>
+          </section>
+        )}
       </main>
       <SignOffStillLooking />
     </Layout>
@@ -189,6 +217,23 @@ export const pageQuery = graphql`
               }
             }
           }
+        }
+      }
+    }
+    allStrapiCpdCourses(sort: { order: ASC, fields: name }) {
+      edges {
+        node {
+          image_description
+          image {
+            childImageSharp {
+              fluid(maxWidth: 1600) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+          description
+          name
+          strapiId
         }
       }
     }

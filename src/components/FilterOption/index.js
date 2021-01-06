@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-scroll"
 
-const FilterOption = ({
+export const FilterOption = ({
   clickFunc,
   filteredValue,
   mobileOnly,
@@ -42,20 +42,18 @@ const FilterOption = ({
 }
 
 FilterOption.defaultProps = {
-  mobileOnly: false,
-  scroll: false,
-  filteredValue: "",
   clickFunc: () => {},
   closeMobileWrapper: () => {},
+  filteredValue: "",
+  mobileOnly: false,
+  scroll: false,
 }
 
 FilterOption.propTypes = {
   clickFunc: PropTypes.func,
+  closeMobileWrapper: PropTypes.func,
   filteredValue: PropTypes.string,
-  value: PropTypes.string.isRequired,
   mobileOnly: PropTypes.bool,
   scroll: PropTypes.bool,
-  closeMobileWrapper: PropTypes.func,
+  value: PropTypes.string.isRequired,
 }
-
-export default FilterOption

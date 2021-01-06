@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-const Resource = ({ name, link, type }) => {
+export const Resource = ({ name, link, type }) => {
   if (link) {
     return (
       <a
@@ -23,5 +23,3 @@ Resource.propTypes = {
   link: PropTypes.string,
   type: PropTypes.string.isRequired,
 }
-
-export default Resource

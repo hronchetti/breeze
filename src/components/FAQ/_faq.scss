@@ -7,6 +7,7 @@
 
   .faqButton {
     @extend %buttonStyleReset;
+    cursor: pointer;
     width: 100%;
     text-align: left;
     display: grid;
@@ -49,7 +50,7 @@
   .faqAnswer {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 300ms ease-out;
+    transition: max-height 400ms ease-in-out;
 
     .faqAnswerContent {
       padding: 0 1.75rem 1.25rem 1.5rem;

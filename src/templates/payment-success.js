@@ -9,7 +9,7 @@ import { TextCard } from "../components/Cards"
 import Layout from "../components/Layout"
 import { Button } from "../components/Button"
 import { createBookingDates, convertToAmPmTime } from "../utilities"
-import FAQ from "../components/FAQ"
+import { FAQ } from "../components"
 import Divider from "../components/Divider"
 
 const paymentSuccess = ({ data }) => {
@@ -81,7 +81,7 @@ const paymentSuccess = ({ data }) => {
               {faqs.length > 1 &&
                 faqs
                   .filter((cur, index) => index > 0)
-                  .map(faq => (
+                  .map((faq) => (
                     <FAQ
                       key={faq.id}
                       question={faq.question}

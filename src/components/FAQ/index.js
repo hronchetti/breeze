@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown"
 import Chevron from "../../images/icons/chevron--scalable.svg"
 import { ReactSVG } from "react-svg"
 
-const FAQ = ({ question, answer }) => {
+export const FAQ = ({ question, answer }) => {
   const [isOpen, setIsOpen] = React.useState(false)
   const FaqElement = React.useRef(null)
 
@@ -30,7 +30,7 @@ const FAQ = ({ question, answer }) => {
         />
       </button>
       <section className="faqAnswer" ref={FaqElement}>
-        <div className="faqAnswerContent">
+        <div className="content faqAnswerContent">
           <ReactMarkdown source={answer} />
         </div>
       </section>
@@ -47,5 +47,3 @@ FAQ.propTypes = {
   question: PropTypes.string,
   answer: PropTypes.string,
 }
-
-export default FAQ
