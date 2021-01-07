@@ -3,9 +3,9 @@ import addToMailchimp from "gatsby-plugin-mailchimp"
 import * as Yup from "yup"
 import { Formik, Form } from "formik"
 
-import { Input, Toast } from "../Form"
+import { Input, Toast } from "../"
 
-const SignOffMailingList = () => {
+export const SignOffMailingList = () => {
   const [toast, setToast] = useState({
     message: "",
     visible: false,
@@ -64,7 +64,7 @@ const SignOffMailingList = () => {
         type={toast.type}
         visible={toast.visible}
         onClick={() =>
-          setToast(toast => ({
+          setToast((toast) => ({
             ...toast,
             visible: false,
           }))
@@ -73,5 +73,3 @@ const SignOffMailingList = () => {
     </section>
   )
 }
-
-export default SignOffMailingList

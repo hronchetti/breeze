@@ -3,9 +3,11 @@ import PropTypes from "prop-types"
 import Img from "gatsby-image"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
 import TrackVisibility from "react-on-screen"
-import AcuphysLogo from "../../../../images/acuphys-logo.svg"
-import Blob from "../../../../images/blob.svg"
-import { VideoPlayer } from "../../../Modal"
+
+import { VideoPlayer } from "../../"
+
+import AcuphysLogo from "../../../images/acuphys-logo.svg"
+import Blob from "../../../images/blob.svg"
 
 export const HeaderViewCourse = ({
   defaultImage,
@@ -52,7 +54,7 @@ export const HeaderViewCourse = ({
                 className="imageContainer"
                 onClick={() => setPlayerVisibility(true)}
                 role="button"
-                onKeyDown={e =>
+                onKeyDown={(e) =>
                   e.keyCode === 13 ? setPlayerVisibility(true) : null
                 }
                 tabIndex={0}

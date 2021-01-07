@@ -1,56 +1,18 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import * as Yup from "yup"
 import { Formik, Form, Field } from "formik"
 import axios from "axios"
 import qs from "qs"
-import PropTypes from "prop-types"
 import { Link } from "react-scroll"
 
-import { Input, TextArea, Select, Toast } from "../Form"
+import { Input, TextArea, Toast } from "../"
 
-const RequestACourse = ({ courses }) => {
-  const [coursesForSelect, setCourses] = useState([])
+export const RequestACourseForm = () => {
   const [toast, setToast] = useState({
     message: "",
     visible: false,
     type: true,
   })
-
-  useEffect(() => {
-    formatCourses(courses)
-  }, [courses])
-
-  const formatCourses = courses => {
-    let formattedCourses = []
-
-    courses.forEach(course => {
-      formattedCourses.push({
-        value: course.node.name,
-        label: course.node.name,
-      })
-    })
-    setCourses([
-      ...formattedCourses,
-      { value: "Acupuncture in Sport", label: "Acupuncture in Sport" },
-      {
-        value: "Acupuncture in Women's Health",
-        label: "Acupuncture in Women's Health",
-      },
-      { value: "Cupping", label: "Cupping" },
-      { value: "Dry Needling", label: "Dry Needling" },
-      {
-        value: "Surface anatomy palpation",
-        label: "Surface anatomy palpation",
-      },
-      { value: "Taping & Strapping", label: "Taping & Strapping" },
-      {
-        value: "Trigger Point Acupuncture",
-        label: "Trigger Point Acupuncture",
-      },
-      { value: "Understanding Research", label: "Understanding Research" },
-      { value: "Tailor your own", label: "Tailor your own" },
-    ])
-  }
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const options = {
@@ -85,7 +47,6 @@ const RequestACourse = ({ courses }) => {
           fullname: "",
           email: "",
           phone: "",
-          course: "",
           location: "",
           message: "",
           "bot-field": "",
@@ -97,9 +58,8 @@ const RequestACourse = ({ courses }) => {
             .email("Must be a valid email address")
             .required("Required"),
           phone: Yup.string(),
-          course: Yup.string().required("Required"),
           location: Yup.string().required("Required"),
-          message: Yup.string(),
+          message: Yup.string().required("Required"),
         })}
         onSubmit={handleSubmit}
       >
@@ -129,22 +89,20 @@ const RequestACourse = ({ courses }) => {
               label="Phone"
               name="phone"
               type="phone"
-              placeholder="Incase we need to ring"
+              placeholder="In case we need to ring"
               optional="true"
             />
-            <Select label="Course" name="course" options={coursesForSelect} />
             <Input
               label="Location"
               name="location"
               type="text"
-              placeholder="Where should the course be held?"
+              placeholder="Where are you based?"
             />
             <TextArea
               label="Message"
               name="message"
-              rows={4}
-              optional="true"
-              placeholder="Any extra information that might help us organise the course"
+              rows={5}
+              placeholder="Have a specific course in mind? Let us know what you'd like to see near you"
             />
             <section className="headerButtons">
               <button
@@ -152,7 +110,7 @@ const RequestACourse = ({ courses }) => {
                 className="button buttonPrimary"
                 type="submit"
               >
-                Request course
+                Submit
               </button>
               <Link
                 to="howItWorks"
@@ -172,7 +130,7 @@ const RequestACourse = ({ courses }) => {
         type={toast.type}
         visible={toast.visible}
         onClick={() =>
-          setToast(toast => ({
+          setToast((toast) => ({
             ...toast,
             visible: false,
           }))
@@ -181,9 +139,3 @@ const RequestACourse = ({ courses }) => {
     </>
   )
 }
-
-RequestACourse.propTypes = {
-  courses: PropTypes.array.isRequired,
-}
-
-export default RequestACourse

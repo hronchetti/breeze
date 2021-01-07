@@ -3,15 +3,39 @@
   grid-template-columns: 1fr;
   gap: 2.5rem;
 
-  .content {
+  .headerHomepageBody {
     opacity: 0;
     transform: translateY(20px);
 
     h1 {
       max-width: 35rem;
     }
+
     p {
       max-width: 27rem;
+    }
+
+    .links {
+      margin-top: 1rem;
+
+      .linkArrow {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+
+        &:before {
+          top: 0.5rem;
+        }
+
+        &:focus {
+          padding-left: 2.125rem;
+        }
+
+        @media (hover: hover) {
+          &:hover {
+            padding-left: 2.125rem;
+          }
+        }
+      }
     }
 
     .headerButtons {
@@ -59,18 +83,25 @@
   .headerHomepage {
     gap: 6rem;
 
+    .headerHomepageBody {
+      .links {
+        margin: 2rem 0 2.5rem 0;
+
+        .linkArrow {
+          &:before {
+            top: 0;
+          }
+
+          padding-top: 0;
+          padding-bottom: 0;
+          margin-bottom: 1.25rem;
+        }
+      }
+    }
+
     .illustrationWrapper {
       .illustration {
         transform: scale(1.04);
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .headerHomepage {
-    .illustrationWrapper {
-      .illustration {
         width: 576px;
         height: 445px;
       }

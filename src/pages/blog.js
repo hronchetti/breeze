@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 
-import BlogArticlePreview from "../components/BlogArticlePreview"
-import FilterOption from "../components/FilterOption"
-import { Header } from "../components/Layout/Headers"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
-import SignOffMailingList from "../components/SignOffMailingList"
+import {
+  BlogArticleList,
+  FilterOption,
+  Header,
+  Layout,
+  SEO,
+  SignOffMailingList,
+} from "../components"
 
 const Blog = ({ data }) => {
   const [articles, setArticles] = useState([])
@@ -19,7 +21,7 @@ const Blog = ({ data }) => {
     setArticles(data.allStrapiBlogArticles.edges)
   }, [data.allStrapiBlogArticleTopics.edges, data.allStrapiBlogArticles.edges])
 
-  const toggleFilteredTopic = clickedTopicName => {
+  const toggleFilteredTopic = (clickedTopicName) => {
     if (
       articleTopicFiltered === clickedTopicName ||
       clickedTopicName === "All topics"
@@ -29,9 +31,9 @@ const Blog = ({ data }) => {
     } else {
       setArticleTopicFiltered(clickedTopicName)
       setArticles([])
-      data.allStrapiBlogArticles.edges.map(article =>
+      data.allStrapiBlogArticles.edges.map((article) =>
         article.node.blog_article_topic.name === clickedTopicName
-          ? setArticles(oldArticles => [...oldArticles, article])
+          ? setArticles((oldArticles) => [...oldArticles, article])
           : null
       )
     }
@@ -67,7 +69,7 @@ const Blog = ({ data }) => {
                 filteredValue={articleTopicFiltered}
                 mobileOnly={true}
               />
-              {data.allStrapiBlogArticleTopics.edges.map(topic => (
+              {data.allStrapiBlogArticleTopics.edges.map((topic) => (
                 <FilterOption
                   key={topic.node.id}
                   value={topic.node.name}
@@ -93,11 +95,8 @@ const Blog = ({ data }) => {
                 ? ` in '${articleTopicFiltered}'`
                 : ""}
             </span>
-            {articles.map(article => (
-              <BlogArticlePreview
-                article={article.node}
-                key={article.node.id}
-              />
+            {articles.map((article) => (
+              <BlogArticleList article={article.node} key={article.node.id} />
             ))}
           </section>
         </section>

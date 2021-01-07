@@ -2,11 +2,10 @@ import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
 
-import Footer from "./Footer"
-import Nav from "./Nav"
-import "../../style/main.scss"
+import { Footer } from "./Footer"
+import { Nav } from "./Nav"
 
-const Layout = ({ children, footer }) => (
+export const Layout = ({ children, footer }) => (
   <StaticQuery
     query={graphql`
       query getAllCourses {
@@ -26,7 +25,7 @@ const Layout = ({ children, footer }) => (
         }
       }
     `}
-    render={data => (
+    render={(data) => (
       <>
         <Nav courses={data.allStrapiCourseTopics.edges} />
         {children}
@@ -49,5 +48,3 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   footer: PropTypes.bool,
 }
-
-export default Layout

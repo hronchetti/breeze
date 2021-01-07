@@ -4,9 +4,7 @@ import { graphql } from "gatsby"
 import { Helmet } from "react-helmet"
 import { loadStripe } from "@stripe/stripe-js/pure"
 
-import Layout from "../components/Layout"
-import { Button } from "../components/Button"
-import { Toast } from "../components/Form"
+import { Button, Layout, Toast } from "../components"
 import {
   courseBookingSlug,
   coursePaymentFailed,
@@ -16,7 +14,7 @@ import {
 const paymentFailed = ({ data, location }) => {
   const booking = data.strapiCourseBookings
   const courseTopic = data.allStrapiCourseTopics.edges.filter(
-    topic => topic.node.strapiId === booking.course.course_topic
+    (topic) => topic.node.strapiId === booking.course.course_topic
   )[0].node.name
 
   const [toast, setToast] = useState({
@@ -91,7 +89,7 @@ const paymentFailed = ({ data, location }) => {
         type={toast.type}
         visible={toast.visible}
         onClick={() =>
-          setToast(toast => ({
+          setToast((toast) => ({
             ...toast,
             visible: false,
           }))

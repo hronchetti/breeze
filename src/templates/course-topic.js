@@ -1,133 +1,28 @@
-import React, { useState } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
-import { clearAllBodyScrollLocks } from "body-scroll-lock"
 
-import { CourseListing, EmptyCourseList } from "../components/Courses"
-import FilterOption from "../components/FilterOption"
-import { HeaderBlob } from "../components/Layout/Headers"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
-import SignOffStillLooking from "../components/SignOffStillLooking"
-import { HealthcareProfessionalsOnly } from "../components/Modal"
+import { CourseListPage } from "../components"
 
 import { createCourseList } from "../utilities"
 
 const CourseList = ({ data }) => {
-  const [sidebarVisibileMobile, setSidebarVisibilityMobile] = useState(false)
-  const [modalVisible, setModalVisibility] = useState(false)
-  const [stripeProduct, setStripeProduct] = useState("")
-  const [bookingId, setBookingId] = useState()
-
   const allCourseBookings = data.allStrapiCourseBookings.edges
   const courses = data.allStrapiCourses.edges
   const courseTopic = data.strapiCourseTopics
-  const courseTopicSEO = courseTopic.seo
-
-  const toggleSidebarVisibilityMobile = () => {
-    setSidebarVisibilityMobile(!sidebarVisibileMobile)
-  }
-
-  const prepareModal = (stripeProduct, bookingId) => {
-    setModalVisibility(true)
-    setStripeProduct(stripeProduct)
-    setBookingId(bookingId)
-  }
 
   const prioritisedCourses = createCourseList(
-    courses.filter(course => course.node.featured_course_in_topic),
-    courses.filter(course => !course.node.featured_course_in_topic)
+    courses.filter((course) => course.node.featured_course_in_topic),
+    courses.filter((course) => !course.node.featured_course_in_topic)
   )
 
   return (
-    <Layout>
-      <SEO
-        title={courseTopicSEO.title}
-        description={courseTopicSEO.description}
-        canonicalHref={courseTopicSEO.canonical_href}
-        ogType={courseTopicSEO.og_type}
-        ogUrl={courseTopicSEO.og_url}
-      />
-      <HeaderBlob
-        title={`${courseTopic.name} courses`}
-        image={courseTopic.image ? courseTopic.image.childImageSharp.fluid : ""}
-        imageDescription={
-          courseTopic.image_description ? courseTopic.image_description : ""
-        }
-      >
-        <p>{courseTopic.description}</p>
-      </HeaderBlob>
-      <main className="backgroundGreyLightSuper">
-        {prioritisedCourses && prioritisedCourses.length > 0 ? (
-          <section className="wrapper wrapperSidebarLayout">
-            <aside
-              className={`wrapperSidebar${
-                sidebarVisibileMobile ? " open" : ""
-              }`}
-            >
-              <div className="sidebar">
-                <span className="sidebarHeading">Quick access</span>
-                <section className="sidebarItems">
-                  {prioritisedCourses.map(course => (
-                    <FilterOption
-                      key={course.node.id}
-                      value={course.node.name}
-                      scroll
-                      closeMobileWrapper={() =>
-                        setTimeout(setSidebarVisibilityMobile(false), 500)
-                      }
-                    />
-                  ))}
-                </section>
-              </div>
-              <button
-                className="sidebarControl"
-                onClick={toggleSidebarVisibilityMobile}
-              >
-                <span className="accessibleText">Show/hide filters</span>
-              </button>
-              <span className="fill"></span>
-            </aside>
-            <section className="filteredContent">
-              <span className="filterCount">
-                {prioritisedCourses.length > 1 ||
-                prioritisedCourses.length === 0
-                  ? `${prioritisedCourses.length} courses`
-                  : `${prioritisedCourses.length} course`}
-              </span>
-              {prioritisedCourses.map(course => (
-                <CourseListing
-                  key={course.node.id}
-                  course={course.node}
-                  bookings={allCourseBookings.filter(
-                    booking =>
-                      booking.node.course &&
-                      booking.node.course.id === course.node.strapiId
-                  )}
-                  prepareModal={prepareModal}
-                  featuredCourse={course.node.featured_course_in_topic}
-                />
-              ))}
-            </section>
-          </section>
-        ) : (
-          <section className="wrapper padded">
-            <EmptyCourseList courseTopic={courseTopic.name} />
-          </section>
-        )}
-      </main>
-      <SignOffStillLooking />
-      {modalVisible ? (
-        <HealthcareProfessionalsOnly
-          closeFn={() => setModalVisibility(false)}
-          stripeProduct={stripeProduct}
-          bookingId={bookingId}
-          location={location}
-        />
-      ) : (
-        clearAllBodyScrollLocks()
-      )}
-    </Layout>
+    <CourseListPage
+      seo={courseTopic.seo}
+      courseList={courseTopic}
+      courses={prioritisedCourses}
+      courseBookings={allCourseBookings}
+    />
   )
 }
 
@@ -174,6 +69,7 @@ export const pageQuery = graphql`
           id
           strapiId
           address_full
+          address_short
           start_date
           booking_price
           booking_price_currency
@@ -204,6 +100,10 @@ export const pageQuery = graphql`
         }
       }
       image_description
+      tick_bullets {
+        bullet
+        id
+      }
       seo {
         canonical_href
         description

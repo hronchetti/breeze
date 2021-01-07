@@ -4,12 +4,14 @@ import PropTypes from "prop-types"
 import ReactMarkdown from "react-markdown"
 import { graphql } from "gatsby"
 
-import { TextCard } from "../components/Cards"
-import Divider from "../components/Divider"
-import { Header } from "../components/Layout/Headers"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
-import SignOffMailingList from "../components/SignOffMailingList"
+import {
+  TextCard,
+  Divider,
+  Header,
+  Layout,
+  SEO,
+  SignOffMailingList,
+} from "../components"
 
 const About = ({ data }) => {
   const about = data.strapiAbout
@@ -47,7 +49,7 @@ const About = ({ data }) => {
             <Divider align="center" />
             {about.quality_assurance.length > 0 ? (
               <div className="narrowContent">
-                {about.quality_assurance.map(section => (
+                {about.quality_assurance.map((section) => (
                   <TextCard key={section.id}>
                     <h4>{section.section_heading}</h4>
                     <ReactMarkdown source={section.content} />

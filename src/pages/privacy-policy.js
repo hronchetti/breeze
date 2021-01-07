@@ -4,10 +4,7 @@ import { graphql } from "gatsby"
 import ReactMarkdown from "react-markdown"
 import Moment from "moment"
 
-import Layout from "../components/Layout"
-import { Header } from "../components/Layout/Headers"
-import SEO from "../components/SEO"
-import { TextCard } from "../components/Cards"
+import { Layout, Header, SEO, TextCard } from "../components"
 
 const PrivacyPolicy = ({ data }) => {
   const privacyPolicy = data.strapiPrivacyPolicy

@@ -2,18 +2,18 @@ import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 
-import { HeaderBlob } from "../components/Layout/Headers"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
-import SignOffStillLooking from "../components/SignOffStillLooking"
-import HowItWorks from "../components/HowItWorks"
-import RequestACourseForm from "../components/RequestACourseForm"
+import {
+  HeaderBlob,
+  HowItWorks,
+  Layout,
+  RequestACourseForm,
+  SEO,
+  SignOffStillLooking,
+} from "../components"
 
 const RequestACourse = ({ data }) => {
   const requestCourse = data.strapiRequestACourse
   const requestCourseSEO = requestCourse.seo
-  const allCourses = data.allStrapiCourses.edges
-
   return (
     <Layout>
       <SEO
@@ -30,7 +30,7 @@ const RequestACourse = ({ data }) => {
         align="top"
       >
         <p>{requestCourse.paragraph}</p>
-        <RequestACourseForm courses={allCourses} />
+        <RequestACourseForm />
       </HeaderBlob>
       <main className="backgroundGreyLightSuper">
         <HowItWorks
@@ -75,14 +75,6 @@ export const pageQuery = graphql`
         og_type
         og_url
         title
-      }
-    }
-    allStrapiCourses {
-      edges {
-        node {
-          name
-          id
-        }
       }
     }
   }

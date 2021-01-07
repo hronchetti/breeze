@@ -13,10 +13,7 @@ import {
   TwitterShareButton,
 } from "react-share"
 
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
-import SignOffMailingList from "../components/SignOffMailingList"
-import BlogArticlePreview from "../components/BlogArticlePreview"
+import { BlogArticleList, Layout, SEO, SignOffMailingList } from "../components"
 import { defaultSEO } from "../utilities"
 
 const BlogArticle = ({ data, location }) => {
@@ -24,6 +21,7 @@ const BlogArticle = ({ data, location }) => {
   const articleSEO = article.seo
     ? article.seo
     : defaultSEO(article.title, article.excerpt, location.href)
+
   const url = location.href ? location.href : ""
   const nextArticle = data.allStrapiBlogArticles.edges[0].node
 
@@ -78,7 +76,7 @@ const BlogArticle = ({ data, location }) => {
             </LinkedinShareButton>
           </aside>
           <article className="article">
-            {article.section.map(section => (
+            {article.section.map((section) => (
               <section key={section.id} className="content">
                 <ReactMarkdown source={section.content} />
                 {section.image && section.image_description ? (
@@ -97,7 +95,7 @@ const BlogArticle = ({ data, location }) => {
           <div className="backgroundGreyLightSuper">
             <section className="wrapper padded nextArticle">
               <h2>Next article</h2>
-              <BlogArticlePreview article={nextArticle} />
+              <BlogArticleList article={nextArticle} />
             </section>
           </div>
         ) : (

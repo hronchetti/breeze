@@ -3,13 +3,15 @@ import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import ReactMarkdown from "react-markdown"
 
-import FAQ from "../components/FAQ"
-import Divider from "../components/Divider"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
-import { Header } from "../components/Layout/Headers"
-import SignOffMailingList from "../components/SignOffMailingList"
-import { TextCard } from "../components/Cards"
+import {
+  Divider,
+  FAQ,
+  Header,
+  Layout,
+  SEO,
+  SignOffMailingList,
+  TextCard,
+} from "../components"
 
 import PhoneIcon from "../images/icons/big/phone.svg"
 import EmailIcon from "../images/icons/big/email.svg"
@@ -129,7 +131,7 @@ const Contact = ({ data }) => {
             {contactUs.faq.length > 1 &&
               contactUs.faq
                 .filter((cur, index) => index > 0)
-                .map(faq => (
+                .map((faq) => (
                   <FAQ
                     key={faq.id}
                     question={faq.question}

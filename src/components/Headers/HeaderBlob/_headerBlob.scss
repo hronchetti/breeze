@@ -3,7 +3,7 @@
   width: calc(100% - 2.5rem);
   display: block;
 
-  .content {
+  .headerBlobBody {
     opacity: 0;
     transform: translateY(20px);
     margin: 0 0 1.5rem 0;
@@ -60,7 +60,7 @@
     &.alignTop {
       align-items: flex-start;
 
-      .content {
+      .headerBlobBody {
         h1,
         p {
           max-width: 30rem;
@@ -68,7 +68,7 @@
       }
     }
 
-    .content {
+    .headerBlobBody {
       margin: 0 0 0.5rem 0;
     }
 
@@ -100,7 +100,7 @@
     grid-gap: 4rem;
     gap: 4rem;
 
-    .content {
+    .headerBlobBody {
       margin: 0 0 10% 0;
 
       p {

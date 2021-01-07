@@ -1,18 +1,20 @@
 import React, { useEffect } from "react"
 import { graphql } from "gatsby"
+import PropTypes from "prop-types"
 import Swiper from "swiper"
 import "swiper/css/swiper.min.css"
-import "../style/03-utilities/swiper.scss"
+import "../style/03-utilities/_swiper.scss"
 
-import Divider from "../components/Divider"
-import HowItWorks from "../components/HowItWorks"
-import Layout from "../components/Layout"
-import PropTypes from "prop-types"
-import SEO from "../components/SEO"
-import SignOffStillLooking from "../components/SignOffStillLooking"
-import { HeaderHomepage } from "../components/Layout/Headers"
-import { ImageCard } from "../components/Cards"
-import { Review } from "../components/Courses"
+import {
+  Divider,
+  HeaderHomepage,
+  HowItWorks,
+  ImageCard,
+  Layout,
+  Review,
+  SEO,
+  SignOffStillLooking,
+} from "../components"
 import { courseTopicSlug } from "../utilities/createSlug"
 
 const LandingPage = ({ data }) => {
@@ -20,6 +22,7 @@ const LandingPage = ({ data }) => {
   const homepageSEO = homepage.seo
   const courseGroups = data.allStrapiCourseTopics.edges
   const courseProfessions = data.allStrapiCourseProfessions.edges
+  const CpdCourses = data.allStrapiCpdCourses.edges
   const courseReviews = data.allStrapiCourses.edges
   let ReviewsSwiper
 
@@ -49,20 +52,22 @@ const LandingPage = ({ data }) => {
       />
       <HeaderHomepage
         title={homepage.title}
-        paragraph={homepage.introduction}
+        courseTopics={courseGroups}
         videoLink={homepage.video_link}
       />
       <main>
         <section className="backgroundGreyLightSuper">
           <div className="reviews">
-            <h2 className="textCenter heading">{homepage.reviews_header}</h2>
+            <h2 className="textCenter heading" id="reviews">
+              {homepage.reviews_header}
+            </h2>
             <Divider align="center" />
             <p className="textCenter paragraph">{homepage.reviews_paragraph}</p>
           </div>
           <div className="swiper-container">
             <div className="swiper-wrapper">
-              {courseReviews.map(course =>
-                course.node.reviews.map(review => (
+              {courseReviews.map((course) =>
+                course.node.reviews.map((review) => (
                   <Review
                     key={review.id}
                     link={review.continue_reading_link}
@@ -81,48 +86,75 @@ const LandingPage = ({ data }) => {
         <section className="backgroundBlueDark">
           <HowItWorks steps={homepage.how_it_works} page="homepage" />
         </section>
-        <section className="backgroundGreyLightSuper">
-          <section className="wrapper padded" id="courses">
-            <h2 className="heading">Courses by topic</h2>
-            <Divider />
-            <div className="courseGroups">
-              {courseGroups.map(({ node }) => (
-                <ImageCard
-                  key={node.id}
-                  image={node.image}
-                  imageDescription={node.image_description}
-                  to={courseTopicSlug(node.name)}
-                >
-                  <h3>{node.name}</h3>
-                  <div className="courseStyleWrapper"></div>
-                  <p>{node.description}</p>
-                  <span className="linkArrow">Get started</span>
-                </ImageCard>
-              ))}
-            </div>
+        {courseGroups.length > 0 && (
+          <section className="backgroundGreyLightSuper">
+            <section className="wrapper padded">
+              <h2 className="heading">Courses by topic</h2>
+              <Divider />
+              <div className="courseGroups">
+                {courseGroups.map(({ node }) => (
+                  <ImageCard
+                    key={node.id}
+                    image={node.image}
+                    imageDescription={node.image_description}
+                    to={courseTopicSlug(node.name)}
+                  >
+                    <h3>{node.name}</h3>
+                    <div className="courseStyleWrapper"></div>
+                    <p>{node.description}</p>
+                    <span className="linkArrow">Get started</span>
+                  </ImageCard>
+                ))}
+              </div>
+            </section>
           </section>
-        </section>
-        <section>
-          <section className="wrapper padded" id="courses">
-            <h2 className="heading">Courses by profession</h2>
-            <Divider />
-            <div className="courseGroups">
-              {courseProfessions.map(({ node }) => (
-                <ImageCard
-                  key={node.id}
-                  image={node.image}
-                  imageDescription={node.image_description}
-                  to={courseTopicSlug(node.name)}
-                >
-                  <h3>{node.name}</h3>
-                  <div className="courseStyleWrapper"></div>
-                  <p>{node.description}</p>
-                  <span className="linkArrow">Get started</span>
-                </ImageCard>
-              ))}
-            </div>
+        )}
+        {courseProfessions.length > 0 && (
+          <section>
+            <section className="wrapper padded">
+              <h2 className="heading">Courses by profession</h2>
+              <Divider />
+              <div className="courseGroups">
+                {courseProfessions.map(({ node }) => (
+                  <ImageCard
+                    key={node.id}
+                    image={node.image}
+                    imageDescription={node.image_description}
+                    to={courseTopicSlug(node.name)}
+                  >
+                    <h3>{node.name}</h3>
+                    <div className="courseStyleWrapper"></div>
+                    <p>{node.description}</p>
+                    <span className="linkArrow">Get started</span>
+                  </ImageCard>
+                ))}
+              </div>
+            </section>
           </section>
-        </section>
+        )}
+        {CpdCourses.length > 0 && (
+          <section className="backgroundGreyLightSuper">
+            <section className="wrapper padded">
+              <h2 className="heading">CPD Courses</h2>
+              <Divider />
+              <div className="courseGroups">
+                {CpdCourses.map(({ node }) => (
+                  <ImageCard
+                    key={node.id}
+                    image={node.image}
+                    imageDescription={node.image_description}
+                    to={courseTopicSlug(node.name)}
+                  >
+                    <h3>{node.name}</h3>
+                    <div className="courseStyleWrapper"></div>
+                    <p>{node.description}</p>
+                    <span className="linkArrow">Get started</span>
+                  </ImageCard>
+                ))}
+              </div>
+            </section>
+          </section>
+        )}
       </main>
       <SignOffStillLooking />
     </Layout>
@@ -143,7 +175,6 @@ export const pageQuery = graphql`
         step_description
         step_heading
       }
-      introduction
       title
       video_link
       reviews_header
@@ -175,7 +206,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allStrapiCourseProfessions(sort: { order: ASC, fields: id }) {
+    allStrapiCourseProfessions(sort: { fields: id, order: ASC }) {
       edges {
         node {
           id
@@ -192,7 +223,25 @@ export const pageQuery = graphql`
         }
       }
     }
-    allStrapiCourses(sort: { order: ASC, fields: id }) {
+    allStrapiCpdCourses(sort: { fields: id, order: ASC }) {
+      edges {
+        node {
+          id
+          image_description
+          image {
+            childImageSharp {
+              fluid(maxWidth: 1600) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+          description
+          name
+          strapiId
+        }
+      }
+    }
+    allStrapiCourses(sort: { fields: id, order: ASC }) {
       edges {
         node {
           reviews {
