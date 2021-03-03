@@ -28,7 +28,7 @@ export const HeaderHomepage = ({ courseTopics, title, videoLink }) => {
                   <Link
                     className="linkArrow"
                     key={node.id}
-                    to={courseTopicSlug(node.name)}
+                    to={courseTopicSlug(node.slug)}
                   >
                     {node.name} courses
                   </Link>
