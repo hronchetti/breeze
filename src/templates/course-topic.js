@@ -115,6 +115,11 @@ export const pageQuery = graphql`
         title
       }
       slug
+      accordions {
+        id
+        content
+        heading
+      }
     }
   }
 `

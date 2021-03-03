@@ -41,9 +41,13 @@
       padding: 2.25rem;
       border-radius: 50%;
       position: fixed;
-      bottom: 2.5rem;
-      right: 1.25rem;
+      bottom: 1.5rem;
+      left: 1.25rem;
       z-index: 3;
+
+      &:focus {
+        outline: none;
+      }
 
       &:before {
         display: block;

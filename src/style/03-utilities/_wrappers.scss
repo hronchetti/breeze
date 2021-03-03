@@ -7,6 +7,10 @@
   &.padded {
     padding: 2rem 0 3.5rem;
   }
+
+  &.paddedBottom {
+    padding-bottom: 3.5rem;
+  }
 }
 
 .backgroundGreyLightSuper {
@@ -43,6 +47,10 @@
     &.padded {
       padding: 4rem 0 5rem;
     }
+
+    &.paddedBottom {
+      padding-bottom: 5rem;
+    }
   }
 
   .narrowContent {
@@ -60,6 +68,10 @@
   .wrapper {
     &.padded {
       padding: 5rem 0 6rem;
+    }
+
+    &.paddedBottom {
+      padding-bottom: 6rem;
     }
   }
 }

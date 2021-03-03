@@ -6,7 +6,9 @@ import { courseTopicSlug } from "../../../utilities"
 import {
   BulletListWithIcon,
   CourseListing,
+  Divider,
   EmptyCourseList,
+  FAQ,
   FilterOption,
   HeaderBlob,
   HealthcareProfessionalsOnly,
@@ -36,7 +38,7 @@ export const CourseListPage = ({
   }
 
   const pageUrl = `https://breeze.academy${courseTopicSlug(courseList.slug)}`
-
+  console.log(courseList.accordions)
   return (
     <Layout>
       <SEO
@@ -124,7 +126,23 @@ export const CourseListPage = ({
             />
           </section>
         )}
+        {courseList.accordions && courseList.accordions.length > 1 && (
+          <section className="wrapper paddedBottom">
+            <h2 className="textCenter">Frequently asked questions</h2>
+            <Divider align="center" />
+            <div className="faqs narrowContent">
+              {courseList.accordions.map((accordion) => (
+                <FAQ
+                  key={accordion.id}
+                  question={accordion.heading}
+                  answer={accordion.content}
+                />
+              ))}
+            </div>
+          </section>
+        )}
       </main>
+
       <SignOffStillLooking />
       {modalVisible ? (
         <HealthcareProfessionalsOnly
