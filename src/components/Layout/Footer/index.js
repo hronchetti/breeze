@@ -77,7 +77,7 @@ export const Footer = ({ courses, socialLinks }) => (
           <li className="title">Courses</li>
           {courses.map(({ node }) => (
             <li key={node.id}>
-              <Link to={courseTopicSlug(node.name)}>{node.name}</Link>
+              <Link to={courseTopicSlug(node.slug)}>{node.name}</Link>
             </li>
           ))}
           <li>

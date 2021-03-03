@@ -1,27 +1,15 @@
-function createSlug(text) {
-  text = text.replace(/\s+/g, "-").toLowerCase()
-  text = text.replace(/,/g, "")
-  text = text.replace(/\./, "")
-  return text
-}
-
 module.exports = {
-  blogArticleSlug: (title) => {
-    return `/blog/${createSlug(title)}/`
+  blogArticleSlug: (slug) => {
+    return `/blog/${slug}/`
   },
-  courseTopicSlug: (name) => {
-    return `/courses/${createSlug(name)}/`
+  courseTopicSlug: (slug) => {
+    return `/courses/${slug}/`
   },
-  cpdCourseSlug: (name) => {
-    return `/courses/cpd-courses/${createSlug(name)}/`
+  courseSlug: (courseTopicSlug, courseSlug) => {
+    return `/courses/${courseTopicSlug}/${courseSlug}/`
   },
-  courseSlug: (courseTopic, courseName) => {
-    return `/courses/${createSlug(courseTopic)}/${createSlug(courseName)}/`
-  },
-  courseBookingSlug: (courseTopic, courseName, bookingId) => {
-    return `/courses/${createSlug(courseTopic)}/${createSlug(
-      courseName
-    )}/?booking=${bookingId}`
+  courseBookingSlug: (courseTopicSlug, courseSlug, bookingId) => {
+    return `/courses/${courseTopicSlug}/${courseSlug}/?booking=${bookingId}`
   },
   coursePaymentSuccess: (bookingId) => {
     return `/payment-succeeded/booking/${bookingId}/`

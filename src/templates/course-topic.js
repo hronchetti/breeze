@@ -56,7 +56,9 @@ export const pageQuery = graphql`
           }
           course_topic {
             name
+            slug
           }
+          slug
         }
       }
     }
@@ -112,6 +114,7 @@ export const pageQuery = graphql`
         og_url
         title
       }
+      slug
     }
   }
 `

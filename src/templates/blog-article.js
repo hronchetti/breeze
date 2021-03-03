@@ -145,6 +145,7 @@ export const pageQuery = graphql`
       }
       title
       excerpt
+      slug
       seo {
         canonical_href
         description
@@ -173,6 +174,7 @@ export const pageQuery = graphql`
           cover_image_description
           created_at
           excerpt
+          slug
           section {
             content
             id

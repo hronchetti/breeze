@@ -1,6 +1,7 @@
 import React from "react"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
 import PropTypes from "prop-types"
+import { courseTopicSlug } from "../../../utilities"
 
 import {
   BulletListWithIcon,
@@ -34,14 +35,16 @@ export const CourseListPage = ({
     setBookingId(bookingId)
   }
 
+  const pageUrl = `https://breeze.academy${courseTopicSlug(courseList.slug)}`
+
   return (
     <Layout>
       <SEO
         title={seo.title}
         description={seo.description}
-        canonicalHref={seo.canonical_href}
+        canonicalHref={pageUrl}
         ogType={seo.og_type}
-        ogUrl={seo.og_url}
+        ogUrl={pageUrl}
       />
       <HeaderBlob
         title={`${courseList.name}`}

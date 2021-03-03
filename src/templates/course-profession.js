@@ -78,6 +78,7 @@ export const pageQuery = graphql`
           }
           course_topic {
             name
+            slug
           }
           not_included_in_course_professions {
             name
@@ -87,6 +88,7 @@ export const pageQuery = graphql`
             id
             name
           }
+          slug
         }
       }
     }
@@ -140,6 +142,7 @@ export const pageQuery = graphql`
         og_url
         title
       }
+      slug
     }
   }
 `

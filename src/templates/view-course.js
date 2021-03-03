@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import ReactMarkdown from "react-markdown"
 import { Link, graphql } from "gatsby"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
+import { courseSlug } from "../utilities"
 
 import {
   AgendaItem,
@@ -65,14 +66,19 @@ const CourseView = ({ data, location }) => {
 
   const futureBookings = createFutureBookings(courseBookings)
 
+  const pageUrl = `https://breeze.academy${courseSlug(
+    course.course_topic.slug,
+    course.slug
+  )}`
+
   return (
     <Layout>
       <SEO
         title={courseSEO.title}
         description={courseSEO.description}
-        canonicalHref={courseSEO.canonical_href}
+        canonicalHref={pageUrl}
         ogType={courseSEO.og_type}
-        ogUrl={courseSEO.og_url}
+        ogUrl={pageUrl}
         schema={courseSEO.schema_json_string}
       />
       <HeaderViewCourse
@@ -272,6 +278,7 @@ export const pageQuery = graphql`
       id
       course_topic {
         name
+        slug
       }
       accordions {
         content
@@ -329,6 +336,7 @@ export const pageQuery = graphql`
         title
         schema_json_string
       }
+      slug
     }
     allStrapiCourseBookings(
       filter: { course: { id: { eq: $strapiId } } }

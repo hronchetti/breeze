@@ -14,6 +14,7 @@ export const Layout = ({ children, footer }) => (
             node {
               id
               name
+              slug
             }
           }
         }

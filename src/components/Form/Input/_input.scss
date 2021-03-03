@@ -18,8 +18,10 @@
       outline: none;
       background-color: $greyLightSuper;
 
+      &:placeholder-shown,
       &::placeholder,
       &::-webkit-input-placeholder,
+      &:-moz-placeholder,
       &::-moz-placeholder,
       &::-ms-placeholder {
         color: hsl(0%, 0%, 50%);

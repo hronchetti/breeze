@@ -29,6 +29,7 @@ exports.createPages = ({ actions, graphql }) => {
           node {
             id
             title
+            slug
           }
           next {
             id
@@ -41,6 +42,7 @@ exports.createPages = ({ actions, graphql }) => {
           node {
             strapiId
             name
+            slug
           }
         }
       }
@@ -50,6 +52,7 @@ exports.createPages = ({ actions, graphql }) => {
           node {
             strapiId
             name
+            slug
           }
         }
       }
@@ -59,6 +62,7 @@ exports.createPages = ({ actions, graphql }) => {
           node {
             strapiId
             name
+            slug
           }
         }
       }
@@ -68,8 +72,10 @@ exports.createPages = ({ actions, graphql }) => {
           node {
             strapiId
             name
+            slug
             course_topic {
               name
+              slug
             }
           }
         }
@@ -85,7 +91,7 @@ exports.createPages = ({ actions, graphql }) => {
     }
     `
   ).then((result) => {
-    // Blog articles /blog/blog_title
+    // Blog articles /blog/{slug}
     const posts = result.data.allStrapiBlogArticles.edges
     const firstPost = result.data.allStrapiBlogArticles.edges[0]
 
@@ -93,7 +99,7 @@ exports.createPages = ({ actions, graphql }) => {
       const next = index === posts.length - 1 ? firstPost.node.id : post.next.id
 
       createPage({
-        path: createSlug.blogArticleSlug(post.node.title),
+        path: createSlug.blogArticleSlug(post.node.slug),
         component: path.resolve(`src/templates/blog-article.js`),
         context: {
           id: post.node.id,
@@ -102,10 +108,10 @@ exports.createPages = ({ actions, graphql }) => {
       })
     })
 
-    // Course topics /courses/course_topic_name
+    // Course topics /courses/{slug}
     result.data.allStrapiCourseTopics.edges.forEach(({ node }) => {
       createPage({
-        path: createSlug.courseTopicSlug(node.name),
+        path: createSlug.courseTopicSlug(node.slug),
         component: path.resolve(`src/templates/course-topic.js`),
         context: {
           name: node.name,
@@ -114,10 +120,10 @@ exports.createPages = ({ actions, graphql }) => {
       })
     })
 
-    // Course professions /courses/course_profession_name
+    // Course professions /courses/{slug}
     result.data.allStrapiCourseProfessions.edges.forEach(({ node }) => {
       createPage({
-        path: createSlug.courseTopicSlug(node.name),
+        path: createSlug.courseTopicSlug(node.slug),
         component: path.resolve(`src/templates/course-profession.js`),
         context: {
           name: node.name,
@@ -126,10 +132,10 @@ exports.createPages = ({ actions, graphql }) => {
       })
     })
 
-    // CPD Courses /courses/cpd-courses/cpd_course_name
+    // CPD Courses /courses/{slug}
     result.data.allStrapiCpdCourses.edges.forEach(({ node }) => {
       createPage({
-        path: createSlug.courseTopicSlug(node.name),
+        path: createSlug.courseTopicSlug(node.slug),
         component: path.resolve(`src/templates/cpd-courses.js`),
         context: {
           name: node.name,
@@ -138,10 +144,10 @@ exports.createPages = ({ actions, graphql }) => {
       })
     })
 
-    // View Course /courses/course_topic_name/course_name
+    // View Course /courses/{course_topic.slug}/{slug}
     result.data.allStrapiCourses.edges.forEach(({ node }) => {
       createPage({
-        path: createSlug.courseSlug(node.course_topic.name, node.name),
+        path: createSlug.courseSlug(node.course_topic.slug, node.slug),
         component: path.resolve(`src/templates/view-course.js`),
         context: {
           name: node.name,

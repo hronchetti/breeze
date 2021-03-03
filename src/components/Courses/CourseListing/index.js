@@ -25,11 +25,13 @@ export const CourseListing = ({
   return (
     <section className="courseItem" id={course.name}>
       <div className="details">
-        <h3>
-          {course.name}
-          {course.online_only ? " (Online)" : ""}
-          {featuredCourse ? <Tag text="Featured" color="yellow" /> : ""}
-        </h3>
+        <Link to={courseSlug(course.course_topic.slug, course.slug)}>
+          <h3>
+            {course.name}
+            {course.online_only ? " (Online)" : ""}
+            {featuredCourse ? <Tag text="Featured" color="yellow" /> : ""}
+          </h3>
+        </Link>
         <section className="facts">
           <span className="fact">
             <b>Skill level:</b> {course.skill_level}
@@ -59,7 +61,7 @@ export const CourseListing = ({
             Book now on Thinkific
           </Button>
           <Button
-            to={courseSlug(course.course_topic.name, course.name)}
+            to={courseSlug(course.course_topic.slug, course.slug)}
             styles="buttonSecondary"
           >
             Find out more
@@ -72,8 +74,8 @@ export const CourseListing = ({
             futureBookings.map(({ node }) => (
               <CourseBooking
                 node={node}
-                topicName={course.course_topic.name}
-                courseName={course.name}
+                topicSlug={course.course_topic.slug}
+                slug={course.slug}
                 key={node.id}
                 prepareModal={prepareModal}
               />
@@ -81,7 +83,7 @@ export const CourseListing = ({
           ) : (
             <Link
               className="booking"
-              to={courseSlug(course.course_topic.name, course.name)}
+              to={courseSlug(course.course_topic.slug, course.slug)}
             >
               <span className="noBookings">
                 No bookings scheduled,{" "}
@@ -98,7 +100,7 @@ export const CourseListing = ({
   )
 }
 
-const CourseBooking = ({ node, topicName, courseName, prepareModal }) => (
+const CourseBooking = ({ node, topicSlug, slug, prepareModal }) => (
   <section className="booking">
     <div className="information">
       <span className="dates">
@@ -122,7 +124,7 @@ const CourseBooking = ({ node, topicName, courseName, prepareModal }) => (
     </div>
     <div className="actions">
       <Button
-        to={courseBookingSlug(topicName, courseName, node.strapiId)}
+        to={courseBookingSlug(topicSlug, slug, node.strapiId)}
         styles="buttonSecondary"
       >
         Find out more
