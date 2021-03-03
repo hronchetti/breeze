@@ -38,7 +38,7 @@ export const CourseListPage = ({
   }
 
   const pageUrl = `https://breeze.academy${courseTopicSlug(courseList.slug)}`
-  console.log(courseList.accordions)
+
   return (
     <Layout>
       <SEO
