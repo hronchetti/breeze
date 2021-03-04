@@ -3,7 +3,6 @@ import PropTypes from "prop-types"
 import Img from "gatsby-image"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
 import TrackVisibility from "react-on-screen"
-
 import { VideoPlayer } from "../../"
 
 import AcuphysLogo from "../../../images/acuphys-logo.svg"
@@ -46,12 +45,12 @@ export const HeaderViewCourse = ({
                     alt="Acuphys logo"
                   />
                 </section>
-              ) : provider && provider.logo && provider.logo.url ? (
+              ) : provider && provider.logo && provider.logo.childImageSharp ? (
                 <section className="acuphys">
                   <b>Brought to you by:</b>
-                  <img
+                  <Img
                     className="acuphysLogo"
-                    src={provider.logo.url}
+                    fluid={provider.logo.childImageSharp.fluid}
                     alt={provider.name}
                   />
                 </section>

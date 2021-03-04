@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Link } from "gatsby"
+import Img from "gatsby-image"
 
 import {
   courseBookingSlug,
@@ -21,15 +22,14 @@ export const CourseListing = ({
   prepareModal,
 }) => {
   const futureBookings = createFutureBookings(bookings)
-  console.log(course)
   return (
     <section className="courseItem" id={course.name}>
       <div
         className={
           course.course_topic.name === "Acupuncture & dry needling" ||
           (course.course_provider &&
-            course.course_provider.Logo &&
-            course.course_provider.Logo.url)
+            course.course_provider.logo &&
+            course.course_provider.logo.childImageSharp)
             ? "details"
             : "details details1Column"
         }
@@ -59,10 +59,10 @@ export const CourseListing = ({
           />
         ) : course.course_provider &&
           course.course_provider.logo &&
-          course.course_provider.logo.url ? (
-          <img
+          course.course_provider.logo.childImageSharp ? (
+          <Img
             className="acuphysLogo"
-            src={course.course_provider.logo.url}
+            fluid={course.course_provider.logo.childImageSharp.fluid}
             alt={course.course_provider.name}
           />
         ) : (

@@ -62,7 +62,11 @@ export const pageQuery = graphql`
             id
             name
             logo {
-              url
+              childImageSharp {
+                fluid(maxWidth: 800) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
             }
           }
           slug
