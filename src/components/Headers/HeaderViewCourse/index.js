@@ -46,13 +46,13 @@ export const HeaderViewCourse = ({
                     alt="Acuphys logo"
                   />
                 </section>
-              ) : provider && provider.Logo && provider.Logo.url ? (
+              ) : provider && provider.logo && provider.logo.url ? (
                 <section className="acuphys">
                   <b>Brought to you by:</b>
                   <img
                     className="acuphysLogo"
-                    src={provider.Logo.url}
-                    alt={provider.Name}
+                    src={provider.logo.url}
+                    alt={provider.name}
                   />
                 </section>
               ) : (

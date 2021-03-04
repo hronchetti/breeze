@@ -78,8 +78,8 @@ export const pageQuery = graphql`
           }
           course_provider {
             id
-            Name
-            Logo {
+            name
+            logo {
               url
             }
           }

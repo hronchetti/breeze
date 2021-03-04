@@ -58,12 +58,12 @@ export const CourseListing = ({
             title="Acuphys logo"
           />
         ) : course.course_provider &&
-          course.course_provider.Logo &&
-          course.course_provider.Logo.url ? (
+          course.course_provider.logo &&
+          course.course_provider.logo.url ? (
           <img
             className="acuphysLogo"
-            src={course.course_provider.Logo.url}
-            alt={course.course_provider.Name}
+            src={course.course_provider.logo.url}
+            alt={course.course_provider.name}
           />
         ) : (
           ""
