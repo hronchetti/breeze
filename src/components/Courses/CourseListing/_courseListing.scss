@@ -37,6 +37,7 @@
     .acuphysLogo {
       grid-column: 1/2;
       margin: 0.25rem 0 1.25rem 0;
+      max-width: 11.5rem;
     }
   }
 
@@ -153,7 +154,15 @@
       gap: 0 2rem;
       grid-template-columns: 1fr 11.5rem;
 
-      h3,
+      &.details1Column {
+        grid-template-columns: 1fr;
+      }
+
+      h3 {
+        padding-right: 5rem;
+        grid-column: 1/2;
+      }
+
       .facts {
         grid-column: 1/2;
       }
@@ -254,6 +263,10 @@
 
     .details {
       grid-template-columns: 1fr 11rem;
+
+      &.details1Column {
+        grid-template-columns: 1fr;
+      }
 
       h3 {
         margin: 0 0 1rem 0;

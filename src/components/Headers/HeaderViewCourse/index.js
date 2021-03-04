@@ -14,6 +14,7 @@ export const HeaderViewCourse = ({
   defaultVideo,
   image,
   imageDescription,
+  provider,
   skillLevel,
   teachingTime,
   title,
@@ -43,6 +44,15 @@ export const HeaderViewCourse = ({
                     className="acuphysLogo"
                     src={AcuphysLogo}
                     alt="Acuphys logo"
+                  />
+                </section>
+              ) : provider && provider.Logo && provider.Logo.url ? (
+                <section className="acuphys">
+                  <b>Brought to you by:</b>
+                  <img
+                    className="acuphysLogo"
+                    src={provider.Logo.url}
+                    alt={provider.Name}
                   />
                 </section>
               ) : (
@@ -105,6 +115,7 @@ HeaderViewCourse.defaultProps = {
   image: {},
   imageDescription: "",
   video: "",
+  provider: {},
 }
 
 HeaderViewCourse.propTypes = {
@@ -112,6 +123,7 @@ HeaderViewCourse.propTypes = {
   defaultVideo: PropTypes.string,
   image: PropTypes.object,
   imageDescription: PropTypes.string,
+  provider: PropTypes.object,
   skillLevel: PropTypes.string.isRequired,
   teachingTime: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,

@@ -73,6 +73,13 @@ export const pageQuery = graphql`
             course_name
             id
           }
+          course_provider {
+            id
+            Name
+            Logo {
+              url
+            }
+          }
           course_topic {
             name
             slug

@@ -24,6 +24,7 @@ export const CourseListPage = ({
   featuredCourses,
   courseBookings,
 }) => {
+  console.log(courses)
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = React.useState(
     false
   )

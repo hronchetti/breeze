@@ -95,6 +95,7 @@ const CourseView = ({ data, location }) => {
         defaultVideo={data.strapiHomepage.video_link}
         defaultImage={data.imageSharp.fluid}
         video={course.youtube_video}
+        provider={course.course_provider}
       />
       <main className="backgroundGreyLightSuper">
         <section className="wrapper courseWrapper">
@@ -325,6 +326,13 @@ export const pageQuery = graphql`
           fluid(maxWidth: 1600) {
             ...GatsbyImageSharpFluid
           }
+        }
+      }
+      course_provider {
+        id
+        Name
+        Logo {
+          url
         }
       }
       seo {

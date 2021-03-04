@@ -15,16 +15,25 @@ import { Tag, CoursePrices } from "../"
 import AcuphysLogo from "../../../images/acuphys-logo.svg"
 
 export const CourseListing = ({
-  course,
-  prepareModal,
   bookings,
+  course,
   featuredCourse,
+  prepareModal,
 }) => {
   const futureBookings = createFutureBookings(bookings)
-
+  console.log(course)
   return (
     <section className="courseItem" id={course.name}>
-      <div className="details">
+      <div
+        className={
+          course.course_topic.name === "Acupuncture & dry needling" ||
+          (course.course_provider &&
+            course.course_provider.Logo &&
+            course.course_provider.Logo.url)
+            ? "details"
+            : "details details1Column"
+        }
+      >
         <Link to={courseSlug(course.course_topic.slug, course.slug)}>
           <h3>
             {course.name}
@@ -47,6 +56,14 @@ export const CourseListing = ({
             src={AcuphysLogo}
             alt="Acuphys logo"
             title="Acuphys logo"
+          />
+        ) : course.course_provider &&
+          course.course_provider.Logo &&
+          course.course_provider.Logo.url ? (
+          <img
+            className="acuphysLogo"
+            src={course.course_provider.Logo.url}
+            alt={course.course_provider.Name}
           />
         ) : (
           ""
