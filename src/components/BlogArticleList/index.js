@@ -5,7 +5,7 @@ import { Link } from "gatsby"
 import { blogArticleSlug } from "../../utilities/createSlug"
 
 export const BlogArticleList = ({ article }) => (
-  <Link className="blogArticleList" to={blogArticleSlug(article.title)}>
+  <Link className="blogArticleList" to={blogArticleSlug(article.slug)}>
     <Img
       className="cover"
       fluid={article.cover.childImageSharp.fluid}

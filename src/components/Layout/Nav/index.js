@@ -64,7 +64,7 @@ export const Nav = ({ courses }) => {
                   {courses.map((course) => (
                     <li className="course" key={course.node.id}>
                       <Link
-                        to={courseTopicSlug(course.node.name)}
+                        to={courseTopicSlug(course.node.slug)}
                         tabIndex={courseTypes ? "0" : "-1"}
                       >
                         {course.node.name}
@@ -77,7 +77,7 @@ export const Nav = ({ courses }) => {
                   {courses.map((course) => (
                     <li className="course" key={course.node.id}>
                       <Button
-                        to={courseTopicSlug(course.node.name)}
+                        to={courseTopicSlug(course.node.slug)}
                         styles="buttonPrimary iconRight iconArrow"
                       >{`${course.node.name}`}</Button>
                     </li>

@@ -97,7 +97,7 @@ const LandingPage = ({ data }) => {
                     key={node.id}
                     image={node.image}
                     imageDescription={node.image_description}
-                    to={courseTopicSlug(node.name)}
+                    to={courseTopicSlug(node.slug)}
                   >
                     <h3>{node.name}</h3>
                     <div className="courseStyleWrapper"></div>
@@ -120,7 +120,7 @@ const LandingPage = ({ data }) => {
                     key={node.id}
                     image={node.image}
                     imageDescription={node.image_description}
-                    to={courseTopicSlug(node.name)}
+                    to={courseTopicSlug(node.slug)}
                   >
                     <h3>{node.name}</h3>
                     <div className="courseStyleWrapper"></div>
@@ -143,7 +143,7 @@ const LandingPage = ({ data }) => {
                     key={node.id}
                     image={node.image}
                     imageDescription={node.image_description}
-                    to={courseTopicSlug(node.name)}
+                    to={courseTopicSlug(node.slug)}
                   >
                     <h3>{node.name}</h3>
                     <div className="courseStyleWrapper"></div>
@@ -203,6 +203,7 @@ export const pageQuery = graphql`
               }
             }
           }
+          slug
         }
       }
     }
@@ -220,6 +221,7 @@ export const pageQuery = graphql`
               }
             }
           }
+          slug
         }
       }
     }
@@ -238,6 +240,7 @@ export const pageQuery = graphql`
           description
           name
           strapiId
+          slug
         }
       }
     }

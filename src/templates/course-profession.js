@@ -76,8 +76,20 @@ export const pageQuery = graphql`
             course_name
             id
           }
+          course_provider {
+            id
+            name
+            logo {
+              childImageSharp {
+                fluid(maxWidth: 800) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
           course_topic {
             name
+            slug
           }
           not_included_in_course_professions {
             name
@@ -87,6 +99,7 @@ export const pageQuery = graphql`
             id
             name
           }
+          slug
         }
       }
     }
@@ -139,6 +152,12 @@ export const pageQuery = graphql`
         og_type
         og_url
         title
+      }
+      slug
+      accordions {
+        id
+        content
+        heading
       }
     }
   }

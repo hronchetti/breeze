@@ -56,7 +56,20 @@ export const pageQuery = graphql`
           }
           course_topic {
             name
+            slug
           }
+          course_provider {
+            id
+            name
+            logo {
+              childImageSharp {
+                fluid(maxWidth: 800) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
+          slug
         }
       }
     }
@@ -111,6 +124,12 @@ export const pageQuery = graphql`
         og_type
         og_url
         title
+      }
+      slug
+      accordions {
+        id
+        content
+        heading
       }
     }
   }

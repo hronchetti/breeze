@@ -14,11 +14,11 @@
   }
 
   .acuphys {
-    margin-top: 1rem;
+    margin: 1rem 0;
 
     b {
       display: block;
-      margin: 0 0 1.25rem 0;
+      margin: 0 0 0.75rem 0;
     }
 
     width: 10rem;
@@ -108,7 +108,7 @@
     }
 
     .acuphys {
-      margin-top: 1.5rem;
+      margin: 1.5rem 0 0 0;
     }
   }
 }
@@ -130,7 +130,7 @@
       margin-top: 2rem;
 
       b {
-        margin: 0 0 1.75rem 0;
+        margin: 0 0 1rem 0;
       }
     }
   }

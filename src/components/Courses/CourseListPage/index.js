@@ -1,11 +1,14 @@
 import React from "react"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
 import PropTypes from "prop-types"
+import { courseTopicSlug } from "../../../utilities"
 
 import {
   BulletListWithIcon,
   CourseListing,
+  Divider,
   EmptyCourseList,
+  FAQ,
   FilterOption,
   HeaderBlob,
   HealthcareProfessionalsOnly,
@@ -21,6 +24,7 @@ export const CourseListPage = ({
   featuredCourses,
   courseBookings,
 }) => {
+  console.log(courses)
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = React.useState(
     false
   )
@@ -34,14 +38,16 @@ export const CourseListPage = ({
     setBookingId(bookingId)
   }
 
+  const pageUrl = `https://breeze.academy${courseTopicSlug(courseList.slug)}`
+
   return (
     <Layout>
       <SEO
         title={seo.title}
         description={seo.description}
-        canonicalHref={seo.canonical_href}
+        canonicalHref={pageUrl}
         ogType={seo.og_type}
-        ogUrl={seo.og_url}
+        ogUrl={pageUrl}
       />
       <HeaderBlob
         title={`${courseList.name}`}
@@ -121,7 +127,23 @@ export const CourseListPage = ({
             />
           </section>
         )}
+        {courseList.accordions && courseList.accordions.length > 1 && (
+          <section className="wrapper paddedBottom">
+            <h2 className="textCenter">Frequently asked questions</h2>
+            <Divider align="center" />
+            <div className="faqs narrowContent">
+              {courseList.accordions.map((accordion) => (
+                <FAQ
+                  key={accordion.id}
+                  question={accordion.heading}
+                  answer={accordion.content}
+                />
+              ))}
+            </div>
+          </section>
+        )}
       </main>
+
       <SignOffStillLooking />
       {modalVisible ? (
         <HealthcareProfessionalsOnly

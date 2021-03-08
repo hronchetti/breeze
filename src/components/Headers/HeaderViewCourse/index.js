@@ -3,7 +3,6 @@ import PropTypes from "prop-types"
 import Img from "gatsby-image"
 import { clearAllBodyScrollLocks } from "body-scroll-lock"
 import TrackVisibility from "react-on-screen"
-
 import { VideoPlayer } from "../../"
 
 import AcuphysLogo from "../../../images/acuphys-logo.svg"
@@ -14,6 +13,7 @@ export const HeaderViewCourse = ({
   defaultVideo,
   image,
   imageDescription,
+  provider,
   skillLevel,
   teachingTime,
   title,
@@ -43,6 +43,15 @@ export const HeaderViewCourse = ({
                     className="acuphysLogo"
                     src={AcuphysLogo}
                     alt="Acuphys logo"
+                  />
+                </section>
+              ) : provider && provider.logo && provider.logo.childImageSharp ? (
+                <section className="acuphys">
+                  <b>Brought to you by:</b>
+                  <Img
+                    className="acuphysLogo"
+                    fluid={provider.logo.childImageSharp.fluid}
+                    alt={provider.name}
                   />
                 </section>
               ) : (
@@ -105,6 +114,7 @@ HeaderViewCourse.defaultProps = {
   image: {},
   imageDescription: "",
   video: "",
+  provider: {},
 }
 
 HeaderViewCourse.propTypes = {
@@ -112,6 +122,7 @@ HeaderViewCourse.propTypes = {
   defaultVideo: PropTypes.string,
   image: PropTypes.object,
   imageDescription: PropTypes.string,
+  provider: PropTypes.object,
   skillLevel: PropTypes.string.isRequired,
   teachingTime: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,

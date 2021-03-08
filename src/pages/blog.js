@@ -132,6 +132,7 @@ export const pageQuery = graphql`
           cover_image_description
           created_at
           excerpt
+          slug
           section {
             content
             id

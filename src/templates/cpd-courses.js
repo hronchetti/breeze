@@ -1,7 +1,6 @@
-import React, { useState } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
-import { clearAllBodyScrollLocks } from "body-scroll-lock"
 
 import { CourseListPage } from "../components"
 
@@ -74,8 +73,20 @@ export const pageQuery = graphql`
             course_name
             id
           }
+          course_provider {
+            id
+            name
+            logo {
+              childImageSharp {
+                fluid(maxWidth: 800) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
           course_topic {
             name
+            slug
           }
           not_included_in_cpd_courses {
             name
@@ -85,6 +96,7 @@ export const pageQuery = graphql`
             id
             name
           }
+          slug
         }
       }
     }
@@ -137,6 +149,12 @@ export const pageQuery = graphql`
         og_type
         og_url
         title
+      }
+      slug
+      accordions {
+        id
+        content
+        heading
       }
     }
   }
