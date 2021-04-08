@@ -142,9 +142,9 @@
         top: 0.75rem;
         transition: all 150ms ease-in;
 
-        @for $i from 1 through 4 {
+        @for $i from 1 through 5 {
           &:nth-of-type(#{$i}) {
-            transition-delay: #{400ms + (400ms / $i)};
+            transition-delay: #{400ms + (500ms / $i)};
           }
         }
 
@@ -197,7 +197,7 @@
 
     .fill {
       transition: height cubic-bezier(0.4, 0.1, 0.1, 1.55) 500ms;
-      height: 31.5rem;
+      height: 34.75rem;
       transition-delay: 0s;
     }
 
@@ -208,7 +208,7 @@
         opacity: 1;
         top: 0;
 
-        @for $i from 1 through 4 {
+        @for $i from 1 through 5 {
           &:nth-of-type(#{$i}) {
             transition-delay: #{100ms * $i};
           }
@@ -231,7 +231,7 @@
   }
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 900px) {
   .navWrapper {
     .fill {
       height: 6em;

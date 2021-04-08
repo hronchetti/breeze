@@ -81,6 +81,16 @@ exports.createPages = ({ actions, graphql }) => {
         }
       }
 
+      allStrapiLocations {
+        edges {
+          node {
+            slug
+            strapiId
+            name
+          }
+        }
+      }
+
       allStrapiCourseBookings {
         edges {
           node {
@@ -149,6 +159,18 @@ exports.createPages = ({ actions, graphql }) => {
       createPage({
         path: createSlug.courseSlug(node.course_topic.slug, node.slug),
         component: path.resolve(`src/templates/view-course.js`),
+        context: {
+          name: node.name,
+          strapiId: node.strapiId,
+        },
+      })
+    })
+
+    // Location pages /locations/{slug}
+    result.data.allStrapiLocations.edges.forEach(({ node }) => {
+      createPage({
+        path: `/locations/${node.slug}`,
+        component: path.resolve(`src/templates/location.js`),
         context: {
           name: node.name,
           strapiId: node.strapiId,

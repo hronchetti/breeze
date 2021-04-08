@@ -24,7 +24,6 @@ export const CourseListPage = ({
   featuredCourses,
   courseBookings,
 }) => {
-  console.log(courses)
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = React.useState(
     false
   )
@@ -121,10 +120,7 @@ export const CourseListPage = ({
           </section>
         ) : (
           <section className="wrapper padded">
-            <EmptyCourseList
-              courseTopic={courseList.name}
-              professionPage={true}
-            />
+            <EmptyCourseList />
           </section>
         )}
         {courseList.accordions && courseList.accordions.length > 1 && (

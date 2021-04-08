@@ -14,6 +14,14 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    // {
+    //   resolve: `gatsby-plugin-hotjar`,
+    //   options: {
+    //     includeInDevelopment: true,
+    //     id: 2215439,
+    //     sv: 6,
+    //   },
+    // },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sass`,
@@ -37,6 +45,9 @@ module.exports = {
           `course-bookings`,
           `courses`,
           `resources`,
+          `locations`,
+          `location-regions`,
+          `location-region-groups`,
         ],
         singleTypes: [
           `homepage`,
@@ -47,6 +58,7 @@ module.exports = {
           `request-a-course`,
           `terms-and-conditions`,
           `privacy-policy`,
+          `locations-page`,
         ],
         queryLimit: 1000,
       },
