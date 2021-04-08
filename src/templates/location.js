@@ -7,13 +7,32 @@ import { createCourseList } from "../utilities"
 
 const Location = ({ data }) => {
   const location = data.strapiLocations
+  const locationCourseBookings = data.allStrapiCourseBookings.edges
+  const locationCourses = data.allStrapiCourses.edges.filter(({ node }) => {
+    let hasBookingsinLocation = false
+
+    node.course_bookings.map((bookingFromCourse) => {
+      if (
+        locationCourseBookings.some(
+          (courseBooking) =>
+            courseBooking.node.strapiId === bookingFromCourse.id
+        )
+      ) {
+        hasBookingsinLocation = true
+      }
+    })
+
+    return hasBookingsinLocation
+  })
+
   return (
     <CourseListPage
       seo={location.seo}
       courseList={location}
-      courses={[]}
+      courses={locationCourses}
       featuredCourses={[]}
-      courseBookings={[]}
+      courseBookings={locationCourseBookings}
+      locationPage={true}
     />
   )
 }
@@ -26,6 +45,47 @@ export default Location
 
 export const pageQuery = graphql`
   query AllCoursesForLocation($name: String!) {
+    allStrapiCourses(
+      filter: { course_topic: { id: { eq: 1 } } }
+      sort: { order: ASC, fields: name }
+    ) {
+      edges {
+        node {
+          id
+          strapiId
+          name
+          skill_level
+          summary
+          teaching_time
+          online_only
+          thinkific_training {
+            course_link
+            course_duration
+            course_name
+            id
+          }
+          course_provider {
+            id
+            name
+            logo {
+              childImageSharp {
+                fluid(maxWidth: 800) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
+          course_topic {
+            name
+            slug
+          }
+          course_bookings {
+            id
+          }
+          slug
+        }
+      }
+    }
     allStrapiCourseBookings(filter: { location: { name: { eq: $name } } }) {
       edges {
         node {

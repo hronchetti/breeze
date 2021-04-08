@@ -23,6 +23,7 @@ export const CourseListPage = ({
   courses,
   featuredCourses,
   courseBookings,
+  locationPage,
 }) => {
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = React.useState(
     false
@@ -114,6 +115,7 @@ export const CourseListPage = ({
                       ? featuredCourses.includes(course)
                       : course.node.featured_course_in_topic
                   }
+                  locationPage={locationPage}
                 />
               ))}
             </section>
@@ -159,6 +161,7 @@ CourseListPage.defaultProps = {
   courses: [],
   featuredCourses: [],
   courseBookings: [],
+  locationPage: false,
 }
 
 CourseListPage.propTypes = {
@@ -167,4 +170,5 @@ CourseListPage.propTypes = {
   courses: PropTypes.array,
   featuredCourses: PropTypes.array,
   courseBookings: PropTypes.array,
+  locationPage: PropTypes.bool,
 }
