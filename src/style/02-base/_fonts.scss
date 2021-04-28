@@ -63,9 +63,11 @@ h2 {
   margin: 0 0 1.5rem 0;
 }
 
-h3 {
-  font: 600 1.5rem/2.125rem "Inter", Arial, sans-serif;
+h3,
+.headingMedium {
+  font: 600 1.25rem/1.75rem "Inter", Arial, sans-serif;
   color: $blueDark;
+  letter-spacing: -0.25px;
 }
 
 h4 {
@@ -90,6 +92,12 @@ strong {
 
 p {
   margin: 1.5rem 0 1rem;
+}
+
+.boldText {
+  font: 600 0.875rem/1.25rem "Inter", Arial, sans-serif;
+  color: $grey;
+  margin: 0;
 }
 
 @media all and (min-width: 800px) {
@@ -131,6 +139,11 @@ p {
     line-height: 2.75rem;
   }
 
+  .headingMedium {
+    font-size: 1.75rem;
+    line-height: 2.5rem;
+  }
+
   h4 {
     font-size: 1.5rem;
     line-height: 2rem;
@@ -138,5 +151,10 @@ p {
 
   p {
     margin: 2rem 0;
+  }
+
+  .boldText {
+    font-size: 1rem;
+    line-height: 1.25rem;
   }
 }

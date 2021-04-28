@@ -20,6 +20,7 @@ export const CourseListing = ({
   course,
   featuredCourse,
   prepareModal,
+  locationPage,
 }) => {
   const futureBookings = createFutureBookings(bookings)
   return (
@@ -95,6 +96,7 @@ export const CourseListing = ({
                 slug={course.slug}
                 key={node.id}
                 prepareModal={prepareModal}
+                locationPage={locationPage}
               />
             ))
           ) : (
@@ -117,16 +119,29 @@ export const CourseListing = ({
   )
 }
 
-const CourseBooking = ({ node, topicSlug, slug, prepareModal }) => (
+const CourseBooking = ({
+  node,
+  topicSlug,
+  slug,
+  prepareModal,
+  locationPage,
+}) => (
   <section className="booking">
     <div className="information">
       <span className="dates">
-        {createBookingDates(node.teaching_period)}
-        {` (${convertToAmPmTime(node.start_time)} - ${convertToAmPmTime(
-          node.end_time
-        )})`}
+        {locationPage
+          ? `${convertToAmPmTime(node.start_time)} - ${convertToAmPmTime(
+              node.end_time
+            )}`
+          : `${createBookingDates(node.teaching_period)} (${convertToAmPmTime(
+              node.start_time
+            )} - ${convertToAmPmTime(node.end_time)})`}
       </span>
-      <h4>{node.address_short}</h4>
+      <h4>
+        {locationPage
+          ? createBookingDates(node.teaching_period)
+          : node.address_short}
+      </h4>
       {node.discount_percentage && node.discount_percentage > 0 ? (
         <Tag discount text={node.discount_percentage.toString()} />
       ) : null}
@@ -159,6 +174,7 @@ const CourseBooking = ({ node, topicSlug, slug, prepareModal }) => (
 CourseListing.defaultProps = {
   bookings: [],
   featuredCourse: false,
+  locationPage: false,
 }
 
 CourseListing.propTypes = {
@@ -166,4 +182,5 @@ CourseListing.propTypes = {
   prepareModal: PropTypes.func.isRequired,
   bookings: PropTypes.array,
   featuredCourse: PropTypes.bool,
+  locationPage: PropTypes.bool,
 }

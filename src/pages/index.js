@@ -101,7 +101,7 @@ const LandingPage = ({ data }) => {
                   >
                     <h3>{node.name}</h3>
                     <div className="courseStyleWrapper"></div>
-                    <p>{node.description}</p>
+                    <p>{node.description_homepage}</p>
                     <span className="linkArrow">Get started</span>
                   </ImageCard>
                 ))}
@@ -124,7 +124,7 @@ const LandingPage = ({ data }) => {
                   >
                     <h3>{node.name}</h3>
                     <div className="courseStyleWrapper"></div>
-                    <p>{node.description}</p>
+                    <p>{node.description_homepage}</p>
                     <span className="linkArrow">Get started</span>
                   </ImageCard>
                 ))}
@@ -147,7 +147,7 @@ const LandingPage = ({ data }) => {
                   >
                     <h3>{node.name}</h3>
                     <div className="courseStyleWrapper"></div>
-                    <p>{node.description}</p>
+                    <p>{node.description_homepage}</p>
                     <span className="linkArrow">Get started</span>
                   </ImageCard>
                 ))}
@@ -195,6 +195,7 @@ export const pageQuery = graphql`
           id
           name
           description
+          description_homepage
           image_description
           image {
             childImageSharp {
@@ -213,6 +214,7 @@ export const pageQuery = graphql`
           id
           name
           description
+          description_homepage
           image_description
           image {
             childImageSharp {
@@ -238,6 +240,7 @@ export const pageQuery = graphql`
             }
           }
           description
+          description_homepage
           name
           strapiId
           slug

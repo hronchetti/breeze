@@ -45,6 +45,9 @@ module.exports = {
           `course-bookings`,
           `courses`,
           `resources`,
+          `locations`,
+          `location-regions`,
+          `location-region-groups`,
         ],
         singleTypes: [
           `homepage`,
@@ -55,6 +58,7 @@ module.exports = {
           `request-a-course`,
           `terms-and-conditions`,
           `privacy-policy`,
+          `locations-page`,
         ],
         queryLimit: 1000,
       },

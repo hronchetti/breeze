@@ -7,7 +7,7 @@ import { Formik, Form } from "formik"
 import { Input, Toast } from "../../Form"
 import SearchingIcon from "../../../images/icons/big/searching.svg"
 
-export const EmptyCourseList = ({ courseTopic, professionPage }) => {
+export const EmptyCourseList = () => {
   const [toast, setToast] = useState({
     message: "",
     visible: false,
@@ -51,9 +51,8 @@ export const EmptyCourseList = ({ courseTopic, professionPage }) => {
             />
             <h3>Courses coming soon</h3>
             <p>
-              We haven&apos;t uploaded {professionPage ? "any" : "our"}{" "}
-              {courseTopic.toLowerCase()} {professionPage ? " " : "courses"}
-              yet, but we do offer them!
+              We don&apos;t currently have any courses planned for this
+              criteria, but we do offer them!
             </p>
             <p>
               To learn more about courses not on our website join our mailing
@@ -75,7 +74,7 @@ export const EmptyCourseList = ({ courseTopic, professionPage }) => {
         type={toast.type}
         visible={toast.visible}
         onClick={() =>
-          setToast(toast => ({
+          setToast((toast) => ({
             ...toast,
             visible: false,
           }))
@@ -83,13 +82,4 @@ export const EmptyCourseList = ({ courseTopic, professionPage }) => {
       />
     </section>
   )
-}
-
-EmptyCourseList.defaultProps = {
-  professionPage: false,
-}
-
-EmptyCourseList.propTypes = {
-  courseTopic: PropTypes.string.isRequired,
-  professionPage: PropTypes.bool,
 }

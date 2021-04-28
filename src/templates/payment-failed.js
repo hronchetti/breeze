@@ -15,7 +15,7 @@ const paymentFailed = ({ data, location }) => {
   const booking = data.strapiCourseBookings
   const courseTopic = data.allStrapiCourseTopics.edges.filter(
     (topic) => topic.node.strapiId === booking.course.course_topic
-  )[0].node.name
+  )[0].node.slug
 
   const [toast, setToast] = useState({
     message: "",
@@ -71,17 +71,17 @@ const paymentFailed = ({ data, location }) => {
             )
           }
         >
-          Try again
+          Retry payment
         </Button>
         <Button
           to={courseBookingSlug(
             courseTopic,
-            booking.course.name,
+            booking.course.slug,
             booking.strapiId
           )}
           styles="buttonSecondary buttonShadow"
         >
-          Back to course
+          Back to course page
         </Button>
       </header>
       <Toast
@@ -115,6 +115,7 @@ export const pageQuery = graphql`
       course {
         id
         name
+        slug
         course_topic
       }
       stripe_product
@@ -122,6 +123,7 @@ export const pageQuery = graphql`
     allStrapiCourseTopics {
       edges {
         node {
+          slug
           name
           strapiId
         }
