@@ -60,7 +60,7 @@ const paymentSuccess = ({ data }) => {
                     styles="buttonPrimary iconLeft iconArrow"
                     href={thinkificTraining.course_link}
                   >
-                    Complete training now
+                    Start preliminary training
                   </Button>
                 </TextCard>
               </>
