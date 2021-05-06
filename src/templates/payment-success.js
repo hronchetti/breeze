@@ -32,7 +32,10 @@ const paymentSuccess = ({ data }) => {
         <h1 className="headingMaxWidth">
           Your space is booked onto {courseBooking.course.name}
         </h1>
-        <p>A payment reciept has been sent to your email</p>
+        <p>
+          A payment reciept has been sent to your email. Please register using
+          the button below, you will NOT have access to this link again.
+        </p>
         {thinkificTrainingAvailable && (
           <Button
             styles="buttonPrimary iconLeft iconArrow paymentStatusHeaderButton"
