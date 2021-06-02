@@ -32,7 +32,18 @@ const paymentSuccess = ({ data }) => {
         <h1 className="headingMaxWidth">
           Your space is booked onto {courseBooking.course.name}
         </h1>
-        <p>A payment reciept has been sent to your email</p>
+        <p>
+          A payment reciept has been sent to your email. Please register using
+          the button below, you will NOT have access to this link again.
+        </p>
+        {thinkificTrainingAvailable && (
+          <Button
+            styles="buttonPrimary iconLeft iconArrow paymentStatusHeaderButton"
+            href={thinkificTraining.course_link}
+          >
+            Start preliminary training
+          </Button>
+        )}
       </header>
       <main className="backgroundGreyLightSuper">
         <div className="wrapper bookingInformation">
@@ -60,7 +71,7 @@ const paymentSuccess = ({ data }) => {
                     styles="buttonPrimary iconLeft iconArrow"
                     href={thinkificTraining.course_link}
                   >
-                    Complete training now
+                    Start preliminary training
                   </Button>
                 </TextCard>
               </>

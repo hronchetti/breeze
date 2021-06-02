@@ -41,11 +41,24 @@
   max-width: 50rem;
 }
 
+.paymentStatusHeaderButton {
+  margin-top: 1rem;
+
+  @supports (width: max-content) {
+    width: max-content;
+  }
+}
+
+@media (min-width: 800px) {
+  .paymentStatusHeaderButton {
+    margin-top: 1.5rem;
+  }
+}
+
 .buttonShadow {
   width: fit-content;
   margin: 0 auto 0.75rem;
   box-shadow: 0rem 0.125rem 0.25rem rgba($blueDark, 0.1);
-  width: 10rem;
 
   &.buttonMargin {
     margin-top: 1.5rem;

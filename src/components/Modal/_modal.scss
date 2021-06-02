@@ -21,6 +21,7 @@
   z-index: 1003;
   width: 100%;
   max-width: 50rem;
+  height: calc(100% - 8rem);
 
   header {
     display: grid;
@@ -40,11 +41,7 @@
   .body {
     padding: 1rem 1.25rem;
     overflow: auto;
-    max-height: calc(100vh - 13rem);
-
-    @media (min-width: 384px) {
-      max-height: calc(100vh - 11rem);
-    }
+    max-height: calc(100% - 11rem);
 
     h4,
     h5,
@@ -71,7 +68,7 @@
 @media screen and (min-width: 600px) {
   .modal {
     .body {
-      max-height: calc(100vh - 10.75rem);
+      max-height: calc(100% - 10.75rem);
     }
 
     footer {
@@ -93,6 +90,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     border-radius: 0.5rem;
+    height: auto;
 
     header {
       padding: 1.5rem 2rem;

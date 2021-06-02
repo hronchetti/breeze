@@ -23,8 +23,8 @@ export const CourseListPage = ({
   courses,
   featuredCourses,
   courseBookings,
+  locationPage,
 }) => {
-  console.log(courses)
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = React.useState(
     false
   )
@@ -115,16 +115,14 @@ export const CourseListPage = ({
                       ? featuredCourses.includes(course)
                       : course.node.featured_course_in_topic
                   }
+                  locationPage={locationPage}
                 />
               ))}
             </section>
           </section>
         ) : (
           <section className="wrapper padded">
-            <EmptyCourseList
-              courseTopic={courseList.name}
-              professionPage={true}
-            />
+            <EmptyCourseList />
           </section>
         )}
         {courseList.accordions && courseList.accordions.length > 1 && (
@@ -163,6 +161,7 @@ CourseListPage.defaultProps = {
   courses: [],
   featuredCourses: [],
   courseBookings: [],
+  locationPage: false,
 }
 
 CourseListPage.propTypes = {
@@ -171,4 +170,5 @@ CourseListPage.propTypes = {
   courses: PropTypes.array,
   featuredCourses: PropTypes.array,
   courseBookings: PropTypes.array,
+  locationPage: PropTypes.bool,
 }

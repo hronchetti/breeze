@@ -18,3 +18,20 @@
     background-position: center;
   }
 }
+
+.link {
+  font-weight: 400;
+  color: $grey;
+  text-decoration: underline;
+  font-size: inherit;
+
+  &:focus {
+    text-decoration: none;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
