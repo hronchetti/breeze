@@ -126,7 +126,6 @@ paymentSuccess.propTypes = {
 export const pageQuery = graphql`
   query getBooking($strapiId: Int) {
     strapiCourseBookings(strapiId: { eq: $strapiId }) {
-      booking_price
       address_full
       strapiId
       start_time

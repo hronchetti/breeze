@@ -7,14 +7,14 @@ import { CoursePrices } from ".."
 
 export const PrimaryBooking = ({
   discount,
-  fullAddress,
-  prepareModal,
-  priceValue,
-  priceCurrency,
-  shortAddress,
-  teachingPeriods,
-  startTime,
   endTime,
+  fullAddress,
+  paythenLink,
+  priceCurrency,
+  priceValue,
+  shortAddress,
+  startTime,
+  teachingPeriods,
 }) => {
   return (
     <section className="sidebarItem">
@@ -31,7 +31,7 @@ export const PrimaryBooking = ({
       </span>
       <p className="address">{fullAddress}</p>
       <p className="shortAddress">{shortAddress}</p>
-      <Button styles="buttonPrimary iconLeft iconArrow" onClick={prepareModal}>
+      <Button styles="buttonPrimary iconLeft iconArrow" href={paythenLink}>
         Book now
       </Button>
     </section>
@@ -44,12 +44,12 @@ PrimaryBooking.defaultProps = {
 
 PrimaryBooking.propTypes = {
   discount: PropTypes.number,
-  fullAddress: PropTypes.string.isRequired,
-  prepareModal: PropTypes.func.isRequired,
-  priceValue: PropTypes.number.isRequired,
-  priceCurrency: PropTypes.string.isRequired,
-  shortAddress: PropTypes.string.isRequired,
-  teachingPeriods: PropTypes.array.isRequired,
-  startTime: PropTypes.string.isRequired,
   endTime: PropTypes.string.isRequired,
+  fullAddress: PropTypes.string.isRequired,
+  paythenLink: PropTypes.string.isRequired,
+  priceCurrency: PropTypes.string.isRequired,
+  priceValue: PropTypes.number.isRequired,
+  shortAddress: PropTypes.string.isRequired,
+  startTime: PropTypes.string.isRequired,
+  teachingPeriods: PropTypes.array.isRequired,
 }

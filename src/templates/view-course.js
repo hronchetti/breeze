@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import ReactMarkdown from "react-markdown"
 import { Link, graphql } from "gatsby"
-import { clearAllBodyScrollLocks } from "body-scroll-lock"
 import { courseSlug } from "../utilities"
 
 import {
@@ -11,7 +10,6 @@ import {
   CoursePrices,
   FAQ,
   HeaderViewCourse,
-  HealthcareProfessionalsOnly,
   Layout,
   OnlineBooking,
   PrimaryBooking,
@@ -31,10 +29,6 @@ import {
 
 const CourseView = ({ data, location }) => {
   const [primaryBooking, setPrimaryBooking] = useState()
-  const [modalVisible, setModalVisibility] = useState(false)
-  const [stripeProduct, setStripeProduct] = useState("")
-  const [bookingId, setBookingId] = useState()
-
   const course = data.strapiCourses
 
   const courseSEO = course.seo
@@ -57,12 +51,6 @@ const CourseView = ({ data, location }) => {
         })
     }
   }, [courseBookings])
-
-  const prepareModal = (stripeProduct, bookingId) => {
-    setModalVisibility(true)
-    setStripeProduct(stripeProduct)
-    setBookingId(bookingId)
-  }
 
   const futureBookings = createFutureBookings(courseBookings)
 
@@ -179,9 +167,7 @@ const CourseView = ({ data, location }) => {
                     <div className="actions">
                       <Button
                         styles="buttonPrimary iconLeft iconArrow"
-                        onClick={() =>
-                          prepareModal(node.stripe_product, node.strapiId)
-                        }
+                        href={node.paythen_link}
                       >
                         Book now
                       </Button>
@@ -211,15 +197,10 @@ const CourseView = ({ data, location }) => {
                 priceValue={primaryBooking.booking_price_value}
                 priceCurrency={primaryBooking.booking_price_currency}
                 discount={primaryBooking.discount_percentage}
+                paythenLink={primaryBooking.paythen_link}
                 teachingPeriods={primaryBooking.teaching_period}
                 fullAddress={primaryBooking.address_full}
                 shortAddress={primaryBooking.address_short}
-                prepareModal={() =>
-                  prepareModal(
-                    primaryBooking.stripe_product,
-                    primaryBooking.strapiId
-                  )
-                }
                 startTime={primaryBooking.start_time}
                 endTime={primaryBooking.end_time}
               />
@@ -252,16 +233,6 @@ const CourseView = ({ data, location }) => {
         </section>
       </main>
       <SignOffStillLooking />
-      {modalVisible ? (
-        <HealthcareProfessionalsOnly
-          closeFn={() => setModalVisibility(false)}
-          stripeProduct={stripeProduct}
-          location={location}
-          bookingId={bookingId}
-        />
-      ) : (
-        clearAllBodyScrollLocks()
-      )}
     </Layout>
   )
 }
@@ -363,6 +334,7 @@ export const pageQuery = graphql`
           booking_price_currency
           booking_price_value
           stripe_product
+          paythen_link
           start_time
           end_time
           discount_percentage

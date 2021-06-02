@@ -19,7 +19,6 @@ export const CourseListing = ({
   bookings,
   course,
   featuredCourse,
-  prepareModal,
   locationPage,
 }) => {
   const futureBookings = createFutureBookings(bookings)
@@ -95,8 +94,8 @@ export const CourseListing = ({
                 topicSlug={course.course_topic.slug}
                 slug={course.slug}
                 key={node.id}
-                prepareModal={prepareModal}
                 locationPage={locationPage}
+                paythenLink={node.paythen_link}
               />
             ))
           ) : (
@@ -123,8 +122,8 @@ const CourseBooking = ({
   node,
   topicSlug,
   slug,
-  prepareModal,
   locationPage,
+  paythenLink,
 }) => (
   <section className="booking">
     <div className="information">
@@ -161,10 +160,7 @@ const CourseBooking = ({
       >
         Find out more
       </Button>
-      <Button
-        styles="buttonPrimary iconLeft iconArrow"
-        onClick={() => prepareModal(node.stripe_product, node.strapiId)}
-      >
+      <Button styles="buttonPrimary iconLeft iconArrow" href={paythenLink}>
         Book now
       </Button>
     </div>
@@ -179,7 +175,6 @@ CourseListing.defaultProps = {
 
 CourseListing.propTypes = {
   course: PropTypes.object.isRequired,
-  prepareModal: PropTypes.func.isRequired,
   bookings: PropTypes.array,
   featuredCourse: PropTypes.bool,
   locationPage: PropTypes.bool,

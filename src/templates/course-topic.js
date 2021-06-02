@@ -10,7 +10,6 @@ const CourseList = ({ data }) => {
   const allCourseBookings = data.allStrapiCourseBookings.edges
   const courses = data.allStrapiCourses.edges
   const courseTopic = data.strapiCourseTopics
-
   const prioritisedCourses = createCourseList(
     courses.filter((course) => course.node.featured_course_in_topic),
     courses.filter((course) => !course.node.featured_course_in_topic)
@@ -84,10 +83,10 @@ export const pageQuery = graphql`
           address_full
           address_short
           start_date
-          booking_price
           booking_price_currency
           booking_price_value
           stripe_product
+          paythen_link
           discount_percentage
           start_time
           end_time

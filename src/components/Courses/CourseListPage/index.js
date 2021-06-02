@@ -11,7 +11,6 @@ import {
   FAQ,
   FilterOption,
   HeaderBlob,
-  HealthcareProfessionalsOnly,
   Layout,
   SEO,
   SignOffStillLooking,
@@ -28,16 +27,6 @@ export const CourseListPage = ({
   const [sidebarVisibileMobile, setSidebarVisibilityMobile] = React.useState(
     false
   )
-  const [modalVisible, setModalVisibility] = React.useState(false)
-  const [stripeProduct, setStripeProduct] = React.useState("")
-  const [bookingId, setBookingId] = React.useState()
-
-  const prepareModal = (stripeProduct, bookingId) => {
-    setModalVisibility(true)
-    setStripeProduct(stripeProduct)
-    setBookingId(bookingId)
-  }
-
   const pageUrl = `https://breeze.academy${courseTopicSlug(courseList.slug)}`
 
   return (
@@ -109,7 +98,6 @@ export const CourseListPage = ({
                       booking.node.course &&
                       booking.node.course.id === course.node.strapiId
                   )}
-                  prepareModal={prepareModal}
                   featuredCourse={
                     featuredCourses && featuredCourses.length > 0
                       ? featuredCourses.includes(course)
@@ -141,18 +129,7 @@ export const CourseListPage = ({
           </section>
         )}
       </main>
-
       <SignOffStillLooking />
-      {modalVisible ? (
-        <HealthcareProfessionalsOnly
-          closeFn={() => setModalVisibility(false)}
-          stripeProduct={stripeProduct}
-          bookingId={bookingId}
-          location={location}
-        />
-      ) : (
-        clearAllBodyScrollLocks()
-      )}
     </Layout>
   )
 }
