@@ -9,6 +9,7 @@ import {
   createBookingDates,
   convertToAmPmTime,
   createFutureBookings,
+  stripeRedirectToCheckout,
 } from "../../../utilities"
 import { Button } from "../../Button"
 import { Tag, CoursePrices } from "../"
@@ -95,7 +96,6 @@ export const CourseListing = ({
                 slug={course.slug}
                 key={node.id}
                 locationPage={locationPage}
-                paythenLink={node.paythen_link}
               />
             ))
           ) : (
@@ -118,13 +118,7 @@ export const CourseListing = ({
   )
 }
 
-const CourseBooking = ({
-  node,
-  topicSlug,
-  slug,
-  locationPage,
-  paythenLink,
-}) => (
+const CourseBooking = ({ node, topicSlug, slug, locationPage }) => (
   <section className="booking">
     <div className="information">
       <span className="dates">
@@ -160,7 +154,12 @@ const CourseBooking = ({
       >
         Find out more
       </Button>
-      <Button styles="buttonPrimary iconLeft iconArrow" href={paythenLink}>
+      <Button
+        styles="buttonPrimary iconLeft iconArrow"
+        onClick={() =>
+          stripeRedirectToCheckout(node.stripe_product, node.strapiId)
+        }
+      >
         Book now
       </Button>
     </div>

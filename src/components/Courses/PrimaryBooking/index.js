@@ -2,18 +2,23 @@ import React from "react"
 import PropTypes from "prop-types"
 
 import { Button } from "../../Button"
-import { createBookingDates, convertToAmPmTime } from "../../../utilities"
+import {
+  createBookingDates,
+  convertToAmPmTime,
+  stripeRedirectToCheckout,
+} from "../../../utilities"
 import { CoursePrices } from ".."
 
 export const PrimaryBooking = ({
+  bookingId,
   discount,
   endTime,
   fullAddress,
-  paythenLink,
   priceCurrency,
   priceValue,
   shortAddress,
   startTime,
+  stripeProduct,
   teachingPeriods,
 }) => {
   return (
@@ -31,7 +36,10 @@ export const PrimaryBooking = ({
       </span>
       <p className="address">{fullAddress}</p>
       <p className="shortAddress">{shortAddress}</p>
-      <Button styles="buttonPrimary iconLeft iconArrow" href={paythenLink}>
+      <Button
+        styles="buttonPrimary iconLeft iconArrow"
+        onClick={() => stripeRedirectToCheckout(stripeProduct, bookingId)}
+      >
         Book now
       </Button>
     </section>
@@ -46,7 +54,6 @@ PrimaryBooking.propTypes = {
   discount: PropTypes.number,
   endTime: PropTypes.string.isRequired,
   fullAddress: PropTypes.string.isRequired,
-  paythenLink: PropTypes.string.isRequired,
   priceCurrency: PropTypes.string.isRequired,
   priceValue: PropTypes.number.isRequired,
   shortAddress: PropTypes.string.isRequired,

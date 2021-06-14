@@ -114,7 +114,6 @@ export const pageQuery = graphql`
           booking_price_currency
           booking_price_value
           stripe_product
-          paythen_link
           discount_percentage
           start_time
           end_time

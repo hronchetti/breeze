@@ -25,6 +25,7 @@ import {
   defaultSEO,
   convertToAmPmTime,
   createFutureBookings,
+  stripeRedirectToCheckout,
 } from "../utilities"
 
 const CourseView = ({ data, location }) => {
@@ -167,7 +168,12 @@ const CourseView = ({ data, location }) => {
                     <div className="actions">
                       <Button
                         styles="buttonPrimary iconLeft iconArrow"
-                        href={node.paythen_link}
+                        onClick={() =>
+                          stripeRedirectToCheckout(
+                            node.stripe_product,
+                            node.strapiId
+                          )
+                        }
                       >
                         Book now
                       </Button>
@@ -197,7 +203,8 @@ const CourseView = ({ data, location }) => {
                 priceValue={primaryBooking.booking_price_value}
                 priceCurrency={primaryBooking.booking_price_currency}
                 discount={primaryBooking.discount_percentage}
-                paythenLink={primaryBooking.paythen_link}
+                bookingId={primaryBooking.strapiId}
+                stripeProduct={primaryBooking.stripe_product}
                 teachingPeriods={primaryBooking.teaching_period}
                 fullAddress={primaryBooking.address_full}
                 shortAddress={primaryBooking.address_short}
@@ -334,7 +341,6 @@ export const pageQuery = graphql`
           booking_price_currency
           booking_price_value
           stripe_product
-          paythen_link
           start_time
           end_time
           discount_percentage
