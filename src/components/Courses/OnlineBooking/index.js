@@ -14,26 +14,28 @@ export const OnlineBooking = ({
 }) => {
   return (
     <section className="sidebarItem">
-      <h3 className="price">
-        {showCoursePrice === false ? (
-          "Sign up"
-        ) : priceValue || priceValue !== 0 ? (
-          <CoursePrices
-            price={priceValue}
-            currency={priceCurrency}
-            discount={discount}
-          />
-        ) : (
-          "Free"
-        )}
-      </h3>
+      {showCoursePrice === false ? (
+        <h3 className="sidebarItemTitle">Start learning</h3>
+      ) : (
+        <h3 className="price">
+          {priceValue || priceValue !== 0 ? (
+            <CoursePrices
+              price={priceValue}
+              currency={priceCurrency}
+              discount={discount}
+            />
+          ) : (
+            "Free"
+          )}
+        </h3>
+      )}
       <p className="sideNote">
         Access this course through Thinkific, our online training partner
       </p>
       <Button styles="buttonPrimary iconLeft iconArrow" href={link}>
         {customButtonText && customButtonText !== ""
           ? customButtonText
-          : "Book now"}
+          : "Sign up today"}
       </Button>
     </section>
   )

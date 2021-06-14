@@ -59,7 +59,6 @@ const CourseView = ({ data, location }) => {
     course.course_topic.slug,
     course.slug
   )}`
-  console.log(course.show_course_price)
   return (
     <Layout>
       <SEO

@@ -22,7 +22,6 @@ export const CourseListing = ({
   featuredCourse,
   locationPage,
 }) => {
-  console.log(course.custom_button_text)
   const futureBookings = createFutureBookings(bookings)
   return (
     <section className="courseItem" id={course.name}>
@@ -79,7 +78,7 @@ export const CourseListing = ({
           >
             {course.custom_button_text && course.custom_button_text !== ""
               ? course.custom_button_text
-              : "Book now on Thinkific"}
+              : "Sign up today"}
           </Button>
           <Button
             to={courseSlug(course.course_topic.slug, course.slug)}

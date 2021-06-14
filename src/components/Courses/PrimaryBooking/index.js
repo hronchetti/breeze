@@ -22,7 +22,6 @@ export const PrimaryBooking = ({
   teachingPeriods,
   customButtonText,
 }) => {
-  console.log(customButtonText)
   return (
     <section className="sidebarItem">
       <h3 className="price">
