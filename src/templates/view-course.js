@@ -59,7 +59,7 @@ const CourseView = ({ data, location }) => {
     course.course_topic.slug,
     course.slug
   )}`
-
+  console.log(course.show_course_price)
   return (
     <Layout>
       <SEO
@@ -175,7 +175,10 @@ const CourseView = ({ data, location }) => {
                           )
                         }
                       >
-                        Book now
+                        {course.custom_button_text &&
+                        course.custom_button_text !== ""
+                          ? course.custom_button_text
+                          : "Book now"}
                       </Button>
                     </div>
                   </section>
@@ -210,6 +213,7 @@ const CourseView = ({ data, location }) => {
                 shortAddress={primaryBooking.address_short}
                 startTime={primaryBooking.start_time}
                 endTime={primaryBooking.end_time}
+                customButtonText={course.custom_button_text}
               />
             ) : onlineCourse ? (
               <OnlineBooking
@@ -217,6 +221,8 @@ const CourseView = ({ data, location }) => {
                 priceCurrency={course.thinkific_training.course_price_currency}
                 discount={course.thinkific_training.discount_percentage}
                 link={course.thinkific_training.course_link}
+                customButtonText={course.custom_button_text}
+                showCoursePrice={course.show_course_price}
               />
             ) : courseBookings && courseBookings.length > 0 ? (
               <ScrollToBookings />
@@ -297,6 +303,8 @@ export const pageQuery = graphql`
       summary
       details
       online_only
+      show_course_price
+      custom_button_text
       youtube_video
       header_image_description
       header_image {

@@ -14,7 +14,6 @@ const CourseList = ({ data }) => {
     courses.filter((course) => course.node.featured_course_in_topic),
     courses.filter((course) => !course.node.featured_course_in_topic)
   )
-
   return (
     <CourseListPage
       seo={courseTopic.seo}
@@ -46,6 +45,8 @@ export const pageQuery = graphql`
           summary
           teaching_time
           online_only
+          show_course_price
+          custom_button_text
           featured_course_in_topic
           thinkific_training {
             course_link

@@ -20,7 +20,9 @@ export const PrimaryBooking = ({
   startTime,
   stripeProduct,
   teachingPeriods,
+  customButtonText,
 }) => {
+  console.log(customButtonText)
   return (
     <section className="sidebarItem">
       <h3 className="price">
@@ -40,7 +42,9 @@ export const PrimaryBooking = ({
         styles="buttonPrimary iconLeft iconArrow"
         onClick={() => stripeRedirectToCheckout(stripeProduct, bookingId)}
       >
-        Book now
+        {customButtonText && customButtonText !== ""
+          ? customButtonText
+          : "Book now"}
       </Button>
     </section>
   )

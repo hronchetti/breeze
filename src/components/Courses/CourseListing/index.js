@@ -22,6 +22,7 @@ export const CourseListing = ({
   featuredCourse,
   locationPage,
 }) => {
+  console.log(course.custom_button_text)
   const futureBookings = createFutureBookings(bookings)
   return (
     <section className="courseItem" id={course.name}>
@@ -76,7 +77,9 @@ export const CourseListing = ({
             styles="buttonPrimary iconLeft iconArrow"
             href={course.thinkific_training.course_link}
           >
-            Book now on Thinkific
+            {course.custom_button_text && course.custom_button_text !== ""
+              ? course.custom_button_text
+              : "Book now on Thinkific"}
           </Button>
           <Button
             to={courseSlug(course.course_topic.slug, course.slug)}
@@ -96,6 +99,8 @@ export const CourseListing = ({
                 slug={course.slug}
                 key={node.id}
                 locationPage={locationPage}
+                showPrice={course.show_course_price}
+                customButtonText={course.custom_button_text}
               />
             ))
           ) : (
@@ -118,7 +123,14 @@ export const CourseListing = ({
   )
 }
 
-const CourseBooking = ({ node, topicSlug, slug, locationPage }) => (
+const CourseBooking = ({
+  node,
+  topicSlug,
+  slug,
+  locationPage,
+  showPrice,
+  customButtonText,
+}) => (
   <section className="booking">
     <div className="information">
       <span className="dates">
@@ -139,11 +151,13 @@ const CourseBooking = ({ node, topicSlug, slug, locationPage }) => (
         <Tag discount text={node.discount_percentage.toString()} />
       ) : null}
       <p>
-        <CoursePrices
-          price={node.booking_price_value}
-          currency={node.booking_price_currency}
-          discount={node.discount_percentage && node.discount_percentage}
-        />{" "}
+        {showPrice !== false && (
+          <CoursePrices
+            price={node.booking_price_value}
+            currency={node.booking_price_currency}
+            discount={node.discount_percentage && node.discount_percentage}
+          />
+        )}{" "}
         &bull; {node.address_full}
       </p>
     </div>
@@ -160,7 +174,9 @@ const CourseBooking = ({ node, topicSlug, slug, locationPage }) => (
           stripeRedirectToCheckout(node.stripe_product, node.strapiId)
         }
       >
-        Book now
+        {customButtonText && customButtonText !== ""
+          ? customButtonText
+          : "Book now"}
       </Button>
     </div>
   </section>

@@ -9,11 +9,15 @@ export const OnlineBooking = ({
   priceCurrency,
   discount,
   link,
+  customButtonText,
+  showCoursePrice,
 }) => {
   return (
     <section className="sidebarItem">
       <h3 className="price">
-        {priceValue || priceValue !== 0 ? (
+        {showCoursePrice === false ? (
+          "Sign up"
+        ) : priceValue || priceValue !== 0 ? (
           <CoursePrices
             price={priceValue}
             currency={priceCurrency}
@@ -27,7 +31,9 @@ export const OnlineBooking = ({
         Access this course through Thinkific, our online training partner
       </p>
       <Button styles="buttonPrimary iconLeft iconArrow" href={link}>
-        Book now
+        {customButtonText && customButtonText !== ""
+          ? customButtonText
+          : "Book now"}
       </Button>
     </section>
   )
