@@ -1,4 +1,9 @@
 .sidebarItem {
+  .sidebarItemTitle {
+    font-size: 1.5rem;
+    line-height: 1.625rem;
+  }
+
   .sideNote {
     font-size: 1rem;
     max-width: 17.5rem;
@@ -8,6 +13,11 @@
 
 @media all and (min-width: 800px) {
   .sidebarItem {
+    .sidebarItemTitle {
+      font-size: 1.75rem;
+      line-height: 2rem;
+    }
+
     .sideNote {
       max-width: none;
       margin: 0.75rem 0 1.25rem 0;

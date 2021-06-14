@@ -6,8 +6,9 @@ export {
   coursePaymentSuccess,
   coursePaymentFailed,
 } from "./createSlug"
-export { createBookingDates } from "./createBookingDates"
-export { defaultSEO } from "./defaultSEO"
 export { convertToAmPmTime } from "./convertToAmPmTime"
-export { createFutureBookings } from "./createFutureBookings"
+export { createBookingDates } from "./createBookingDates"
 export { createCourseList } from "./createCourseList"
+export { createFutureBookings } from "./createFutureBookings"
+export { defaultSEO } from "./defaultSEO"
+export { stripeRedirectToCheckout } from "./stripeRedirectToCheckout"

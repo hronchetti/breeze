@@ -67,6 +67,8 @@ export const pageQuery = graphql`
           summary
           teaching_time
           online_only
+          show_course_price
+          custom_button_text
           thinkific_training {
             course_link
             course_duration

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 import ReactMarkdown from "react-markdown"
 import { Link, graphql } from "gatsby"
-import { clearAllBodyScrollLocks } from "body-scroll-lock"
 import { courseSlug } from "../utilities"
 
 import {
@@ -11,7 +10,6 @@ import {
   CoursePrices,
   FAQ,
   HeaderViewCourse,
-  HealthcareProfessionalsOnly,
   Layout,
   OnlineBooking,
   PrimaryBooking,
@@ -27,14 +25,11 @@ import {
   defaultSEO,
   convertToAmPmTime,
   createFutureBookings,
+  stripeRedirectToCheckout,
 } from "../utilities"
 
 const CourseView = ({ data, location }) => {
   const [primaryBooking, setPrimaryBooking] = useState()
-  const [modalVisible, setModalVisibility] = useState(false)
-  const [stripeProduct, setStripeProduct] = useState("")
-  const [bookingId, setBookingId] = useState()
-
   const course = data.strapiCourses
 
   const courseSEO = course.seo
@@ -58,19 +53,12 @@ const CourseView = ({ data, location }) => {
     }
   }, [courseBookings])
 
-  const prepareModal = (stripeProduct, bookingId) => {
-    setModalVisibility(true)
-    setStripeProduct(stripeProduct)
-    setBookingId(bookingId)
-  }
-
   const futureBookings = createFutureBookings(courseBookings)
 
   const pageUrl = `https://breeze.academy${courseSlug(
     course.course_topic.slug,
     course.slug
   )}`
-
   return (
     <Layout>
       <SEO
@@ -180,10 +168,16 @@ const CourseView = ({ data, location }) => {
                       <Button
                         styles="buttonPrimary iconLeft iconArrow"
                         onClick={() =>
-                          prepareModal(node.stripe_product, node.strapiId)
+                          stripeRedirectToCheckout(
+                            node.stripe_product,
+                            node.strapiId
+                          )
                         }
                       >
-                        Book now
+                        {course.custom_button_text &&
+                        course.custom_button_text !== ""
+                          ? course.custom_button_text
+                          : "Book now"}
                       </Button>
                     </div>
                   </section>
@@ -211,17 +205,14 @@ const CourseView = ({ data, location }) => {
                 priceValue={primaryBooking.booking_price_value}
                 priceCurrency={primaryBooking.booking_price_currency}
                 discount={primaryBooking.discount_percentage}
+                bookingId={primaryBooking.strapiId}
+                stripeProduct={primaryBooking.stripe_product}
                 teachingPeriods={primaryBooking.teaching_period}
                 fullAddress={primaryBooking.address_full}
                 shortAddress={primaryBooking.address_short}
-                prepareModal={() =>
-                  prepareModal(
-                    primaryBooking.stripe_product,
-                    primaryBooking.strapiId
-                  )
-                }
                 startTime={primaryBooking.start_time}
                 endTime={primaryBooking.end_time}
+                customButtonText={course.custom_button_text}
               />
             ) : onlineCourse ? (
               <OnlineBooking
@@ -229,6 +220,8 @@ const CourseView = ({ data, location }) => {
                 priceCurrency={course.thinkific_training.course_price_currency}
                 discount={course.thinkific_training.discount_percentage}
                 link={course.thinkific_training.course_link}
+                customButtonText={course.custom_button_text}
+                showCoursePrice={course.show_course_price}
               />
             ) : courseBookings && courseBookings.length > 0 ? (
               <ScrollToBookings />
@@ -252,16 +245,6 @@ const CourseView = ({ data, location }) => {
         </section>
       </main>
       <SignOffStillLooking />
-      {modalVisible ? (
-        <HealthcareProfessionalsOnly
-          closeFn={() => setModalVisibility(false)}
-          stripeProduct={stripeProduct}
-          location={location}
-          bookingId={bookingId}
-        />
-      ) : (
-        clearAllBodyScrollLocks()
-      )}
     </Layout>
   )
 }
@@ -319,6 +302,8 @@ export const pageQuery = graphql`
       summary
       details
       online_only
+      show_course_price
+      custom_button_text
       youtube_video
       header_image_description
       header_image {

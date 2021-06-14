@@ -9,6 +9,7 @@ import {
   createBookingDates,
   convertToAmPmTime,
   createFutureBookings,
+  stripeRedirectToCheckout,
 } from "../../../utilities"
 import { Button } from "../../Button"
 import { Tag, CoursePrices } from "../"
@@ -19,7 +20,6 @@ export const CourseListing = ({
   bookings,
   course,
   featuredCourse,
-  prepareModal,
   locationPage,
 }) => {
   const futureBookings = createFutureBookings(bookings)
@@ -76,7 +76,9 @@ export const CourseListing = ({
             styles="buttonPrimary iconLeft iconArrow"
             href={course.thinkific_training.course_link}
           >
-            Book now on Thinkific
+            {course.custom_button_text && course.custom_button_text !== ""
+              ? course.custom_button_text
+              : "Sign up today"}
           </Button>
           <Button
             to={courseSlug(course.course_topic.slug, course.slug)}
@@ -95,8 +97,9 @@ export const CourseListing = ({
                 topicSlug={course.course_topic.slug}
                 slug={course.slug}
                 key={node.id}
-                prepareModal={prepareModal}
                 locationPage={locationPage}
+                showPrice={course.show_course_price}
+                customButtonText={course.custom_button_text}
               />
             ))
           ) : (
@@ -123,8 +126,9 @@ const CourseBooking = ({
   node,
   topicSlug,
   slug,
-  prepareModal,
   locationPage,
+  showPrice,
+  customButtonText,
 }) => (
   <section className="booking">
     <div className="information">
@@ -146,11 +150,13 @@ const CourseBooking = ({
         <Tag discount text={node.discount_percentage.toString()} />
       ) : null}
       <p>
-        <CoursePrices
-          price={node.booking_price_value}
-          currency={node.booking_price_currency}
-          discount={node.discount_percentage && node.discount_percentage}
-        />{" "}
+        {showPrice !== false && (
+          <CoursePrices
+            price={node.booking_price_value}
+            currency={node.booking_price_currency}
+            discount={node.discount_percentage && node.discount_percentage}
+          />
+        )}{" "}
         &bull; {node.address_full}
       </p>
     </div>
@@ -163,9 +169,13 @@ const CourseBooking = ({
       </Button>
       <Button
         styles="buttonPrimary iconLeft iconArrow"
-        onClick={() => prepareModal(node.stripe_product, node.strapiId)}
+        onClick={() =>
+          stripeRedirectToCheckout(node.stripe_product, node.strapiId)
+        }
       >
-        Book now
+        {customButtonText && customButtonText !== ""
+          ? customButtonText
+          : "Book now"}
       </Button>
     </div>
   </section>
@@ -179,7 +189,6 @@ CourseListing.defaultProps = {
 
 CourseListing.propTypes = {
   course: PropTypes.object.isRequired,
-  prepareModal: PropTypes.func.isRequired,
   bookings: PropTypes.array,
   featuredCourse: PropTypes.bool,
   locationPage: PropTypes.bool,

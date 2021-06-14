@@ -2,19 +2,25 @@ import React from "react"
 import PropTypes from "prop-types"
 
 import { Button } from "../../Button"
-import { createBookingDates, convertToAmPmTime } from "../../../utilities"
+import {
+  createBookingDates,
+  convertToAmPmTime,
+  stripeRedirectToCheckout,
+} from "../../../utilities"
 import { CoursePrices } from ".."
 
 export const PrimaryBooking = ({
+  bookingId,
   discount,
-  fullAddress,
-  prepareModal,
-  priceValue,
-  priceCurrency,
-  shortAddress,
-  teachingPeriods,
-  startTime,
   endTime,
+  fullAddress,
+  priceCurrency,
+  priceValue,
+  shortAddress,
+  startTime,
+  stripeProduct,
+  teachingPeriods,
+  customButtonText,
 }) => {
   return (
     <section className="sidebarItem">
@@ -31,8 +37,13 @@ export const PrimaryBooking = ({
       </span>
       <p className="address">{fullAddress}</p>
       <p className="shortAddress">{shortAddress}</p>
-      <Button styles="buttonPrimary iconLeft iconArrow" onClick={prepareModal}>
-        Book now
+      <Button
+        styles="buttonPrimary iconLeft iconArrow"
+        onClick={() => stripeRedirectToCheckout(stripeProduct, bookingId)}
+      >
+        {customButtonText && customButtonText !== ""
+          ? customButtonText
+          : "Book now"}
       </Button>
     </section>
   )
@@ -44,12 +55,11 @@ PrimaryBooking.defaultProps = {
 
 PrimaryBooking.propTypes = {
   discount: PropTypes.number,
-  fullAddress: PropTypes.string.isRequired,
-  prepareModal: PropTypes.func.isRequired,
-  priceValue: PropTypes.number.isRequired,
-  priceCurrency: PropTypes.string.isRequired,
-  shortAddress: PropTypes.string.isRequired,
-  teachingPeriods: PropTypes.array.isRequired,
-  startTime: PropTypes.string.isRequired,
   endTime: PropTypes.string.isRequired,
+  fullAddress: PropTypes.string.isRequired,
+  priceCurrency: PropTypes.string.isRequired,
+  priceValue: PropTypes.number.isRequired,
+  shortAddress: PropTypes.string.isRequired,
+  startTime: PropTypes.string.isRequired,
+  teachingPeriods: PropTypes.array.isRequired,
 }
